@@ -1,0 +1,347 @@
+% Preamble for pmath347_notes.tex
+
+\usepackage[dvipsnames, table]{xcolor}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{changepage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{forest}
+\usepackage{fullpage}
+\usepackage{geometry}
+\usepackage{graphicx}
+%\usepackage{bbold}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{parskip}
+\usepackage[notmath]{sansmathfonts}
+\usepackage{tabularx}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage[titles]{tocloft}
+
+\usepackage[
+  pdftitle={PMATH 347 Notes},
+  pdfsubject={University of Waterloo, Spring 2021 (William Slofstra)},
+  pdfauthor={Marco Yang <kc4yang@uwaterloo.ca>},
+  colorlinks=true,
+  linkcolor=blue
+]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+\usetikzlibrary{arrows.meta}
+
+%% Layout
+
+\graphicspath{{./img/}}
+
+% Margins
+\geometry{
+  margin=1in,
+  headheight=1ex + \baselineskip,
+  headsep=\baselineskip
+}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\hspace{1.5ex}{#1}}{}}
+\fancyhead[L]{\color{black!50} \small \sffamily PMATH 347}
+\fancyhead[R]{\color{black!50} \small \sffamily \leftmark}
+\fancyfoot[C]{\color{black!50} \small \sffamily \thepage}
+
+% Chapters
+\counterwithout*{section}{chapter} % Don't reset section number in new chapter
+\titleformat{\chapter}
+  {\huge \sffamily \bfseries \centering} % Format
+  {Week \thechapter:} % Label
+  {1ex} % Sep
+  {} % Before
+\titlecontents{chapter}
+  [0em] % Left spacing
+  {\vspace{\baselineskip}} % Above
+  {\large \bfseries \contentslabel{2em}} % Numbered format
+  {\large \bfseries} % Numberless format
+  {\hfill} % Filler page format
+  [\vspace{\baselineskip}] % Below
+
+% Sections
+\renewcommand{\thesection}{\arabic{section}}
+\newcommand{\sectionbreak}{\clearpage\phantomsection}
+\titleformat{\section}
+  {\Large \sffamily \bfseries} % Format
+  {\thesection:} % Label
+  {1ex} % Sep
+  {} % Before
+\titlecontents{section}
+  [3em] % Left spacing
+  {} % Above
+  {\bfseries \contentslabel{2em}} % Numbered format
+  {} % Numberless format
+  {\titlerule*{$\cdot$}\contentspage} % Filler page format
+  [] % Below
+
+% Subsections
+\titleformat{\subsection}
+  {\large \sffamily \bfseries} % Format
+  {} % Label
+  {0pt} % Sep
+  {} % Before
+\titlecontents{subsection}
+  [3em] % Left spacing
+  {} % Above
+  {} % Numbered format
+  {} % Numberless format
+  {\hfill} % Filler page format
+  [] % Below
+
+%% Commands
+
+% New week
+\newcommand{\week}[1]{
+  \chapter{#1}
+  \thispagestyle{empty}
+  \pagebreak
+}
+
+% Environments
+\newtcbtheorem[no counter]
+  {thm} % environment name
+  {Theorem} % display name
+  { % options
+    colback=blue!10,
+    colframe=blue!10,
+    colbacktitle=blue!10,
+    coltitle=blue!60!black,
+    fonttitle=\sffamily\bfseries,
+    sharp corners,
+    boxsep=1ex,
+    toptitle=1ex,
+    before skip=\baselineskip,
+    after skip=\baselineskip,
+    separator sign={~---},
+    label type=thm
+  }
+  {thm} % label prefix
+\crefname{thm}{Theorem}{Theorems}
+
+\newtcbtheorem[no counter]
+  {lem} % environment name
+  {Lemma} % display name
+  { % options
+    colback=blue!10,
+    colframe=blue!10,
+    colbacktitle=blue!10,
+    coltitle=blue!60!black,
+    fonttitle=\sffamily\bfseries,
+    sharp corners,
+    boxsep=1ex,
+    toptitle=1ex,
+    before skip=\baselineskip,
+    after skip=\baselineskip,
+    separator sign={~---},
+    label type=lem
+  }
+  {lem} % label prefix
+\crefname{lem}{Lemma}{Lemmas}
+
+\newtcbtheorem[no counter]
+  {cor} % environment name
+  {Corollary} % display name
+  { % options
+    colback=blue!10,
+    colframe=blue!10,
+    colbacktitle=blue!10,
+    coltitle=blue!60!black,
+    fonttitle=\sffamily\bfseries,
+    sharp corners,
+    boxsep=1ex,
+    toptitle=1ex,
+    before skip=\baselineskip,
+    after skip=\baselineskip,
+    separator sign={~---},
+    label type={cor}
+  }
+  {cor} % label prefix
+\crefname{cor}{Corollary}{Corollaries}
+
+\newtcbtheorem[no counter]
+  {prop} % environment name
+  {Proposition} % display name
+  { % options
+    colback=blue!10,
+    colframe=blue!10,
+    colbacktitle=blue!10,
+    coltitle=blue!60!black,
+    fonttitle=\sffamily\bfseries,
+    sharp corners,
+    boxsep=1ex,
+    toptitle=1ex,
+    before skip=\baselineskip,
+    after skip=\baselineskip,
+    separator sign={~---},
+    label type={prop}
+  }
+  {prop} % label prefix
+\crefname{prop}{Proposition}{Propositions}
+
+\newtcbtheorem[no counter]
+  {exer} % environment name
+  {Exercise} % display name
+  { % options
+    colback=red!10,
+    colframe=red!10,
+    colbacktitle=red!10,
+    coltitle=red!60!black,
+    fonttitle=\sffamily\bfseries,
+    sharp corners,
+    boxsep=1ex,
+    toptitle=1ex,
+    before skip=\baselineskip,
+    after skip=\baselineskip,
+    separator sign={~---},
+    label type={exer}
+  }
+  {exer} % label prefix
+\crefname{exer}{Exercise}{Exercises}
+
+\newtcbtheorem[no counter]
+  {defn} % environment name
+  {Definition} % display name
+  { % options
+    parbox=false,
+    nameref/.style={},
+    colback=green!10,
+    colframe=green!10,
+    colbacktitle=green!10,
+    coltitle=green!60!black,
+    fonttitle=\sffamily\bfseries,
+    sharp corners,
+    boxsep=1ex,
+    toptitle=1ex,
+    before skip=\baselineskip,
+    after skip=\baselineskip,
+    separator sign={~---},
+    label type={defn}
+  }
+  {defn} % label prefix
+\crefname{defn}{Definition}{Definitions}
+
+\newtcolorbox{ex}[1][Example]{
+  enhanced,
+  parbox=false,
+  sharp corners,
+  breakable,
+  boxrule=0pt,
+  left=1ex + 2mm + 4pt,
+  right=0pt,
+  bottom=0pt,
+  frame hidden,
+  title={#1},
+  fonttitle=\sffamily\bfseries,
+  colback=white,
+  coltitle=red!60!black,
+  colbacktitle=white,
+  borderline west={4pt}{0pt}{red!60!black},
+  before skip=\baselineskip,
+  after skip=\baselineskip
+}
+
+\makeatletter
+\newenvironment{proofb}{%
+  \par
+  \pushQED{\qed}
+  \normalfont \topsep0\p@\@plus6\p@\relax
+  \trivlist
+  \item[]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\newenvironment{thmproof}[1][Proof.]{
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    parbox=false,
+    sharp corners,
+    boxrule=0pt,
+    left=1ex + 2mm + 4pt,
+    right=0pt,
+    bottom=0pt,
+    frame hidden,
+    title={#1},
+    fonttitle=\sffamily\itshape,
+    colback=white,
+    coltitle=blue!60!black,
+    colbacktitle=white,
+    borderline west={4pt}{0pt}{blue!60!black},
+    before skip=\baselineskip,
+    after skip=\baselineskip
+  ]
+  \begin{proofb}
+}{
+  \end{proofb}
+  \end{tcolorbox}
+}
+
+\newenvironment{exerproof}[1][Proof.]{
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    parbox=false,
+    sharp corners,
+    boxrule=0pt,
+    left=1ex + 2mm + 4pt,
+    right=0pt,
+    bottom=0pt,
+    frame hidden,
+    title={#1},
+    fonttitle=\sffamily\itshape,
+    colback=white,
+    coltitle=red!60!black,
+    colbacktitle=white,
+    borderline west={4pt}{0pt}{red!60!black},
+    before skip=\baselineskip,
+    after skip=\baselineskip
+  ]
+  \begin{proofb}
+}{
+  \end{proofb}
+  \end{tcolorbox}
+}
+
+% Emphasis
+\newcommand{\hldef}[1]{\textcolor{green!60!black}{\textbf{#1}}}
+
+% Circled numbers
+\newcommand*\circled[1]{
+  \tikz[baseline=(char.base)]{
+    \node[shape=circle, draw, inner sep=2pt] (char) {\footnotesize #1};
+  }
+}
+
+% Enum with circled numbers
+\newenvironment{enumcase}[1][]{
+  \begin{enumerate}[label=\protect\circled{\arabic*}, #1]
+}{
+  \end{enumerate}
+}
+
+%% Math commands
+
+% Useful delimiters: abs, ceil, floor
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% Operators and such
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
