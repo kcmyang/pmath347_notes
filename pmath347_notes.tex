@@ -591,6 +591,558 @@ Easy properties:
   which implies $\abs{g} = \abs{g^{-1}}$.
 \end{thmproof}
 
+%%%%% Lec 02
+\section{Dihedral and permutation groups}
+
+\subsection{Dihedral groups}
+
+\begin{defn}{$n$-gon}{ngon}
+  A regular polygon $P_n$ with $n \geq 3$ vertices is called an \hldef{$n$-gon}.
+\end{defn}
+
+Specifically: set $v_k = (\cos(2\pi k/n), \sin(2\pi k/n)) = e^{2\pi ik/n}$ and get an $n$-gon by
+drawing a line segment from $v_k$ to $v_{k + 1}$ for all $0 \leq k \leq n$ (where $v_n := v_0$).
+
+\begin{center}
+  \begin{tabular}{
+    >{\centering\arraybackslash}m{0.3\textwidth}
+    >{\centering\arraybackslash}m{0.3\textwidth}
+    >{\centering\arraybackslash}m{0.3\textwidth}
+  }
+    \begin{tikzpicture}[
+      vtx/.style={
+        circle, draw, fill=black,
+        inner sep=0pt, minimum width=4pt
+      }
+    ]
+      \foreach \ang/\x in {0/v0,120/v1,240/v2} {
+        \node[vtx] (\x) at (\ang:1.5){};
+      }
+      \node[font=\footnotesize] at (0,0){$3$-gon};
+      \node[right] at (v0){$v_0$};
+      \node[above left] at (v1){$v_1$};
+      \node[below left] at (v2){$v_2$};
+
+      \draw (v0)--(v1)--(v2)--(v0);
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}[
+      vtx/.style={
+        circle, draw, fill=black,
+        inner sep=0pt, minimum width=4pt
+      }
+    ]
+      \foreach \ang/\x in {0/v0,90/v1,180/v2,270/v3} {
+        \node[vtx] (\x) at (\ang:1.5){};
+      }
+      \node[font=\footnotesize] at (0,0){$4$-gon};
+      \node[right] at (v0){$v_0$};
+      \node[above] at (v1){$v_1$};
+      \node[left] at (v2){$v_2$};
+      \node[below] at (v3){$v_3$};
+
+      \draw (v0)--(v1)--(v2)--(v3)--(v0);
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}[
+      vtx/.style={
+        circle, draw, fill=black,
+        inner sep=0pt, minimum width=4pt
+      }
+    ]
+      \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+        \node[vtx] (\x) at (\ang:1.5){};
+      }
+      \node[font=\footnotesize] at (0,0){$5$-gon};
+      \node[right] at (v0){$v_0$};
+      \node[above right] at (v1){$v_1$};
+      \node[above left] at (v2){$v_2$};
+      \node[below left] at (v3){$v_3$};
+      \node[below right] at (v4){$v_4$};
+
+      \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+    \end{tikzpicture}
+    \\
+  \end{tabular}
+\end{center}
+
+\begin{defn}{symmetry, dihedral group}{symmetry_dihedralgroup}
+  A \hldef{symmetry} of the $n$-gon $P_n$ is an invertible linear transformation
+  $T \in \GL_2(\mathbb{R})$ such that $T(P_n) = P_n$.
+
+  The set of symmetries of $P_n$ is called the \hldef{dihedral group} and is denoted by $D_{2n}$
+  (or $D_n$).
+\end{defn}
+
+(Think of matrices and linear transformations interchangeably.
+Matrix multiplication = composition of transformations.)
+
+\begin{prop}{}{}
+  $D_{2n}$ is a group under composition.
+\end{prop}
+
+Proof later (key point: $S, T \in D_{2n} \implies ST \in D_{2n}$).
+
+\begin{lem}{}{}
+  Say $v_i$ and $v_j$ are adjacent in $P_n$ if they are connected by a line segment.
+  \begin{enumerate}
+    \item If $T \in D_{2n}$, then $(T(v_0), T(v_1))$ are adjacent.
+    \item If $S, T \in D_{2n}$ and $S(v_i) = T(v_i)$ for $i = 0, 1$, then $S = T$.
+  \end{enumerate}
+\end{lem}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item $v_0, v_1$ are adjacent and $T$ is linear (lines map to lines).
+    \item $v_0, v_1$ are linearly independent (and form a basis in $\mathbb{R}^2$).
+  \end{enumerate}
+\end{thmproof}
+
+\begin{cor}{}{}
+  $\abs{D_{2n}} \leq 2n$.
+\end{cor}
+
+\begin{thmproof}
+  Let $A$ be the set of adjacent $(v_i, v_j)$, so $\abs{A} = 2n$.
+  By lemma, $D_{2n} \to A : T \mapsto (T(v_0), T(v_1))$ is well-defined and injective.
+\end{thmproof}
+
+Intuitively, we can ask: for every pair of adjacent vertices $(v_i, v_j)$, is there an element
+$T \in D_{2n}$ with $T(v_0) = v_i$ and $T(v_1) = v_j$?
+If yes, then $\abs{D_{2n}} = 2n$.
+
+\pagebreak
+\subsection[Special elements of D2n]{Special elements of $D_{2n}$}
+
+Let $s \in D_{2n}$ be rotation by $2\pi / n$ radians, so $\abs{s} = n$ (that is, $s^n = e$ and
+$s^k \neq e$ for $1 \leq k < n$).
+
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[right] at (v0){$v_0$};
+  \node[above right] at (v1){$v_1$};
+  \node[above left] at (v2){$v_2$};
+  \node[below left] at (v3){$v_3$};
+  \node[below right] at (v4){$v_4$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+\end{tikzpicture}
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[right] at (v0){$v_1$};
+  \node[above right] at (v1){$v_2$};
+  \node[above left] at (v2){$v_3$};
+  \node[below left] at (v3){$v_4$};
+  \node[below right] at (v4){$v_0$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[->] (-3,0)--(-2,0){} node[midway, above]{$s$};
+  \node at (-3.25,0){};
+\end{tikzpicture}
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[right] at (v0){$v_2$};
+  \node[above right] at (v1){$v_3$};
+  \node[above left] at (v2){$v_4$};
+  \node[below left] at (v3){$v_0$};
+  \node[below right] at (v4){$v_1$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[->] (-3,0)--(-2,0){} node[midway, above]{$s$};
+  \node at (-3.25,0){};
+\end{tikzpicture}
+
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[right] at (v0){$v_3$};
+  \node[above right] at (v1){$v_4$};
+  \node[above left] at (v2){$v_0$};
+  \node[below left] at (v3){$v_1$};
+  \node[below right] at (v4){$v_2$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[->] (-3,0)--(-2,0){} node[midway, above]{$s$};
+\end{tikzpicture}
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[right] at (v0){$v_4$};
+  \node[above right] at (v1){$v_0$};
+  \node[above left] at (v2){$v_1$};
+  \node[below left] at (v3){$v_2$};
+  \node[below right] at (v4){$v_3$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[->] (-3,0)--(-2,0){} node[midway, above]{$s$};
+  \node at (-3.25,0){};
+\end{tikzpicture}
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[right] at (v0){$v_0$};
+  \node[above right] at (v1){$v_1$};
+  \node[above left] at (v2){$v_2$};
+  \node[below left] at (v3){$v_3$};
+  \node[below right] at (v4){$v_4$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[->] (-3,0)--(-2,0){} node[midway, above]{$s$};
+  \node at (-3.25,0){};
+\end{tikzpicture}
+
+Let $r$ be reflection through the $x$-axis.
+
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[above right] at (v0){$v_0$};
+  \node[above right] at (v1){$v_1$};
+  \node[above left] at (v2){$v_2$};
+  \node[below left] at (v3){$v_3$};
+  \node[below right] at (v4){$v_4$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[dashed] (-2,0)--(2.5,0);
+\end{tikzpicture}
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[above right] at (v0){$v_0$};
+  \node[above right] at (v1){$v_4$};
+  \node[above left] at (v2){$v_3$};
+  \node[below left] at (v3){$v_2$};
+  \node[below right] at (v4){$v_1$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[->] (-3,0)--(-2,0) node[midway, above]{$r$};
+  \node at (-3.25,0){};
+\end{tikzpicture}
+
+$\abs{r} = 2$, that is, $r^2 = e$ and $r \neq e$.
+
+We have $r(v_0) = v_0$ and $r(v_1)$ is now the vertex before $v_0$ rather than the vertex after.
+
+\pagebreak
+\subsection{Putting rotation and reflection together}
+
+$s^i$ for $0 \leq i < n$ sends $v_0 \mapsto v_i$ and $v_1 \mapsto v_{i + 1}$.
+(Say $v_n = v_0$ and $s^0 = e$.)
+
+$s^i r$ for $0 \leq i < n$ sends $v_0 \mapsto v_i$ and $v_1 \mapsto v_{i - 1}$.
+(Say $v_{-1} = v_{n - 1}$.)
+
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[above right] at (v0){$v_0$};
+  \node[above right] at (v1){$v_1$};
+  \node[above left] at (v2){$v_2$};
+  \node[below left] at (v3){$v_3$};
+  \node[below right] at (v4){$v_4$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[dashed] (-2,0)--(2.5,0);
+\end{tikzpicture}
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[above right] at (v0){$v_0$};
+  \node[above right] at (v1){$v_4$};
+  \node[above left] at (v2){$v_3$};
+  \node[below left] at (v3){$v_2$};
+  \node[below right] at (v4){$v_1$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[->] (-3,0)--(-2,0) node[midway, above]{$r$};
+  \node at (-3.25,0){};
+\end{tikzpicture}
+\begin{tikzpicture}[
+  vtx/.style={
+    circle, draw, fill=black,
+    inner sep=0pt, minimum width=4pt
+  }
+]
+  \foreach \ang/\x in {0/v0,72/v1,144/v2,216/v3,288/v4} {
+    \node[vtx] (\x) at (\ang:1.5){};
+  }
+  \node[above right] at (v0){$v_2$};
+  \node[above right] at (v1){$v_1$};
+  \node[above left] at (v2){$v_0$};
+  \node[below left] at (v3){$v_4$};
+  \node[below right] at (v4){$v_3$};
+  \draw (v0)--(v1)--(v2)--(v3)--(v4)--(v0);
+  \draw[->] (-3,0)--(-2,0) node[midway, above]{$s^2$};
+  \node at (-3.25,0){};
+\end{tikzpicture}
+
+\begin{prop}{}{}
+  $D_{2n} = \{ s^i r^j : 0 \leq i < n, \ 0 \leq j < 2 \}$, so $\abs{D_{2n}} = 2n$.
+\end{prop}
+
+So what is $rs$?
+
+$rs(v_0) = r(v_1) = v_{n - 1}$ and $rs(v_1) = r(v_2) = v_{n - 2}$.
+
+So $rs = s^{n - 1} r = s^{-1} r$.
+
+\begin{cor}{}{}
+  $D_{2n}$ is a finite non-abelian group.
+\end{cor}
+
+In summary:
+\begin{itemize}
+  \item $D_{2n} = \{ s^i r^j : 0 \leq i < n, \ 0 \leq j < 2 \}$
+  \item $\abs{D_{2n}} = 2n$
+  \item $s^n = e$, $r^2 = e$, $rs = s^{-1} r$
+  \item $D_{2n}$ is a finite non-abelian group.
+\end{itemize}
+Exercise: show these relations are enough to completely determine $D_{2n}$.
+
+\pagebreak
+\subsection{What's group theory about?}
+
+Basic answer: sets with one binary operation.
+
+Better answer: group theory is the study of symmetry.
+
+If we resize or rotate $P_n$, then the symmetries remain the same.
+
+Kleinian view of geometry:
+\begin{itemize}
+  \item $D_{2n}$ captures what is means to be a regular $n$-gon.
+  \item More generally, geometry is about the study of symmetries.
+\end{itemize}
+
+\pagebreak
+\subsection{Permutation groups}
+
+If $X$ is a set, let $\Fun(X, X)$ be the set of functions $X \to X$.
+Then
+\[ \circ \colon \Fun(X, X) \times \Fun(X, X) \to \Fun(X, X) : (f, g) \mapsto f \circ g \]
+is an associative operation with an identity $\Id_X$.
+
+Let $S_X = \{ f \in \Fun(X, X) : f \text{ is a bijection} \}$.
+
+\begin{prop}{}{}
+  $S_X$ is a group under $\circ$.
+\end{prop}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+\begin{defn}{symmetric group}{symmetricgroup}
+  Let $n \geq 1$.
+  The \hldef{symmetric group} (or \hldef{permutation group}) $S_n$ is the group $S_X$ with
+  $X = \{1, \ldots, n\}$.
+\end{defn}
+
+Elements of $S_n$ are bijections $\pi \colon \{1, \ldots, n\} \to \{1, \ldots, n\}$.
+
+What makes such a $\pi$ a bijection?
+Every element of $\{1, \ldots, n\}$ must appear in the list $\pi(1), \ldots, \pi(n)$ and no
+element can appear twice.
+
+We have $n$ choices for $\pi(1)$, $n - 1$ choices for $\pi(2)$, \dots, 1 choice for $\pi(n)$.
+Thus $\abs{S_n} = n(n - 1) \cdots 1 = n!$.
+
+Note $\abs{S_1} = 1! = 1$, so $S_1$ is the trivial group.
+
+\pagebreak
+\subsection{Permutations}
+
+Elements of $S_n$ are called \hldef{permutations}.
+We have several ways of representing permutations:
+\begin{enumerate}
+  \item
+  Two-line representation:
+  \[ \pi = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 & 6 \\ 6 & 5 & 1 & 4 & 2 & 3 \end{pmatrix} \]
+  \item
+  One-line representation: $\pi = 651423$.
+  \item
+  Disjoint cycle representation: write down the \hldef{cycles} of $\pi$.
+  Here $\pi(1) = 6$, $\pi(6) = 3$, and $\pi(3) = 1$, so $(163)$ is a cycle of $\pi$.
+
+  $\pi = (163)(25)(4) = (163)(25)$.
+  We typically drop cycles of length 1, and write cycles containing the smallest unused element
+  first.
+
+  The identity is empty in disjoint cycle notation, so we just use $e$.
+\end{enumerate}
+
+Multiplication can be done in two-line or disjoint cycle notation:
+\begin{align*}
+  \pi &= \begin{pmatrix}
+    1 & 2 & 3 & 4 & 5 & 6 \\
+    6 & 5 & 1 & 4 & 2 & 3
+  \end{pmatrix} = (163)(25) \\
+  \sigma &= \begin{pmatrix}
+    1 & 2 & 3 & 4 & 5 & 6 \\
+    2 & 6 & 4 & 5 & 3 & 1
+  \end{pmatrix} = (126)(345) \\
+  \pi\sigma &= \begin{pmatrix}
+    1 & 2 & 3 & 4 & 5 & 6 \\
+    5 & 3 & 4 & 2 & 1 & 6
+  \end{pmatrix} = (15)(234)
+\end{align*}
+One-line notation is hard, so we don't use it here.
+
+Inversion can also be done in two-line or disjoint cycle notation:
+\[
+  \pi = \begin{pmatrix}
+    1 & 2 & 3 & 4 & 5 & 6 \\
+    6 & 5 & 1 & 4 & 2 & 3
+  \end{pmatrix} = (163)(25)
+\]
+\[
+  \pi^{-1} = \begin{pmatrix}
+    6 & 5 & 1 & 4 & 2 & 3 \\
+    1 & 2 & 3 & 4 & 5 & 6
+  \end{pmatrix} = \begin{pmatrix}
+    1 & 2 & 3 & 4 & 5 & 6 \\
+    3 & 5 & 6 & 4 & 2 & 1
+  \end{pmatrix} = (136)(25)
+\]
+If $\pi(i) = j$, then $\pi^{-1}(j) = i$, so cycles of $\pi^{-1}$ are cycles of $\pi$ in reverse
+order.
+
+\pagebreak
+\subsection{Fixed points and support sets}
+
+\begin{defn}{fixed point, support set}{fixedpoint_supportset}
+  The \hldef{fixed points} of a permutation $\pi \in S_n$ are the numbers $1 \leq i \leq n$ such
+  that $\pi(i) = i$.
+
+  The \hldef{support set} of $\pi \in S_n$ is
+  \[ \supp(\pi) = \{ 1 \leq i \leq n : \pi(i) \neq i \}. \]
+
+  $\pi$ and $\sigma$ are \hldef{disjoint} if $\supp(\pi) \cap \supp(\sigma) = \varnothing$.
+\end{defn}
+
+\begin{ex}
+  $\supp((163)(25)) = \{1, 2, 3, 5, 6\}$.
+\end{ex}
+
+Some notes:
+\begin{itemize}
+  \item
+  In general, $\supp(\pi)$ are exactly the numbers that appear in the disjoint cycle representation
+  of $\pi$ (when length-1 cycles are omitted).
+  \item
+  $\supp(\pi) = \varnothing$ if and only if $\pi = e$.
+  \item
+  $\supp(\pi^{-1}) = \supp(\pi)$.
+  \item
+  If $i \in \supp(\pi)$, then $\pi(i) \in \supp(\pi)$.
+\end{itemize}
+
+\pagebreak
+\subsection{Commuting elements}
+
+\begin{defn}{commute}{commute}
+  Two elements $g, h$ in a group $G$ \hldef{commute} if $gh = hg$.
+\end{defn}
+
+\begin{lem}{}{}
+  If $\pi, \sigma \in S_n$ are disjoint, then $\pi\sigma = \sigma\pi$.
+\end{lem}
+
+\begin{thmproof}
+  Suppose $1 \leq i \leq n$.
+
+  If $i \in \supp(\pi)$, then $\pi(i) \in \supp(\pi)$.
+  Since $\pi, \sigma$ are disjoint, we have $i, \pi(i) \not\in \supp(\sigma)$.
+  So $\pi(\sigma(i)) = \pi(i) = \sigma(\pi(i))$.
+
+  By symmetry, $\pi(\sigma(i)) = \sigma(\pi(i))$ if $i \in \supp(\sigma)$.
+
+  If $i \not\in \supp(\pi) \cup \supp(\sigma)$, then $\pi(\sigma(i)) = i = \sigma(\pi(i))$.
+
+  Then $\pi(\sigma(i)) = \sigma(\pi(i))$ for all $i$, so $\pi\sigma = \sigma\pi$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Cycles}
+
+\begin{defn}{cycle}{cycle}
+  A \hldef{$k$-cycle} is an element of $S_n$ with disjoint cycle notation $(i_1 i_2 \cdots i_k)$.
+\end{defn}
+
+Suppose the cycles of $\pi \in S_n$ are $c_1, \ldots, c_k$.
+We can regard $c_i$ as an element of $S_n$ and $\pi = c_1 \cdot c_2 \cdot \cdots \cdot c_k$ as a
+product in $S_n$.
+Since $c_i$ and $c_j$ are disjoint, $c_i c_j = c_j c_i$.
+Thus the order of cycles in disjoint cycle representation doesn't matter.
+
+\begin{ex}
+  $\pi = (163)(25) = (25) \cdot (163)$.
+\end{ex}
+
+Additionally, we have $\pi^{-1} = c_k^{-1} \cdots c_1^{-1} = c_1^{-1} \cdots c_k^{-1}$.
+
+\begin{ex}
+  If $c$ and $c'$ are non-disjoint cycles, then they don't necessarily commute:
+  $(12)(23) = (123)$ while $(23)(12) = (123)^{-1} = (132) \neq (12)(23)$.
+\end{ex}
+
+If $\pi$ is a permutation, then $\pi$ commutes with $\pi^i$ for all $i$, so $\pi$ and $\pi^i$
+commute.
+However, $\pi$ and $\pi^i$ don't have disjoint support sets.
+
 %---------------
 \end{document}
 %---------------
