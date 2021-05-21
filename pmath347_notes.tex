@@ -118,7 +118,7 @@ Many operations mentioned so far are associative:
   \item
   Vector addition, matrix addition and multiplication;
   \item
-  Modular addition and multiplication on $\mathbb{Z} / n\mathbb{Z}$;
+  Modular addition and multiplication on $\Zmod{n}$;
   \item
   Function composition (homework).
 \end{itemize}
@@ -205,7 +205,7 @@ Many familiar operations are commutative:
   \item
   Vector and matrix addition
   \item
-  Modular addition and multiplication on $\mathbb{Z} / n\mathbb{Z}$
+  Modular addition and multiplication on $\Zmod{n}$
 \end{itemize}
 The following operations are \textbf{not} commutative:
 \begin{itemize}
@@ -455,9 +455,9 @@ Terminology:
     The identity is $0$ and the inverse of $n$ is $-n$.
     These groups have infinite order.
     \item
-    $\mathbb{Z} / n\mathbb{Z}$ is also a group under $+$ (and also abelian).
+    $\Zmod{n}$ is also a group under $+$ (and also abelian).
     The identity is $0 = [0]$ and the inverse of $[m]$ is $-[m] = [-m]$.
-    This group is finite with order $\abs{\mathbb{Z} / n\mathbb{Z}} = n$.
+    This group is finite with order $\abs{\Zmod{n}} = n$.
     \item
     If $(V, +, \cdot)$ is a vector space, then $(V, +)$ is a group.
     The identity is $0$ and the inverse of $v$ is $-v$.
@@ -575,7 +575,7 @@ Easy properties:
 \end{itemize}
 
 \begin{ex}
-  We use additive notation for $\mathbb{Z} / n\mathbb{Z}$, so $g^n$ is written as $ng$ and $e = 0$.
+  We use additive notation for $\Zmod{n}$, so $g^n$ is written as $ng$ and $e = 0$.
   For this group, $k1 = 0$ if and only if $n \mid k$, so $\abs{1} = n$.
 \end{ex}
 
@@ -1142,6 +1142,535 @@ Additionally, we have $\pi^{-1} = c_k^{-1} \cdots c_1^{-1} = c_1^{-1} \cdots c_k
 If $\pi$ is a permutation, then $\pi$ commutes with $\pi^i$ for all $i$, so $\pi$ and $\pi^i$
 commute.
 However, $\pi$ and $\pi^i$ don't have disjoint support sets.
+
+%%%%% Lec 3
+\week{Subgroups and homomorphisms}
+
+\section{Subgroups}
+
+\subsection{Subgroups}
+
+\begin{defn}{subgroup}{subgroup}
+  Let $(G, \cdot)$ be a group.
+  A subset $H \subseteq G$ is a \hldef{subgroup} of $G$ if
+  \begin{enumerate}
+    \item for all $g, h \in H$, $g \cdot h \in H$ ($H$ is \hldef{closed under products}),
+    \item for all $g \in H$, $g^{-1} \in H$ ($H$ is \hldef{closed under inverses}), and
+    \item $e_G \in H$.
+  \end{enumerate}
+
+  Notation: $H \leq G$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $\mathbb{Z} \leq \mathbb{Q}^+ := (\mathbb{Q}, +)$.
+    \item $\mathbb{Q}_{> 0} := \{ x \in \mathbb{Q} : x > 0 \} \leq \mathbb{Q}^\times$.
+
+    Check: if $x, y \in \mathbb{Q}$ and $x, y > 0$, then $xy > 0 \implies xy \in \mathbb{Q}_{> 0}$.
+    Also, if $x > 0$, then $1/x > 0 \implies 1/x \in \mathbb{Q}_{> 0}$.
+  \end{itemize}
+\end{ex}
+
+\begin{ex}
+  Let $G = D_{2n}$ and $s$ be rotation.
+
+  $H = \{ e = s^0, s, s^2, \ldots, s^{n - 1} \}$ is a subgroup of $D_{2n}$.
+\end{ex}
+
+\begin{exerproof}
+  Claim: $s^i \in H$ for all $i \in \mathbb{Z}$.
+
+  Proof: let $i = nk + r$ with $0 \leq r < n$.
+  Then $s^i = s^{nk + r} = (s^n)^k s^r = s^r$ since $s^n = e$.
+
+  Checking subgroup properties:
+  \begin{itemize}
+    \item If $s^i, s^j \in H$, then $s^{i + j} \in H$.
+    \item If $s^i \in H$, then $s^{-i} \in H$.
+    \item $e \in H$.
+  \end{itemize}
+\end{exerproof}
+
+$H$ is the smallest subgroup containing $s$ (since subgroups are closed under products).
+
+Notation for $H$ is $\ang{s}$.
+
+\begin{ex}
+  Let $G = \mathbb{Z} = (\mathbb{Z}, +)$.
+
+  If $m \in \mathbb{Z}$, then
+  $m\mathbb{Z} := \{ km : k \in \mathbb{Z} \} = \{ n \in \mathbb{Z} : m \mid n \}$ is a subgroup of
+  $\mathbb{Z}$.
+
+  In particular, $0\mathbb{Z} = \{0\}$ is a subgroup of $\mathbb{Z}$ called the \hldef{trivial
+  subgroup}.
+\end{ex}
+
+\begin{defn}{trivial subgroup, proper subgroup}{trivialpropersubgroup}
+  If $G$ is a group, then $\{e\}$ is a subgroup called the \hldef{trivial subgroup}.
+
+  Also, $G$ is a subgroup of $G$.
+  A subgroup $H$ is \hldef{proper} if $H \neq G$.
+  Notation: $H < G$.
+\end{defn}
+
+$H$ is a proper non-trivial subgroup if $\{e\} \neq H < G$.
+
+\begin{ex}
+  Some non-subgroups:
+  \begin{itemize}
+    \item
+    $\mathbb{Q}_{\geq 0} := \{x \in \mathbb{Q} : x \geq 0\}$ is not a subgroup of $\mathbb{Q}^+$.
+
+    If $x, y \in \mathbb{Q}_{\geq 0}$, then $x + y \in \mathbb{Q}_{\geq 0}$.
+    Also, $0 \in \mathbb{Q}_{\geq 0}$.
+
+    But if $x \in Q_{\geq 0}$, then $-x \not\in \mathbb{Q}_{\geq 0}$ unless $x = 0$.
+    \item
+    $\mathbb{Q}^\times$ is not a subgroup of $(\mathbb{Q}, \cdot)$ because $(\mathbb{Q}, \cdot)$ is
+    not a group.
+  \end{itemize}
+\end{ex}
+
+\begin{prop}{}{}
+  If $H$ is a subgroup of $(G, \boxtimes)$, then $(H, \boxtimes \rvert_{H \times H})$ is a group,
+  such that
+  \begin{enumerate}
+    \item the identity of $H$ is $e_H = e_G$, and
+    \item the inverse of $g \in H$ is the same as the inverse of $g$ in $G$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  First, we show $\boxtimes \rvert_{H \times H}$ is a binary operation on $H$.
+  Note $\boxtimes$ is a function $G \times G \to G$, so $\boxtimes \rvert_{H \times H}$ is a
+  function $H \times H \to G$.
+  But if $g, h \in H$, then $g \boxtimes h \in H$.
+  Thus $\boxtimes \rvert_{H \times H}$ is a function $H \times H \to H$.
+
+  From now on, denote this function by $\tilde{\boxtimes}$.
+
+  Since $\boxtimes$ is associative, $\tilde{\boxtimes}$ is associative.
+
+  Note $e_H = e_G$ is the identity for $\tilde{\boxtimes}$.
+
+  If $g \in H$, then $g^{-1}$ with respect to $\boxtimes$ is in $H$.
+
+  Since $g \mathop{\tilde{\boxtimes}} g^{-1} = g^{-1} \mathop{\tilde{\boxtimes}} g = e_G = e_H$,
+  $g^{-1}$ is the inverse of $g$ with respect to $\tilde{\boxtimes}$.
+
+  So $(H, \tilde{\boxtimes})$ is a group.
+\end{thmproof}
+
+We call $\tilde{\boxtimes}$ the \hldef{operation induced by $\boxtimes$} on $H$.
+Usually we just refer to $\tilde{\boxtimes}$ as $\boxtimes$.
+
+\begin{ex}
+  \begin{itemize}
+    \item $\mathbb{Z}$ is a subgroup of $\mathbb{Q}$ with operation $+$.
+    \item If $H$ is a subgroup of $(G, \cdot)$, then $H$ is a group with operation $\cdot$.
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Speeding up the subgroup check}
+
+\begin{prop}{}{}
+  $H$ is a subgroup of $G$ if and only if
+  \begin{enumerate}
+    \item $H$ is non-empty, and
+    \item $gh^{-1} \in H$ for all $g, h \in H$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}[leftmargin=4em]
+    \item[($\implies$)]
+    If $H$ is a subgroup of $G$, then $e_G \in H$, so $H \neq \varnothing$.
+    Also if $g, h \in H$, then $h^{-1} \in H$ and $gh^{-1} \in H$.
+    \item[($\impliedby$)]
+    By (1), there is some $x \in H$.
+    By (2), $xx^{-1} = e_G \in H$.
+
+    Also by (2), $e_G \cdot x^{-1} = x^{-1} \in H$ (so $H$ is closed under inverses).
+
+    Now if $x, y \in H$, then $y^{-1} \in H$, so $xy = x(y^{-1})^{-1} \in H$ (so $H$ is closed under
+    products).
+  \end{enumerate}
+\end{thmproof}
+
+\begin{ex}
+  Let $(V, +, \cdot)$ be a vector space.
+
+  If $W$ is a subspace of $V$, then $W$ is a subgroup of $(V, +)$.
+
+  Check:
+  \begin{itemize}
+    \item $0 \in W$ so $W$ is non-empty.
+    \item If $v, w \in W$, then $v + (-w) = v - w \in W$.
+  \end{itemize}
+  $W$ is a subgroup by the proposition.
+\end{ex}
+
+\pagebreak
+\subsection{Finite subgroups}
+
+\begin{prop}{}{}
+  Suppose $H$ is a finite subset of $G$.
+  Then $H$ is a subgroup of $G$ if and only if
+  \begin{enumerate}
+    \item $H$ is non-empty, and
+    \item $gh \in H$ for all $g, h \in H$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  The forward direction is trivial.
+
+  Suppose $g \in H$.
+  By induction, we can show $g^n \in H$ for all $n \in \mathbb{N}$.
+
+  Since $H$ is finite, the sequence $g, g^2, g^3, \ldots \in H$ must eventually repeat.
+
+  So $g^i = g^j$ for some $1 \leq i < j \implies g^n = e$ for $n = j - i$.
+
+  If $n = 1$, then $g^n = g = e$ so $g^{-1} = e \in H$.
+  If $n > 1$, then $g^{n - 1} = g^{-1} \in H$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Subgroups generated by a set}
+
+\begin{prop}{}{}
+  Suppose $\mathcal{F}$ is a non-empty set of subgroups of $G$.
+  Then
+  \[ K := \bigcap_{H \in \mathcal{F}} H \]
+  is a subgroup of $G$.
+\end{prop}
+
+\begin{thmproof}
+  Note $e_G \in H$ for all $H \in \mathcal{F}$, so $e_G \in K$ and thus $K$ is non-empty.
+
+  Now consider $x, y \in K$.
+  Then $x, y \in H$ for all $H \in \mathcal{F}$, so $y^{-1} \in H$ for all $H \in \mathcal{F}$,
+  so $xy^{-1} \in H$ for all $H \in \mathcal{F}$, so $xy^{-1} \in K$.
+
+  By proposition, $K$ is a subgroup of $G$.
+\end{thmproof}
+
+\begin{defn}{subgroup generated by a set}{subgroupgenerated}
+  Let $S$ be a subset of a group $G$.
+
+  The \hldef{subgroup generated by $S$ in $G$} is
+  \[ \ang{S} := \bigcap_{S \subseteq H \leq G} H. \]
+\end{defn}
+
+Notes:
+\begin{itemize}
+  \item The intersection is non-empty because $S \subseteq G \leq G$.
+  \item If $S \subseteq K \leq G$, then $\ang{S} \subseteq K$.
+  So say that $\ang{S}$ is the smallest subgroup of $G$ containing $S$.
+  \item $\ang{\varnothing} = \ang{e} = \{e\}$, the trivial subgroup.
+  \item If $S = \{s_1, s_2, \ldots\}$, we often write
+  $\ang{S} = \ang{s_1, s_2, \ldots}$.
+\end{itemize}
+
+\begin{ex}
+  Consider $D_{2n}$ and its rotation generator $s$.
+
+  Let $K = \{e = s^0, s^1, s^2, \ldots, s^{n - 1}\}$.
+  As previously checked, $K$ is a subgroup of $D_{2n}$.
+
+  Since $s \in K$, $\ang{s} \in K$.
+
+  On the other hand, we can show by induction that $s^i \in \ang{s}$ for all
+  $i \in \mathbb{Z}$.
+  So $K \subseteq \ang{s} \implies \ang{s} = K$.
+\end{ex}
+
+Note that $\ang{s}$ is constructed by taking all products of $s$ with itself.
+Can we generalize this example?
+
+If $S \subset G$, let $S^{-1} = \{s^{-1} : s \in S\}$.
+
+\begin{prop}{}{}
+  If $S \subset G$, let
+  \[ K = \{e\} \cup \{ s_1 \cdots s_k : k \geq 1, \ s_1, \ldots, s_k \in S \cup S^{-1} \}. \]
+  Then $\ang{S} = K$.
+\end{prop}
+
+\begin{thmproof}
+  Claim 1: $S \subseteq K \subseteq \ang{S}$.
+
+  Proof: We know $e \in \ang{S}$.
+  Prove by induction that $s_1 \cdots s_k \in \ang{S}$ for all $k \geq 1$ and
+  $s_1, \ldots, s_k \in S \cup S^{-1}$.
+
+  Claim 2: $K$ is a subgroup.
+
+  Proof: $e \in K$ by construction.
+  Consider $x, y \in K$.
+  Then
+  \begin{align*}
+    x &= s_1 \cdots s_k, \ k \geq 0, \ s_1, \ldots, s_k \in S \cup S^{-1} \\
+    y &= t_1 \cdots t_\ell, \ \ell \geq 0, \ t_1, \ldots, t_\ell \in S \cup S^{-1}.
+  \end{align*}
+  So $xy = s_1 \cdots s_k t_1 \cdots t_\ell \in K$, and $x^{-1} = s_k^{-1} \cdots s_1^{-1} \in K$
+  since $s_k^{-1}, \ldots, s_1^{-1} \in S \cup S^{-1}$.
+
+  So $K$ is a subgroup.
+
+  Proof of proposition: $S \subseteq K$ and $\ang{S}$ is the smallest subgroup containing
+  $S$, so $\ang{S} \subseteq K$.
+
+  Thus $\ang{S} = K$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Lattice of subgroups}
+
+Subgroups of $G$ are ordered by set inclusion $\subseteq$.
+
+If $H_1, H_2 \leq G$ and $H_1 \subseteq H_2$, then $H_1 \leq H_2$, so we also write this order as
+$\leq$.
+(Exercise.)
+
+The set of subgroups of $G$ with order $\leq$ is called the \hldef{lattice of subgroups of $G$}.
+
+The first subgroup below $H_1, H_2 \leq G$ in the lattice is $H_1 \cup H_2$.
+The first subgroup above $H_1, H_2 \leq G$ in the lattice is $\ang{H_1 \cup H_2}$.
+
+\begin{center}
+  \begin{forest}
+    [$\mathbb{Z}$, calign=child, calign child=2
+      [$2\mathbb{Z}$, name=2
+        [$4\mathbb{Z}$, name=4]
+      ]
+      [$3\mathbb{Z}$
+        [$6\mathbb{Z}$, name=6
+          [$\vdots$, name=vdots
+            [$0\mathbb{Z}$]
+          ]
+        ]
+      ]
+      [$\cdots$]
+    ]
+    \draw (2)--(6);
+    \draw (4)--(vdots);
+  \end{forest}
+\end{center}
+
+%%%%% Lec 4
+\section{Cyclic groups}
+
+\subsection{Generators and cyclic groups}
+
+\begin{defn}{generate, cyclic}{}
+  A subset $S$ of a group $G$ \hldef{generates} $G$ if $\ang{S} = G$.
+
+  A group $G$ is \hldef{cyclic} if $G = \ang{a}$ for some $a \in G$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $\mathbb{Z} = \ang{1} = \ang{-1}$ (generators are not unique)
+    \item $\Zmod{n} = \ang{[1]} = \ang{[-1]}$
+    \item $\mathbb{Q}^+$ is not cyclic (homework)
+    \item If $G$ is a group, then $\ang{a}$ is a cyclic group for any $a \in G$ (called the
+    \hldef{cyclic subgroup generated by $a$}).
+  \end{itemize}
+\end{ex}
+
+\begin{lem}{}{}
+  \begin{enumerate}
+    \item If $a \in G$, then $\ang{a} = \{ a^i : i \in \mathbb{Z} \}$.
+    \item If $\abs{a} = n$, then $\ang{a} = \{ a^i : 0 \leq i < n \}$.
+  \end{enumerate}
+\end{lem}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item Follows from previous proposition about $\ang{S}$.
+    \item See argument for $\ang{s}$ in $D_{2n}$.
+  \end{enumerate}
+\end{thmproof}
+
+Questions:
+\begin{itemize}
+  \item In (2), can $\abs{\ang{a}}$ be smaller than $n$?
+  \item Does $\abs{\ang{a}}$ determine $\abs{a}$?
+\end{itemize}
+
+\pagebreak
+\subsection{Order of cyclic groups}
+
+\begin{prop}{}{}
+  If $G = \ang{a}$, then $\abs{G} = \abs{a}$.
+\end{prop}
+
+\begin{thmproof}
+  We've already seen that $\abs{G} \leq \abs{a}$.
+
+  Suppose $\abs{G} = n < \infty$.
+
+  The sequence $a^0, a^1, a^2, \ldots, a^n \in G$ must have repetition.
+  So there are $0 \leq i < j \leq n$ with $a^i = a^j$, which means $a^{j - i} = e$ and hence
+  $\abs{a} \leq n$.
+
+  So $\abs{a} \leq \abs{G}$, thus $\abs{a} = \abs{G}$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Examples in closer detail}
+
+\begin{ex}
+  For $G = \mathbb{Z}$:
+  \begin{itemize}
+    \item Infinite cyclic group.
+    \item Generators: $+1$ and $-1$.
+    \item Order of $m \in \mathbb{Z}$ is
+    \[ \abs{m} = \begin{cases}
+      \infty \qquad & m \neq 0 \\
+      1 & m = 0
+    \end{cases}. \]
+    \item Cyclic subgroups are $\ang{m} = m\mathbb{Z} = \{ km : k \in \mathbb{Z} \}$.
+    (Note difference in $\ang{a}$ between additive and multiplicative notation.)
+
+    Homework: all subgroups of $\mathbb{Z}$ are cyclic.
+  \end{itemize}
+\end{ex}
+
+\begin{ex}
+  Can we analyze $\Zmod{n}$ in the same way?
+
+  (Note: at this point we may drop the brackets. For example, in $\Zmod{5}$, $3 = 8$.)
+
+  Questions:
+  \begin{itemize}
+    \item What are the generators of $\Zmod{n}$?
+    \item What are the orders of elements of $\Zmod{n}$?
+    \item What are the subgroups?
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection[Generators of Z mod nZ]{Generators of $\Zmod{n}$}
+
+\begin{lem}{}{}
+  Suppose $G = \ang{S}$.
+  Then $G = \abs{T}$ if and only if $S \subseteq \ang{T}$.
+\end{lem}
+
+So $\Zmod{n} = \ang{[a]}$ if and only if $[1] \in \ang{[a]}$ (since $[1]$ is a
+generator).
+Note then
+\begin{align*}
+  [1] \in \ang{[a]} &\iff xa = 1 \pmod{n} \qquad \text{for some } x \in \mathbb{Z} \\
+  &\iff xa - 1 = yn \qquad \text{for some } x, y \in \mathbb{Z} \\
+  &\iff xa + yn = 1 \qquad \text{for some } x, y \in \mathbb{Z} \\
+  &\iff \gcd(a, n) = 1
+\end{align*}
+so $\ang{[a]} = \Zmod{n}$ if and only if $\gcd(a, n) = 1$.
+
+\pagebreak
+\subsection[Order of elements in Z mod nZ]{Order of elements in $\Zmod{n}$}
+
+\begin{lem}{}{}
+  If $G$ is a group, $g \in G$, and $g^n = e$, then $\abs{g} \mid n$.
+\end{lem}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+If $a \in \mathbb{Z}$, then $n[a] = 0$, so $\abs{[a]} \mid n$.
+
+\begin{lem}{}{}
+  Suppose $a \mid n$.
+  Then $\abs{[a]} = \frac{n}{a}$.
+\end{lem}
+
+\begin{thmproof}
+  If $n = ka$, then $\ell[a] \neq 0$ for $1 \leq \ell < k$ and $k[a] = [ka] = 0$, so
+  $\abs{[a]} = k$.
+\end{thmproof}
+
+\begin{lem}{}{}
+  Suppose $a \in \mathbb{Z}$ and let $b = \gcd(a, n)$.
+  Then $\ang{[a]} = \ang{[b]}$.
+\end{lem}
+
+\begin{thmproof}
+  Since $b \mid a$, there is $k$ such that $a = kb$.
+  Thus $[a] \in \ang{[b]}$, so $\ang{[a]} \subseteq \ang{[b]}$.
+
+  By properties of $\gcd$, there are $x, y \in \mathbb{Z}$ such that $xa + yn = b$.
+
+  So $[b] = x[a] + y[n] = x[a]$, which implies $[b] \in \ang{[a]}$ and thus
+  $\ang{[b]} \subseteq \ang{[a]}$.
+
+  Hence $\ang{[a]} = \ang{[b]}$.
+\end{thmproof}
+
+\begin{prop}{}{}
+  Suppose $a \in \mathbb{Z}$.
+  Then
+  \[ \abs{[a]} = \frac{n}{\gcd(a, n)}. \]
+\end{prop}
+
+\begin{thmproof}
+  Let $b = \gcd(a, n)$.
+  Then $\ang{[a]} = \ang{[b]}$.
+  So
+  \[ \abs{[a]} = \abs{\ang{[a]}} = \abs{\ang{[b]}} = \abs{[b]}. \]
+  But $b \mid n$, so by lemma $\abs{[b]} = \frac{n}{b}$.
+\end{thmproof}
+
+\pagebreak
+\subsection[Subgroups of Z mod nZ]{Subgroups of $\Zmod{n}$}
+
+\begin{cor}{}{}
+  Let $n \geq 1$.
+  \begin{itemize}
+    \item The order $d$ of any cyclic subgroup of $\Zmod{n}$ divides $n$.
+    \item For every $d \mid n$, there is a unique cyclic subgroup of $\Zmod{n}$ of order $d$.
+    It is generated by $[a]$, where $a = \frac{n}{d}$.
+  \end{itemize}
+\end{cor}
+
+\begin{thmproof}
+  If $\abs{\ang{[a]}} = d$, then $d = \abs{[a]} \mid n$ by lemma.
+
+  Also, $d = \frac{n}{\gcd(a, n)}$, and by lemma, $\ang{[a]} = \ang{[\frac{n}{d}]}$.
+
+  Conversely, if $d \mid n$ and $a = \frac{n}{d}$, then $\abs{\ang{[a]}} = d$.
+\end{thmproof}
+
+\begin{ex}
+  Cyclic subgroups of $\Zmod{6}$:
+  \begin{itemize}
+    \item $\ang{6} = \{0\}$.
+    \item $\ang{3} = \{0, 3\}$.
+    \item $\ang{2} = \{0, 2, 4\} = \ang{4}$.
+    \item $\ang{1} = \{0, 1, 2, 3, 4, 5\} = \Zmod{6} = \ang{5}$.
+  \end{itemize}
+
+  Cyclic subgroups of $\Zmod{p}$ where $p$ prime:
+  \begin{itemize}
+    \item $\ang{p} = \ang{0}$.
+    \item $\ang{1} = \Zmod{p}$.
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Proofs later}
+
+\begin{itemize}
+  \item Every subgroup of a cyclic group is cyclic.
+  (So the previous corollary is a complete list of subgroups of $\Zmod{n}$.)
+  \item Every cyclic group is isomorphic to one of $\Zmod{n}$ for $n \geq 1$, or $\mathbb{Z}$.
+\end{itemize}
 
 %---------------
 \end{document}

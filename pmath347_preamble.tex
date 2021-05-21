@@ -337,14 +337,18 @@
 
 %% Math commands
 
-% Useful delimiters: abs, ceil, floor
+% Useful delimiters: abs
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ang{\langle}{\rangle}
 
 % Operators and such
 \DeclareMathOperator{\Id}{Id}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Fun}{Fun}
 \DeclareMathOperator{\supp}{supp}
+
+% Macros
+\newcommand{\Zmod}[1]{\mathbb{Z}/{#1}\mathbb{Z}}
