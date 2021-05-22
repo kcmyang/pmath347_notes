@@ -1672,6 +1672,486 @@ If $a \in \mathbb{Z}$, then $n[a] = 0$, so $\abs{[a]} \mid n$.
   \item Every cyclic group is isomorphic to one of $\Zmod{n}$ for $n \geq 1$, or $\mathbb{Z}$.
 \end{itemize}
 
+%%%%% Lec 5
+\section{Homomorphisms}
+
+\subsection{Homomorphisms}
+
+\begin{defn}{homomorphism (morphism)}{homomorphism}
+  Let $G$ and $H$ be groups.
+  A function $\phi \colon G \to H$ is a \hldef{homomorphism} (or \hldef{morphism}) if
+  \[ \phi(g \cdot h) = \phi(g) \cdot \phi(h) \]
+  for all $g, h \in G$.
+\end{defn}
+
+A homomorphism preserves the group operation from $G$ to $H$.
+
+\begin{ex}
+  \begin{itemize}
+    \item
+    For $\mathbb{K}$ a field, $\mathbb{K}^\times = \{a \in \mathbb{K} : a \neq 0\}$ is a group with
+    operation $\cdot$.
+
+    Then $\GL_n \mathbb{K} \to \mathbb{K}^\times : A \mapsto \det(A)$ is a homomorphism because
+    $\det(AB) = \det(A) \det(B)$ for all $A, B$.
+    \item
+    Let $\mathbb{R}_{> 0} = \{x \in \mathbb{R} : x > 0\} \leq \mathbb{R}^\times$.
+    Then $\mathbb{R}_{> 0} \to \mathbb{R}_{> 0} : x \mapsto \sqrt{x}$ is a homomorphism since
+    $\sqrt{xy} = \sqrt{x} \sqrt{y}$.
+    \item
+    Additive notation: $\phi \colon (G, +) \to (H, +)$ is a homomorphism if
+    $\phi(x + y) = \phi(x) + \phi(y)$ for all $x, y \in G$.
+
+    $\phi \colon \mathbb{Z} \to \mathbb{Z} : k \mapsto mk$ is a homomorphism for any
+    $m \in \mathbb{Z}$ since $\phi(x + y) = m(x + y) = mx + my = \phi(x) + \phi(y)$ for all
+    $x, y \in \mathbb{Z}$.
+    \item
+    If $V, W$ are vector spaces and $T \colon V \to W$ is a linear transformation, then $T$ is a
+    homomorphism from $(V, +)$ to $(W, +)$ since $T(v + w) = T(v) + T(w)$ for all $v, w \in V$.
+    \item
+    Mixed notation: $\mathbb{R}^+ \to \mathbb{R}^\times : x \mapsto e^x$ is a homomorphism since
+    $e^{x + y} = e^x \cdot e^y$ for all $x, y \in \mathbb{R}^+$.
+    \item
+    $\mathbb{R}^+ \to \mathbb{R}^+ : x \mapsto e^x$ is not a homomorphism because
+    $e^{x + y} \neq e^x + e^y$ in general (take $x = y = 0$).
+  \end{itemize}
+\end{ex}
+
+\begin{lem}{}{}
+  Suppose $\phi \colon G \to H$ is a homomorphism.
+  Then:
+  \begin{enumerate}
+    \item $\phi(e_G) = e_H$.
+    \item $\phi(g^{-1}) = \phi(g)^{-1}$ for all $g \in G$.
+    \item $\phi(g^n) = \phi(g)^n$ for all $n \in \mathbb{Z}$.
+    \item $\abs{\phi(g)} \mid \abs{g}$ for all $g \in G$ (say $n \mid \infty$ for all
+    $n \in \mathbb{N}$).
+  \end{enumerate}
+\end{lem}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item
+    $\phi(e_G) = \phi(e_G^2) = \phi(e_G) \cdot \phi(e_G)$, so
+    $e_H = \phi(e_G)^{-1} \cdot \phi(e_G) = \phi(e_G)^{-1} \cdot \phi(e_G) \cdot \phi(e_G)
+      = \phi(e_G)$.
+    \item
+    $e_H = \phi(e_G) = \phi(gg^{-1}) = \phi(g) \phi(g^{-1})$ and similarly
+    $\phi(g^{-1}) \phi(g) = e_H$, so $\phi(g^{-1})$ is the unique inverse of $\phi(g)$.
+    \item
+    Use induction for $n \geq 0$, additionally with part (b) for $n < 0$.
+    \item
+    If $\abs{g} = n < \infty$, then $g^n = e_G$ so $\phi(g)^n = \phi(g^n) = \phi(e_G) = e_H$.
+    Homework: prove $\abs{\phi(g)} \mid n$.
+  \end{enumerate}
+\end{thmproof}
+
+\pagebreak
+\subsection{Making new homomorphisms from old}
+
+\begin{lem}{}{}
+  If $H \leq G$ and $H$ is considered as a group with the induced operation from $G$, then
+  $i \colon H \to G : x \mapsto x$ is a homomorphism.
+\end{lem}
+
+\begin{thmproof}
+  $i(g \cdot h) = g \cdot h = i(g) \cdot i(h)$.
+\end{thmproof}
+
+\begin{lem}{}{}
+  If $\phi \colon G \to M$ and $\psi \colon H \to K$ are homomorphisms, then $\psi \circ \phi$ is
+  a homomorphism.
+\end{lem}
+
+\begin{thmproof}
+  $(\psi \circ \phi)(g \cdot h) = \psi(\phi(g) \cdot \phi(h)) = \psi(\phi(g)) \cdot \psi(\phi(h))$.
+\end{thmproof}
+
+\begin{cor}{}{}
+  If $\phi \colon G \to H$ is a homomorphism and $K \leq G$, then the \hldef{restriction}
+  $\phi \rvert_K$ is a homomorphism.
+\end{cor}
+
+\begin{thmproof}
+  $\phi \rvert_K = \phi \circ i$, where $i \colon K \to G$ is the inclusion $x \mapsto x$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Images of homomorphisms}
+
+If $f \colon X \to Y$ is a function and $S \subseteq X$, then say $f(S) := \{ f(x) : x \in S \}$.
+
+\begin{prop}{}{}
+  If $\phi \colon G \to H$ is a homomorphism and $K \leq G$, then $\phi(K) \leq H$.
+\end{prop}
+
+That is, homomorphisms send subgroups of the domain to subgroups of the codomain.
+
+\begin{thmproof}
+  Since $K$ is non-empty, $\phi(K)$ is non-empty.
+
+  If $x, y \in \phi(K)$, then $x = \phi(x_0)$ and $y = \phi(y_0)$ for some $x_0, y_0 \in K$.
+
+  So $xy^{-1} = \phi(x_0)\phi(y_0)^{-1} = \phi(x_0)\phi(y_0^{-1}) = \phi(x_0 y_0^{-1}) \in \phi(K)$,
+  since $x_0 y_0^{-1} \in K$.
+\end{thmproof}
+
+\begin{defn}{image}{image}
+  If $\phi \colon G \to H$ is a homomorphism, the \hldef{image} of $\phi$ is the subgroup
+  $\Im \phi = \phi(G) \leq H$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item
+    Let $\phi \colon \mathbb{R}^+ \to \mathbb{R}^\times : x \mapsto e^x$.
+
+    $e^x > 0$ for all $x \in \mathbb{R}$, so $\Im \phi \subseteq \mathbb{R}_{> 0}$.
+
+    If $y \in \mathbb{R}_{> 0}$, then $y = \phi(\log y)$, so $\Im \phi = \mathbb{R}_{> 0}$.
+    \item
+    If $K \leq G$ and $i \colon K \to G$ is inclusion, then $\Im i = K$.
+    \item
+    For $\phi \colon \mathbb{Z} \to \mathbb{Z} : k \mapsto mk$ for some $m \in \mathbb{Z}$,
+    $\phi(\mathbb{Z}) = m\mathbb{Z}$.
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Properties of images}
+
+\begin{lem}{}{}
+  If $\phi \colon G \to H$ is a homomorphism with $\Im \phi \leq K \leq H$, then the function
+  $\tilde{\phi} \colon G \to K : x \mapsto \phi(x)$ is also a homomorphism with
+  $\Im \tilde{\phi} = \Im \phi \leq K$.
+\end{lem}
+
+\begin{thmproof}
+  \begin{align*}
+    \tilde{\phi}(x \cdot y) &= \phi(x \cdot y) \\
+    &= \phi(x) \cdot \phi(y) \qquad \text{in } H \\
+    &= \tilde{\phi}(x) \cdot \tilde{\phi}(y) \qquad \text{in } K.
+  \end{align*}
+
+  Also $\tilde{\phi}(G) = \phi(G)$, regarded as a subset of $K$.
+\end{thmproof}
+
+We usually just refer to $\tilde{\phi}$ as $\phi$.
+
+\begin{lem}{}{}
+  A homomorphism $\phi \colon G \to H$ is surjective if and only if $\Im \phi = H$.
+\end{lem}
+
+\begin{thmproof}
+  Obvious from definition.
+\end{thmproof}
+
+\begin{cor}{}{}
+  $\phi$ induces a surjective homomorphism $\tilde{\phi} \colon G \to K$, where $K = \Im \phi$.
+\end{cor}
+
+\begin{prop}{}{}
+  Let $\phi \colon G \to H$ be a homomorphism.
+  If $S \subseteq G$, then $\phi(\ang{S}) = \ang{\phi(S)}$.
+\end{prop}
+
+\begin{thmproof}
+  First, $\phi(S^{-1}) = \{\phi(s^{-1}) : s \in S\} = \{\phi(s)^{-1} : s \in S\} = \phi(S)^{-1}$.
+  Thus
+  \begin{align*}
+    \phi(\ang{S})
+    &= \phi(\{ s_1 \cdots s_k : k \geq 0, \ s_1, \ldots, s_k \in S \cup S^{-1} \}) \\
+    &= \{ \phi(s_1) \cdots \phi(s_k) : k \geq 0, \ s_1, \ldots, s_k \in S \cup S^{-1} \} \\
+    &= \{ t_1 \cdots t_k : k \geq 0, \ t_1, \ldots, t_k \in \phi(S) \cup \phi(S)^{-1} \} \\
+    &= \ang{\phi(S)}.
+  \end{align*}
+\end{thmproof}
+
+\pagebreak
+\subsection{Pulling back subgroups}
+
+If $f \colon X \to Y$ is a function and $S \subseteq Y$, then say
+$f^{-1}(S) := \{x \in X : f(x) \in S\}$.
+
+\begin{prop}{}{}
+  If $\phi \colon G \to H$ is a homomorphism and $K \leq H$, then $\phi^{-1}(K) \leq G$.
+\end{prop}
+
+That is, we can also get a subgroup of the domain from a subgroup of the codomain.
+
+Note: the forward and backward processes are not necessarily inverses, so we don't have a bijection
+(just yet).
+
+\begin{thmproof}
+  $\phi(e_G) = e_H \in K$, so $e_G \in \phi^{-1}(K)$.
+
+  If $x, y \in \phi^{-1}(K)$, then $\phi(x), \phi(y) \in K$ so
+  $\phi(x y^{-1}) = \phi(x) \phi(y)^{-1} \in K$ and hence $xy^{-1} \in \phi^{-1}(K)$.
+\end{thmproof}
+
+\pagebreak
+\subsection{The kernel of a homomorphism}
+
+\begin{defn}{kernel}{kernel}
+  If $\phi \colon G \to H$ is a homomorphism, then the \hldef{kernel} of $\phi$ is the subgroup
+  $\ker \phi := \phi^{-1}(\{e_H\}) = \{ g \in G : \phi(g) = e_H \} \leq G$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item
+    For $\det \colon \GL_n(\mathbb{K}) \to \mathbb{K}^\times$, we have
+    $\ker \det = \{ A \in \GL_n(\mathbb{K}) : \det(A) = 1 \}$.
+
+    This subgroup of $\GL_n(\mathbb{K})$ is called the \hldef{special linear group}, denoted by
+    $\SL_n(\mathbb{K})$.
+    \item
+    If $\phi \colon \mathbb{Z} \to \mathbb{Z} : k \mapsto mk$, then $\phi(k) = 0$ if and only if
+    $mk = 0$, so
+    \[ \ker \phi = \begin{cases}
+      \{0\} \qquad & m \neq 0 \\
+      \mathbb{Z} & m = 0
+    \end{cases}. \]
+    \item
+    If $\phi \colon \mathbb{R}^+ \to \mathbb{R}^\times : x \mapsto e^x$, then $e^x = 1$ if and only
+    if $x = 0$, so $\ker \phi = \{0\}$.
+  \end{itemize}
+\end{ex}
+
+\begin{prop}{}{}
+  A homomorphism $\phi \colon G \to H$ is injective if and only if $\ker \phi = \{e_G\}$.
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}[leftmargin=4em]
+    \item[($\implies$)]
+    If $\phi$ is injective, then $\phi(x) = e_H = \phi(e_G)$ if and only if $x = e_G$, so
+    $\ker \phi = \{e_G\}$.
+    \item[($\impliedby$)]
+    Suppose $\ker \phi = \{e_G\}$ and $\phi(x) = \phi(y)$.
+
+    Then $\phi(xy^{-1}) = \phi(x)\phi(y)^{-1} = e_H$, so $xy^{-1} \in \ker \phi$.
+
+    But then $xy^{-1} = e_G$, so $x = y$.
+    That is, $\phi$ is injective.
+  \end{enumerate}
+\end{thmproof}
+
+\pagebreak
+\subsection{Application: subgroups of cyclic groups}
+
+\begin{prop}{}{}
+  If $H$ is a subgroup of a cyclic group $G$, then $H$ is cyclic.
+\end{prop}
+
+\begin{thmproof}
+  We need the following facts:
+  \begin{enumerate}
+    \item All subgroups of $\mathbb{Z}$ are of the form $m\mathbb{Z} = \ang{m}$, hence cyclic.
+    (Homework.)
+    \item $G$ is cyclic if and only if there is a surjective homomorphism $\mathbb{Z} \to G$.
+    (Homework.)
+    \item If $f \colon X \to Y$ is a surjective function and $S \subseteq Y$, then
+    $f(f^{-1}(S)) = S$.
+    (Exercise.)
+  \end{enumerate}
+
+  Since $G$ is cyclic, by (2) there is a surjective homomorphism $\phi \colon \mathbb{Z} \to G$.
+
+  By (1), since all subgroups of $\mathbb{Z}$ are cyclic, there is $m \in \mathbb{Z}$ such that
+  $\phi^{-1}(H) = \ang{m}$.
+
+  So let $\psi \colon \mathbb{Z} \to \mathbb{Z}$ be the homomorphism with $\psi(k) = mk$.
+
+  Then $\phi \circ \psi \colon \mathbb{Z} \to G$ is a homomorphism.
+  We see that
+  \[ (\phi \circ \psi)(\mathbb{Z}) = \phi(m\mathbb{Z}) = \phi(\phi^{-1}(H)) = H \]
+  by (3).
+
+  We can restrict the codomain of $\phi \circ \psi$ to get a surjective homomorphism
+  $\mathbb{Z} \to H$.
+  Hence $H$ is cyclic by (2).
+\end{thmproof}
+
+\pagebreak
+\subsection{Review on bijections}
+
+\begin{defn}{bijection}{bijection}
+  Let $f \colon X \to Y$ be a function.
+  Then $f$ is:
+  \begin{itemize}
+    \item \hldef{injective} if for all $x_1, x_2 \in X$, $f(x_1) = f(x_2)$ implies that $x_1 = x_2$;
+    \item \hldef{surjective} if for all $y \in Y$, there exists $x \in X$ with $f(x) = y$; and
+    \item \hldef{bijective} if $f$ is both injective and surjective.
+  \end{itemize}
+\end{defn}
+
+\begin{prop}{}{}
+  $f \colon X \to Y$ is a bijection if and only if there is a function $g \colon Y \to X$ such that
+  $f \circ g = 1_Y$ and $g \circ f = 1_X$.
+\end{prop}
+
+If $g$ exists, then it is unique, and we denote it by $f^{-1}$.
+
+\pagebreak
+\subsection{Isomorphisms}
+
+\begin{defn}{isomorphism}{isomorphism}
+  A homomorphism $\phi \colon G \to H$ is an \hldef{isomorphism} if $\phi$ is a bijection.
+\end{defn}
+
+\begin{lem}{}{}
+  $\phi \colon G \to H$ is an isomorphism if and only if $\ker \phi = \{e_G\}$ and $\Im \phi = H$.
+\end{lem}
+
+\begin{ex}
+  \begin{itemize}
+    \item $\mathbb{R}^+ \to \mathbb{R}_{> 0} : x \mapsto e^x$ is an isomorphism.
+    \item If $\phi \colon G \to H$ is injective, then $\phi$ induces an isomorphism $G \to \Im\phi$.
+    \item $\mathbb{Z} \to m\mathbb{Z} : k \mapsto mk$ is an isomorphism.
+  \end{itemize}
+\end{ex}
+
+\begin{prop}{}{}
+  Suppose $\phi \colon G \to H$ is an isomorphism.
+  Then $\phi^{-1} : H \to G$ is also an isomorphism.
+\end{prop}
+
+\begin{thmproof}
+  $\phi^{-1}$ is also a bijection, so we just need to show that it is a homomorphism.
+
+  Let $g, h \in H$.
+  Then $\phi(\phi^{-1}(g) \cdot \phi^{-1}(h)) = \phi(\phi^{-1}(g)) \cdot \phi(\phi^{-1}(h))
+    = g \cdot h$.
+
+  So $\phi^{-1}(g) \cdot \phi^{-1}(h) = \phi^{-1}(g \cdot h)$.
+  Hence $\phi^{-1}$ is a homomorphism.
+\end{thmproof}
+
+\begin{cor}{}{}
+  A homomorphism $\phi \colon G \to H$ is an isomorphism if and only if there is a homomorphism
+  $\psi \colon H \to G$ such that
+  \begin{enumerate}
+    \item $\psi \circ \phi = 1_G$, and
+    \item $\phi \circ \psi = 1_H$.
+  \end{enumerate}
+\end{cor}
+
+This shows isomorphisms are to homomorphisms as bijections are to functions.
+
+\begin{thmproof}
+  \begin{enumerate}[leftmargin=4em]
+    \item[($\impliedby$)] If $\psi$ exists, then $\phi$ is a bijection.
+    \item[($\implies$)] If $\phi$ is an isomorphism, then we can take $\psi = \phi^{-1}$.
+  \end{enumerate}
+\end{thmproof}
+
+\begin{defn}{isomorphic}{isomorphic}
+  We say that groups $G$ and $H$ are \hldef{isomorphic} if there is an isomorphism
+  $\phi \colon G \to H$.
+
+  Notation: $G \cong H$.
+\end{defn}
+
+Key facts:
+\begin{itemize}
+  \item If $G \cong H$, then $H \cong G$ (symmetry).
+
+  Proof: If $\phi \colon G \to H$ is an isomorphism, then $\phi^{-1} \colon H \to G$ is an
+  isomorphism.
+  \item If $G \cong H$ and $H \cong K$, then $G \cong K$ (transitivity).
+
+  Proof: If $\phi \colon G \to H$ is an isomorphism and $\psi \colon H \to K$ is an isomorphism,
+  then $\psi \circ \phi$ is an isomorphism.
+  \item $G \cong G$ (reflexivity).
+
+  Proof: $1_G \colon G \to G$ is an isomorphism.
+\end{itemize}
+
+\pagebreak
+\subsection{Isomorphism as a relation}
+
+Idea: if $G \cong H$, then $G$ and $H$ are identical \emph{as groups}.
+
+If $\phi \colon G \to H$ is an isomorphism, then:
+\begin{itemize}
+  \item $\abs{G} = \abs{H}$;
+  \item $G$ is abelian if and only if $H$ is abelian;
+  \item $\abs{g} = \abs{\phi(g)}$ for all $g \in G$;
+  \item $K \subseteq G$ is a subgroup of $G$ if and only if $\phi(K)$ is a subgroup of $H$.
+\end{itemize}
+
+\pagebreak
+\subsection{Isomorphisms of cyclic groups}
+
+\begin{prop}{}{}
+  If $G$ and $H$ are cyclic groups, then $G \cong H$ if and only if $\abs{G} = \abs{H}$.
+\end{prop}
+
+\begin{thmproof}
+  The forward implication is obvious.
+
+  Suppose $G = \ang{a}$ and $H = \ang{b}$ where $\abs{G} = \abs{H}$.
+
+  Claim: $a^i = a^j$ for $i < j$ if and only if $\abs{a} \mid j - i$.
+
+  Proof: if $a^i = a^j$ then $a^{j - i} = e$, apply the homework to finish.
+  Conversely, if $\abs{a} \mid j - i$, then $j - i = k\abs{a}$.
+  So $a^{j - i} = a^{k\abs{a}} = e$ and hence $a^j = a^i$.
+
+  (Note: if $\abs{a} = \infty$, then $a^i \neq a^j$ for all $i \neq j \in \mathbb{Z}$.)
+
+  Now define $\phi \colon G \to H : a^i \mapsto b^i$.
+
+  Notice $\abs{a} = \abs{G} = \abs{H} = \abs{b}$.
+  Then $a^i = a^j$ implies $\abs{a} \mid j - i$ implies $\abs{b} \mid j - i$ implies $b^i = b^j$, so
+  $\phi$ is well-defined.
+
+  We see $\phi(a^i \cdot a^j) = \phi(a^{i + j}) = b^{i + j} = b^i \cdot b^j
+    = \phi(a^i) \cdot \phi(a^j)$ for all $a^i, a^j \in G$, so $\phi$ is a homomorphism.
+
+  Similarly to above, $\psi \colon H \to G : b^i \mapsto a^i$ is well-defined and clearly an
+  inverse to $\phi$.
+
+  Thus $\phi$ is an isomorphism.
+\end{thmproof}
+
+\begin{cor}{}{}
+  Suppose $G$ is a cyclic group.
+  \begin{itemize}
+    \item If $\abs{G} = \infty$, then $G \cong \mathbb{Z}$.
+    \item If $\abs{G} = n < \infty$, then $G \cong \Zmod{n}$.
+  \end{itemize}
+\end{cor}
+
+\begin{cor}{}{}
+  Cyclic groups are abelian.
+\end{cor}
+
+\begin{exer}{}{}
+  Prove the previous corollary without the corollary before it.
+\end{exer}
+
+\pagebreak
+\subsection{Multiplicative notation for cyclic groups}
+
+Sometimes it is convenient to use the multiplicative form of cyclic groups.
+
+\begin{defn}{}{}
+  Let $a$ be a formal indeterminate.
+  Let
+  \begin{itemize}
+    \item $C_\infty = \{a^i : i \in \mathbb{Z}\}$ with $a^i \cdot a^j = a^{i + j}$; and
+    \item $C_n = \{a^i : i \in \Zmod{n}\}$ with $a^i \cdot a^j = a^{i + j}$.
+  \end{itemize}
+\end{defn}
+
+Of course, we have:
+\begin{itemize}
+  \item $C_\infty \cong \mathbb{Z}$ via $a^i \mapsto i$.
+  \item $C_n \cong \Zmod{n}$ via $a^i \mapsto i$.
+\end{itemize}
+
 %---------------
 \end{document}
 %---------------
