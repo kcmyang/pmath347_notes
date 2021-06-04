@@ -1143,9 +1143,9 @@ If $\pi$ is a permutation, then $\pi$ commutes with $\pi^i$ for all $i$, so $\pi
 commute.
 However, $\pi$ and $\pi^i$ don't have disjoint support sets.
 
-%%%%% Lec 3
 \week{Subgroups and homomorphisms}
 
+%%%%% Lec 3
 \section{Subgroups}
 
 \subsection{Subgroups}
@@ -2151,6 +2151,1060 @@ Of course, we have:
   \item $C_\infty \cong \mathbb{Z}$ via $a^i \mapsto i$.
   \item $C_n \cong \Zmod{n}$ via $a^i \mapsto i$.
 \end{itemize}
+
+%%%%% Week 3
+\week{Cosets, Lagrange's Theorem, and Products}
+
+\section{Cosets and Lagrange's Theorem}
+
+\subsection{Affine spaces}
+
+Linear subspaces motivate the definition of subgroups.
+Let $T \colon V \to W$ be a linear transformation (so $T$ is a homomorphism $(V, +) \to (W, +)$).
+We get $\ker T = \{x \in V : T(x) = 0\}$ which are the ``solutions to $Tx = 0$''.
+What are the solutions to $Tx = b$?
+
+Note $Tx = b$ has a solution if and only if $b \in \Im T$.
+If $b \in \Im T$ and $Tx = b$ has solution $x_0$, then all other solutions are of the form
+$x_0 + x_1$ for $x_1 \in \ker T$.
+We conclude the space of solutions has form $x_0 + \ker T$.
+We call this an \hldef{affine subspace} (like a linear subspace, but may not contain 0).
+
+\begin{defn}{coset}{coset}
+  If $S \subseteq G$ and $g \in G$, we let
+  \[ gS = \{gh : h \in S\} \quad \text{and} \quad Sg = \{hg : h \in S\}. \]
+  If $H \leq G$, then $gH$ is called a \hldef{left coset} of $H$ in $G$ and $Hg$ is called a
+  \hldef{right coset} of $H$ in $G$.
+\end{defn}
+
+For abelian groups, $gH = Hg$.
+In additive notation, a coset of $H$ in $(G, +)$ is $g + H$.
+
+\begin{ex}
+  \begin{itemize}
+    \item
+    If $U$ is a subspace of vector space $(V, +, \cdot)$, cosets of $U$ are affine subspaces
+    $v + U$ for $v \in V$.
+    \item
+    Given $m \in \mathbb{Z}$, cosets of $m\mathbb{Z}$ are sets
+    \[
+      a + m\mathbb{Z} = \{a + km : k \in \mathbb{Z}\} = \{x \in \mathbb{Z} : x \equiv a \mod{m}\}.
+    \]
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Cosets in the dihedral group}
+
+Recall $D_{2n} = \{s^i r^j : 0 \leq i < n, \ j \in \{0, 1\}\}$.
+
+Say $H = \ang{s} = \{e = s^0, s^1, \ldots, s^{n - 1}\}$.
+
+The right cosets of $H$ are:
+\begin{itemize}
+  \item $He = H$
+  \item $Hr = \{r, sr, \ldots, s^{n - 1}r\}$
+  \item $Hs^i = \{s^i, s^{i + 1}, \ldots, s^{n - 1}, e, s^1, \ldots, s^{i - 1}\} = H$
+  \item $Hs^i r = \{s^i r, s^{i + 1}r, \ldots, s^{n - 1}r, r, sr, \ldots, sr, \ldots, s^{i - 1}r\}
+    = H$
+\end{itemize}
+Notice $D_{2n} = H \sqcup Hr$ where $\sqcup$ is disjoint union.
+
+Exercise 1: use $rs = s^{-1}r$ to show $s^i r = rs^{-i}$ for all $i \in \mathbb{Z}$.
+
+Exercise 2: if $S \subseteq G$ and $g, h \in G$, then $ghS = g(hS)$.
+
+The left cosets of $H$ are:
+\begin{itemize}
+  \item $eH = H$
+  \item $s^i H = H$
+  \item $s^i r H = rs^{-i}H = rH$
+\end{itemize}
+
+Notice
+\begin{align*}
+  rH &= \{r, rs, rs^2, \ldots, rs^{n - 1}\} \\
+  &= \{r, s^{-1}r, s^{-2}r, \ldots, s^{-n + 1}r\} \\
+  &= \{r, s^{n - 1}r, s^{n - 2}r, \ldots, sr\} \\
+  &= Hr
+\end{align*}
+so in this case, the left and right cosets are equal.
+
+What about $K = \ang{r} = \{e, r\}$?
+
+Left cosets: $rK = \{r, e\} = K$ and $s^iK = \{s^i, s^i r\} = s^i rK$.
+We see the left cosets are $s^i K$ for $0 \leq i < n$, and
+\[ D_{2n} = \bigsqcup_{i = 0}^{n - 1} s^i K. \]
+
+Right cosets: $Kr = \{r, e\} = K$ and $Ks^i = \{s^i, rs^i\} = \{s^i, s^{-1}r\}$ and
+$Ks^i r = \{s^i r, s^{-1}\} = Ks^{-1}$.
+We see the right cosets are $K s^i$ for $0 \leq i < n$, and
+\[ D_{2n} = \bigsqcup_{i = 0}^{n - 1} Ks^i. \]
+
+In this case, the left and right cosets are not equal.
+
+\pagebreak
+\subsection{Sets of cosets}
+
+\begin{defn}{set of cosets}{}
+  If $H \leq G$, let
+  \[ G/H = \{gH : g \in G\} = \{S \subseteq G: S = gH \text{ for some } g \in G\} \]
+  be the \hldef{set of left cosets} of $H$ in $G$, and
+  \[ H \setminus G = \{Hg: g \in G\} = \{S \subseteq G : S = Hg \text{ for some } g \in G\} \]
+  be the \hldef{set of right cosets} of $H$ in $G$.
+\end{defn}
+
+We are very interested in trying to understand $G/H$ and $H \setminus G$.
+
+\begin{ex}
+  \begin{itemize}
+    \item $D_{2n} / \ang{s} = \{\ang{s}, r\ang{s}\}$.
+    \item $D_{2n} / \ang{r} = \{s^i \ang{r}, \ 0 \leq i < n\}$.
+  \end{itemize}
+\end{ex}
+
+\begin{ex}
+  Consider $n\mathbb{Z} \leq \mathbb{Z}$.
+  Then
+  \[ a + n\mathbb{Z} = \{x \in \mathbb{Z} : x \equiv a \mod{n}\} =: [a] \]
+  so
+  \begin{align*}
+    \Zmod{n} &= \{a + n\mathbb{Z} : a \in \mathbb{Z}\} \\
+    &= \{a + n\mathbb{Z} : 0 \leq a < n\} \\
+    &= \{[a] : 0 \leq a < n\}.
+  \end{align*}
+\end{ex}
+
+A big question for later: for which $H \leq G$ is $G/H$ a group?
+
+\pagebreak
+\subsection{Cosets of a kernel}
+
+Suppose $\phi \colon G \to K$ is a homomorphism and let $H = \ker \phi$.
+(Note $\phi(x) = b$ has a solution $x$ for $b \in K$ if and only if $b \in \Im \phi$.)
+
+\begin{lem}{}{}
+  Suppose $\phi(x_0) = b$.
+  The set of solutions $\phi^{-1}(\{b\})$ to $\phi(x) = b$ is $x_0 H = H x_0$.
+\end{lem}
+
+\begin{thmproof}
+  Suppose $\phi(x_1) = b$.
+  Then $\phi(x_0^{-1} x_1) = b^{-1}b = e$, so $x_0^{-1}x_1 \in H$ and thus
+  $x_1 = x_0(x_0^{-1}x_1) \in x_0 H$.
+
+  Conversely, if $x_1 = x_0 h$ for $h \in H$, then $\phi(x_1) = \phi(x_0)\phi(h) = b$, so every
+  element of $x_0 H$ is a solution.
+
+  A similar argument using right cosets shows the set of solutions is also $Hx_0$.
+\end{thmproof}
+
+In this case, the left cosets are the right cosets.
+
+\begin{prop}{}{}
+  If $\phi \colon G \to K$ is a homomorphism, then there is a bijection between $G / \ker\phi$ and
+  $\Im \phi$.
+\end{prop}
+
+\begin{thmproof}
+  $g \cdot \ker\phi$ is the set of solutions to $\phi(x) = b$ where $b = \phi(g)$.
+
+  As a result, $\phi(g \cdot \ker\phi) = \{b\}$ and $b \in \Im \phi$.
+
+  In the other direction, $g \ker\phi = \phi^{-1}(\{b\})$.
+\end{thmproof}
+
+\begin{ex}
+  Suppose $G = \mathbb{Z}$ and $K = \Zmod{n}$.
+
+  From tutorial, there is a homomorphism $\phi \colon \mathbb{Z} \to \Zmod{n} : a \mapsto [a]$.
+  We get $\ker\phi = n\mathbb{Z}$ and $\Im\phi = \Zmod{n}$.
+
+  Then $\Zmod{n} = \{[a] : 0 \leq a < n\} = \{a + n\mathbb{Z} : 0 \leq a < n\}$, so
+  $a + n\mathbb{Z}$ is the set of solutions of $[x] \equiv [a]$ in $\Zmod{n}$.
+\end{ex}
+
+\pagebreak
+\subsection{Indexes and Lagrange's theorem}
+
+Given $H \leq G$, how many left cosets does $H$ have?
+
+\begin{defn}{index}{}
+  The \hldef{index} of $H$ in $G$ is
+  \[
+    [G : H] = \begin{cases}
+      \abs{G/H} \quad & G/H \text{ is finite} \\
+      \infty & G/H \text{ is infinite}
+    \end{cases}.
+  \]
+\end{defn}
+
+\begin{thm}{Lagrange's theorem}{lagrange}
+  If $H \leq G$, then $\abs{G} = [G : H] \cdot \abs{H}$.
+\end{thm}
+
+Why use left cosets in the definition?
+
+\begin{prop}{}{}
+  The function $\phi \colon G/H \to H \setminus G : S \mapsto S^{-1}$ is a bijection.
+\end{prop}
+
+\begin{thmproof}
+  Suppose $S \in G/H$, so $S = gH$ for some $g \in G$.
+  Then
+  \begin{align*}
+    S^{-1} &= \{(gh)^{-1} : h \in H\} \\
+    &= \{h^{-1}g^{-1} : h \in H\} \\
+    &= \{hg^{-1} : h \in H\} \\
+    &= Hg^{-1}
+  \end{align*}
+  because $H \to H : h \mapsto h^{-1}$ is a bijection.
+  So $\phi$ is well-defined, and a similar argument shows
+  $\psi \colon H \setminus G \to G/H : S \mapsto S^{-1}$ is well-defined.
+
+  Finally, $\psi$ is an inverse to $\phi$.
+\end{thmproof}
+
+\begin{cor}{}{}
+  If $H \leq G$ then
+  \[
+    [G : H] = \begin{cases}
+      \abs{H \setminus G} \quad & H \setminus G \text{ is finite} \\
+      \infty & H \setminus G \text{ is infinite}
+    \end{cases}.
+  \]
+\end{cor}
+
+Results from Lagrange's theorem: if $H \leq G$, then $\abs{H}$ divides $\abs{G}$, and if $G$ is
+finite, then $[G : H] = \frac{\abs{G}}{\abs{H}}$.
+
+\begin{ex}
+  \begin{itemize}
+    \item $G = D_{2n}$, $H = \ang{s}$.
+    Here, $\abs{D_{2n}} = 2n$, $\abs{H} = n$, so $[G : H] = 2$.
+    \item $G = D_{2n}$, $H = \ang{r}$.
+    Here, $\abs{D_{2n}} = 2n$, $\abs{H} = 2$, so $[G : H] = n$.
+    \item $G = \mathbb{Z}$, $H = m\mathbb{Z}$.
+    Here, $\abs{G} = \abs{H} = \infty$, but $[G : H] = \abs{\Zmod{m}} = m$.
+    So $\abs{G} = [G : H] \abs{H}$, but we don't learn anything about $[G : H]$ from Lagrange's
+    theorem.
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Consequences of Lagrange's theorem}
+
+\begin{cor}{}{}
+  If $x \in G$, then $\abs{x}$ divides $\abs{G}$.
+\end{cor}
+
+\begin{thmproof}
+  $\abs{x} = \abs{\ang{x}}$ and $\abs{\ang{x}}$ divides $\abs{G}$.
+\end{thmproof}
+
+\begin{prop}{}{}
+  If $\abs{G}$ is prime, then $G$ is cyclic.
+\end{prop}
+
+\begin{thmproof}
+  Let $x \in G$ and $x \neq e$.
+  Then $\abs{x} \neq 1$, and $\abs{x} \mid \abs{G}$, so $\abs{x} = \abs{G}$.
+  Then since $\abs{\ang{x}} = \abs{x} = \abs{G}$, we have $G = \ang{x}$ (since $G$ is finite).
+\end{thmproof}
+
+We can thus list out groups of small orders (up to isomorphism)\dots
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{c | c}
+    Order & Known groups \\
+    \hline
+    1 & Trivial group \\
+    2 & $\Zmod{2}$ \\
+    3 & $\Zmod{3}$ \\
+    4 & $\Zmod{4}$, ?? \\
+    5 & $\Zmod{5}$ \\
+    6 & $\Zmod{6}$, $D_6 = S_3$, ?? \\
+    7 & $\Zmod{7}$ \\
+    8 & $\Zmod{8}$, $D_8$, ?? \\
+    9 & $\Zmod{9}$, ??
+  \end{tabular}
+\end{center}
+
+\begin{cor}{}{}
+  If $\phi \colon G \to K$ is a homomorphism, then $\abs{\Im \phi} = [G : \ker\phi]$, and hence
+  divides $\abs{G}$.
+\end{cor}
+
+\begin{thmproof}
+  There is a bijection $G / \ker\phi \to \Im\phi$, so $\abs{\Im\phi} = [G : \ker\phi]$ by
+  definition.
+  Lagrange's theorem then implies $\abs{\Im\phi}$ divides $\abs{G}$ (and $\abs{K}$).
+\end{thmproof}
+
+\begin{exer}{}{}
+  If $G, K$ are groups, then $\phi \colon G \to K : g \mapsto e_K$ is a homomorphism (called the
+  \hldef{trivial homomorphism}).
+  Show $\phi \colon G \to K$ is the trivial homomorphism if and only if $\Im\phi = \{e\}$ (the
+  trivial subgroup).
+\end{exer}
+
+As a result, if $G$ and $K$ have coprime order, then the only homomorphism $\phi \colon G \to K$ is
+the trivial homomorphism.
+
+\pagebreak
+\subsection{Beginning to prove Lagrange's theorem}
+
+Recall
+\begin{align*}
+  D_{2n} &= \{s^i r^j : 0 \leq i < n, \ j \in \{0, 1\}\} \\
+  &= \ang{s} \sqcup r\ang{s} \\
+  &= \bigsqcup_{i = 0}^{n - 1} s^i \ang{r}.
+\end{align*}
+Here, the cosets of $H$ are disjoint, so we can divide $G$ into $[G : H]$ sets of size $\abs{H}$.
+
+Does this work in general?
+
+\begin{prop}{}{}
+  Let $H \leq G$ and suppose $g, k \in G$.
+  Then the following are equivalent:
+  \begin{enumerate}
+    \item $g^{-1}k \in H$
+    \item $k \in gH$
+    \item $gH = kH$
+    \item $gH \cap kH \neq \varnothing$
+  \end{enumerate}
+\end{prop}
+
+Example: $H = hH$ if and only if $h \in H$ (using (3) and (1)).
+
+\begin{thmproof}
+  (1) $\implies$ (2): If $g^{-1}k = h \in H$, then $k = gh \in gH$.
+
+  (2) $\implies$ (3): Suppose $k = gh$ for some $h \in H$.
+  If $h' \in H$, then $kh' = g(hh') \in gH$ since $hh' \in H$.
+  So $kh \subseteq gH$.
+  Also $g = kh^{-1} \in kH$, so similarly $gH \subseteq kH$.
+
+  (3) $\implies$ (4): If $gH = kH$, then $gH \cap kH = gH \neq \varnothing$ (since $g \in gH$).
+
+  (4) $\implies$ (1): Suppose $x \in gH \cap kH$.
+  Then $x = gh_1 = kh_2$ for $h_1, h_2 \in H$.
+  So $g^{-1}k = h_1h_2^{-1} \in H$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Partitions}
+
+\begin{defn}{partition}{}
+  Let $X$ be a set.
+  A \hldef{partition} of $X$ is a subset $\mathcal{Q}$ of $2^X$ such that
+  \[
+    \text{(a) } \bigcup_{S \in \mathcal{Q}} S = X \quad \text{and} \quad
+    \text{(b) } S \cap T = \varnothing \text{ for all } S \neq T \in \mathcal{Q}.
+  \]
+\end{defn}
+
+Equivalently, $\mathcal{Q}$ is a partition if $X = \bigsqcup_{S \in \mathcal{Q}} S$ or every element
+of $X$ is contained in exactly one element of $\mathcal{Q}$.
+
+We can show cosets partition $G$:
+
+\begin{cor}{}{}
+  If $H \leq G$, then $G/H$ is a partition of $G$.
+\end{cor}
+
+\begin{thmproof}
+  $g \in gH$, so every element of $G$ belongs to some element of $G/H$.
+  Then $\bigcup_{S \in G/H} S = G$.
+
+  Suppose $S \neq T$ are in $G/H$.
+  If $S \cap T \neq \varnothing$, then $S = T$ by (3) and (4) of the proposition.
+  So $S \cap T = \varnothing$.
+\end{thmproof}
+
+We can also show cosets have the same size:
+
+\begin{lem}{}{}
+  If $S \subseteq G$ and $g \in G$, then $S \to gS : h \mapsto gh$ is a bijection.
+\end{lem}
+
+\begin{thmproof}
+  Inverse is $gS \to S : h \mapsto g^{-1}h$.
+\end{thmproof}
+
+As a consequence, if $H$ is finite and $g \in G$, then $\abs{gH} = \abs{H}$.
+
+\pagebreak
+\subsection{Proof of Lagrange's theorem}
+
+\begin{thmproof}[Proof (Lagrange's theorem).]
+  If $\abs{H} = \infty$ then $\abs{G} = \infty$.
+
+  Since cosets are disjoint, if $[G : H] = \infty$ then $\abs{G} = \infty$.
+
+  Now suppose $\abs{H}$ and $[G : H]$ are finite.
+  By lemma, $\abs{gH} = \abs{H}$ for all $g \in G$.
+  Since $G/H$ is a partition of $G$, $G$ is a disjoint union of $[G : H]$ subsets all of size
+  $\abs{H}$.
+
+  So $\abs{G} = [G : H] \abs{H}$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Equivalence relations}
+
+\begin{defn}{relation}{}
+  A \hldef{relation} $\sim$ on a set $X$ is a subset of $X \times X$.
+
+  Notation: $a \sim b$ if $(a, b) \in \mathop{\sim}$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $=$ on $X$
+    \item $\leq, <, >, \geq$ on $\mathbb{N}$ (or any ordered set)
+    \item $\subseteq$ on $2^X$
+  \end{itemize}
+\end{ex}
+
+\begin{defn}{equivalence relation}{}
+  A relation $\sim$ on $X$ is an \hldef{equivalence relation} if
+  \begin{itemize}
+    \item $x \sim x$ for all $x \in X$ (reflexivity)
+    \item $x \sim y \implies y \sim x$ for all $x, y \in X$ (symmetry)
+    \item $x \sim y \text{ and } y \sim z \implies x \sim z$ for all $x, y, z \in X$ (transitivity).
+  \end{itemize}
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $=$ on $X$
+    \item $\equiv_m$ (congruence mod $m$) on $\mathbb{Z}$
+    \item not $\leq, <, >, \geq$ on $\mathbb{N}$, $\mathbb{R}$, etc.
+    \item isomorphism $\cong$ on the \emph{proper class} of groups
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Equivalence classes}
+
+\begin{defn}{equivalence class}{}
+  If $\sim$ is an equivalence relation on $X$, the \hldef{equivalence class} of $x \in X$ is
+  $[x] = [x]_\sim := \{y \in X : x \sim y\}$.
+\end{defn}
+
+\begin{prop}{}{}
+  Let $\sim$ be an equivalence relation on $X$.
+  If $x, y \in X$ then the following are equivalent:
+  \begin{enumerate}
+    \item $x \sim y$
+    \item $y \in [x]$
+    \item $[x] = [y]$
+    \item $[x] \cap [y] \neq \varnothing$
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  (1) $\implies$ (2): By definition.
+
+  (2) $\implies$ (3): If $z \in [y]$, then $x \sim y \sim z \implies z \in [x]$, so
+  $[y] \subseteq [x]$.
+  Also $x \sim y \implies y \sim x \implies [x] \subseteq [y]$.
+
+  (3) $\implies$ (4): $[x] \cap [y] = [x] \supseteq \{x\} \neq \varnothing$.
+
+  (4) $\implies$ (1): If $z \in [x] \cap [y]$, then $x \sim z \sim y \implies x \sim y$.
+\end{thmproof}
+
+Equivalence relations yield partitions:
+
+\begin{cor}{}{}
+  If $\sim$ is an equivalence relation on $X$, then $\{[x]_\sim : x \in X\}$ is a partition of $X$.
+\end{cor}
+
+Partitions yield equivalence relations:
+
+\begin{cor}{}{}
+  If $\mathcal{Q}$ is a partition of $X$, then there is an equivalence relation $\sim$ on $X$ such
+  that $\{[x]_\sim : x \in X\} = \mathcal{Q}$.
+\end{cor}
+
+\begin{thmproof}
+  Every element $x \in X$ is contained in a unique set $S_x \in \mathcal{Q}$.
+  Define $\sim$ by saying $x \sim y \iff S_x = S_y$.
+\end{thmproof}
+
+Let's apply this to cosets:
+
+\begin{prop}{}{}
+  If $H \leq G$, define a relation $\sim_H$ on $G$ by $g \sim_H k$ if $g^{-1}k \in H$.
+  Then $\sim_H$ is an equivalence relation, and the equivalence class of $g \in G$ is $[g] = gH$.
+\end{prop}
+
+For example, $h \sim e$ if and only if $h \in H$.
+
+%%%%% Lec 07
+\section{Normal subgroups}
+
+\subsection{When is a left coset a right coset?}
+
+From before:
+
+\begin{prop}{}{}
+  Let $H \leq G$ and suppose $g, k \in G$.
+  Then the following are equivalent:
+  \begin{enumerate}
+    \item $g^{-1}k \in H$
+    \item $k \in gH$
+    \item $gH = kH$
+    \item $gH \cap kH \neq \varnothing$
+  \end{enumerate}
+\end{prop}
+
+By symmetry:
+
+\begin{prop}{}{}
+  Let $H \leq G$ and suppose $g, k \in G$.
+  Then the following are equivalent:
+  \begin{enumerate}
+    \item $k^{-1}g \in H$
+    \item $k \in Hg$
+    \item $Hg = Hk$
+    \item $Hg \cap Hk \neq \varnothing$
+  \end{enumerate}
+\end{prop}
+
+Caution: $g^{-1}k \in H$ does not necessarily imply $kg^{-1} \in H$.
+
+\begin{lem}{}{}
+  If $H \leq G$ and $Hg = hH$ for $g, h \in G$, then $gH = Hg$.
+\end{lem}
+
+\begin{thmproof}
+  $g \in Hg = hH$, so $gH = hH$.
+\end{thmproof}
+
+\begin{defn}{normal subgroup}{}
+  A subgroup $N \leq G$ is a \hldef{normal subgroup} if $gN = Ng$ for all $g \in G$.
+
+  Notation: $N \trianglelefteq G$.
+\end{defn}
+
+\pagebreak
+\subsection{Conjugation and set multiplication}
+
+\begin{defn}{conjugate}{}
+  If $g, h \in G$, then \hldef{conjugate} of $h$ by $g$ is $ghg^{-1}$.
+\end{defn}
+
+Conjugates come up in change of basis and diagonalization in linear algebra.
+
+Note $gSg^{-1} = \{ghg^{-1} : h \in S\}$.
+We also get $gN = Ng$ if and only if $gNg^{-1} = N$.
+
+Also, $S \subseteq T$ if and only if $gS \subseteq gT$ if and only if $Sg \subseteq Tg$.
+
+\pagebreak
+\subsection{Equivalent characterizations of normal subgroups}
+
+\begin{prop}{}{}
+  Let $N \leq G$.
+  Then the following are equivalent:
+  \begin{multicols}{2}
+    \begin{enumerate}
+      \item $N \trianglelefteq G$ ($gN = Ng$ for all $g \in G$)
+      \item $gNg^{-1} = N$ for all $g \in G$
+      \item $gNg^{-1} \subseteq N$ for all $g \in G$
+      \item $G/N = N \setminus G$
+      \item $G/N \subseteq N \setminus G$
+      \item $N \setminus G \subseteq G/N$
+    \end{enumerate}
+  \end{multicols}
+\end{prop}
+
+\begin{thmproof}
+  We've already done (1) $\iff$ (2).
+
+  Clearly (2) $\implies$ (3).
+
+  For (3) $\implies$ (2), suppose $gNg^{-1} \subseteq N$ for all $g \in G$.
+  Given $g \in G$, we know $g^{-1}Ng \subseteq N$, so $N \subseteq gNg^{-1}$.
+  Hence $N = gNg^{-1}$.
+
+  Clearly (1) $\implies$ (4) $\implies$ (5) and (6).
+
+  For (5) $\implies$ (1), suppose $G/N \subseteq N \setminus G$.
+  If $g \in G$, then $gN = Nh$ for some $h \in G$.
+  By lemma, $gN = Ng$.
+
+  (6) $\implies$ (1) is similar.
+\end{thmproof}
+
+\begin{ex}
+  \begin{itemize}
+    \item
+    $\ang{s} \leq D_{2n}$: we already saw $G/\ang{s} = \ang{s} \setminus G$.
+    So $\ang{s} \trianglelefteq D_{2n}$.
+    We can also check $s^i\ang{s}s^{-i} = \ang{s}$ and $r\ang{s}r^{-1} = \ang{s}$ (since
+    $rs^ir^{-1} = s^{-i}$).
+    \item
+    $\ang{r} \leq D_{2n}$: $G/\ang{r} \neq \ang{r} \setminus G$, so $\ang{r}$ is not normal.
+    Indeed, $srs^{-1} = s^2r \not\in \ang{r}$ for $n \geq 3$.
+    \item
+    If $G$ is abelian, then all subgroups are normal.
+    \item
+    If $\phi \colon G \to K$ is a homomorphism, then $\ker\phi$ is normal.
+
+    Previous proof: $G/\ker\phi$ is the set of solution sets to equations $\phi(x) = b$ where
+    $b \in \Im\phi$, which is $\ker\phi \setminus G$.
+
+    Alternative: if $x \in \ker\phi$ and $g \in G$, then we have
+    $\phi(gxg^{-1}) = \phi(g)\phi(x)\phi(g^{-1}) = \phi(g)\phi(g)^{-1} = e$, so
+    $gxg^{-1} \in \ker\phi \implies g(\ker\phi)g^{-1} \subseteq \ker\phi$.
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Warning: normal subgroups are not transitive}
+
+The subgroup relation $\leq$ is transitive: if $H \leq G$ and $K \leq H$, then $K \leq G$.
+(Usually we just say $K \leq H \leq G \implies K \leq G$.)
+
+The normal subgroup relation $\trianglelefteq$ is not transitive: consider
+$H = \ang{r, s^2} \leq D_8$.
+Then $rs^2 = s^{4 - 2}r = s^2 r \implies rs^2r^{-1} = s^2$.
+Exercise: check $H \trianglelefteq D_8$.
+From the homework, $H$ is abelian so $\ang{r} \trianglelefteq H$.
+But $\ang{r} \not\trianglelefteq D_8$.
+
+\pagebreak
+\subsection{Normalizers}
+
+\begin{defn}{normalizer}{}
+  Let $S \subseteq G$.
+  Then $N_G(S) := \{g \in G : gSg^{-1} = S\}$ is called the \hldef{normalizer} of $S$ in $G$.
+\end{defn}
+
+\begin{lem}{}{}
+  $N_G(S) \leq G$.
+\end{lem}
+
+\begin{thmproof}
+  $eSe = S$, so $e \in N_G(S)$.
+
+  If $g, h \in N_G(S)$, then $ghS(gh)^{-1} = g(hSh^{-1})g^{-1} = gSg^{-1} = S$ so $gh \in N_G(S)$.
+
+  If $g \in N_G(S)$, then $g^{-1}Sg = g^{-1}(gSg^{-1})g = eSe = S$, so $g^{-1} \in N_G(S)$.
+\end{thmproof}
+
+\begin{lem}{}{}
+  Suppose $H \leq G$.
+  Then $H \trianglelefteq G$ if and only if $N_G(H) = G$.
+\end{lem}
+
+\begin{cor}{}{}
+  If $G = \ang{S}$ and $H \leq G$, then $H \trianglelefteq G$ if and only if $gHg^{-1} = H$ for all
+  $g \in S$.
+\end{cor}
+
+\begin{thmproof}
+  $H \trianglelefteq G$ if and only if $N_G(H) = G$ if and only if $S \subseteq N_G(H)$ (the
+  normalizer is a subgroup of $G$, so it is equal to $G$ iff it contains the generators of $G$).
+\end{thmproof}
+
+Warning: it is possible to have $gHg^{-1} \subseteq H$ and $g \not\in N_G(H)$.
+
+\begin{lem}{}{}
+  If $\abs{g} < \infty$ and $gHg^{-1} \subseteq H$, then $g \in N_G(H)$.
+\end{lem}
+
+\begin{thmproof}
+  Induction: if $gHg^{-1} \subseteq H$, then $g^iHg^{-i} \subseteq H$ for all $i \geq 0$.
+
+  If $\abs{g} = n < \infty$, then $g^{-1}Hg = g^{n - 1}Hg^{-(n - 1)} \subseteq H$.
+  Hence $H \subseteq gHg^{-1}$, so $gHg^{-1} = H$.
+\end{thmproof}
+
+\begin{cor}{}{}
+  Suppose $G = \ang{S}$ is finite and $H \leq G$.
+  If $gHg^{-1} \subseteq H$ for all $g \in S$, then $H \trianglelefteq G$.
+\end{cor}
+
+\pagebreak
+\subsection{Centres}
+
+\begin{defn}{centre}{}
+  If $G$ is a group, the \hldef{centre} of $G$ is
+  $Z(G) = \{g \in G : gh = hg \text{ for all } h \in G\}$.
+\end{defn}
+
+That is, $Z(G)$ is the set of elements in $G$ which commute with all elements in $G$.
+
+\begin{ex}
+  $Z(\GL_n\mathbb{C}) = \{\lambda I_n : \lambda \neq 0\}$.
+\end{ex}
+
+\begin{prop}{}{}
+  $Z(G) \trianglelefteq G$.
+\end{prop}
+
+\begin{thmproof}[Proof (exercise).]
+  $eh = he$ for all $h \in G$, so $e \in Z(G)$.
+
+  If $g, h \in Z(G)$ and $k \in G$, then $ghk = gkh = kgh$ so $gh \in Z(G)$.
+
+  If $g \in Z(G)$ and $k \in G$, then $gk = kg \implies k = g^{-1}kg \implies kg^{-1} = g^{-1}k$ so
+  $g^{-1} \in Z(G)$.
+
+  Thus $Z(G) \leq G$.
+
+  By definition, we clearly have $kZ(G) = Z(G)k$ for all $k \in G$, so $Z(G) \trianglelefteq G$.
+\end{thmproof}
+
+%%%%% Lec 08
+\section{Product groups}
+
+\subsection{Getting more groups}
+
+\begin{prop}{}{}
+  Suppose $(G_1, \cdot_1)$ and $(G_2, \cdot_2)$ are groups.
+  Then $G_1 \times G_2$ is a group under operation
+  \[ (g_1, g_2) \cdot (h_1, h_2) = (g_1 \cdot_1 h_1, g_2 \cdot_2 h_2) \]
+  for $g_i, h_i \in G_i$ where $i = 1, 2$.
+\end{prop}
+
+\begin{thmproof}[Proof (homework).]
+  Since $G_1$ and $G_2$ are groups, they are closed under $\cdot_1$ and $\cdot_2$ respectively, so
+  $\cdot$ is clearly a binary operation on $G_1 \times G_2$ by construction.
+  Furthermore, $\cdot_1$ and $\cdot_2$ are associative, so $\cdot$ is clearly associative by
+  construction.
+
+  Letting $e_1 = e_{G_1}$ and $e_2 = e_{G_2}$, we see
+  \[
+    (e_1, e_2) \cdot (g_1, g_2) = (g_1, g_2) = (g_1, g_2) \cdot (e_1, e_2)
+  \]
+  for all $g_1 \in G_1$ and $g_2 \in G_2$, so $(e_1, e_2)$ is an identity in $G_1 \times G_2$.
+
+  For $(g_1, g_2) \in G_1 \times G_2$, we know $(g_1^{-1}, g_2^{-1}) \in G_1 \times G_2$ and
+  \[
+    (g_1, g_2) \cdot (g_1^{-1}, g_2^{-1}) = (e_1, e_2) = (g_1^{-1}, g_2^{-1}) \cdot (g_1, g_2)
+  \]
+  so $(g_1, g_2)$ has an inverse in $G_1 \times G_2$, namely $(g_1^{-1}, g_2^{-1})$.
+\end{thmproof}
+
+\begin{defn}{product group}{}
+  If $G_1, G_2$ are groups, the group $G_1 \times G_2$ with the operation from the above
+  proposition is called the \hldef{product} of $G_1$ and $G_2$.
+\end{defn}
+
+\begin{ex}[Example: Klein 4-group]
+  Obviously $\abs{G_1 \times G_2} = \abs{G_1} \cdot \abs{G_2}$, so the group
+  $\Zmod{2} \times \Zmod{2}$ has order 4.
+  We call this the \hldef{Klein 4-group}.
+
+  The group's multiplication table is
+  \[
+    \begin{array}{c|cccc}
+             & (0, 0) & (0, 1) & (1, 0) & (1, 1) \\
+      \hline
+      (0, 0) & (0, 0) & (0, 1) & (1, 0) & (1, 1) \\
+      (0, 1) & (0, 1) & (0, 0) & (1, 1) & (1, 0) \\
+      (1, 0) & (1, 0) & (1, 1) & (0, 0) & (0, 1) \\
+      (1, 1) & (1, 1) & (1, 0) & (0, 1) & (0, 0)
+    \end{array}
+  \]
+  so all elements have order 2 and thus the group is not cyclic.
+
+  The identity is $(0, 0)$.
+  In general, $e_{G_1 \times G_2} = (e_{G_1}, e_{G_2})$.
+\end{ex}
+
+\pagebreak
+\subsection{Two subgroups of a product}
+
+\begin{prop}{}{}
+  Suppose $G = H \times K$.
+  Let $\tilde{H} = \{(h, e_K) : h \in H\}$ and $\tilde{K} = \{(e_H, k): k \in K\}$.
+  Then
+  \begin{enumerate}
+    \item $\tilde{H}, \tilde{K} \leq G$.
+    \item $H \to \tilde{H} : h \mapsto (h, e)$ and $K \to \tilde{K} : k \mapsto (e, k)$ are
+    isomorphisms.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}[Proof (homework).]
+\end{thmproof}
+
+So we can think of $H$ and $K$ as subgroups of $H \times K$.
+Note $H \times K$ can have many other subgroups as well.
+
+Compactly, we can write $\tilde{H} = H \times \{e\} \leq H \times K$ and
+$\tilde{K} = \{e\} \times K \leq H \times K$.
+
+These subgroups commute.
+\begin{lem}{}{}
+  If $h \in \tilde{H}$ and $k \in \tilde{K}$, then $hk = kh$.
+\end{lem}
+
+\begin{thmproof}[Proof (homework).]
+  For clarity, say $\tilde{h} = (h, e) \in \tilde{H}$ and $\tilde{k} = (e, k) \in \tilde{K}$.
+  Then
+  \[
+    \tilde{h}\tilde{k} = (h, e) \cdot (e, k) = (h, k) = (e, k) \cdot (h, e) = \tilde{k}\tilde{h}.
+  \]
+\end{thmproof}
+
+\begin{cor}{}{}
+  If $\phi \colon H \times K \to G$ is a homomorphism, then $\phi(h)\phi(k) = \phi(k)\phi(h)$ for
+  all $h \in \tilde{H}$ and $k \in \tilde{K}$.
+\end{cor}
+
+This is a simple result, but we can actually prove a version equivalent to the converse as well.
+
+\pagebreak
+\subsection{Homomorphisms between products}
+
+\begin{lem}{}{}
+  If $\alpha \colon H \to G$ and $\beta \colon K \to G$ are homomorphisms such that
+  $\alpha(h)\beta(k) = \beta(k)\alpha(h)$ for all $h \in H$ and $k \in K$, then
+  $\gamma \colon H \times K \to G : (h, k) \mapsto \alpha(h)\beta(k)$ is a homomorphism.
+\end{lem}
+
+\begin{thmproof}
+  For all $x, z \in H$ and $y, w \in K$:
+  \begin{align*}
+    \gamma((x, y) \cdot (z, w))
+    &= \gamma((xz, yw)) \\
+    &= \alpha(xz)\beta(yw) \\
+    &= \alpha(x)\alpha(z)\beta(y)\beta(w) \\
+    &= \alpha(x)\beta(y)\alpha(z)\beta(w) \\
+    &= \gamma(x, y)\gamma(z, w).
+  \end{align*}
+\end{thmproof}
+
+Notation: the homomorphism $\gamma$ is called $\alpha \cdot \beta$ (not entirely standard).
+
+\begin{cor}{}{}
+  If $\alpha \colon H \to H'$ and $\beta \colon K \to K'$ are homomorphisms, then
+  $\gamma \colon H \times K \to H' \times K' : (h, k) \mapsto (\alpha(h), \beta(k))$ is a
+  homomorphism.
+\end{cor}
+
+\begin{thmproof}
+  Define $\tilde{\alpha} \colon H \to H' \times K' : h \mapsto (\alpha(h), e)$ and
+  $\tilde{\beta} \colon K \to H' \times K' : k \mapsto (e, \beta(h))$.
+
+  From the homework, $\tilde{\alpha}$ and $\tilde{\beta}$ are homomorphisms, and that
+  $\tilde{\alpha}(x)\tilde{\beta}(y) = \tilde{\beta}(y)\tilde{\alpha(x)}$ for all $x \in H$ and
+  $y \in K$.
+
+  Then $\gamma((x, y)) = (\alpha(x), e) \cdot (e, \beta(y))
+    = \tilde{\alpha}(x) \cdot \tilde{\beta(y)}$ so $\gamma = \tilde{\alpha} \cdot \tilde{\beta}$.
+\end{thmproof}
+
+Notation: the homomorphism $\gamma$ is called $\alpha \times \beta$ (more standard).
+
+\begin{cor}{}{}
+  If $\alpha \colon H \to H'$ and $\beta \colon K \to K'$ are isomorphisms, then
+  $\alpha \times \beta \colon H \times K \to H' \times K'$ is an isomorphism.
+\end{cor}
+
+\begin{thmproof}
+  $\alpha \times \beta$ has inverse $\alpha^{-1} \times \beta^{-1}$.
+\end{thmproof}
+
+\begin{prop}{}{}
+  $G \to G \times \{e\} : g \mapsto (g, e)$ is an isomorphism.
+\end{prop}
+
+\begin{thmproof}
+  See homework for equivalent proof.
+\end{thmproof}
+
+\pagebreak
+\subsection{Groups of small order (revised)}
+
+We can use products to complete the list of groups of order $p^2$.
+
+\begin{prop}{}{}
+  Suppose $p$ is prime and $\abs{G} = p^2$.
+  Then either $G$ is cyclic, or $G \cong (\Zmod{p}) \times (\Zmod{p})$.
+\end{prop}
+
+\begin{thmproof}[Proof (homework).]
+  % Suppose $G$ is not cyclic.
+  % Since $p^2 \geq 4$, take $g \in G$ where $g \neq e$.
+  % By lemma, $\abs{g}$ divides $\abs{G} = p^2$, so $\abs{g} \in \{1, p, p^2\}$.
+  % But $\abs{g} = 1$ if and only if $g = e$ and $\abs{g} = p^2 = \abs{G}$ if and only if $G$ is
+  % cyclic, so $\abs{g} = p$.
+
+  % Then $\abs{\ang{g}} = p$ and $G$ is finite, so by Lagrange's theorem
+  % \[
+  %   \frac{\abs{G}}{\abs{\ang{g}}} = [G : \ang{g}] = p.
+  % \]
+  % Thus there are $p$ left cosets of $\ang{g}$, which we know partition $G$.
+  % So letting $h \in G \setminus \ang{g}$, we can write
+  % \[
+  %   G = \bigsqcup_{i = 0}^{p - 1} h^i \ang{g}
+  %     = \bigsqcup_{i = 0}^{p - 1} \{ h^i g^j : 0 \leq j < p \}
+  %     = \{ h^i g^j : 0 \leq i < p, \ 0 \leq j < p \}.
+  % \]
+\end{thmproof}
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{c | c}
+    Order & Known groups \\
+    \hline
+    1 & Trivial group \\
+    2 & $\Zmod{2}$ \\
+    3 & $\Zmod{3}$ \\
+    4 & $\Zmod{4}$, $(\Zmod{2}) \times (\Zmod{2})$ \\
+    5 & $\Zmod{5}$ \\
+    6 & $\Zmod{6}$, $D_6 = S_3$, ?? \\
+    7 & $\Zmod{7}$ \\
+    8 & $\Zmod{8}$, $D_8$, ?? \\
+    9 & $\Zmod{9}$, $(\Zmod{3}) \times (\Zmod{3})$
+  \end{tabular}
+\end{center}
+
+\pagebreak
+\subsection{How do we know if a group is a product?}
+
+Recall:
+\begin{prop}{}{}
+  Suppose $G = H \times K$.
+  Let $\tilde{H} = \{(h, e_K) : h \in H\}$ and $\tilde{K} = \{(e_H, k): k \in K\}$.
+  Then
+  \begin{enumerate}
+    \item $\tilde{H}, \tilde{K} \leq G$.
+    \item $H \to \tilde{H} : h \mapsto (h, e)$ and $K \to \tilde{K} : k \mapsto (e, k)$ are
+    isomorphisms.
+  \end{enumerate}
+\end{prop}
+
+Corollary: $H \times K \to \tilde{H} \times \tilde{K} : (h, k) \mapsto ((h, e), (e, k))$ is an
+isomorphism.
+
+Other properties of $\tilde{H}$ and $\tilde{K}$ (homework):
+\begin{itemize}
+  \item If $h \in \tilde{H}$ and $k \in \tilde{K}$, then $hk = kh$.
+  \item Every $g \in G$ can be written as $g = \tilde{h}\tilde{k}$ for unique
+    $\tilde{h} \in \tilde{H}$ and $\tilde{k} \in \tilde{K}$.
+\end{itemize}
+
+\pagebreak
+\subsection{Unique factorizations}
+
+Given $S, T \subseteq G$, let $ST = \{gh : g \in S, \ h \in T\}$.
+
+\begin{lem}{}{}
+  $G = ST$ if and only if every $g \in G$ can be written as $g = hk$ for some $h \in S$ and
+  $k \in T$.
+\end{lem}
+
+Example: $D_{2n} = \{s^i r^j\} = \ang{s}\ang{r}$.
+
+Question: if $G = HK$ for $H, K \leq G$, when does $g = hk$ for unique $h \in H$ and $k \in K$?
+(Uniqueness means that if $g = hk = h'k'$ for $h, h' \in H$ and $k, k' \in K$, then $h = h'$ and
+$k = k'$.)
+
+Notice if $e \neq g \in H \cap K$, then $g = ge = eg$ so the factorization is not unique.
+So a necessary condition for unique factorization is that $H \cap K = \{e\}$.
+This is actually sufficient:
+
+\begin{lem}{}{}
+  Suppose $G = HK$ for $H, K \leq G$ for $H, K \leq G$.
+  Then every element $g \in G$ can be written as $g = hk$ for unique $h \in H$ and $k \in K$ if and
+  only if $H \cap K = \{e\}$.
+\end{lem}
+
+\begin{thmproof}
+  We already proved $H \cap K = \{e\}$ is necessary.
+
+  Suppose $H \cap K = \{e\}$.
+  If $g = hk = h'k'$, then $(h')^{-1}h = k'k^{-1} \in H \cap K$.
+  So $(h')^{-1}h = k'k^{-1} = e$ implying $h = h'$ and $k = k'$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Internal (direct) products}
+
+\begin{defn}{internal direct product}{}
+  $G$ is the \hldef{internal direct product} of subgroups $H, K \leq G$ if
+  \begin{enumerate}
+    \item $HK = G$,
+    \item $H \cap K = \{e\}$, and
+    \item $hk = kh$ for all $h \in H$ and $k \in K$.
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $H \times K$ is the internal direct product of $\tilde{H} = H \times \{e\}$ and
+      $\tilde{K} = \{e\} \times K$.
+    \item $D_{2n}$ is not the internal direct product of $\ang{s}$ and $\ang{r}$ because
+      $sr \neq rs$.
+  \end{itemize}
+\end{ex}
+
+\begin{thm}{}{}
+  Suppose $G$ is the internal direct product of $H$ and $K$.
+  Then $\phi \colon H \times K \to G : (h, k) \mapsto hk$ is an isomorphism.
+\end{thm}
+
+\begin{thmproof}
+  Let $i_H \colon H \to G : h \mapsto h$ and $i_K \colon K \to G : k \mapsto k$.
+  By part (3) of the definition, $i_H(h) i_K(k) = i_K(k) i_H(h)$ for all $h \in H$ and $k \in K$, so
+  $\phi = i_H \cdot i_K$ is a homomorphism.
+
+  By lemma, every element $g \in G$ can be written as $g = hk$ for unique $h \in H$ and $k \in K$.
+  Thus $\phi$ is a bijection.
+\end{thmproof}
+
+\pagebreak
+\subsection{A weaker condition}
+
+\begin{lem}{}{}
+  If $G$ is an internal direct product of $H$ and $K$, then $H, K \trianglelefteq G$.
+\end{lem}
+
+\begin{thmproof}
+  Suppose $g \in G$, so $g = hk$ for $h \in H$ and $k \in K$.
+  Then $kHk^{-1} = \{khk^{-1} : h \in H\} = \{kk^{-1}h : h \in H\} = H$, so
+  $gHg^{-1} = hkHk^{-1}h^{-1} = hHh^{-1} \subseteq H$.
+  Then $H \trianglelefteq G$.
+
+  Similar for $K$.
+\end{thmproof}
+
+\begin{prop}{}{}
+  $G$ is the internal direct product of $H, K \leq G$ if and only if
+  \begin{enumerate}
+    \item $G = HK$,
+    \item $H \cap K = \{e\}$, and
+    \item $H, K \trianglelefteq G$.
+  \end{enumerate}
+\end{prop}
+
+\begin{defn}{commutator}{}
+  The \hldef{commutator} of $g, h \in G$ is $[g, h] := g \cdot h \cdot g^{-1} \cdot h^{-1}$.
+\end{defn}
+
+\begin{lem}{}{}
+  If $g, h \in G$, then $[g, h] = e$ if and only if $gh = hg$.
+\end{lem}
+
+\begin{thmproof}[Proof (proposition).]
+  We already saw the forward implication.
+
+  If $h \in H$ and $k \in K$, then $[h, k] = (hkh^{-1})k^{-1} \in K$ since $K \trianglelefteq G$.
+  But $[h, k] = h(kh^{-1}k^{-1}) \in H$ since $H \trianglelefteq G$.
+  So $[h, k] \in H \cap K = \{e\}$ which implies $[h, k] = e$.
+  Hence $hk = kh$, which completes the definition of an internal direct product.
+\end{thmproof}
 
 %---------------
 \end{document}
