@@ -1555,7 +1555,7 @@ Questions:
 \end{ex}
 
 \pagebreak
-\subsection[Generators of Z mod nZ]{Generators of $\Zmod{n}$}
+\subsection[Generators of Z/nZ]{Generators of $\Zmod{n}$}
 
 \begin{lem}{}{}
   Suppose $G = \ang{S}$.
@@ -1574,7 +1574,7 @@ Note then
 so $\ang{[a]} = \Zmod{n}$ if and only if $\gcd(a, n) = 1$.
 
 \pagebreak
-\subsection[Order of elements in Z mod nZ]{Order of elements in $\Zmod{n}$}
+\subsection[Order of elements in Z/nZ]{Order of elements in $\Zmod{n}$}
 
 \begin{lem}{}{}
   If $G$ is a group, $g \in G$, and $g^n = e$, then $\abs{g} \mid n$.
@@ -3205,6 +3205,949 @@ This is actually sufficient:
   So $[h, k] \in H \cap K = \{e\}$ which implies $[h, k] = e$.
   Hence $hk = kh$, which completes the definition of an internal direct product.
 \end{thmproof}
+
+%%%%%
+\week{Quotients and the Isomorphism Theorems}
+
+%%%%% Lec 09
+\section{Quotient groups}
+
+\subsection{Left cosets and functions}
+
+If $H \leq G$, then $G/H$ is the set of left cosets.
+
+Defining an equivalence relation $\sim_H$ by $g \sim_H k \iff g^{-1}k \in H$, the equivalence class
+of $g \in G$ is $[g] = gH$.
+
+For example, $\Zmod{n} = \{[a] : 0 \leq a < n\}$.
+Here, $\Zmod{n}$ is a group with operation $[a] + [b] = [a + b]$.
+
+Can we generalize this by defining a group structure on $G/H$ by $[g] \cdot [h] = [gh]$?
+(Or, $gH \cdot hH = ghH$ as elements of $G/H$.)
+A big problem: this might not be well-defined.
+
+\begin{defn}{function}{}
+  A \hldef{relation} $R$ between sets $X$ and $Y$ is a subset of $X \times Y$.
+  Notation: $a \mathrel{R} b$ if $(a, b) \in R$.
+
+  A relation $R$ is a \hldef{function} from $X \to Y$ if
+  \begin{enumerate}
+    \item for all $x \in X$, there is $y \in Y$ such that $x \mathrel{R} y$, and
+    \item for all $x \in X$ and $y, z \in Y$, if $x \mathrel{R} y$ and $x \mathrel{R} z$ then
+      $x = z$.
+  \end{enumerate}
+\end{defn}
+
+We can define a relation $\to$ between $G/H \times G/H$ and $G/H$ by $([g], [h]) \to [gh]$ for all
+$g, h \in G$.
+
+Is this relation a function?
+For (1), if $x = ([g], [h])$ we can take $y = [gh]$.
+What about (2)?
+
+\begin{lem}{}{}
+  The relation $\to$ between $G/H \times G/H$ and $G/H$ defined by $([g], [h]) \to [gh]$ is a
+  function if and only if $H$ is normal.
+
+  Furthermore, if $H$ is normal, then $ghH = gh \cdot hH$ (the setwise product).
+\end{lem}
+
+\begin{thmproof}
+  In the forward direction, suppose $\to$ is a function.
+
+  Suppose $g \in G$ and $h \in H$.
+  Then $([g], [g^{-1}]) \to [e]$.
+  But $[g] = [gh]$, and $([gh], [g^{-1}]) \to [ghg^{-1}]$.
+  Since $\to$ is a function, $[ghg^{-1}] = [e]$.
+
+  This means $ghg^{-1} \sim_H e$, or $ghg^{-1} \in H$.
+  This holds for all $g \in G$ and $h \in H$, so $H \trianglelefteq G$.
+
+  In the reverse direction, suppose $H$ is normal.
+
+  Then $h^{-1}Hh \subseteq H$ so $(h^{-1}Hh) \cdot H \subseteq H$.
+  Since $e \in h^{-1}Hh$, we actually get $(h^{-1}Hh) \cdot H = H$.
+  Hence $gH \cdot hH = gh(h^{-1}Hh) \cdot H = ghH$.
+
+  Finally, say $(S, T) \to R$ and $(S, T) \to R'$ for $S, T, R, R' \in G/H$.
+  Then $R = S \cdot T = R'$.
+  So $\to$ is a function.
+\end{thmproof}
+
+The converse of the `furthermore' actually holds as well, giving two new characterizations of a
+subgroup being normal.
+
+\pagebreak
+\subsection{Quotient groups}
+
+\begin{thm}{}{}
+  Let $N \trianglelefteq G$.
+  Then the setwise product $gN \cdot hN = ghN$ makes $G/N$ into a group.
+  Furthermore, the function $q \colon G \to G/N : g \mapsto gN$ is a surjective homomorphism with
+  $\ker q = N$.
+\end{thm}
+
+$G/N$ is called the \hldef{quotient} of $G$ by $N$, or a \hldef{quotient group}.
+
+Elements of $G/N$ can be written as $gN$ or $[g]$ or $\overline{g}$.
+
+The group operation can be stated as $gN \cdot hN = ghN$ or $[g] \cdot [h] = [gh]$ or
+$\overline{g} \cdot \overline{h} = \overline{gh}$.
+
+$q$ is called the \hldef{quotient map} or \hldef{quotient homomorphism}.
+
+\begin{thmproof}
+  Let $[g], [h], [k] \in G/N$.
+
+  Then
+  \[
+    ([g] \cdot [h]) \cdot [k] = [gh] \cdot [k] = [ghk] = [g] \cdot [hk] = [g] \cdot ([h] \cdot [k])
+  \]
+  so $\cdot$ is associative.
+  Next,
+  \[
+    [e] \cdot [g] = [eg] = [g] = [ge] = [g] \cdot [e]
+  \]
+  so $[e] = N$ is an identity.
+  Finally,
+  \[
+    [g] \cdot [g^{-1}] = [gg^{-1}] = [e] = [g^{-1}g] = [g^{-1}] \cdot [g]
+  \]
+  so $g$ has inverse $[g^{-1}]$.
+
+  Note $q$ is clearly surjective, and $q(gh) = [gh] = [g] \cdot [h] = q(g)q(h)$.
+  Also, $q(g) = [g] = [e]$ if and only if $g \in N$, so $\ker q = N$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Normal subgroups are kernels}
+
+Previously, we proved that if $\phi \colon G \to K$ is a homomorphism then
+$\ker\phi \trianglelefteq G$.
+
+\begin{cor}{}{}
+  Let $N \trianglelefteq G$.
+  Then there is a group $K$ and homomorphism $\phi \colon G \to K$ such that $N = \ker\phi$.
+\end{cor}
+
+\begin{thmproof}
+  Take $K = G/N$ and $q \colon G \to G/N$ the quotient homomorphism.
+  Then $\ker q = N$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Examples of quotient groups}
+
+\begin{ex}[Example: $\Zmod{n}$]
+  We can now define this using the theorem instead of relying on the pre-existing definition.
+\end{ex}
+
+\begin{ex}[Example: $D_{2n}/\ang{s}$]
+  The cosets are $\ang{s} = \{s^i : 0 \leq i < n\}$ and $\ang{s}r = \{s^ir : 0 \leq i < n\}$.
+
+  Multiplication table:
+  \[
+    \begin{array}{c|cc}
+      & \ang{s} & \ang{s}r \\
+      \hline
+      \ang{s} & \ang{s} & \ang{s}r \\
+      \ang{s}r & \ang{s}r & \ang{s}
+    \end{array}
+  \]
+  so $D_{2n}/\ang{s} \cong \Zmod{2}$.
+\end{ex}
+
+\begin{ex}[Example: $N$ not normal]
+  Consider $\ang{r}$, which has left cosets $s^i\ang{r} = \{s^i, s^ir\}$ for $0 \leq i < n$.
+  But $\ang{r} \cdot s\ang{r} = \{s, sr, s^{-1}r, s^{-1}\}$ which is not a left coset of $\ang{r}$.
+
+  Also, $es = s$ is in a different coset from $rs = s^{-1}r$, so $[g] \cdot [h] = [gh]$ is not
+  well-defined here.
+\end{ex}
+
+\begin{ex}[Example: $D_{2n}/Z(D_{2n})$]
+  Homework.
+\end{ex}
+
+\begin{ex}[Example: $\GL_n(\mathbb{K})/Z(\GL_n(\mathbb{K}))$]
+  Recall $Z(\GL_n(\mathbb{K})) = \{\lambda 1 : \lambda \neq 0\}$.
+
+  If $M$ is invertible, then $[M] = \{\lambda M : \lambda \neq 0\}$.
+
+  $[M] \cdot [N] = \{\lambda_1 \lambda_2 MN : \lambda_1, \lambda_2 \neq 0\} = [MN]$.
+
+  We think of $\GL_n(\mathbb{K})$ as the group of invertible linear transformations on
+  $\mathbb{K}^n$ (acting on vectors).
+
+  We can then think of $\GL_n(\mathbb{K})/Z(\GL_n(\mathbb{K}))$ as the invertible transformations of
+  lines through the origin in $\mathbb{K}^n$.
+
+  $\GL_n(\mathbb{K})/Z(\GL_n(\mathbb{K}))$ is called the \hldef{projective general linear group},
+  and is denoted by $\PGL_n(\mathbb{K})$.
+\end{ex}
+
+In general, we can look at:
+\begin{itemize}
+  \item $G / Z(G)$ for any group $G$
+  \item $G / \ker\phi$ for any homomorphism $\phi \colon G \to K$
+  \item $G / N$ for any group $G$ and normal subgroup $N \trianglelefteq G$
+\end{itemize}
+How do we find the group structure on $G/N$?
+We will build up techniques for approaching this problem.
+
+%%%%% Lec 10
+\section{First isomorphism and correspondence theorems}
+
+\subsection{Homomorphisms from quotients}
+
+Suppose $N \trianglelefteq G$.
+What are the homomorphisms $\psi \colon G/N \to K$?
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (G) at (0, 1){$G$};
+    \node (K) at (4, 1){$K$};
+    \node (GN) at (2, 0){$G/N$};
+    \draw[->] (G)--(K) node[midway, above]{$\psi \circ q$};
+    \draw[->] (G)--(GN) node[midway, below left]{$q$};
+    \draw[->] (GN)--(K) node[midway, below right]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+Every such $\psi$ gives a homomorphism $\psi \circ q \colon G \to K$ (called the \hldef{lift} or
+\hldef{pullback} of $\psi$).
+What homomorphisms $G \to K$ do we get?
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (G) at (0, 1){$G$};
+    \node (K) at (4, 1){$K$};
+    \node (GN) at (2, 0){$G/N$};
+    \draw[->] (G)--(K) node[midway, above]{$\phi$};
+    \draw[->] (G)--(GN) node[midway, below left]{$q$};
+    \draw[->, dashed] (GN)--(K) node[midway, below right]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+Given $\phi$, when can we fill in $\psi$ so that the diagram \hldef{commutes} (the paths are
+equivalent)?
+
+\begin{thm}{Universal property of quotients}{}
+  Suppose $\phi \colon G \to K$ is a homomorphism and $N \trianglelefteq G$.
+  Let $q \colon G \to G/N$ be the quotient homomorphism.
+  Then there is a homomorphism $\psi \colon G/N \to K$ such that $\psi \circ q = \phi$ if and only
+  if $N \subseteq \ker\phi$.
+  Furthermore, if $\psi$ exists then it is unique.
+\end{thm}
+
+In other words, we can fill in $\psi$ if and only if $N \subseteq \ker\phi$.
+
+\begin{defn}{set of morphisms}{}
+  If $G, K$ are groups, let $\Hom(G, K)$ be the set of morphisms $G \to K$.
+\end{defn}
+
+\begin{cor}{}{}
+  For any groups $G, K$ and $N \trianglelefteq G$, the function
+  \[
+    q^* \colon \Hom(G/N, K) \to \{\phi \in \Hom(G, K) : N \subseteq \ker\phi\}
+      : \psi \mapsto \psi \circ q
+  \]
+  is a bijection.
+\end{cor}
+
+\pagebreak
+\subsection{Comparison to universal property of products}
+
+From before (but without the name):
+\begin{thm}{Universal property of products}{}
+  Let $\alpha \colon H \to G$ and $\beta \colon K \to G$ be homomorphisms, and let
+  $i_H \colon H \to H \times K$ and $i_K \colon K \to H \times K$ be the inclusions of $H$ and $K$
+  in $H \times K$.
+  Then there is a homomorphism $\phi \colon H \times K \to G$ such that $\phi \circ i_H = \alpha$
+  and $\phi \circ i_K = \beta$ if and only if $\alpha(h)\beta(k) = \beta(k)\alpha(h)$ for all
+  $h \in H$ and $k \in K$.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (H) at (0, 1.5){$H$};
+    \node (K) at (0, -1.5){$K$};
+    \node (HK) at (1.5, 0){$H \times K$};
+    \node (G) at (4, 0){$G$};
+    \draw[->] (H)--(HK) node[midway, left]{$i_H$};
+    \draw[->] (K)--(HK) node[midway, left]{$i_K$};
+    \draw[->] (H)--(G) node[midway, above right]{$\alpha$};
+    \draw[->] (K)--(G) node[midway, below right]{$\beta$};
+    \draw[->, dashed] (HK)--(G);
+  \end{tikzpicture}
+\end{center}
+
+\begin{cor}{}{}
+  There is a bijection between $\Hom(H \times K, G)$ and
+  $\{(\alpha, \beta) \in \Hom(H, G) \times \Hom(K, G) : \alpha(h)\beta(k) = \beta(k)\alpha(h)
+    \text{ for all } h \in H \text{ and } k \in K\}$.
+\end{cor}
+
+We need some more machinery to justify why these are ``universal properties'', but for now we can
+think of them as setting up important bijections.
+
+\pagebreak
+\subsection{Proving the universal property of quotients}
+
+\begin{lem}{}{}
+  If $\alpha \colon G \to H$ is surjective and $\psi_1, \psi_2 : H \to K$ are such that
+  $\psi_1 \circ \alpha = \psi_2 \circ \alpha$, then $\psi_1 = \psi_2$.
+\end{lem}
+
+\begin{thmproof}
+  If $h \in H$, then there is $g \in G$ with $\alpha(g) = h$.
+  So $\psi_1(h) = \psi_1(\alpha(g)) = \psi_2(\alpha(g)) = \psi_2(h)$.
+\end{thmproof}
+
+Restatement for reference:
+
+\begin{thm}{Universal property of quotients}{}
+  Suppose $\phi \colon G \to K$ is a homomorphism and $N \trianglelefteq G$.
+  Let $q \colon G \to G/N$ be the quotient homomorphism.
+  Then there is a homomorphism $\psi \colon G/N \to K$ such that $\psi \circ q = \phi$ if and only
+  if $N \subseteq \ker\phi$.
+  Furthermore, if $\psi$ exists then it is unique.
+\end{thm}
+
+\begin{thmproof}
+  If $\psi$ exists and $n \in N$, then $\phi(n) = \psi(q(n)) = \psi(e) = e$ so
+  $N \subseteq \ker\phi$.
+
+  Suppose $N \subseteq \ker\phi$.
+  Define $\psi \colon G/N \to K : [g] \mapsto \phi(g)$.
+  To show $\psi$ is well-defined, note that if $[g] = [h]$ then $g^{-1}h \in N \subseteq \ker\phi$,
+  so $\phi(g^{-1})\phi(h) = \phi(g^{-1}h) = e$, so $\phi(g) = \phi(h)$.
+
+  Clearly $\psi \circ q(g) = \psi([g]) = \phi(g)$ for all $g \in G$, so $\psi \circ q = \phi$.
+
+  If $[g], [h] \in G/N$, then
+  \[
+    \psi([g] \cdot [h]) = \psi([gh]) = \phi(gh) = \phi(g)\phi(h) = \psi([g])\psi([h])
+  \]
+  so $\psi$ is a homomorphism.
+
+  If $\psi' \colon G/N \to K$ is another homomorphism with $\psi' \circ q = \phi$, then
+  $\psi' \circ q = \psi \circ q$ which implies $\psi' = \psi$ by the lemma ($q$ is surjective).
+  So uniqueness holds.
+\end{thmproof}
+
+Note $\phi(gN) = \phi(g)\phi(N) = \phi(g)\{e\} = \{\phi(g)\}$.
+So if $S \in G/N$, then $\phi(S) = \{b\}$, a singleton set.
+Thus an equivalent way of defining $\psi$ is by $\psi(S) = b$ for $b \in K$ such that
+$\phi(S) = \{b\}$.
+
+\pagebreak
+\subsection{The first isomorphism theorem}
+
+Recall: if $\phi \colon G \to K$ is a homomorphism then $[G : \ker\phi] = \abs{\Im\phi}$.
+
+Proof: there is a bijection $\psi \colon G/\ker\phi \to \Im\phi$ defined by $\psi(S) = b$ where
+$b \in K$ is such that $\phi(S) = \{b\}$.
+
+This looks like what we just did!
+
+Now we also know $G/\ker\phi$ is a group, so $\abs{G/\ker\phi} = [G : \ker\phi] = \abs{\Im\phi}$.
+Maybe this bijection is an isomorphism?
+
+\begin{thm}{First isomorphism theorem}{}
+  Suppose that $\phi \colon G \to K$ is a homomorphism.
+  Then there is an isomorphism $\psi \colon G/\ker\phi \to \Im\phi$ such that $\phi = \psi \circ q$,
+  where $q \colon G \to G/\ker\phi$ is the quotient homomorphism.
+\end{thm}
+
+\begin{thmproof}
+  First, $\ker\phi \subseteq \ker\phi$, so by the universal property there is a homomorphism
+  $\psi \colon G/\ker\phi \to K$ with $\psi \circ q = \phi$.
+
+  Next $\psi([g]) = \phi(g)$ so clearly $\Im\psi = \Im\phi$.
+  Thus we can regard $\psi$ as a surjective homomorphism $G/\ker\phi \to \Im\phi$.
+
+  To see $\psi$ is a bijection, note $\psi$ agrees with the function $G/\ker\phi \to \Im\phi$
+  defined previous to the theorem.
+
+  Alternatively, notice if $\psi([g]) = e$, then $\phi(g) = e$, so $g \in \ker\phi$ and thus
+  $[g] = [e]$.
+  Then $\psi$ is injective by proposition.
+\end{thmproof}
+
+\begin{ex}
+  The first isomorphism theorem is usually the best way to determine $G/N$:
+  \begin{itemize}
+    \item
+    Recall $\SL_n\mathbb{K} \trianglelefteq \GL_n\mathbb{K}$ is defined as the kernel of the
+    determinant homomorphism $\det \colon \GL_n\mathbb{K} \to \mathbb{K}^\times$.
+    The image is $\Im\det = \mathbb{K}^\times$.
+
+    By first isomorphism theorem, $\GL_n\mathbb{K} / \SL_n\mathbb{K} \cong \mathbb{K}^\times$.
+    (Here, we only use the existence of $\psi$.)
+    \item
+    Consider $\mathbb{Z} \trianglelefteq \mathbb{R}^+$.
+    What is $\mathbb{R}/\mathbb{Z}$?
+
+    We have a homomorphism $\exp \colon \mathbb{R} \to \mathbb{C}^\times : x \mapsto e^{2\pi ix}$
+    and we know $e^{2\pi ix} = 1$ if and only if $x \in \mathbb{Z}$ (so $\ker\exp = \mathbb{Z}$).
+    Then $\Im\exp = \{a \in \mathbb{C} : \abs{a} = 1\} =: S^1$ (the \hldef{circle group}).
+
+    So $\mathbb{R}/\mathbb{Z} \cong S^1$.
+  \end{itemize}
+\end{ex}
+
+In general, to find $G/N$ we can try finding a group $K$ and homomorphism $\phi \colon G \to K$
+where $\ker\phi = N$.
+Then the first isomorphism theorem yields $G/N \cong \Im\phi$.
+
+There are several more examples on the homework.
+
+Sometimes, we can also turn this around and use the first isomorphism theorem to find $\Im\phi$.
+
+\pagebreak
+\subsection{Images and pullbacks}
+
+We want to understand subgroups of $G/N$ using $q \colon G \to G/N$.
+
+Recall: if $f \colon X \to Y$ is a function and $S \subseteq X$ and $T \subseteq Y$, then
+\begin{itemize}
+  \item $f(S) := \{f(x) : x \in S\}$ and
+  \item $f^{-1}(T) := \{x \in X : f(x) \in T\}$.
+\end{itemize}
+
+From week 2:
+
+\begin{prop}{}{}
+  If $\phi \colon G \to H$ is a homomorphism and $K \leq G$, then $\phi(K) \leq H$.
+\end{prop}
+
+The ``pushforward'' or image of a subgroup is a subgroup.
+
+\begin{prop}{}{}
+  If $\phi \colon G \to H$ is a homomorphism and $K \leq H$, then $\phi^{-1}(K) \leq G$.
+\end{prop}
+
+The pullback of a subgroup is a subgroup.
+
+\pagebreak
+\subsection{Subgroup correspondence for isomorphisms}
+
+If $f \colon X \to Y$ is a bijection, then $f^{-1}(f(S)) = S$ and $f(f^{-1}(T)) = T$.
+Thus if $\phi \colon G \to H$ is an isomorphism, we get a bijection
+\begin{center}
+  \begin{tikzpicture}
+    \node[align=center, text width=2cm] at (0, 0){Subgroups of $G$};
+    \node[align=center, text width=2cm] at (8, 0){Subgroups of $H$};
+    \draw[->] (1.5, 0.3)--(6.5, 0.3) node[midway, above]{$K \mapsto \phi(K)$};
+    \draw[->] (6.5, -0.3)--(1.5, -0.3) node[midway, below]{$\phi^{-1}(K') \mapsfrom K'$};
+  \end{tikzpicture}
+\end{center}
+
+Furthermore:
+\begin{itemize}
+  \item $K_1 \leq K_2 \iff \phi(K_1) \leq \phi(K_2)$
+  \item $\phi(K_1 \cap K_2) = \phi(K_1) \cap \phi(K_2)$
+  \item $K$ is normal $\iff$ $\phi(K)$ is normal
+  \item $\phi(\ang{S}) = \ang{\phi(S)}$
+  \item $[G : K] = [H : \phi(K)]$
+\end{itemize}
+
+\pagebreak
+\subsection{Set operation identities}
+
+Some identities for bijections don't hold for general functions.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{ll}
+    Always hold                                            & Don't always hold \\
+    \hline
+    $A \subseteq B \implies f(A) \subseteq f(B)$           & $f(A \cap B) = f(A) \cap f(B)$ \\
+    $A \subseteq B \implies f^{-1}(A) \subseteq f^{-1}(B) \qquad$ & $f^{-1}(f(A)) = A$ \\
+    $f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$          & $f(f^{-1}(B)) = B$ \\
+    $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$          & \\
+    $f(A \cup B) = f(A) \cup f(B)$                         & \\
+  \end{tabular}
+\end{center}
+
+The left column holds for all functions; the right column holds for bijections but not for general
+functions.
+
+One consequence of these identities is that order is preserved:
+
+\begin{lem}{}{}
+  If $\phi \colon G \to H$ is a homomorphism, then:
+  \begin{enumerate}
+    \item If $K_1 \leq K_2 \leq G$, then $f(K_1) \leq f(K_2)$.
+    \item If $K_1 \leq K_2 \leq H$, then $f^{-1}(K_1) \leq f^{-1}(K_2)$.
+  \end{enumerate}
+\end{lem}
+
+Note we can't say that $K_1 \leq K_2 \iff \phi(K_1) \leq \phi(K_2)$ since
+$\phi^{-1}(\phi(K)) \neq K$ in general.
+
+Another consequence is that pullbacks preserve intersection:
+
+\begin{lem}{}{}
+  If $\phi \colon G \to H$ is a homomorphism and $K_1, K_2 \leq H$, then
+  $\phi^{-1}(K_1 \cap K_2) = \phi^{-1}(K_1) \cap \phi^{-1}(K_2)$.
+\end{lem}
+
+\pagebreak
+\subsection{Set operation identities for surjections}
+
+If we suppose $f \colon X \to Y$ is surjective, the table changes:
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{ll}
+    Always hold                                            & Don't always hold \\
+    \hline
+    $A \subseteq B \implies f(A) \subseteq f(B)$           & $f(A \cap B) = f(A) \cap f(B)$ \\
+    $A \subseteq B \implies f^{-1}(A) \subseteq f^{-1}(B) \qquad$ & $f^{-1}(f(A)) = A$ \\
+    $f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$          & \sout{$f(f^{-1}(B)) = B$} \\
+    $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$          & \\
+    $f(A \cup B) = f(A) \cup f(B)$                         & \\
+    $f(f^{-1}(B)) = B$                                     & \\
+  \end{tabular}
+\end{center}
+
+\begin{lem}{}{}
+  If $\phi \colon G \to H$ is a surjective homomorphism and $K \leq H$, then
+  $\phi(\phi^{-1}(K)) = K$.
+\end{lem}
+
+\begin{defn}{set of subgroups}{}
+  If $G$ is a group, let $\Sub(G)$ denote the set of subgroups of $G$.
+\end{defn}
+
+If $\phi \colon G \to H$ is a homomorphism, we get the induced functions
+$\phi \colon \Sub(G) \to \Sub(H)$ and $\phi^{-1} \colon \Sub(H) \to \Sub(G)$.
+
+If $\phi$ is surjective, the lemma shows $\phi$ is a left inverse to $\phi^{-1}$.
+So $\phi^{-1} \colon \Sub(H) \to \Sub(G)$ is injective (from homework 1).
+
+Question: what's the image of $\phi^{-1}$ in $\Sub(G)$?
+
+\pagebreak
+\subsection[The set of pullbacks in Sub(G)]{The set of pullbacks in $\Sub(G)$}
+
+\begin{lem}{}{}
+  Let $\phi \colon G \to H$ be a homomorphism.
+  Then:
+  \begin{enumerate}
+    \item If $K \leq H$, then $\ker\phi \leq \phi^{-1}(K)$.
+    \item If $\ker\phi \leq K \leq G$, then $\phi^{-1}(\phi(K)) = K$.
+  \end{enumerate}
+\end{lem}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item $\ker\phi = \phi^{-1}(\{e\}) \subseteq \phi(H)$.
+    \item $K \leq \phi^{-1}(\phi(K))$ is easy.
+    Suppose $y \in \phi^{-1}(\phi(K))$.
+    Then $\phi(y) \in \phi(K)$, so $\phi(y) = \phi(k)$ for some $k \in K$.
+    Since $\phi(k^{-1}y) = e$, we get $k^{-1}y \in \ker\phi \subseteq K \implies y \in K$.
+    We conclude that $\phi^{-1}(\phi(K)) \subseteq K$.
+  \end{enumerate}
+\end{thmproof}
+
+Conclusion: $K = \phi^{-1}(K') \iff \ker\phi \leq K$ ($K$ is a pullback iff $K$ contains the
+kernel).
+
+\begin{thm}{Correspondence theorem}{}
+  Let $\phi \colon G \to H$ be a surjective homomorphism.
+  Then there is a bijection
+  \begin{center}
+    \begin{tikzpicture}
+      \node[align=center, text width=2.5cm] at (0, 0){Subgroups $K$ of $G$ with $\ker\phi \leq K$};
+      \node[align=center, text width=2.5cm] at (8, 0){Subgroups $K'$ of $H$};
+      \draw[->] (1.5, 0.3)--(6.5, 0.3) node[midway, above]{$K \mapsto \phi(K)$};
+      \draw[->] (6.5, -0.3)--(1.5, -0.3) node[midway, below]{$\phi^{-1}(K') \mapsfrom K'$};
+    \end{tikzpicture}
+  \end{center}
+  Furthermore, if $\ker\phi \leq K, K_1, K_2 \leq G$ then
+  \begin{enumerate}
+    \item $K_1 \leq K_2 \iff \phi(K_1) \leq \phi(K_2)$,
+    \item $\phi(K_1 \cap K_2) = \phi(K_1) \cap \phi(K_2)$, and
+    \item $K$ is normal $\iff$ $\phi(K)$ is normal.
+  \end{enumerate}
+\end{thm}
+
+\begin{thmproof}
+  Since $\phi$ is surjective, $\phi(\phi^{-1}(K')) = K'$ for all $K' \leq H$.
+  Conversely, if $\ker\phi \leq K \leq G$ then $\phi^{-1}(\phi(K)) = K$.
+  So $\phi$ and $\phi^{-1}$ are inverses on the specified sets.
+
+  \begin{enumerate}
+    \item Follows from the fact that $\phi$ and $\phi^{-1}$ are inverses and preserve $\leq$.
+    \item By lemma, $\phi^{-1}(\phi(K_1) \cap \phi(K_2))
+      = \phi^{-1}(\phi(K_1)) \cap \phi^{-1}(\phi(K_2)) = K_1 \cap K_2$.
+      Applying $\phi$ to both sides, we see also $\phi(K_1 \cap K_2) = \phi(K_1) \cap \phi(K_2)$.
+    \item (Homework.)
+  \end{enumerate}
+\end{thmproof}
+
+\pagebreak
+\subsection{Correspondence theorem for quotient groups}
+
+If $N \trianglelefteq G$, then $q \colon G \to G/N$ is a surjection.
+
+\begin{thm}{Correspondence theorem for quotient groups}{}
+  Let $N \trianglelefteq G$.
+  Then there is a bijection
+  \begin{center}
+    \begin{tikzpicture}
+      \node[align=center, text width=2.5cm] at (0, 0){Subgroups $N \leq K \leq G$};
+      \node[align=center, text width=2.5cm] at (8, 0){Subgroups $K'$ of $G/N$};
+      \draw[->] (1.5, 0.3)--(6.5, 0.3) node[midway, above]{$K \mapsto q(K)$};
+      \draw[->] (6.5, -0.3)--(1.5, -0.3) node[midway, below]{$q^{-1}(K') \mapsfrom K'$};
+    \end{tikzpicture}
+  \end{center}
+  Furthermore, if $N \leq K, K_1, K_2 \leq G$ then
+  \begin{enumerate}
+    \item $K_1 \leq K_2 \iff q(K_1) \leq q(K_2)$,
+    \item $q(K_1 \cap K_2) = q(K_1) \cap q(K_2)$, and
+    \item $K$ is normal $\iff$ $q(K)$ is normal.
+  \end{enumerate}
+\end{thm}
+
+This seems like a specialization of the correspondence theorem, but they are actually equivalent
+(with some work).
+
+Recall the first isomorphism theorem tells us that if $\phi \colon G \to H$ is a surjective
+homomorphism, then $G/\ker\phi \cong H$.
+So there is a bijection between $\Sub(H)$ and $\Sub(G/\ker\phi)$.
+
+As an exercise, check that (first isomorphism theorem) + (subgroup correspondence for isomorphisms)
++ (correspondence theorem for quotient groups) implies (correspondence theorem for surjective
+homomorphisms).
+
+\pagebreak
+\subsection[Identifying q(K)]{Identifying $q(K)$}
+
+Suppose $N \trianglelefteq G$ and $N \leq K \leq G$.
+Let $q_G \colon G \to G/N$ be the quotient map.
+Since $N \trianglelefteq K$, we also have the quotient map $q_K \colon K \to K/N$.
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (K) at (0, 2){$K$};
+    \node (KN) at (0, 0){$K/N$};
+    \node (G) at (4, 2){$G$};
+    \node (GN) at (4, 0){$G/N$};
+    \draw[->] (K)--(KN) node[midway, left]{$q_K$};
+    \draw[->] (K)--(G) node[midway, above]{$i_K$};
+    \draw[->] (K)--(GN) node[midway, below left]{$q_G \circ i$};
+    \draw[->] (G)--(GN) node[midway, right]{$q_G$};
+    \draw[->] (KN)--(GN) node[midway, below]{$kN \mapsto kN$};
+  \end{tikzpicture}
+\end{center}
+
+Since $\ker q_G \circ i = N$, the first isomorphism theorem tells us there is an isomorphism
+$\psi \colon K/N \to \Im q \circ i_K = q(K)$ such that $\psi \circ q_K = q_G \circ i$.
+
+In other words, if $k \in K$ then $\psi(kN) = q(k) = kN$.
+
+\begin{prop}{}{}
+  Suppose $N \trianglelefteq G$ and $N \leq K \leq G$.
+  Let $q \colon G \to G/N$ be the quotient map.
+
+  Then the function $K/N \to q(K) \leq G/N \colon kN \mapsto kN$ is an isomorphism.
+\end{prop}
+
+Because of this isomorphism, we use the following notation:
+
+\begin{defn}{subgroup $q(K)$}{}
+  If $N \trianglelefteq G$ and $N \leq K \leq G$, then the subgroup $q(K)$ corresponding to $K$ in
+  $G/N$ is denoted by $K/N$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item Let $G = D_{2n}$ and $N = \ang{s}$ where $s$ is the rotation generator.
+
+    Subgroups of $D_{2n}$ containing $N$ correspond to subgroups of $D_{2n}/N = \Zmod{2}$.
+    $\Zmod{2}$ only has two subgroups, itself and $\{e\}$.
+    So there are only two subgroups of $D_{2n}$ containing $N$.
+    \item
+    $\GL_n\mathbb{K}/\SL_n\mathbb{K} \cong \mathbb{K}^\times$, so subgroups of $\GL_n\mathbb{K}$
+    containing $\SL_n\mathbb{K}$ correspond to subgroups of $\mathbb{K}^\times$ (of which there
+    can be many).
+  \end{itemize}
+\end{ex}
+
+%%%%% Lec 11
+\section{Second and third isomorphism theorems}
+
+\subsection{Third isomorphism theorem}
+
+What about quotients of quotients?
+
+Suppose $N \trianglelefteq G$ and $N \leq K \leq G$.
+
+From the correspondence theorem (homework), $K \trianglelefteq G$ if and only if
+$K/N \trianglelefteq G/N$.
+Then suppose $K/N \trianglelefteq G/N$.
+What is $(G/N)/(K/N)$?
+
+\begin{thm}{Third isomorphism theorem (informal version)}{}
+  $(G/N)/(K/N) \cong G/K$.
+\end{thm}
+
+\begin{ex}
+  Suppose $n \mid m$, so $m\mathbb{Z} \leq n\mathbb{Z}$ (and both are normal).
+
+  Then $(\mathbb{Z}/m\mathbb{Z})/(n\mathbb{Z}/m\mathbb{Z}) \cong \mathbb{Z}/n\mathbb{Z}$.
+  For example, $(\mathbb{Z}/20\mathbb{Z})/(5\mathbb{Z}/20\mathbb{Z}) \cong \mathbb{Z}/5\mathbb{Z}$.
+\end{ex}
+
+\begin{thm}{Third isomorphism theorem}{}
+  Let $N \trianglelefteq G$ and $N \leq K \trianglelefteq G$.
+  Let
+  \begin{itemize}
+    \item $q_1$ be the quotient map $G \to G/N$,
+    \item $q_2$ be the quotient map $G/N \to (G/N)/(K/N)$, and
+    \item $q_3$ be the quotient map $G \to G/K$.
+  \end{itemize}
+  Then there is an isomorphism $\psi \colon G/K \to (G/N)/(K/N)$ such that
+  $\psi \circ q_3 = q_2 \circ q_1$.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (G) at (0, 2){$G$};
+    \node (GN) at (4, 2){$G/N$};
+    \node (GK) at (0, 0){$G/K$};
+    \node (GNKN) at (4, 0){$(G/N)/(K/N)$};
+    \draw[->] (G)--(GK) node[midway, left]{$q_3$};
+    \draw[->] (G)--(GN) node[midway, above]{$q_1$};
+    \draw[->] (GN)--(GNKN) node[midway, right]{$q_2$};
+    \draw[->] (GK)--(GNKN) node[midway, below]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+\begin{thmproof}
+  Note that $\ker q_2 \circ q_1 = (q_2 \circ q_1)^{-1}(\{e\}) = q_1^{-1}(q_2^{-1}(\{e\}))
+    = q_1^{-1}(K/N) = K$.
+
+  Since $q_2$ and $q_1$ are surjective, $\Im q_2 \circ q_1 = (G/N)/(K/N)$.
+
+  By the first isomorphism theorem, there is an isomorphism $\psi \colon G/K \to (G/N)/(K/N)$ such
+  that $\psi \circ q_3 = q_2 \circ q_1$.
+\end{thmproof}
+
+\pagebreak
+\subsection[What if K isn't normal?]{What if $K$ isn't normal?}
+
+Then $G/K$ isn't a group, and neither is $(G/N)/(K/N)$.
+
+However, we can still talk about $[G : K]$ and $[G/N : K/N]$.
+
+\begin{prop}{}{}
+  If $N \trianglelefteq G$ and $N \leq K \leq G$, then $[G : K] = [G/N : K/N]$.
+\end{prop}
+
+In fact, this doesn't even need quotient spaces.
+This holds for surjective homomorphisms.
+
+\begin{prop}{}{}
+  Let $\phi \colon G \to H$ be a surjective homomorphism and suppose $\ker\phi \leq K \leq G$.
+  Then $[G : K] = [H : \phi(K)]$.
+\end{prop}
+
+These are equivalent by the first isomorphism theorem.
+
+\begin{thmproof}
+  Define a function $f \colon G/K \to H/\phi(K) : gK \mapsto \phi(g)\phi(K)$.
+
+  Well-defined: if $gK = hK$, then
+  $h^{-1}g \in K \implies \phi(h)^{-1}\phi(g) = \phi(h^{-1}g) \in \phi(K)$.
+  So $\phi(g)\phi(K) = \phi(h)\phi(K)$.
+
+  Since $\phi$ is surjective, $f$ is surjective.
+
+  Suppose $f(gK) = f(hK)$ so $\phi(g)\phi(K) = \phi(h)\phi(K)$.
+  Then $\phi(h^{-1}g) = \phi(h)^{-1}\phi(g) \in \phi(K)$ which shows
+  $h^{-1}g \in \phi^{-1}(\phi(K)) = K$ by the correspondence theorem.
+  So $gK = hK$ and $f$ is injective.
+
+  Then $f$ is a bijection, so the indices must be equal.
+\end{thmproof}
+
+\pagebreak
+\subsection{Revisiting products}
+
+Recall this lemma:
+
+\begin{lem}{}{}
+  Suppose $G = HK$ for $H, K \leq G$ for $H, K \leq G$.
+  Then every element $g \in G$ can be written as $g = hk$ for unique $h \in H$ and $k \in K$ if and
+  only if $H \cap K = \{e\}$.
+\end{lem}
+
+Which motivated this definition:
+
+\begin{defn}{internal direct product}{}
+  $G$ is the \hldef{internal direct product} of subgroups $H, K \leq G$ if
+  \begin{enumerate}
+    \item $HK = G$,
+    \item $H \cap K = \{e\}$, and
+    \item $hk = kh$ for all $h \in H$ and $k \in K$.
+  \end{enumerate}
+\end{defn}
+
+But the proof of the lemma did not use the fact that $G = HK$, so we can generalize it.
+
+\begin{lem}{}{}
+  Suppose $H, K \leq G$.
+  Then every element of $HK$ can be written as $hk$ for unique $h \in H$ and $k \in K$ if and only
+  if $H \cap K = \{e\}$.
+\end{lem}
+
+If $H \cap K = \{e\}$, then $\abs{HK} = \abs{H} \cdot \abs{K}$.
+
+What if $H \cap K \neq \{e\}$?
+Here, $HK = \bigcup_{h \in H} hK$, a union of cosets of $K$.
+Let $X = \{hK : h \in H\} \subseteq G/K$.
+Then $X$ is a partition of $HK$, so $\abs{HK} = \abs{X} \cdot \abs{K}$.
+But how large is $X$?
+
+\begin{lem}{}{}
+  Let $H, K \leq G$.
+  If $h_1, h_2 \in H$, then $h_1K = h_2K$ if and only if $h_1(H \cap K) = h_2(H \cap K)$.
+\end{lem}
+
+\begin{thmproof}
+  $h_1K = h_2K \iff h_1^{-1}h_2 \in K \iff h_1^{-1}h_2 \in H \cap K$.
+  But $h_1^{-1}h_2 \in H \cap K$ if and only if $h_1(H \cap K) = h_2(H \cap K)$.
+\end{thmproof}
+
+Rephrasing, consider the equivalence relations $\sim_K$ on $G$ and $\sim_{H \cap K}$ on $H$:
+if $h_1, h_2\ in H$, then $h_1 \sim_K h_2 \iff h_1 \sim_{H \cap K} h_2$.
+
+\begin{cor}{}{}
+  $H/(H \cap K) \to X \colon h(H \cap K) \to hK$ is a bijection.
+\end{cor}
+
+\begin{thmproof}
+  By the lemma, this is well-defined and injective.
+  Surjectivity is obvious.
+\end{thmproof}
+
+Now we see $\abs{X} = [H : H \cap K]$, so $\abs{HK} = [H : H \cap K] \abs{K}$.
+Lagrange's theorem yields $[H : H \cap K] \cdot \abs{H \cap K} = \abs{H}$, so we have:
+
+\begin{prop}{}{}
+  If $H, K \leq G$, then $\abs{HK}\abs{H \cap K} = \abs{H}\abs{K}$.
+\end{prop}
+
+If $H$ and $K$ are finite, another way to think of this formula is
+$[H : H \cap K] = \abs{X} = \frac{\abs{HK}}{\abs{K}}$.
+
+Is the fraction an index as well?
+Maybe--$HK$ is not necessarily a group.
+
+\begin{prop}{}{}
+  Let $H, K \leq G$.
+  Then $HK \leq G \iff HK = KH \iff KH \subseteq HK$.
+\end{prop}
+
+\begin{thmproof}
+  If $HK \leq G$ and $h \in H$ and $k \in K$, then $h, k \in HK$ so $kh \in HK$.
+  Also, $k^{-1}h^{-1} \in HK$, so $k^{-1}h^{-1} = h_0k_0$.
+  Hence $hk = (k^{-1}h^{-1})^{-1} = k_0^{-1}h_0^{-1} \in KH$.
+  So $KH \subseteq HK$ and $HK \subseteq KH$, hence $HK = KH$.
+
+  Now suppose $KH \subseteq HK$, we need to show $HK \leq G$.
+  We always have $e \in HK$.
+  If $x, y \in HK$, then $x = h_0k_0$ and $y = h_1k_1$ for some $h_0, h_1 \in H$ and
+  $k_0, k_1 \in K$.
+  Since $KH \subseteq HK$, $k_0^{-1}h_0^{-1}h_1 = h_2k_2$ for some $h_2 \in H$ and $k_2 \in K$.
+  So $x^{-1}y = k_0^{-1}h_0^{-1}h_1k_1 = h_2k_2k_1 \in HK$.
+\end{thmproof}
+
+Corollary: if $KH \subseteq HK$, then $[H : H \cap K] = [HK : K]$ (exercise: even for infinite
+$HK$ or $K$).
+
+When is $KH \subseteq HK$?
+
+A sufficient condition is that for all $h \in H$, there is $h' \in H$ such that $Kh = h'K$.
+Recall that if $Kh = h'K$, then $h'K = Kh$.
+So we can rephrase this condition as $hKh^{-1} = K$ for all $h \in H$, or $H \subseteq N_G(K)$.
+
+\begin{cor}{}{}
+  If $H \subseteq N_G(K)$, then $HK \leq G$, and hence $[H : H \cap K] = [HK : K]$.
+\end{cor}
+
+What else does $H \subseteq N_G(K)$ imply?
+
+We know $hKh^{-1} = K$ and $kKk^{-1} = K$, so
+$H, K \subseteq N_{HK}(K) \implies N_{HK}(K) = HK \implies K \trianglelefteq HK$.
+
+If $k \in H \cap K$ and $h \in H$, then $hkh^{-1} \in H \cap K$.
+So $H \cap K \trianglelefteq H$.
+
+\pagebreak
+\subsection{Second isomorphism theorem}
+
+\begin{thm}{Second isomorphism theorem}{}
+  Suppose $H \subseteq N_G(K)$.
+  Then $HK \leq G$, $K \trianglelefteq HK$, and $H \cap K \trianglelefteq H$.
+  Furthermore, if $i_H \colon H \to HK$ is the inclusion and $q_1 \colon H \to H/(H \cap K)$ and
+  $q_2 \colon HK \to HK/K$ are the quotient maps, then there is an isomorphism
+  $\psi \colon H/(H \cap K) \to HK/K$ such that $\psi \circ q_1 = q_2 \circ i_H$.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (H) at (0, 2){$H$};
+    \node (HK) at (4, 2){$HK$};
+    \node (HHK) at (0, 0){$H/H \cap K$};
+    \node (HKK) at (4, 0){$HK/K$};
+    \draw[->] (H)--(HHK) node[midway, left]{$q_1$};
+    \draw[->] (H)--(HK) node[midway, above]{$i_H$};
+    \draw[->] (HK)--(HKK) node[midway, right]{$q_2$};
+    \draw[->] (HHK)--(HKK) node[midway, below]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+\begin{thmproof}
+  We've already shown $HK \leq G$, $K \trianglelefteq HK$, and $H \cap K \trianglelefteq H$.
+
+  If $h \in H$ and $k \in K$, then $hkK = hK$.
+  So $HK/K = \{gK : g \in HK\} = \{hK : h \in H\}$.
+  Hence $\Im q_2 \circ i_H = \{hK : h \in H\} = HK/K$.
+
+  Next, $\ker q_2 \circ i_H = i_H^{-1}(q_2^{-1}(\{e\})) = i_H^{-1}(K) = H \cap K$.
+
+  By the first isomorphism theorem, there is an isomorphism $\psi$ as desired.
+\end{thmproof}
+
+\begin{ex}[Example: $\PGL_n\mathbb{C}$]
+  Recall $\PGL_n\mathbb{C} = \GL_n\mathbb{C} / Z(\GL_n\mathbb{C})$.
+
+  Let $K = Z(\GL_n\mathbb{C}) = \{\lambda 1 : \lambda \neq 0\}$.
+
+  Since $K \trianglelefteq \GL_n\mathbb{C}$, $N_{\GL_n\mathbb{C}}(K) = \GL_n\mathbb{C}$.
+
+  Take $H = \SL_n\mathbb{C} = \{M \in \GL_n\mathbb{C} : \det M = 1\}
+    \trianglelefteq \GL_n\mathbb{C} = N_{\GL_n\mathbb{C}}(K)$, so $HK \leq \GL_n\mathbb{C}$ by the
+  second isomorphism theorem.
+
+  Suppose $M \in \GL_n\mathbb{C}$ and let $\lambda = \det M$.
+  Then $\det \lambda^{-1/n}M = \lambda^{-1} \det M = 1$, so $\lambda^{-1/n}M \in H$ (for any
+  choice of $\lambda^{-1/n}$).
+
+  We conclude $\GL_n\mathbb{C} = HK$.
+
+  Now define $C_n := H \cap K = \{\lambda 1 : \lambda^n = 1\}
+    = \{e^{2\pi i k/n} : k = 0, \ldots, n - 1\}$.
+  (Note $C_n \cong \Zmod{n}$.)
+
+  By the second isomorphism theorem, $\PGL_n\mathbb{C} \cong \SL_n\mathbb{C}/C_n$.
+\end{ex}
 
 %---------------
 \end{document}
