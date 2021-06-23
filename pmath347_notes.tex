@@ -4149,6 +4149,1085 @@ So $H \cap K \trianglelefteq H$.
   By the second isomorphism theorem, $\PGL_n\mathbb{C} \cong \SL_n\mathbb{C}/C_n$.
 \end{ex}
 
+\week{Group Actions}
+
+%%%%% Lec 12
+\section{Group actions and Cayley's theorem}
+
+\subsection{Group actions}
+
+\begin{ex}
+  Permutations $S_n$ of $\{1, \ldots, n\}$ form a group.
+
+  This means we can multiply permutations together: e.g. $(12)(34)(24) = (1234)$.
+
+  But we can also plug in numbers from $\{1, \ldots, n\}$: e.g. $((12)(34))(3) = 4$.
+
+  We say that $S_n$ \hldef{acts} on $\{1, \ldots, n\}$.
+\end{ex}
+
+\begin{ex}
+  Similarly, for $\GL_n\mathbb{C}$, we can do more than multiply matrices: we can also multiply
+  matrices and vectors.
+
+  Given $A \in \GL_n\mathbb{C}$ and $v \in \mathbb{C}^n$, we get $Av \in \mathbb{C}^n$.
+
+  We say that $\GL_n\mathbb{C}$ \hldef{acts} on $\mathbb{C}^n$.
+\end{ex}
+
+Group actions can reveal a lot about a group.
+
+\begin{defn}{(left) action}{}
+  Let $G$ be a group.
+  A \hldef{(left) action} of $G$ on a set $X$ is a function $\cdot \colon G \times X \to X$ such
+  that
+  \begin{enumerate}
+    \item $e \cdot x = x$ for all $x \in X$, and
+    \item $g \cdot (h \cdot x) = (gh) \cdot x$ for all $g, h \in G$ and $x \in X$.
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $S_n$ acts on $\{1, \ldots, n\}$ for $n \geq 1$ (proof: below).
+    \item $\GL_n\mathbb{K}$ acts on $\mathbb{K}^n$ (proof: exercise).
+    \item If $X$ is any set and $G$ is any group, we can define an action of $G$ on $x$ by
+      $g \cdot x = x$ for all $g \in G$ and $x \in X$.
+      This is the \hldef{trivial action} of $G$ on $X$.
+      Proof: (1) clear; (2) $g \cdot (h \cdot x) = g \cdot x = x = (gh) \cdot x$.
+  \end{itemize}
+\end{ex}
+
+\begin{prop}{}{}
+  Let $X$ be a set.
+  The group $S_X$ (of invertible functions $X \to X$ under composition $\circ$) acts on $X$
+  via $f \cdot x = f(x)$.
+\end{prop}
+
+\begin{thmproof}
+  The identity 1 in $S_X$ is the identity function, so $1 \cdot x = 1(x) = x$.
+  If $f, g \in S_X$, then $(f \circ g)(x) = f(g(x)) = f \cdot (g \cdot x)$.
+\end{thmproof}
+
+Note: usually we use notation $f(x)$ rather than $f \cdot x$.
+Also, recall $S_n = S_{\{1, \ldots, n\}}$.
+
+\begin{lem}{}{}
+  If $G$ acts on $X$ and $H \leq G$, then $H$ acts on $X$ by the restricted action
+  $H \times X \to X : (h, x) \mapsto h \cdot x$.
+\end{lem}
+
+Hence an alternative way to show $\GL_n\mathbb{K}$ acts on $\mathbb{K}^n$ is to observe
+$\GL_n\mathbb{K} \leq S_{\mathbb{K}^n}$.
+(Invertible $n \times n$ matrices are invertible functions $\mathbb{K}^n \to \mathbb{K}^n$.)
+
+\pagebreak
+\subsection{Invariant subsets}
+
+Groups aren't tied to a particular action.
+
+\begin{ex}
+  $D_{2n}$ was defined as a subgroup of $\GL_2\mathbb{R}$, so it acts on $\mathbb{R}^2$.
+
+  However, $D_{2n}$ also acts on the vertices $v_0, \ldots, v_{n - 1}$ of the $n$-gon.
+
+  In fact, this action determines elements of $D_{2n}$:
+  \begin{itemize}
+    \item $s^i$ sends $v_0 \mapsto v_i$ and $v_1 \mapsto v_{i + 1}$
+    \item $s^i r$ sends $v_0 \mapsto v_i$ and $v_1 \mapsto v_{i - 1}$
+  \end{itemize}
+\end{ex}
+
+This dihedral group action on the vertices of the $n$-gon is a special case of a pattern.
+
+\begin{defn}{invariant under an action}{}
+  If $G$ acts on $X$, a subset $Y \subseteq X$ is \hldef{invariant under the action of} $G$ if
+  $g \cdot y \in Y$ for all $g \in G$ and $y \in Y$.
+\end{defn}
+
+\begin{lem}{}{}
+  If $G$ acts on $X$ and $Y$ is an invariant subset, then $G$ acts on $Y$ via
+  $G \times Y \to Y : (g, y) \mapsto g \cdot y$.
+\end{lem}
+
+\begin{ex}
+  $\{0\}$ is an invariant subset of $\mathbb{K}^n$ under the action of $\GL_n\mathbb{K}$.
+  In this case, the action of $\GL_n\mathbb{K}$ on $\{0\}$ is the trivial action.
+\end{ex}
+
+\pagebreak
+\subsection{Actions on functions}
+
+\begin{prop}{}{}
+  Suppose $G$ acts on $X$ and $Y$, and let $\Fun(X, Y)$ denote the set of functions from $X$ to $Y$.
+
+  If $g \in G$ and $f \in \Fun(X, Y)$, let $g \cdot f$ be the function
+  \[ g \cdot f \colon X \to Y : x \mapsto g \cdot f(g^{-1} \cdot x). \]
+  Then $G \times \Fun(X, Y) : (g, f) \mapsto g \cdot f$ is a left action of $G$ on $\Fun(X, Y)$.
+\end{prop}
+
+\begin{thmproof}[Proof (homework).]
+\end{thmproof}
+
+Often we apply this function with the trivial action on $Y$, so the action looks like
+$g \cdot f(x) = f(g^{-1} \cdot x)$.
+
+\pagebreak
+\subsection{Actions on subsets}
+
+\begin{prop}{}{}
+  Suppose $G$ acts on $X$, and let $2^X$ denote the set of subsets of $X$.
+  Then $g \cdot S = \{g \cdot s : s \in S\}$ defines an action of $G$ on $2^X$.
+\end{prop}
+
+\begin{thmproof}
+  Let $S \in 2^X$.
+
+  First, $e \cdot S = \{e \cdot s : s \in S\} = \{s : s \in S\} = S$.
+
+  Next, let $g, h \in G$.
+  Then
+  \begin{align*}
+    g \cdot (h \cdot S)
+    &= g \cdot \{h \cdot s : s \in S\} \\
+    &= \{g \cdot (h \cdot s) : s \in S\} \\
+    &= \{gh \cdot s : s \in S\} \\
+    &= gh \cdot S.
+  \end{align*}
+\end{thmproof}
+
+Alternative proof: use $2^X$ as the set of functions $X \to \{0, 1\}$.
+Realize action of $G$ on $2^X$ by taking action on functions with trivial action on $\{0, 1\}$
+(homework).
+
+\pagebreak
+\subsection{Left regular actions}
+
+Does every group act on some set?
+
+\begin{lem}{}{}
+  If $G$ is a group, then the multiplication map $\cdot \colon G \times G \to G$ is a left action
+  of $G$ on $G$.
+\end{lem}
+
+\begin{thmproof}
+  Immediate from group definition.
+\end{thmproof}
+
+So every group acts on itself by left multiplication.
+This action is called the \hldef{left regular action} of $G$ on $G$.
+
+\begin{lem}{}{}
+  If $H \leq G$, then $G$ acts on $G/H$ by $g \cdot (kH) = gkH$.
+\end{lem}
+
+\begin{thmproof}
+  $G/H$ is an invariant subset of $2^G$.
+\end{thmproof}
+
+Since $G/\{e\} = G$, this generalizes the left regular action.
+
+\pagebreak
+\subsection{Right actions}
+
+\begin{ex}
+  Let $G$ be a group where the product of $g$ and $h$ is denoted $gh$.
+
+  For $g, k \in G$, define $g \cdot k = kg$ (right multiplication).
+  If $g, h, k \in G$, then $g \cdot (h \cdot k) = g \cdot kh = khg$, but $gh \cdot k = kgh$, which
+  is not equal to $kgh$ if $hg \neq gh$.
+
+  So right multiplication does not define a left action in general.
+\end{ex}
+
+Can we fix this?
+
+\begin{defn}{(right) action}{}
+  Let $G$ be a group.
+  A \hldef{(right) action} of $G$ on a set $X$ is a function $\cdot \colon X \times G \to X$ such
+  that
+  \begin{enumerate}
+    \item $x \cdot e = x$ for all $x \in X$, and
+    \item $(x \cdot g) \cdot h = x \cdot (gh)$ for all $g, h \in G$ and $x \in X$.
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item There is a right action of $G$ on itself by right multiplication.
+    This is called the \hldef{right regular action} of $G$ on $G$.
+    More generally, if $H \leq G$ then $G$ acts on $H \backslash G$.
+    \item If $G$ is a group and $X$ is a set, then there is a trivial right action of $G$ on $X$
+    defined by $x \cdot g = x$ for all $g \in G$ and $x \in X$.
+    \item If there is a right action of $G$ on $X$, and $Y$ is any set, then
+    $(g \cdot f)(x) = f(g \cdot x)$ defines a \emph{left} action of $G$ on $\Fun(X, Y)$.
+  \end{itemize}
+\end{ex}
+
+Can we reconcile right and left actions somehow?
+
+\begin{prop}{}{}
+  If $\cdot$ is a right action of $G$ on $X$, then $g \cdot x = x \cdot g^{-1}$ defines a left
+  action of $G$ on $X$.
+\end{prop}
+
+\begin{thmproof}
+  First $e \cdot x = x \cdot e = x$, and for $g, h \in G$ and $x \in X$, we get
+  \begin{align*}
+    g \cdot (h \cdot x)
+    &= g \cdot (x \cdot h^{-1}) \\
+    &= (x \cdot h^{-1}) \cdot g^{-1} \\
+    &= x \cdot h^{-1}g^{-1} \\
+    &= x \cdot (gh)^{-1} \\
+    &= gh \cdot x.
+  \end{align*}
+\end{thmproof}
+
+Combined with the last example, this proposition explains why if $\cdot$ is a left action of $G$
+on $X$, we can define a left action of $G$ on $\Fun(X, Y)$ by setting
+$(g \cdot f)(x) = f(g^{-1} \cdot x)$.
+
+\pagebreak
+\subsection{Permutation representations}
+
+\begin{lem}{}{}
+  If $G$ has a left action on a set $X$, and $g \in G$, let $\ell_g \colon X \to X$ be defined by
+  $\ell_g(x) = g \cdot x$.
+  Then:
+  \begin{enumerate}
+    \item $\ell_g \circ \ell_h = \ell_{gh}$ for all $g, h \in G$.
+    \item $\ell_e = 1$, the identity function.
+    \item $\ell_g$ is a bijection for all $g \in G$.
+  \end{enumerate}
+\end{lem}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item $\ell_g \circ \ell_h(x) = g \cdot (h \cdot x) = gh \cdot x = \ell_{gh}(x)$.
+    \item $\ell_e(x) = e \cdot x = x$.
+    \item $\ell_g \circ \ell_{g^{-1}} = \ell_e = 1 = \ell_{g^{-1}} \circ \ell_g$, so $\ell_g$ is
+      invertible.
+  \end{enumerate}
+\end{thmproof}
+
+\begin{cor}{}{}
+  Every left action of $G$ on $X$ gives a homomorphism $\phi \colon G \to S_X : g \mapsto \ell_g$
+  with $\phi(g)(x) = g \cdot x$.
+\end{cor}
+
+\begin{defn}{permutation representation}{}
+  If $X$ is a set, a \hldef{permutation representation} of $G$ on $X$ is a homomorphism
+  $\phi \colon G \to S_X$.
+\end{defn}
+
+If $\abs{X} = n$, then $S_X \cong S_n$.
+So an action on a finite set $X$ with $\abs{X} = n$ gives a homomorphism to $S_n$.
+
+Example: $D_{2n}$ acts on $n$ vertices of the $n$-gon, so there is a homomorphism $D_{2n} \to S_n$.
+
+\pagebreak
+\subsection{Permutation representations of the dihedral group}
+
+Let $X = \{v_0, \ldots, v_{n - 1}\}$ be the vertices of the $n$-gon.
+We identify $X$ with $\{1, \ldots, n\}$ by mapping $v_i \mapsto i + 1$ so we can write elements of
+$S_X$ as elements of $S_n$.
+
+Let $\phi \colon D_{2n} \to S_n$ be a permutation representation given by the action of $D_{2n}$ on
+$X$.
+
+What is $\phi(s)$?
+We see $s \cdot v_0 = v_1$, $s \cdot v_1 = v_2$, $\ldots$, $s \cdot v_n = v_0$, so
+$\phi(s) = (1 \ 2 \ 3 \ \cdots \ n)$.
+
+What is $\phi(r)$?
+We see $r \cdot v_0 = v_0$, $r \cdot v_1 = v_{n - 1}$, $r \cdot v_2 = v_{n - 2}$, and in general
+$r \cdot v_i = v_{n - i}$, so
+\[
+  \phi(r) = \begin{cases}
+    (2 \ n)(3 \ n - 1) \cdots (\frac{n + 1}{2} \ \frac{n + 3}{2}) \qquad & n \text { odd} \\
+    (2 \ n)(3 \ n - 1) \cdots (\frac{n}{2} \ \frac{n}{2} + 2) \qquad & n \text { even} \\
+  \end{cases}.
+\]
+
+In general, $\phi(s^i r^j) = \phi(s)^i \phi(r)^j$.
+
+(Note a different choice of $r$ could have yielded a different representation.)
+
+\begin{thm}{}{}
+  \begin{enumerate}
+    \item If $G$ acts on $X$, then there is a homomorphism $\phi \colon G \to S_X$ defined by
+      $\phi(g)(x) = g \cdot x$.
+    \item If $\phi \colon G \to S_X$ is a homomorphism, then $g \cdot x = \phi(g)(x)$ defines a
+      group action of $G$ on $X$.
+  \end{enumerate}
+\end{thm}
+
+In other words, group actions are equivalent to permutation representations.
+Because of this theorem, we treat the two as interchangeable.
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item Already done.
+    \item First, $e \cdot x = \phi(e)(x) = 1(x) = x$ for all $x \in X$.
+    Next, if $g, h \in G$ and $x \in X$, then
+    \[ g \cdot (h \cdot x) = \phi(g)(\phi(h)(x)) = (\phi(g) \circ \phi(h))(x) = \phi(gh)(x). \]
+  \end{enumerate}
+\end{thmproof}
+
+\pagebreak
+\subsection{Faithful actions}
+
+\begin{defn}{kernel, faithful}{}
+  Let $G$ act on a set $X$, and let $\phi \colon G \to S_X$ be the corresponding permutation
+  representation.
+  The \hldef{kernel} of the action is $\ker \phi$, and the action is \hldef{faithful} if
+  $\ker\phi = \{e\}$.
+\end{defn}
+
+That is, an action is faithful if the corresponding permutation representation is injective.
+
+\begin{lem}{}{}
+  An action of $G$ on $X$ is faithful if and only if for every $g \in G$ with $g \neq e$, there is
+  $x \in X$ such that $g \cdot x \neq x$.
+\end{lem}
+
+\begin{thmproof}
+  $\ell_g \neq 1$ if and only if there is $x \in X$ such that $g \cdot x = \ell_g(x) \neq x$.
+\end{thmproof}
+
+\begin{ex}
+  \begin{itemize}
+    \item $S_X$ acts faithfully on $X$.
+    \item If $A \cdot e_i = e_i$ for all $i = 1, \ldots, n$, then $A = 1$, so the action of
+      $\GL_n\mathbb{K}$ on $\mathbb{K}^n$ is faithful.
+    \item $D_{2n}$ acts faithfully on vertices on the $n$-gon (exercise).
+    \item The trivial action is not faithful.
+  \end{itemize}
+\end{ex}
+
+Does every group act faithfully on some set?
+
+\begin{thm}{Cayley's theorem}{}
+  The left regular action of $G$ on $G$ is faithful.
+
+  Consequently, $G$ is isomorphic to a subgroup of $S_G$.
+  In particular, if $\abs{G} = n < \infty$, then $G$ is isomorphic to a subgroup of $S_n$.
+\end{thm}
+
+\begin{thmproof}
+  If $g \in G$ with $g \neq e$, then $g \cdot e = g \neq e$.
+  So the left regular action is faithful.
+
+  Hence the permutation representation $\phi \colon G \to S_G$ is injective, and thus $G$ is
+  isomorphic to $\Im\phi \leq S_G$ (first isomorphism theorem).
+
+  If $\abs{G} = n < \infty$, then $S_G \cong S_n$.
+\end{thmproof}
+
+The homomorphism $G \to S_G$ given by this theorem is called the \hldef{left regular representation}
+of $G$.
+
+\begin{ex}
+  Let $G = \Zmod{2} = \{[0], [1]\}$.
+
+  By Cayley's theorem, $G$ is isomorphic to a subgroup of $S_2$.
+
+  $[0] + [0] = [0]$ and $[0] + [1] = [1]$, so $[0] \mapsto e$ in $S_2$.
+
+  $[1] + [0] = [1]$ and $[1] + [1] = [0]$, so $[1] \mapsto (12)$ in $S_2$.
+\end{ex}
+
+Note the left regular representation may not be the most efficient permutation representation.
+
+\begin{ex}
+  $D_6$ has order 6, so it is isomorphic to a subgroup of $S_6$.
+
+  But $D_6$ acts faithfully on the vertices of the 3-gon, so there is an injective homomorphism
+  $D_6 \to S_3$; since $\abs{D_6} = \abs{S_3} = 6$, this is an isomorphism.
+
+  But $\abs{S_6} = 6! \gg 6$, so the left regular representation may be much larger in terms of
+  space.
+\end{ex}
+
+%%%%% Lec 13
+\section{Orbits and stabilizers}
+
+\subsection{Orbits}
+
+\begin{defn}{orbit}{}
+  Let $G$ act on $X$.
+  The \hldef{$G$-orbit} of $x$ is $\orbit_x = \{g \cdot x : g \in G\}$.
+  A subset $\orbit \subseteq X$ is an \hldef{orbit} if $\orbit = \orbit_x$ for some $x \in X$.
+  A group action is \hldef{transitive} if $\orbit_x = X$ for some $x \in X$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item Let $H \leq G$ act on $G$ by left multiplication.
+    The orbit of $g \in G$ is $\orbit_g = Hg$, a right coset.
+
+    Since $Hg$ is a proper subset of $G$ if $H < G$, we see the action is not transitive unless
+    $H = G$.
+    \item Consider the action of $\GL_n\mathbb{K}$ on $\mathbb{K}^n$.
+    Then
+    \[
+      \orbit_v = \begin{cases}
+        \{0\} & v = 0 \\
+        \mathbb{K}^n \setminus \{0\} \qquad & v \neq 0
+      \end{cases}.
+    \]
+    So this action is not transitive, and there are two orbits.
+    \item If $1 \leq i \neq j \leq n$, then we can find $\pi \in S_n$ where $\pi(i) = j$.
+    So $\orbit_i = \{1, \ldots, n\}$ for all $i$.
+    We conclude the action of $S_n$ on $\{1, \ldots, n\}$ is transitive and has one orbit.
+    \item More generally, the action of $S_X$ on $X$ is transitive and has one orbit.
+    \item Suppose $\sigma \in S_n$.
+    What are the orbits of $\ang{\sigma}$ on $\{1, \ldots, n\}$?
+
+    For example, take $\sigma = (137)(26)(48) \in S_8$.
+    Then $\orbit_1 = \orbit_3 = \orbit_7 = \{1, 3, 7\}$, $\orbit_2 = \orbit_6 = \{2, 6\}$,
+    $\orbit_4 = \orbit_8 = \{4, 8\}$, and $\orbit_5 = \{5\}$.
+
+    In general, if
+    $\sigma = (i_{11} \cdots i_{1k_1})(i_{21} \cdots i_{2k_2}) \cdots (i_{m1} \cdots i_{mk_m})$
+    (including 1-cycles), then the orbits are $\{i_{j1}, \ldots, i_{jk_j}\}$ for $1 \leq j \leq m$.
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection[Equivalence relation from a G-action]{Equivalence relation from a $G$-action}
+
+Note that in all the previous examples, the orbits partitioned $X$.
+Recall that partitions correspond to equivalence relations.
+
+\begin{defn}{}{}
+  If $G$ acts on $X$, say that $x \sim_G y$ if there is $g \in G$ such that $g \cdot x = y$.
+\end{defn}
+
+\begin{lem}{}{}
+  If $G$ acts on $X$, then $\sim_G$ is an equivalence relation on $X$.
+\end{lem}
+
+\begin{thmproof}
+  Since $e \cdot x = x$, $x \sim_G x$ for all $x \in X$.
+
+  If $g \cdot x = y$, then $g^{-1} \cdot y = x$, so $x \sim_G y \implies y \sim_G x$.
+
+  Finally, if $g \cdot x = y$ and $h \cdot y = z$, then $hg \cdot x = z$, so $x \sim_G y$ and
+  $y \sim_G z \implies x \sim_G z$.
+\end{thmproof}
+
+Then if $x \in X$, the equivalence class $[x]_{\sim_G}$ of $x$ is
+$\{y \in X : x \sim_G y\} = \{y \in X : y = g \cdot x \text{ for some } g \in G\} = \orbit_x$.
+
+Thus we conclude the equivalence classes of $\sim_G$ are the orbits of $G$ acting on $X$.
+
+\begin{prop}{}{}
+  If $G$ acts on $X$, then orbits of $G$ form a partition of $X$.
+  In particular, the action is transitive if and only if there is only one orbit.
+\end{prop}
+
+\begin{defn}{set of representatives}{}
+  Let $\sim$ be an equivalence relation on a set $X$.
+  A subset $S \subseteq X$ is said to be a \hldef{set of representatives} for $\sim$ if each
+  equivalence class of $\sim$ contains exactly one element of $S$.
+\end{defn}
+
+A set of representatives exists for every $\sim$.
+
+\begin{cor}{}{}
+  Suppose $G$ acts on a set $X$ and let $S$ be a set of representatives for $\sim_G$.
+  Then
+  \[ \abs{X} = \sum_{x \in S} \abs{\orbit_x}. \]
+\end{cor}
+
+What is $\abs{\orbit_x}$?
+
+We can use the function $G \to \orbit_x : g \mapsto g \cdot x$.
+This is clearly surjective, but what if the function is not injective (i.e., $g \cdot x = h \cdot x$
+for some $g \neq h$)?
+
+\pagebreak
+\subsection{Stabilizers}
+
+\begin{defn}{stabilizer}{}
+  If $G$ acts on $X$, and $x \in X$, the \hldef{stabilizer} of $x$ is
+  $G_x := \{g \in G : g \cdot x = x\}$.
+\end{defn}
+
+\begin{prop}{}{}
+  If $G$ acts on $X$, and $x \in X$, then $G_x$ is a subgroup of $G$.
+\end{prop}
+
+\begin{thmproof}
+  First, $e \in G_x$.
+
+  Second, if $g, h \in G_x$, then
+  $gh \cdot x = g \cdot (h \cdot x) = g \cdot x = x \implies gh \in G_x$.
+
+  Third, if $g \in G_x$, then
+  $g^{-1} \cdot x = g^{-1} \cdot (g \cdot x) = e \cdot x = x \implies g^{-1} \in G_x$.
+\end{thmproof}
+
+\begin{thm}{Orbit-stabilizer theorem}{}
+  If $G$ acts on $X$, and $x \in X$, then there is a bijection
+  $G/G_x \to \orbit_x : gG_x \mapsto g \cdot x$.
+\end{thm}
+
+\begin{thmproof}
+  Well-defined: if $gG_x = hG_x$, then $g^{-1}h \in G_x$.
+  So $g^{-1}h \cdot x = x \implies h \cdot x = g \cdot x$.
+
+  Injective: if $g \cdot x = h \cdot x$, then $g^{-1}h \cdot x = x$, so
+  $g^{-1}h \in G_x \implies gG_x = hG_x$.
+
+  Surjective: if $y \in \orbit_x$, then $y = g \cdot x$ by definition.
+\end{thmproof}
+
+\begin{cor}{}{}
+  If $G$ acts on $X$ and $x \in X$, then $\abs{\orbit_x} = [G : G_x]$.
+\end{cor}
+
+\pagebreak
+\subsection[Example: Sn]{Example: $S_n$}
+
+Let $G = S_n$ and $X = \{1, \ldots, n\}$.
+
+We know the action of $G$ on $X$ is transitive, so $\orbit_i = X$ for any $i$.
+
+Then $n = \abs{\orbit_i} = [G : G_i] = \frac{\abs{G}}{\abs{G_i}} = \frac{n!}{\abs{G_i}}$.
+Hence $\abs{G_i} = (n - 1)!$ for any $i$.
+
+Thus the stabilizer of $i$ is $G_i = \{\pi \in S_n : \pi(i) = i\}$.
+
+For a concrete example, if $n = 4$, then
+$G_1 = \{e, (23), (24), (34), (234), (243)\}$.
+
+In general, $G_i \cong S_{n - 1}$ (add 1 to each number in $S_{n - 1}$ which is $\geq i$), so
+we see $\abs{G_i} = (n - 1)!$ directly.
+
+\pagebreak
+\subsection[Example: G/H]{Example: $G/H$}
+
+Recall that the action of $G$ on $G/H$ is $g \cdot kH = gkH$ (i.e. usual set multiplication).
+
+\begin{prop}{}{}
+  Suppose $H \leq G$.
+  Then the left multiplication action of $G$ on $G/H$ is transitive, and $G_{eH} = H$.
+\end{prop}
+
+\begin{thmproof}
+  If $gH \in G/H$, then $gH = g \cdot eH$, so $\orbit_{eH} = G/H$.
+
+  Also, $g \cdot eH = eH \iff gH = H \iff g \in H$.
+\end{thmproof}
+
+In this case, the orbit-stabilizer theorem states that $\orbit_{eH} = G/H$ is in bijection with
+$G/H$ (tautology).
+
+\pagebreak
+\subsection{Kernel versus stabilizer}
+
+If $G$ acts on $X$, then the kernel of the action is
+$\{g \in G : g \cdot x = x \text{ for all } x\}$.
+
+Meanwhile, the stabilizer $G_x = \{g \in G : g \cdot x = x\}$ has $x$ fixed.
+
+Consequently, if $H$ is the kernel of the action, then $H \leq G_x$ for all $x \in X$.
+
+\begin{prop}{}{}
+  If $G$ acts on $X$, then the kernel of the action is $\bigcap_{x \in X} G_x$, the intersection of
+  the stabilizers.
+\end{prop}
+
+\begin{thmproof}
+  $g$ is in the kernel if and only if $g \in G_x$ for all $x \in X$.
+\end{thmproof}
+
+An application:
+
+\begin{thm}{}{}
+  If $G$ is finite and $H \leq G$ has index $[G : H] = p$ where $p$ is the smallest prime dividing
+  $\abs{G}$, then $H \trianglelefteq G$.
+\end{thm}
+
+\begin{thmproof}
+  Let $K$ be the kernel of the action of $G$ on $G/H$ (so $K$ is normal).
+
+  By the proposition, $K \leq H = G_{eH}$.
+  Then let $k = [H : K] = \frac{\abs{H}}{\abs{K}}$.
+
+  Now $[G : K] = \frac{\abs{G}}{\abs{K}} = \frac{\abs{G}}{\abs{H}} \frac{\abs{H}}{\abs{K}} = pk$.
+
+  By the first isomorphism theorem, $G/K$ is isomorphic to a subgroup of $S_p$.
+  So $\abs{G/K} = kp \mid p! = \abs{S_p} \implies k \mid (p - 1)!$.
+
+  But we also have $k \mid \abs{G}$.
+  Since $p$ is the smallest prime dividing $\abs{G}$, we must have $k = 1$.
+  Hence $\abs{H} = \abs{K}$ so $H = K$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Conjugation actions}
+
+Recall left multiplication defines a left action of $G$ on $G$.
+There is, however, another natural left action.
+
+\begin{lem}{}{}
+  $G \times G \to G : (g, k) \mapsto gkg^{-1}$ defines an action of $G$ on $G$.
+\end{lem}
+
+This action is called the \hldef{conjugation action} of $G$ on $G$.
+
+To avoid conjustion with the left multiplication action here, we'll denote it by
+$g \bullet k = gkg^{-1}$.
+
+(In practice, there is no convention about $\cdot$ and $\bullet$; specify your choices when
+writing.)
+
+\begin{thmproof}
+  If $k \in G$, then $e \bullet k = eke = k$.
+
+  If $g, h, k \in G$, then
+  $g \bullet (h \bullet k) = g \bullet hkh^{-1} = ghkh^{-1}g^{-1} = (gh)k(gh)^{-1} = gh \bullet k$.
+\end{thmproof}
+
+\begin{defn}{conjugacy class, centralizer}{}
+  The orbit of $k \in G$ under the conjugation action is called the \hldef{conjugacy class} of $k$,
+  denoted by $\Conj_G(k)$.
+
+  The stabilizer of $k \in G$ is called the \hldef{centralizer} of $k$ in $G$, denoted by $C_G(k)$.
+\end{defn}
+
+By definition, $\Conj_G(k) = \{gkg^{-1} : g \in G\}$.
+
+$C_G(k) = \{g \in G : gkg^{-1} = k\} = \{g \in G : gk = kg\}$, namely the centralizer is the set
+of elements in $G$ which commute with $k$.
+
+By the orbit-stabilizer theorem, $\abs{\Conj_G(k)} = [G : C_G(k)]$.
+
+For example: $\Conj(e) = \{geg^{-1} : g \in G\} = \{e\}$ and $C_G(e) = G$.
+
+Note the conjugation action of $G$ on $G$ induces an action of $G$ on $2^G$.
+In particular, if $g \in G$ and $S \subseteq G$, then
+$g \bullet S = \{g \bullet h : h \in S\} = \{ghg^{-1} : h \in S\} = gSg^{-1} = N_G(S)$ (the
+normalizer of $S$ in $G$).
+
+\pagebreak
+\subsection{Example: matrices}
+
+One important instance of the conjugation action is with $\GL_n\mathbb{K}$.
+
+Actually, if $A, B$ are $n \times n$ matrices and $A$ is invertbile, then $ABA^{-1}$ makes sense
+even if $B$ is not invertible.
+
+\begin{exer}{}{}
+  Show $\GL_n\mathbb{K}$ acts on $M_n\mathbb{K}$ by conjugation, where $M_n\mathbb{K}$ is the set
+  of $n \times n$ matrices over $\mathbb{K}$.
+\end{exer}
+
+Recall matrices $A$ and $B$ are \hldef{similar} if there is $C \in \GL_n\mathbb{K}$ such that
+$CAC^{-1} = B$.
+This is the equivalence relation $\sim_{\GL_n\mathbb{K}}$.
+
+The orbits of the conjugation action of $\GL_n\mathbb{K}$ on $M_n\mathbb{K}$ are called
+\hldef{similarity classes}.
+
+A matrix $A$ is \hldef{diagonalizable} if it is similar to a diagonal matrix.
+
+When $\mathbb{K} = \mathbb{C}$, every similarity class contains exactly one matrix in Jordan
+normal form; matrices in Jordan normal form give a set of representatives for
+$\sim_{\GL_n\mathbb{K}}$.
+
+\pagebreak
+\subsection{Class equation and Cauchy's theorem}
+
+Using standard facts about orbits,
+\[ \abs{G} = \sum_{g \in S} \abs{\Conj(g)} = \sum_{g \in S} [G : C_G(g)] \]
+where $S$ is a set of representatives for conjugacy classes.
+
+We could simplify this by pulling out conjugacy classes of size 1:
+
+\begin{lem}{}{}
+  $\abs{\Conj(k)} = 1 \iff C_G(k) = G \iff k \in Z(G)$.
+\end{lem}
+
+\begin{thmproof}
+  $\abs{\Conj(k)} = 1$ if and only if $gkg^{-1} = k$ for all $g \in G$ (since $k \in \Conj(k)$
+  always) if and only if $C_G(k) = G$ if and only if $k \in Z(G)$.
+\end{thmproof}
+
+\begin{thm}{Class equation}{}
+  If $G$ is a finite group, then
+  \[ \abs{G} = \abs{Z(G)} + \sum_{g \in T} \abs{\Conj(g)} \]
+  where $T$ is a set of representatives for conjugacy classes not contained in the center.
+\end{thm}
+
+\begin{thm}{Cauchy's theorem}{}
+  If $G$ is a finite group and $p$ is a prime dividing $\abs{G}$, then $G$ contains an element of
+  order $p$.
+\end{thm}
+
+\begin{thmproof}
+  Let $\abs{G} = pm$.
+  Note the theorem is clear when $G$ is cyclic.
+
+  First assume $G$ is abelian; proof by induction on $m$.
+
+  Base case: if $m = 1$, then $G$ is cyclic, so we are done.
+
+  Inductive step: pick $a \in G$, $a \neq e$.
+  We can assume $\abs{a} < \abs{G}$ (otherwise $G$ is cyclic).
+  If $p \mid \abs{a}$, then by induction we get $b \in \ang{a}$ with $\abs{b} = p$.
+  Otherwise, $N = \ang{a} \trianglelefteq G$ since $G$ is abelian.
+  Thus $\abs{G/N} = \frac{\abs{G}}{\abs{N}} < \abs{G}$.
+  Since $p \mid \abs{G}$ but $p \nmid \abs{N}$, we get $p \mid \abs{G/N}$.
+  By induction, $G/N$ has an element $gN$ of order $p$.
+  Let $n = \abs{g}$.
+  Since $g^n = 1$, $q(g)^n = 1$ where $q$ is the quotient map, so $p \mid n$.
+  If $G = \ang{g}$, we are done, otherwise apply induction to $\ang{g}$.
+
+  Now take a general $G$ (possibly non-abelian); induction on $\abs{G}$.
+
+  By the class equation, $\abs{G} = \abs{Z(G)} + \sum_{g \in T} \abs{\Conj(g)}$.
+
+  If $p \nmid \abs{\Conj(g)} = \abs{G}/\abs{C_G(g)}$ for some $g \in T$, then $p \mid \abs{C_G(g)}$.
+  Since $g \not\in Z(G)$, $\abs{\Conj(g)} > 1 \implies \abs{C_G(g)} < \abs{G}$.
+  By induction, $C_G(g)$ contains an element of order $p$.
+
+  If $p \mid \abs{\Conj(g)}$ for all $g \in T$, then $p \mid \abs{Z(G)}$.
+  $Z(G)$ is an abelian group, so by the abelian case, $Z(G)$ contains an element of order $p$.
+\end{thmproof}
+
+\pagebreak
+\subsection[Center of p-groups]{Center of $p$-groups}
+
+\begin{defn}{$p$-group}{}
+  Let $p$ be prime.
+  A group $G$ is a \hldef{$p$-group} if $\abs{G} = p^k$ for some $k \geq 1$.
+\end{defn}
+
+\begin{thm}{}{}
+  If $G$ is a $p$-group, then $Z(G) \neq \{e\}$.
+\end{thm}
+
+\begin{thmproof}
+  $\abs{G} = \abs{Z(G)} + \sum_{g \in T} [G : C_G(g)]$.
+
+  Note $[G : C_G(g)] \mid \abs{G}$.
+
+  If $g \not\in Z(G)$, then $[G : C_G(g)] > 1 \implies p \mid [G : C_G(g)]$.
+
+  So $p \mid \abs{Z(G)}$.
+\end{thmproof}
+
+As shown in the proof, the order of $Z(G)$ is a non-zero power of $p$.
+Alternatively, get this from the theorem and Lagrange's theorem.
+
+\week{Classification of Groups}
+
+\section{Classification of groups}
+
+Classification problem: identify all groups up to isomorphism.
+(We could replace groups with any algebraic structure.
+Classification is one of the big questions in modern mathematics.)
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{c | c}
+    Order & Known groups \\
+    \hline
+    1 & Trivial group \\
+    2 & $\Zmod{2}$ \\
+    3 & $\Zmod{3}$ \\
+    4 & $\Zmod{4}$, $(\Zmod{2}) \times (\Zmod{2})$ \\
+    5 & $\Zmod{5}$ \\
+    6 & $\Zmod{6}$, $D_6 = S_3$, ?? \\
+    7 & $\Zmod{7}$ \\
+    8 & $\Zmod{8}$, $D_8$, ?? \\
+    9 & $\Zmod{9}$, $(\Zmod{3}) \times (\Zmod{3})$
+  \end{tabular}
+\end{center}
+
+\pagebreak
+\subsection[Groups of order p squared]{Groups of order $p^2$}
+
+\begin{prop}{}{}
+  Suppose $p$ is prime and $\abs{G} = p^2$.
+  Then either $G$ is cyclic, or $G \cong (\Zmod{p}) \times (\Zmod{p})$.
+\end{prop}
+
+\begin{thmproof}
+  Suppose $G$ is not cyclic, so choose $a \in G \setminus \{e\}$.
+
+  We know $\ang{a} \neq G$, so $\abs{a} = p$ and we can find $b \in G \setminus \ang{a}$.
+
+  Since $\ang{b} \neq G$, we get $\abs{b} = p$ as well.
+  Let $H = \ang{a}$ and $K = \ang{b}$.
+
+  Since $H \cap K < K$, we see $\abs{H \cap K} = 1$ so $H \cap K = \{e\}$.
+  Then $\abs{HK} = \frac{\abs{H}\abs{K}}{\abs{H \cap K}} = p^2$ so $HK = G$.
+
+  Finally, $[G : H] = [G : K] = p$, the smallest prime dividing $\abs{G}$.
+  Hence $H, K \trianglelefteq G$ so $G \cong H \times K \cong (\Zmod{p}) \times (\Zmod{p})$.
+\end{thmproof}
+
+\subsection[Groups of order pq]{Groups of order $pq$}
+
+\begin{lem}{}{}
+  Suppose $H, K \trianglelefteq G$ where $\gcd(\abs{H}, \abs{K}) = 1$ and
+  $\abs{H}\abs{K} = \abs{G}$.
+  Then $G \cong H \times K$.
+\end{lem}
+
+\begin{thmproof}
+  Since $\abs{H \cap K}$ divides both $\abs{H}$ and $\abs{K}$, we get $\abs{H \cap K} = 1$ so
+  $H \cap K = \{e\}$.
+
+  Also, $\abs{HK} = \frac{\abs{H}\abs{K}}{\abs{H \cap K}} = \abs{G}$ so $HK = G$.
+
+  The result follows from the characterization of products.
+\end{thmproof}
+
+Suppose $\abs{G} = pq$ for distinct primes $p < q$.
+What can we say about $G$?
+
+By Cauchy's theorem, $G$ has elements $a, b$ with $\abs{a} = p$ and $\abs{b} = q$.
+Let $H = \ang{a}$ and $K = \ang{b}$.
+Note $\gcd(\abs{H}, \abs{K}) = 1$ and $\abs{H}\abs{K} = \abs{G}$.
+Is it true that $H, K \trianglelefteq G$?
+
+We know $[G : K] = p$, which is the smallest prime dividing $\abs{G}$, so $K \trianglelefteq G$.
+But is $H \trianglelefteq G$?
+Not necessarily.
+
+Counterexample: $G = D_6$, $H = \ang{r}$, $K = \ang{s}$.
+
+What if we suppose $H, K \leq G$, $HK = G$, $H \cap K = \{e\}$, and $K \trianglelefteq G$?
+Is $G \cong H \times K$ here?
+Again, no!
+
+In our counterexample, that would mean $D_6 \cong H \times K \cong (\Zmod{2}) \times (\Zmod{3})$,
+but $D_6$ is non-abelian.
+
+However, there is a set bijection $H \times K \to G : (h, k) \mapsto hk$, and we can say that
+$G \cong H \ltimes K$, the \hldef{semidirect product} of $H$ and $K$ (later, optional).
+
+For $p = 2$ and $q = 3$, it turns out the only groups of order $pq = 6$ are
+$\mathbb{Z}_2 \times \mathbb{Z}_3$, $\mathbb{Z}_6$, and $D_6 \cong S_3$.
+
+\pagebreak
+\subsection{What can we say?}
+
+The difficulty in analyzing the $pq$ case was that $H \leq G$ might not be normal.
+This concern is not present if $G$ is abelian, so we will focus on finite abelian groups this week.
+
+There are lots of other ways to approach classification.
+Notice that for small orders, we are essentially describing groups as being built out of other
+groups.
+
+We say a group is \hldef{simple} if it contains no (non-trivial) normal subgroups.
+Simple groups are the minimal building blocks for other groups.
+
+Finally, by looking at the isomorphism problem for \hldef{finitely-presented groups} (later,
+optional), we will see that the classification problem for infinite groups cannot be solved.
+
+\pagebreak
+\subsection{Decomposing finite abelian groups}
+
+From the earlier lemma, we can disregard the normality constraint when considering abelian groups.
+Then, how can we find groups of coprime order?
+
+\begin{lem}{}{}
+  Suppose $G$ is an abelian group.
+  Let $G^{(m)} = \{g \in G : g^m = e\}$.
+  Then $G^{(m)} \leq G$ for all $m \geq 1$.
+\end{lem}
+
+\begin{thmproof}
+  Clearly $e \in G^{(m)}$ for all $m \geq 1$.
+  If $g, h \in G^{(m)}$, then $(g^{-1}h)^m = g^{-m}h^m = e \in G^{(m)}$.
+\end{thmproof}
+
+$G^{(m)}$ is the \hldef{$m$-torsion subgroup}.
+
+\begin{prop}{}{}
+  Suppose $\abs{G} = mn$ where $\gcd(m, n) = 1$.
+  Then
+  \begin{enumerate}
+    \item $\phi \colon G \to G^{(m)} \times G^{(n)} : g \mapsto (g^n, g^m)$ is an isomorphism.
+    \item $\abs{G^{(m)}} = m$ and $\abs{G^{(n)}} = n$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item
+    If $g \in G$, then $g^{mn} = e$, so $g^n \in G^{(m)}$ and $g^m \in G^{(n)}$.
+    Hence $\phi$ is well-defined.
+
+    Now find $a, b \in \mathbb{Z}$ such that $an + bm = 1$.
+    If $\phi(g) = e$, then $g^n = g^m = e \implies g = g^{an + bm} = e$, so $\phi$ is injective.
+
+    If $g \in G^{(m)}$ and $h \in G^{(n)}$, then $g = g^{an + bm} = g^{an}$ and similarly
+    $h = h^{an + bm} = h^{bm}$, so $\phi(g^a h^b) = (g^{an}h^{bn}, g^{am}h^{bm}) = (g, h)$.
+    Hence $\phi$ is also surjective.
+
+    We also need to show $\phi$ is a homomorphism:
+    \[
+      \phi(gh) = ((gh)^n, (gh)^m) = (g^nh^n, g^mh^m) = (g^n, g^m) \cdot (h^n, h^m) = \phi(g)\phi(h).
+    \]
+    \item
+    Since $G \cong G^{(m)} \times G^{(n)}$, $\abs{G} = \abs{G^{(m)}}\abs{G^{(n)}}$.
+
+    Suppose $\abs{G} = p_1^{a_1} \cdots p_k^{a_k}$ is the prime factorization of $\abs{G}$.
+    Since $\abs{G} = mn$ and $\gcd(m, n) = 1$, we have $m = p_1^{b_1} \cdots p_k^{b_k}$ and
+    $n = p_1^{c_1} \cdots p_k^{c_k}$ where for each $i$, $a_i = b_i + c_i$ and only one of
+    $b_i$ and $c_i$ is non-zero.
+
+    Suppose $b_i > 0$.
+    If $p_i \mid \abs{G^{(n)}}$, then $G^{(n)}$ has an element $a$ of order $p_i$ by Cauchy's
+    theorem.
+    Then $p_i \mid m \implies a \in G^{(m)} \implies a \in \ker\phi \implies a = e$, which is
+    impossible.
+    So $p_i \nmid \abs{G^{(n)}} \implies p_i^{a_i} \mid \abs{G^{(m)}}$.
+
+    Conclusion: $m \mid \abs{G^{(m)}}$ and $n \mid \abs{G^{(n)}}$.
+    So $\abs{G^{(m)}} = m$ and $\abs{G^{(n)}} = n$.
+  \end{enumerate}
+\end{thmproof}
+
+\begin{ex}
+  Suppose $\gcd(m, n) = 1$ and let $G = \Zmod{mn}$.
+
+  If $m[x] = 0$ for $0 \leq x < mn$, then $mn \mid mx \iff n \mid x$.
+  So $G^{(m)} = \{[x] \in G : m[x] = 0\} = n\mathbb{Z}/mn\mathbb{Z}$.
+
+  Since $\mathbb{Z} \to n\mathbb{Z} : x \mapsto nx$ is an isomorphism sending
+  $m\mathbb{Z} \mapsto mn\mathbb{Z}$, $n\mathbb{Z}/mn\mathbb{Z} \cong \Zmod{m}$.
+  Similarly, $G^{(n)} \cong m\mathbb{Z}/mn\mathbb{Z} \cong \Zmod{n}$.
+
+  The proposition gives $\Zmod{mn} \cong (\Zmod{m}) \times (\Zmod{n})$.
+  (Chinese remainder theorem.)
+\end{ex}
+
+\begin{cor}{}{}
+  Let $G$ be a finite abelian group and let $\abs{G} = p_1^{a_1} \cdots p_k^{a_k}$ where
+  $p_1, \ldots, p_k$ are distinct primes and $a_i > 0$ for all $i$.
+  Then $G \cong G_1 \times G_2 \times \cdots \times G_k$ where $\abs{G_i} = p_i^{a_i}$.
+\end{cor}
+
+\begin{thmproof}
+  Let $G_1 = G^{(p_1^{a_1})}$ and let $r = p_2^{a_2} \cdots p_k^{a_k}$.
+
+  Since $p_1^{a_1}$ and $r$ are coprime and $p_1^{a_1} \cdot r = \abs{G}$, the proposition implies
+  $G \cong G_1 \times G^{(r)}$ and that $\abs{G_1} = p_1^{a_1}$ and $\abs{G^{(r)} = r}$.
+
+  We can continue to get $G^{(r)} = G_2 \times \cdots \times G_k$ as desired.
+\end{thmproof}
+
+We can go further, and decompose into cyclic groups.
+
+\begin{prop}{}{}
+  If $G$ is a finite abelian group, then
+  $G \cong C_{a_1} \times C_{a_2} \times \cdots \times C_{a_k}$ for some sequence $a_1, \ldots, a_k$
+  where every $a_i$ is a prime power.
+\end{prop}
+
+(Recall that $C_n$ is the multiplicative form of $\Zmod{n}$.)
+
+\begin{thmproof}
+  By the previous corollary, we can assume $G$ is a $p$-group, i.e.\ $\abs{G} = p^n$ for some $n$.
+  Proof by induction on $n$; for base case $n = 0$, take $k = 0$.
+
+  Choose an element $x \in G$ of maximal order, so say $\abs{x} = p^r$.
+  Since $G$ is abelian, $N = \ang{x} \trianglelefteq G$.
+
+  Then $\abs{G/N} < \abs{G}$, so by induction, $G/N = C_{b_1} \times \cdots C_{b_\ell}$ for some
+  sequence $b_1, \ldots, b_\ell$ of prime powers.
+  By Lagrange's theorem, $b_i = p^{s_i}$ for all $i$.
+
+  For each $i$, let $\tilde{y}_i$ be the generator of $C_{b_i}$.
+  Let $y_iN \in G/N$ be the element of $G/N$ corresponding to
+  $(e, \ldots, e, \tilde{y}_i, e, \ldots, e)$ (that is, $\tilde{y}_i$ in the $i$-th position).
+  Say $\abs{y_i} = p^{t_i}$; note $r \geq t_i \geq s_i$.
+
+  We know that $y_i^{b_i} \in N$, so $y_i^{b_i} = x^{c_i}$ for some $c_i$.
+  Now $b_i = p^{s_i}$, so $\abs{y_i^{b_i}} = p^{t_i} / p^{s_i} = p^{t_i - s_i}$.
+  We conclude that $c_i = d_ip^{r - (t_i - s_i)} = d_ip^{r - t_i + s_i}$ for some $d_i$.
+
+  Let $z_i = y_i x^{-d_ip^{r - t_i}}$.
+  Then $z_iN = y_iN$, and $z_i^{b_i} = y_i^{b_i}x^{-d_ip^{r - t_i + s_i}} = y_i^{b_i}x^{-c_i} = e$,
+  so $\abs{z_i} = b_i$.
+
+  Let $H = \ang{z_1, \ldots, z_\ell} \leq G$ and suppose $w \in H \cap N$.
+  Then $w = z_1^{n_1} \cdots z_\ell^{n_\ell}$ where $0 \leq n_i < b_i$ for all $i$.
+
+  Let $q \colon G \to G/N$ be the quotient map.
+  Then
+  \[
+    q(w) = q(z_1)^{n_1} \cdots q(z_\ell)^{n_\ell} = (z_1N)^{n_1} \cdots (z_\ell N)^{n_\ell}
+    = (y_1N)^{n_1} \cdots (y_\ell N)^{n_\ell}
+    \cong (\tilde{y}_1^{n_1}, \ldots, \tilde{y}_\ell^{n_\ell}).
+  \]
+  But since $w \in N = \ker q$, $q(w) = e$, so $n_1 = \cdots = n_\ell = 0$.
+  We conclude $w = e$, or in other words $H \cap N = \{e\}$.
+
+  Suppose $g \in G$.
+  Then $gN \cong (\tilde{y}_1^{n_1}, \ldots, \tilde{y}_\ell^{n_\ell})$ for some
+  $n_1, \ldots, n_\ell$ which implies $gN = (z_1N)^{n_1} \cdots (z_\ell N)^{n_\ell}
+    = (z_1^{n_1} \cdots z_\ell^{n_\ell})N$.
+  In particular, $g \in HN$.
+  We conclude $HN = G$.
+
+  Since $G$ is abelian, $H, N \trianglelefteq G$.
+  So $G = N \times H$
+
+  Now $N \cong C_{p^r}$ and $\abs{H} < \abs{G}$, so by induction, $H$ is also a product of
+  prime-power cyclic groups.
+\end{thmproof}
+
+Now, the main result.
+
+\begin{thm}{Classification of finite abelian groups}{}
+  If $G$ is a finite abelian group, then
+  $G \cong C_{a_1} \times \cdots \times C_{a_k}$ where $a_1 \leq \cdots \leq a_k$
+  is a sequence of prime powers.
+
+  Furthermore, if $G \cong C_{b_1} \times \cdots \times C_{b_\ell}$ where
+  $b_1 \leq \cdots \leq b_\ell$ is another sequence of prime powers, then $k = \ell$ and $a_i = b_i$
+  for all $1 \leq i \leq k = \ell$.
+\end{thm}
+
+\begin{ex}
+  We saw earlier that $C_2 \times C_3 \cong C_6$ (or generally $C_m \times C_n \cong C_{mn}$ for
+  coprime $m$ and $n$), so the requirement that $a_i$ be a prime power is required for uniqueness.
+\end{ex}
+
+\begin{thmproof}
+  We just need to prove uniqueness.
+
+  If $G \cong C_{b_1} \times \cdots \times C_{b_\ell}$, then
+  $G^{(m)} \cong C_{b_1}^{(m)} \times \cdots \times C_{b_\ell}^{(m)}$.
+
+  If $p, q$ are distinct primes, then $C_{p^r}^{(q^s)} = \{e\}$.
+  Otherwise if $p = q$, $\abs{C_{p^r}^{(p^s)}} = p^{\min(r, s)}$.
+
+  Now
+  \[
+    \abs{G^{(p^r)}} = \prod_{s \geq 1} \prod_{i : b_i = p^s} \abs{C_{b_i}^{(p^r)}}
+      = \prod_{s \geq 1} \prod_{i : b_i = p^s} p^{\min(r, s)}
+  \]
+  and hence
+  \[
+    \frac{\abs{G^{(p^r)}}}{\abs{G^{(p^{r - 1})}}} = \prod_{s \geq r} \prod_{i : b_i = p^s} p.
+  \]
+  So $\log_p \abs{G^{(p^r)}} - \log_p \abs{G^{(p^{r - 1})}}
+    = \abs{\{ i : b_i = p^s \text{ for some } s \geq r \}}$.
+
+  Exercise: recover $\ell$ and $b_1, \ldots, b_\ell$ from these numbers.
+\end{thmproof}
+
 %---------------
 \end{document}
 %---------------
