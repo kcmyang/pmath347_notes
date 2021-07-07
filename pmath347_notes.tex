@@ -57,7 +57,7 @@ Notation:
   We can use function notation (typically for symbols)
   \[ b \colon X \times X \to X : (x, y) \mapsto b(x, y) \]
   or inline notation (typically for letters)
-  \[ + \colon \mathbb{N} \times \mathbb{N} \to \mathbb{N} : (x, y) \mapsto x + y. \]
+  \[ + \colon \N \times \N \to \N : (x, y) \mapsto x + y. \]
   \item
   Some symbols: $a + b$, $a \times b$, $a \cdot b$, $a \circ b$, $a \oplus b$, $a \otimes b$,
   $a \odot b$, $a \diamond b$, $a * b$, $a \bullet b$, $a \boxplus b$, $a \boxtimes b$.
@@ -69,11 +69,11 @@ Notation:
 \begin{ex}
   \begin{itemize}
     \item
-    Addition $+$ is a binary operation on $\mathbb{N}$, but subtraction $-$ is not since $a - b$ is
-    not necessarily in $\mathbb{N}$.
+    Addition $+$ is a binary operation on $\N$, but subtraction $-$ is not since $a - b$ is
+    not necessarily in $\N$.
     \item
-    Subtraction is a binary operation on $\mathbb{Z}$, \emph{i.e.}, it defines a function
-    $- \colon \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z}$.
+    Subtraction is a binary operation on $\Z$, \emph{i.e.}, it defines a function
+    $- \colon \Z \times \Z \to \Z$.
     \item
     If $(V, +, \cdot)$ is a vector space over a field $\mathbb{K}$, then $+$ is a binary operation
     on $V$, but $\cdot$ is not since $\cdot$ is a function $\mathbb{K} \times V \to V$.
@@ -91,11 +91,11 @@ Notation:
 \begin{ex}
   \begin{itemize}
     \item
-    Negation $\mathbb{Z} \to \mathbb{Z} : x \mapsto -x$ is a unary operation.
+    Negation $\Z \to \Z : x \mapsto -x$ is a unary operation.
     \item
-    Taking the multiplicative inverse $x \mapsto 1/x$ is not a unary operation on $\mathbb{Q}$,
+    Taking the multiplicative inverse $x \mapsto 1/x$ is not a unary operation on $\Q$,
     since $1/0$ is not defined, but it is a unary operation on
-    \[ \mathbb{Q}^\times := \{ a \in \mathbb{Q} : a \neq 0 \}. \]
+    \[ \Q^\times := \{ a \in \Q : a \neq 0 \}. \]
   \end{itemize}
 \end{ex}
 
@@ -113,8 +113,8 @@ Notation:
 Many operations mentioned so far are associative:
 \begin{itemize}
   \item
-  Addition and multiplication for $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$,
-  $\mathbb{C}$, polynomials, and functions;
+  Addition and multiplication for $\N$, $\Z$, $\Q$, $\R$,
+  $\C$, polynomials, and functions;
   \item
   Vector addition, matrix addition and multiplication;
   \item
@@ -200,8 +200,8 @@ unambiguous.
 Many familiar operations are commutative:
 \begin{itemize}
   \item
-  Addition and multiplication on $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$,
-  $\mathbb{C}$
+  Addition and multiplication on $\N$, $\Z$, $\Q$, $\R$,
+  $\C$
   \item
   Vector and matrix addition
   \item
@@ -240,14 +240,14 @@ commutative case.
 \begin{ex}
   \begin{itemize}
     \item
-    The zero element $0$ of $\mathbb{Z}$ is an identity for $+$, since $0 + x = x + 0 = x$ for all
-    $x \in \mathbb{Z}$.
+    The zero element $0$ of $\Z$ is an identity for $+$, since $0 + x = x + 0 = x$ for all
+    $x \in \Z$.
     \item
-    $1 \in \mathbb{Q}$ is an identity for $\cdot$, since $1 \cdot x = x \cdot 1 = x$ for all
-    $x \in \mathbb{Q}$.
+    $1 \in \Q$ is an identity for $\cdot$, since $1 \cdot x = x \cdot 1 = x$ for all
+    $x \in \Q$.
     \item
-    $0 \in \mathbb{Q}$ is not an identity for $\cdot$, since $0 \cdot x = 0 \neq x$ for all
-    $x \in \mathbb{Q}$.
+    $0 \in \Q$ is not an identity for $\cdot$, since $0 \cdot x = 0 \neq x$ for all
+    $x \in \Q$.
   \end{itemize}
 \end{ex}
 
@@ -272,11 +272,11 @@ commutative case.
 \begin{ex}
   \begin{itemize}
     \item
-    $-n$ is an inverse for $n \in \mathbb{Z}$ with respect to $+$, since $n + (-n) = (-n) + n = 0$.
+    $-n$ is an inverse for $n \in \Z$ with respect to $+$, since $n + (-n) = (-n) + n = 0$.
     \item
-    $n \in \mathbb{Z}$ does not have an inverse with respect to $\cdot$ unless $n = \pm 1$.
+    $n \in \Z$ does not have an inverse with respect to $\cdot$ unless $n = \pm 1$.
     \item
-    If $x \in \mathbb{Q}$ is non-zero, then $1/x$ is an inverse of $x$ with respect to $\cdot$.
+    If $x \in \Q$ is non-zero, then $1/x$ is an inverse of $x$ with respect to $\cdot$.
     The element $0$ does not have an inverse, since there is no element $y$ with $0 \cdot y = 1$.
   \end{itemize}
 \end{ex}
@@ -387,7 +387,7 @@ $a^{-1}$.
   \end{enumerate}
 \end{thmproof}
 
-(1) and (2) also hold for $n \in \mathbb{Z}$ with respect to $\cdot$ if $n \neq 0$, even though $n$
+(1) and (2) also hold for $n \in \Z$ with respect to $\cdot$ if $n \neq 0$, even though $n$
 is not invertible for $n \neq \pm 1$.
 
 \pagebreak
@@ -440,7 +440,7 @@ Terminology:
   and
   \[ g^{-n} := (g^{-1})^n = (g^n)^{-1} \]
   where $g^0 := e$.
-  Exercise: if $m, n \in \mathbb{Z}$, then $(g^n)^m = g^{mn}$.
+  Exercise: if $m, n \in \Z$, then $(g^n)^m = g^{mn}$.
   \item
   If $g, h \in G$, then
   \[ (gh)^n = gh \cdots gh, \]
@@ -450,7 +450,7 @@ Terminology:
 \begin{ex}
   \begin{itemize}
     \item
-    $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$ are all (abelian) groups under operation
+    $\Z$, $\Q$, $\R$, $\C$ are all (abelian) groups under operation
     $+$.
     The identity is $0$ and the inverse of $n$ is $-n$.
     These groups have infinite order.
@@ -462,11 +462,11 @@ Terminology:
     If $(V, +, \cdot)$ is a vector space, then $(V, +)$ is a group.
     The identity is $0$ and the inverse of $v$ is $-v$.
     \item
-    $\mathbb{Z}$ is not a group with respect to $\cdot$, since most elements do not have an inverse.
+    $\Z$ is not a group with respect to $\cdot$, since most elements do not have an inverse.
     \item
-    $\mathbb{Q}$ is also not a group with respect to $\cdot$, since $0$ does not have an inverse.
+    $\Q$ is also not a group with respect to $\cdot$, since $0$ does not have an inverse.
     \item
-    $\mathbb{Q}^\times$ is a group with respect to $\cdot$.
+    $\Q^\times$ is a group with respect to $\cdot$.
     \item
     Every group has to contain at least one element, the identity.
     So the simplest possible group is ${1}$ with operation $1 \cdot 1 = 1$.
@@ -502,7 +502,7 @@ Let $\GL_n(\mathbb{K})$ denote the invertible $n \times n$ matrices over a field
 Standard notation for a group operation is $gh$.
 This is called \hldef{multiplicative notation}.
 
-For groups like $(\mathbb{Z}, +)$, it is confusing to write $mn$ instead of $m + n$ since $mn$
+For groups like $(\Z, +)$, it is confusing to write $mn$ instead of $m + n$ since $mn$
 already has another meaning.
 
 For abelian groups $G$, we can also use \hldef{additive notation}.
@@ -531,9 +531,9 @@ For non-abelian groups we always use multiplicative notation.
 For abelian groups, we can choose either.
 Note the conventions may conflict, so we should be clear about which we choose.
 
-For a group like $(\mathbb{Z}, +)$, we could use $mn$, but it is clearer to use $m + n$.
+For a group like $(\Z, +)$, we could use $mn$, but it is clearer to use $m + n$.
 
-For a group like $(\mathbb{Q}^\times, \cdot)$, we could use $x + y$, but it is clearer to use
+For a group like $(\Q^\times, \cdot)$, we could use $x + y$, but it is clearer to use
 $x \cdot y$ or $xy$.
 
 \pagebreak
@@ -548,7 +548,7 @@ $x \cdot y$ or $xy$.
 The multiplication table contains the complete information of the group (even for infinite groups).
 
 \begin{ex}
-  For $\mathbb{Z} / 2\mathbb{Z}$:
+  For $\Z / 2\Z$:
   \[
     \begin{array}{c|cc}
       & 0 & 1 \\
@@ -668,7 +668,7 @@ drawing a line segment from $v_k$ to $v_{k + 1}$ for all $0 \leq k \leq n$ (wher
 
 \begin{defn}{symmetry, dihedral group}{symmetry_dihedralgroup}
   A \hldef{symmetry} of the $n$-gon $P_n$ is an invertible linear transformation
-  $T \in \GL_2(\mathbb{R})$ such that $T(P_n) = P_n$.
+  $T \in \GL_2(\R)$ such that $T(P_n) = P_n$.
 
   The set of symmetries of $P_n$ is called the \hldef{dihedral group} and is denoted by $D_{2n}$
   (or $D_n$).
@@ -694,7 +694,7 @@ Proof later (key point: $S, T \in D_{2n} \implies ST \in D_{2n}$).
 \begin{thmproof}
   \begin{enumerate}
     \item $v_0, v_1$ are adjacent and $T$ is linear (lines map to lines).
-    \item $v_0, v_1$ are linearly independent (and form a basis in $\mathbb{R}^2$).
+    \item $v_0, v_1$ are linearly independent (and form a basis in $\R^2$).
   \end{enumerate}
 \end{thmproof}
 
@@ -1164,11 +1164,11 @@ However, $\pi$ and $\pi^i$ don't have disjoint support sets.
 
 \begin{ex}
   \begin{itemize}
-    \item $\mathbb{Z} \leq \mathbb{Q}^+ := (\mathbb{Q}, +)$.
-    \item $\mathbb{Q}_{> 0} := \{ x \in \mathbb{Q} : x > 0 \} \leq \mathbb{Q}^\times$.
+    \item $\Z \leq \Q^+ := (\Q, +)$.
+    \item $\Q_{> 0} := \{ x \in \Q : x > 0 \} \leq \Q^\times$.
 
-    Check: if $x, y \in \mathbb{Q}$ and $x, y > 0$, then $xy > 0 \implies xy \in \mathbb{Q}_{> 0}$.
-    Also, if $x > 0$, then $1/x > 0 \implies 1/x \in \mathbb{Q}_{> 0}$.
+    Check: if $x, y \in \Q$ and $x, y > 0$, then $xy > 0 \implies xy \in \Q_{> 0}$.
+    Also, if $x > 0$, then $1/x > 0 \implies 1/x \in \Q_{> 0}$.
   \end{itemize}
 \end{ex}
 
@@ -1179,7 +1179,7 @@ However, $\pi$ and $\pi^i$ don't have disjoint support sets.
 \end{ex}
 
 \begin{exerproof}
-  Claim: $s^i \in H$ for all $i \in \mathbb{Z}$.
+  Claim: $s^i \in H$ for all $i \in \Z$.
 
   Proof: let $i = nk + r$ with $0 \leq r < n$.
   Then $s^i = s^{nk + r} = (s^n)^k s^r = s^r$ since $s^n = e$.
@@ -1197,13 +1197,13 @@ $H$ is the smallest subgroup containing $s$ (since subgroups are closed under pr
 Notation for $H$ is $\ang{s}$.
 
 \begin{ex}
-  Let $G = \mathbb{Z} = (\mathbb{Z}, +)$.
+  Let $G = \Z = (\Z, +)$.
 
-  If $m \in \mathbb{Z}$, then
-  $m\mathbb{Z} := \{ km : k \in \mathbb{Z} \} = \{ n \in \mathbb{Z} : m \mid n \}$ is a subgroup of
-  $\mathbb{Z}$.
+  If $m \in \Z$, then
+  $m\Z := \{ km : k \in \Z \} = \{ n \in \Z : m \mid n \}$ is a subgroup of
+  $\Z$.
 
-  In particular, $0\mathbb{Z} = \{0\}$ is a subgroup of $\mathbb{Z}$ called the \hldef{trivial
+  In particular, $0\Z = \{0\}$ is a subgroup of $\Z$ called the \hldef{trivial
   subgroup}.
 \end{ex}
 
@@ -1221,14 +1221,14 @@ $H$ is a proper non-trivial subgroup if $\{e\} \neq H < G$.
   Some non-subgroups:
   \begin{itemize}
     \item
-    $\mathbb{Q}_{\geq 0} := \{x \in \mathbb{Q} : x \geq 0\}$ is not a subgroup of $\mathbb{Q}^+$.
+    $\Q_{\geq 0} := \{x \in \Q : x \geq 0\}$ is not a subgroup of $\Q^+$.
 
-    If $x, y \in \mathbb{Q}_{\geq 0}$, then $x + y \in \mathbb{Q}_{\geq 0}$.
-    Also, $0 \in \mathbb{Q}_{\geq 0}$.
+    If $x, y \in \Q_{\geq 0}$, then $x + y \in \Q_{\geq 0}$.
+    Also, $0 \in \Q_{\geq 0}$.
 
-    But if $x \in Q_{\geq 0}$, then $-x \not\in \mathbb{Q}_{\geq 0}$ unless $x = 0$.
+    But if $x \in Q_{\geq 0}$, then $-x \not\in \Q_{\geq 0}$ unless $x = 0$.
     \item
-    $\mathbb{Q}^\times$ is not a subgroup of $(\mathbb{Q}, \cdot)$ because $(\mathbb{Q}, \cdot)$ is
+    $\Q^\times$ is not a subgroup of $(\Q, \cdot)$ because $(\Q, \cdot)$ is
     not a group.
   \end{itemize}
 \end{ex}
@@ -1268,7 +1268,7 @@ Usually we just refer to $\tilde{\boxtimes}$ as $\boxtimes$.
 
 \begin{ex}
   \begin{itemize}
-    \item $\mathbb{Z}$ is a subgroup of $\mathbb{Q}$ with operation $+$.
+    \item $\Z$ is a subgroup of $\Q$ with operation $+$.
     \item If $H$ is a subgroup of $(G, \cdot)$, then $H$ is a group with operation $\cdot$.
   \end{itemize}
 \end{ex}
@@ -1329,7 +1329,7 @@ Usually we just refer to $\tilde{\boxtimes}$ as $\boxtimes$.
   The forward direction is trivial.
 
   Suppose $g \in H$.
-  By induction, we can show $g^n \in H$ for all $n \in \mathbb{N}$.
+  By induction, we can show $g^n \in H$ for all $n \in \N$.
 
   Since $H$ is finite, the sequence $g, g^2, g^3, \ldots \in H$ must eventually repeat.
 
@@ -1385,7 +1385,7 @@ Notes:
   Since $s \in K$, $\ang{s} \in K$.
 
   On the other hand, we can show by induction that $s^i \in \ang{s}$ for all
-  $i \in \mathbb{Z}$.
+  $i \in \Z$.
   So $K \subseteq \ang{s} \implies \ang{s} = K$.
 \end{ex}
 
@@ -1443,14 +1443,14 @@ The first subgroup above $H_1, H_2 \leq G$ in the lattice is $\ang{H_1 \cup H_2}
 
 \begin{center}
   \begin{forest}
-    [$\mathbb{Z}$, calign=child, calign child=2
-      [$2\mathbb{Z}$, name=2
-        [$4\mathbb{Z}$, name=4]
+    [$\Z$, calign=child, calign child=2
+      [$2\Z$, name=2
+        [$4\Z$, name=4]
       ]
-      [$3\mathbb{Z}$
-        [$6\mathbb{Z}$, name=6
+      [$3\Z$
+        [$6\Z$, name=6
           [$\vdots$, name=vdots
-            [$0\mathbb{Z}$]
+            [$0\Z$]
           ]
         ]
       ]
@@ -1474,9 +1474,9 @@ The first subgroup above $H_1, H_2 \leq G$ in the lattice is $\ang{H_1 \cup H_2}
 
 \begin{ex}
   \begin{itemize}
-    \item $\mathbb{Z} = \ang{1} = \ang{-1}$ (generators are not unique)
+    \item $\Z = \ang{1} = \ang{-1}$ (generators are not unique)
     \item $\Zmod{n} = \ang{[1]} = \ang{[-1]}$
-    \item $\mathbb{Q}^+$ is not cyclic (homework)
+    \item $\Q^+$ is not cyclic (homework)
     \item If $G$ is a group, then $\ang{a}$ is a cyclic group for any $a \in G$ (called the
     \hldef{cyclic subgroup generated by $a$}).
   \end{itemize}
@@ -1484,7 +1484,7 @@ The first subgroup above $H_1, H_2 \leq G$ in the lattice is $\ang{H_1 \cup H_2}
 
 \begin{lem}{}{}
   \begin{enumerate}
-    \item If $a \in G$, then $\ang{a} = \{ a^i : i \in \mathbb{Z} \}$.
+    \item If $a \in G$, then $\ang{a} = \{ a^i : i \in \Z \}$.
     \item If $\abs{a} = n$, then $\ang{a} = \{ a^i : 0 \leq i < n \}$.
   \end{enumerate}
 \end{lem}
@@ -1525,19 +1525,19 @@ Questions:
 \subsection{Examples in closer detail}
 
 \begin{ex}
-  For $G = \mathbb{Z}$:
+  For $G = \Z$:
   \begin{itemize}
     \item Infinite cyclic group.
     \item Generators: $+1$ and $-1$.
-    \item Order of $m \in \mathbb{Z}$ is
+    \item Order of $m \in \Z$ is
     \[ \abs{m} = \begin{cases}
       \infty \qquad & m \neq 0 \\
       1 & m = 0
     \end{cases}. \]
-    \item Cyclic subgroups are $\ang{m} = m\mathbb{Z} = \{ km : k \in \mathbb{Z} \}$.
+    \item Cyclic subgroups are $\ang{m} = m\Z = \{ km : k \in \Z \}$.
     (Note difference in $\ang{a}$ between additive and multiplicative notation.)
 
-    Homework: all subgroups of $\mathbb{Z}$ are cyclic.
+    Homework: all subgroups of $\Z$ are cyclic.
   \end{itemize}
 \end{ex}
 
@@ -1566,9 +1566,9 @@ So $\Zmod{n} = \ang{[a]}$ if and only if $[1] \in \ang{[a]}$ (since $[1]$ is a
 generator).
 Note then
 \begin{align*}
-  [1] \in \ang{[a]} &\iff xa = 1 \pmod{n} \qquad \text{for some } x \in \mathbb{Z} \\
-  &\iff xa - 1 = yn \qquad \text{for some } x, y \in \mathbb{Z} \\
-  &\iff xa + yn = 1 \qquad \text{for some } x, y \in \mathbb{Z} \\
+  [1] \in \ang{[a]} &\iff xa = 1 \pmod{n} \qquad \text{for some } x \in \Z \\
+  &\iff xa - 1 = yn \qquad \text{for some } x, y \in \Z \\
+  &\iff xa + yn = 1 \qquad \text{for some } x, y \in \Z \\
   &\iff \gcd(a, n) = 1
 \end{align*}
 so $\ang{[a]} = \Zmod{n}$ if and only if $\gcd(a, n) = 1$.
@@ -1584,7 +1584,7 @@ so $\ang{[a]} = \Zmod{n}$ if and only if $\gcd(a, n) = 1$.
   Homework.
 \end{thmproof}
 
-If $a \in \mathbb{Z}$, then $n[a] = 0$, so $\abs{[a]} \mid n$.
+If $a \in \Z$, then $n[a] = 0$, so $\abs{[a]} \mid n$.
 
 \begin{lem}{}{}
   Suppose $a \mid n$.
@@ -1597,7 +1597,7 @@ If $a \in \mathbb{Z}$, then $n[a] = 0$, so $\abs{[a]} \mid n$.
 \end{thmproof}
 
 \begin{lem}{}{}
-  Suppose $a \in \mathbb{Z}$ and let $b = \gcd(a, n)$.
+  Suppose $a \in \Z$ and let $b = \gcd(a, n)$.
   Then $\ang{[a]} = \ang{[b]}$.
 \end{lem}
 
@@ -1605,7 +1605,7 @@ If $a \in \mathbb{Z}$, then $n[a] = 0$, so $\abs{[a]} \mid n$.
   Since $b \mid a$, there is $k$ such that $a = kb$.
   Thus $[a] \in \ang{[b]}$, so $\ang{[a]} \subseteq \ang{[b]}$.
 
-  By properties of $\gcd$, there are $x, y \in \mathbb{Z}$ such that $xa + yn = b$.
+  By properties of $\gcd$, there are $x, y \in \Z$ such that $xa + yn = b$.
 
   So $[b] = x[a] + y[n] = x[a]$, which implies $[b] \in \ang{[a]}$ and thus
   $\ang{[b]} \subseteq \ang{[a]}$.
@@ -1614,7 +1614,7 @@ If $a \in \mathbb{Z}$, then $n[a] = 0$, so $\abs{[a]} \mid n$.
 \end{thmproof}
 
 \begin{prop}{}{}
-  Suppose $a \in \mathbb{Z}$.
+  Suppose $a \in \Z$.
   Then
   \[ \abs{[a]} = \frac{n}{\gcd(a, n)}. \]
 \end{prop}
@@ -1669,7 +1669,7 @@ If $a \in \mathbb{Z}$, then $n[a] = 0$, so $\abs{[a]} \mid n$.
 \begin{itemize}
   \item Every subgroup of a cyclic group is cyclic.
   (So the previous corollary is a complete list of subgroups of $\Zmod{n}$.)
-  \item Every cyclic group is isomorphic to one of $\Zmod{n}$ for $n \geq 1$, or $\mathbb{Z}$.
+  \item Every cyclic group is isomorphic to one of $\Zmod{n}$ for $n \geq 1$, or $\Z$.
 \end{itemize}
 
 %%%%% Lec 5
@@ -1695,24 +1695,24 @@ A homomorphism preserves the group operation from $G$ to $H$.
     Then $\GL_n \mathbb{K} \to \mathbb{K}^\times : A \mapsto \det(A)$ is a homomorphism because
     $\det(AB) = \det(A) \det(B)$ for all $A, B$.
     \item
-    Let $\mathbb{R}_{> 0} = \{x \in \mathbb{R} : x > 0\} \leq \mathbb{R}^\times$.
-    Then $\mathbb{R}_{> 0} \to \mathbb{R}_{> 0} : x \mapsto \sqrt{x}$ is a homomorphism since
+    Let $\R_{> 0} = \{x \in \R : x > 0\} \leq \R^\times$.
+    Then $\R_{> 0} \to \R_{> 0} : x \mapsto \sqrt{x}$ is a homomorphism since
     $\sqrt{xy} = \sqrt{x} \sqrt{y}$.
     \item
     Additive notation: $\phi \colon (G, +) \to (H, +)$ is a homomorphism if
     $\phi(x + y) = \phi(x) + \phi(y)$ for all $x, y \in G$.
 
-    $\phi \colon \mathbb{Z} \to \mathbb{Z} : k \mapsto mk$ is a homomorphism for any
-    $m \in \mathbb{Z}$ since $\phi(x + y) = m(x + y) = mx + my = \phi(x) + \phi(y)$ for all
-    $x, y \in \mathbb{Z}$.
+    $\phi \colon \Z \to \Z : k \mapsto mk$ is a homomorphism for any
+    $m \in \Z$ since $\phi(x + y) = m(x + y) = mx + my = \phi(x) + \phi(y)$ for all
+    $x, y \in \Z$.
     \item
     If $V, W$ are vector spaces and $T \colon V \to W$ is a linear transformation, then $T$ is a
     homomorphism from $(V, +)$ to $(W, +)$ since $T(v + w) = T(v) + T(w)$ for all $v, w \in V$.
     \item
-    Mixed notation: $\mathbb{R}^+ \to \mathbb{R}^\times : x \mapsto e^x$ is a homomorphism since
-    $e^{x + y} = e^x \cdot e^y$ for all $x, y \in \mathbb{R}^+$.
+    Mixed notation: $\R^+ \to \R^\times : x \mapsto e^x$ is a homomorphism since
+    $e^{x + y} = e^x \cdot e^y$ for all $x, y \in \R^+$.
     \item
-    $\mathbb{R}^+ \to \mathbb{R}^+ : x \mapsto e^x$ is not a homomorphism because
+    $\R^+ \to \R^+ : x \mapsto e^x$ is not a homomorphism because
     $e^{x + y} \neq e^x + e^y$ in general (take $x = y = 0$).
   \end{itemize}
 \end{ex}
@@ -1723,9 +1723,9 @@ A homomorphism preserves the group operation from $G$ to $H$.
   \begin{enumerate}
     \item $\phi(e_G) = e_H$.
     \item $\phi(g^{-1}) = \phi(g)^{-1}$ for all $g \in G$.
-    \item $\phi(g^n) = \phi(g)^n$ for all $n \in \mathbb{Z}$.
+    \item $\phi(g^n) = \phi(g)^n$ for all $n \in \Z$.
     \item $\abs{\phi(g)} \mid \abs{g}$ for all $g \in G$ (say $n \mid \infty$ for all
-    $n \in \mathbb{N}$).
+    $n \in \N$).
   \end{enumerate}
 \end{lem}
 
@@ -1804,16 +1804,16 @@ That is, homomorphisms send subgroups of the domain to subgroups of the codomain
 \begin{ex}
   \begin{itemize}
     \item
-    Let $\phi \colon \mathbb{R}^+ \to \mathbb{R}^\times : x \mapsto e^x$.
+    Let $\phi \colon \R^+ \to \R^\times : x \mapsto e^x$.
 
-    $e^x > 0$ for all $x \in \mathbb{R}$, so $\Im \phi \subseteq \mathbb{R}_{> 0}$.
+    $e^x > 0$ for all $x \in \R$, so $\Im \phi \subseteq \R_{> 0}$.
 
-    If $y \in \mathbb{R}_{> 0}$, then $y = \phi(\log y)$, so $\Im \phi = \mathbb{R}_{> 0}$.
+    If $y \in \R_{> 0}$, then $y = \phi(\log y)$, so $\Im \phi = \R_{> 0}$.
     \item
     If $K \leq G$ and $i \colon K \to G$ is inclusion, then $\Im i = K$.
     \item
-    For $\phi \colon \mathbb{Z} \to \mathbb{Z} : k \mapsto mk$ for some $m \in \mathbb{Z}$,
-    $\phi(\mathbb{Z}) = m\mathbb{Z}$.
+    For $\phi \colon \Z \to \Z : k \mapsto mk$ for some $m \in \Z$,
+    $\phi(\Z) = m\Z$.
   \end{itemize}
 \end{ex}
 
@@ -1906,14 +1906,14 @@ Note: the forward and backward processes are not necessarily inverses, so we don
     This subgroup of $\GL_n(\mathbb{K})$ is called the \hldef{special linear group}, denoted by
     $\SL_n(\mathbb{K})$.
     \item
-    If $\phi \colon \mathbb{Z} \to \mathbb{Z} : k \mapsto mk$, then $\phi(k) = 0$ if and only if
+    If $\phi \colon \Z \to \Z : k \mapsto mk$, then $\phi(k) = 0$ if and only if
     $mk = 0$, so
     \[ \ker \phi = \begin{cases}
       \{0\} \qquad & m \neq 0 \\
-      \mathbb{Z} & m = 0
+      \Z & m = 0
     \end{cases}. \]
     \item
-    If $\phi \colon \mathbb{R}^+ \to \mathbb{R}^\times : x \mapsto e^x$, then $e^x = 1$ if and only
+    If $\phi \colon \R^+ \to \R^\times : x \mapsto e^x$, then $e^x = 1$ if and only
     if $x = 0$, so $\ker \phi = \{0\}$.
   \end{itemize}
 \end{ex}
@@ -1947,29 +1947,29 @@ Note: the forward and backward processes are not necessarily inverses, so we don
 \begin{thmproof}
   We need the following facts:
   \begin{enumerate}
-    \item All subgroups of $\mathbb{Z}$ are of the form $m\mathbb{Z} = \ang{m}$, hence cyclic.
+    \item All subgroups of $\Z$ are of the form $m\Z = \ang{m}$, hence cyclic.
     (Homework.)
-    \item $G$ is cyclic if and only if there is a surjective homomorphism $\mathbb{Z} \to G$.
+    \item $G$ is cyclic if and only if there is a surjective homomorphism $\Z \to G$.
     (Homework.)
     \item If $f \colon X \to Y$ is a surjective function and $S \subseteq Y$, then
     $f(f^{-1}(S)) = S$.
     (Exercise.)
   \end{enumerate}
 
-  Since $G$ is cyclic, by (2) there is a surjective homomorphism $\phi \colon \mathbb{Z} \to G$.
+  Since $G$ is cyclic, by (2) there is a surjective homomorphism $\phi \colon \Z \to G$.
 
-  By (1), since all subgroups of $\mathbb{Z}$ are cyclic, there is $m \in \mathbb{Z}$ such that
+  By (1), since all subgroups of $\Z$ are cyclic, there is $m \in \Z$ such that
   $\phi^{-1}(H) = \ang{m}$.
 
-  So let $\psi \colon \mathbb{Z} \to \mathbb{Z}$ be the homomorphism with $\psi(k) = mk$.
+  So let $\psi \colon \Z \to \Z$ be the homomorphism with $\psi(k) = mk$.
 
-  Then $\phi \circ \psi \colon \mathbb{Z} \to G$ is a homomorphism.
+  Then $\phi \circ \psi \colon \Z \to G$ is a homomorphism.
   We see that
-  \[ (\phi \circ \psi)(\mathbb{Z}) = \phi(m\mathbb{Z}) = \phi(\phi^{-1}(H)) = H \]
+  \[ (\phi \circ \psi)(\Z) = \phi(m\Z) = \phi(\phi^{-1}(H)) = H \]
   by (3).
 
   We can restrict the codomain of $\phi \circ \psi$ to get a surjective homomorphism
-  $\mathbb{Z} \to H$.
+  $\Z \to H$.
   Hence $H$ is cyclic by (2).
 \end{thmproof}
 
@@ -2006,9 +2006,9 @@ If $g$ exists, then it is unique, and we denote it by $f^{-1}$.
 
 \begin{ex}
   \begin{itemize}
-    \item $\mathbb{R}^+ \to \mathbb{R}_{> 0} : x \mapsto e^x$ is an isomorphism.
+    \item $\R^+ \to \R_{> 0} : x \mapsto e^x$ is an isomorphism.
     \item If $\phi \colon G \to H$ is injective, then $\phi$ induces an isomorphism $G \to \Im\phi$.
-    \item $\mathbb{Z} \to m\mathbb{Z} : k \mapsto mk$ is an isomorphism.
+    \item $\Z \to m\Z : k \mapsto mk$ is an isomorphism.
   \end{itemize}
 \end{ex}
 
@@ -2099,7 +2099,7 @@ If $\phi \colon G \to H$ is an isomorphism, then:
   Conversely, if $\abs{a} \mid j - i$, then $j - i = k\abs{a}$.
   So $a^{j - i} = a^{k\abs{a}} = e$ and hence $a^j = a^i$.
 
-  (Note: if $\abs{a} = \infty$, then $a^i \neq a^j$ for all $i \neq j \in \mathbb{Z}$.)
+  (Note: if $\abs{a} = \infty$, then $a^i \neq a^j$ for all $i \neq j \in \Z$.)
 
   Now define $\phi \colon G \to H : a^i \mapsto b^i$.
 
@@ -2119,7 +2119,7 @@ If $\phi \colon G \to H$ is an isomorphism, then:
 \begin{cor}{}{}
   Suppose $G$ is a cyclic group.
   \begin{itemize}
-    \item If $\abs{G} = \infty$, then $G \cong \mathbb{Z}$.
+    \item If $\abs{G} = \infty$, then $G \cong \Z$.
     \item If $\abs{G} = n < \infty$, then $G \cong \Zmod{n}$.
   \end{itemize}
 \end{cor}
@@ -2141,14 +2141,14 @@ Sometimes it is convenient to use the multiplicative form of cyclic groups.
   Let $a$ be a formal indeterminate.
   Let
   \begin{itemize}
-    \item $C_\infty = \{a^i : i \in \mathbb{Z}\}$ with $a^i \cdot a^j = a^{i + j}$; and
+    \item $C_\infty = \{a^i : i \in \Z\}$ with $a^i \cdot a^j = a^{i + j}$; and
     \item $C_n = \{a^i : i \in \Zmod{n}\}$ with $a^i \cdot a^j = a^{i + j}$.
   \end{itemize}
 \end{defn}
 
 Of course, we have:
 \begin{itemize}
-  \item $C_\infty \cong \mathbb{Z}$ via $a^i \mapsto i$.
+  \item $C_\infty \cong \Z$ via $a^i \mapsto i$.
   \item $C_n \cong \Zmod{n}$ via $a^i \mapsto i$.
 \end{itemize}
 
@@ -2186,9 +2186,9 @@ In additive notation, a coset of $H$ in $(G, +)$ is $g + H$.
     If $U$ is a subspace of vector space $(V, +, \cdot)$, cosets of $U$ are affine subspaces
     $v + U$ for $v \in V$.
     \item
-    Given $m \in \mathbb{Z}$, cosets of $m\mathbb{Z}$ are sets
+    Given $m \in \Z$, cosets of $m\Z$ are sets
     \[
-      a + m\mathbb{Z} = \{a + km : k \in \mathbb{Z}\} = \{x \in \mathbb{Z} : x \equiv a \mod{m}\}.
+      a + m\Z = \{a + km : k \in \Z\} = \{x \in \Z : x \equiv a \mod{m}\}.
     \]
   \end{itemize}
 \end{ex}
@@ -2210,7 +2210,7 @@ The right cosets of $H$ are:
 \end{itemize}
 Notice $D_{2n} = H \sqcup Hr$ where $\sqcup$ is disjoint union.
 
-Exercise 1: use $rs = s^{-1}r$ to show $s^i r = rs^{-i}$ for all $i \in \mathbb{Z}$.
+Exercise 1: use $rs = s^{-1}r$ to show $s^i r = rs^{-i}$ for all $i \in \Z$.
 
 Exercise 2: if $S \subseteq G$ and $g, h \in G$, then $ghS = g(hS)$.
 
@@ -2264,13 +2264,13 @@ We are very interested in trying to understand $G/H$ and $H \backslash G$.
 \end{ex}
 
 \begin{ex}
-  Consider $n\mathbb{Z} \leq \mathbb{Z}$.
+  Consider $n\Z \leq \Z$.
   Then
-  \[ a + n\mathbb{Z} = \{x \in \mathbb{Z} : x \equiv a \mod{n}\} =: [a] \]
+  \[ a + n\Z = \{x \in \Z : x \equiv a \mod{n}\} =: [a] \]
   so
   \begin{align*}
-    \Zmod{n} &= \{a + n\mathbb{Z} : a \in \mathbb{Z}\} \\
-    &= \{a + n\mathbb{Z} : 0 \leq a < n\} \\
+    \Zmod{n} &= \{a + n\Z : a \in \Z\} \\
+    &= \{a + n\Z : 0 \leq a < n\} \\
     &= \{[a] : 0 \leq a < n\}.
   \end{align*}
 \end{ex}
@@ -2315,13 +2315,13 @@ In this case, the left cosets are the right cosets.
 \end{thmproof}
 
 \begin{ex}
-  Suppose $G = \mathbb{Z}$ and $K = \Zmod{n}$.
+  Suppose $G = \Z$ and $K = \Zmod{n}$.
 
-  From tutorial, there is a homomorphism $\phi \colon \mathbb{Z} \to \Zmod{n} : a \mapsto [a]$.
-  We get $\ker\phi = n\mathbb{Z}$ and $\Im\phi = \Zmod{n}$.
+  From tutorial, there is a homomorphism $\phi \colon \Z \to \Zmod{n} : a \mapsto [a]$.
+  We get $\ker\phi = n\Z$ and $\Im\phi = \Zmod{n}$.
 
-  Then $\Zmod{n} = \{[a] : 0 \leq a < n\} = \{a + n\mathbb{Z} : 0 \leq a < n\}$, so
-  $a + n\mathbb{Z}$ is the set of solutions of $[x] \equiv [a]$ in $\Zmod{n}$.
+  Then $\Zmod{n} = \{[a] : 0 \leq a < n\} = \{a + n\Z : 0 \leq a < n\}$, so
+  $a + n\Z$ is the set of solutions of $[x] \equiv [a]$ in $\Zmod{n}$.
 \end{ex}
 
 \pagebreak
@@ -2384,7 +2384,7 @@ finite, then $[G : H] = \frac{\abs{G}}{\abs{H}}$.
     Here, $\abs{D_{2n}} = 2n$, $\abs{H} = n$, so $[G : H] = 2$.
     \item $G = D_{2n}$, $H = \ang{r}$.
     Here, $\abs{D_{2n}} = 2n$, $\abs{H} = 2$, so $[G : H] = n$.
-    \item $G = \mathbb{Z}$, $H = m\mathbb{Z}$.
+    \item $G = \Z$, $H = m\Z$.
     Here, $\abs{G} = \abs{H} = \infty$, but $[G : H] = \abs{\Zmod{m}} = m$.
     So $\abs{G} = [G : H] \abs{H}$, but we don't learn anything about $[G : H]$ from Lagrange's
     theorem.
@@ -2563,7 +2563,7 @@ As a consequence, if $H$ is finite and $g \in G$, then $\abs{gH} = \abs{H}$.
 \begin{ex}
   \begin{itemize}
     \item $=$ on $X$
-    \item $\leq, <, >, \geq$ on $\mathbb{N}$ (or any ordered set)
+    \item $\leq, <, >, \geq$ on $\N$ (or any ordered set)
     \item $\subseteq$ on $2^X$
   \end{itemize}
 \end{ex}
@@ -2580,8 +2580,8 @@ As a consequence, if $H$ is finite and $g \in G$, then $\abs{gH} = \abs{H}$.
 \begin{ex}
   \begin{itemize}
     \item $=$ on $X$
-    \item $\equiv_m$ (congruence mod $m$) on $\mathbb{Z}$
-    \item not $\leq, <, >, \geq$ on $\mathbb{N}$, $\mathbb{R}$, etc.
+    \item $\equiv_m$ (congruence mod $m$) on $\Z$
+    \item not $\leq, <, >, \geq$ on $\N$, $\R$, etc.
     \item isomorphism $\cong$ on the \emph{proper class} of groups
   \end{itemize}
 \end{ex}
@@ -2842,7 +2842,7 @@ Warning: it is possible to have $gHg^{-1} \subseteq H$ and $g \not\in N_G(H)$.
 That is, $Z(G)$ is the set of elements in $G$ which commute with all elements in $G$.
 
 \begin{ex}
-  $Z(\GL_n\mathbb{C}) = \{\lambda I_n : \lambda \neq 0\}$.
+  $Z(\GL_n\C) = \{\lambda I_n : \lambda \neq 0\}$.
 \end{ex}
 
 \begin{prop}{}{}
@@ -3586,14 +3586,14 @@ Maybe this bijection is an isomorphism?
     By first isomorphism theorem, $\GL_n\mathbb{K} / \SL_n\mathbb{K} \cong \mathbb{K}^\times$.
     (Here, we only use the existence of $\psi$.)
     \item
-    Consider $\mathbb{Z} \trianglelefteq \mathbb{R}^+$.
-    What is $\mathbb{R}/\mathbb{Z}$?
+    Consider $\Z \trianglelefteq \R^+$.
+    What is $\R/\Z$?
 
-    We have a homomorphism $\exp \colon \mathbb{R} \to \mathbb{C}^\times : x \mapsto e^{2\pi ix}$
-    and we know $e^{2\pi ix} = 1$ if and only if $x \in \mathbb{Z}$ (so $\ker\exp = \mathbb{Z}$).
-    Then $\Im\exp = \{a \in \mathbb{C} : \abs{a} = 1\} =: S^1$ (the \hldef{circle group}).
+    We have a homomorphism $\exp \colon \R \to \C^\times : x \mapsto e^{2\pi ix}$
+    and we know $e^{2\pi ix} = 1$ if and only if $x \in \Z$ (so $\ker\exp = \Z$).
+    Then $\Im\exp = \{a \in \C : \abs{a} = 1\} =: S^1$ (the \hldef{circle group}).
 
-    So $\mathbb{R}/\mathbb{Z} \cong S^1$.
+    So $\R/\Z \cong S^1$.
   \end{itemize}
 \end{ex}
 
@@ -3897,10 +3897,10 @@ What is $(G/N)/(K/N)$?
 \end{thm}
 
 \begin{ex}
-  Suppose $n \mid m$, so $m\mathbb{Z} \leq n\mathbb{Z}$ (and both are normal).
+  Suppose $n \mid m$, so $m\Z \leq n\Z$ (and both are normal).
 
-  Then $(\mathbb{Z}/m\mathbb{Z})/(n\mathbb{Z}/m\mathbb{Z}) \cong \mathbb{Z}/n\mathbb{Z}$.
-  For example, $(\mathbb{Z}/20\mathbb{Z})/(5\mathbb{Z}/20\mathbb{Z}) \cong \mathbb{Z}/5\mathbb{Z}$.
+  Then $(\Z/m\Z)/(n\Z/m\Z) \cong \Z/n\Z$.
+  For example, $(\Z/20\Z)/(5\Z/20\Z) \cong \Z/5\Z$.
 \end{ex}
 
 \begin{thm}{Third isomorphism theorem}{}
@@ -4125,28 +4125,28 @@ So $H \cap K \trianglelefteq H$.
   By the first isomorphism theorem, there is an isomorphism $\psi$ as desired.
 \end{thmproof}
 
-\begin{ex}[Example: $\PGL_n\mathbb{C}$]
-  Recall $\PGL_n\mathbb{C} = \GL_n\mathbb{C} / Z(\GL_n\mathbb{C})$.
+\begin{ex}[Example: $\PGL_n\C$]
+  Recall $\PGL_n\C = \GL_n\C / Z(\GL_n\C)$.
 
-  Let $K = Z(\GL_n\mathbb{C}) = \{\lambda 1 : \lambda \neq 0\}$.
+  Let $K = Z(\GL_n\C) = \{\lambda 1 : \lambda \neq 0\}$.
 
-  Since $K \trianglelefteq \GL_n\mathbb{C}$, $N_{\GL_n\mathbb{C}}(K) = \GL_n\mathbb{C}$.
+  Since $K \trianglelefteq \GL_n\C$, $N_{\GL_n\C}(K) = \GL_n\C$.
 
-  Take $H = \SL_n\mathbb{C} = \{M \in \GL_n\mathbb{C} : \det M = 1\}
-    \trianglelefteq \GL_n\mathbb{C} = N_{\GL_n\mathbb{C}}(K)$, so $HK \leq \GL_n\mathbb{C}$ by the
+  Take $H = \SL_n\C = \{M \in \GL_n\C : \det M = 1\}
+    \trianglelefteq \GL_n\C = N_{\GL_n\C}(K)$, so $HK \leq \GL_n\C$ by the
   second isomorphism theorem.
 
-  Suppose $M \in \GL_n\mathbb{C}$ and let $\lambda = \det M$.
+  Suppose $M \in \GL_n\C$ and let $\lambda = \det M$.
   Then $\det \lambda^{-1/n}M = \lambda^{-1} \det M = 1$, so $\lambda^{-1/n}M \in H$ (for any
   choice of $\lambda^{-1/n}$).
 
-  We conclude $\GL_n\mathbb{C} = HK$.
+  We conclude $\GL_n\C = HK$.
 
   Now define $C_n := H \cap K = \{\lambda 1 : \lambda^n = 1\}
     = \{e^{2\pi i k/n} : k = 0, \ldots, n - 1\}$.
   (Note $C_n \cong \Zmod{n}$.)
 
-  By the second isomorphism theorem, $\PGL_n\mathbb{C} \cong \SL_n\mathbb{C}/C_n$.
+  By the second isomorphism theorem, $\PGL_n\C \cong \SL_n\C/C_n$.
 \end{ex}
 
 \week{Group Actions}
@@ -4167,12 +4167,12 @@ So $H \cap K \trianglelefteq H$.
 \end{ex}
 
 \begin{ex}
-  Similarly, for $\GL_n\mathbb{C}$, we can do more than multiply matrices: we can also multiply
+  Similarly, for $\GL_n\C$, we can do more than multiply matrices: we can also multiply
   matrices and vectors.
 
-  Given $A \in \GL_n\mathbb{C}$ and $v \in \mathbb{C}^n$, we get $Av \in \mathbb{C}^n$.
+  Given $A \in \GL_n\C$ and $v \in \C^n$, we get $Av \in \C^n$.
 
-  We say that $\GL_n\mathbb{C}$ \hldef{acts} on $\mathbb{C}^n$.
+  We say that $\GL_n\C$ \hldef{acts} on $\C^n$.
 \end{ex}
 
 Group actions can reveal a lot about a group.
@@ -4227,7 +4227,7 @@ $\GL_n\mathbb{K} \leq S_{\mathbb{K}^n}$.
 Groups aren't tied to a particular action.
 
 \begin{ex}
-  $D_{2n}$ was defined as a subgroup of $\GL_2\mathbb{R}$, so it acts on $\mathbb{R}^2$.
+  $D_{2n}$ was defined as a subgroup of $\GL_2\R$, so it acts on $\R^2$.
 
   However, $D_{2n}$ also acts on the vertices $v_0, \ldots, v_{n - 1}$ of the $n$-gon.
 
@@ -4835,7 +4835,7 @@ The orbits of the conjugation action of $\GL_n\mathbb{K}$ on $M_n\mathbb{K}$ are
 
 A matrix $A$ is \hldef{diagonalizable} if it is similar to a diagonal matrix.
 
-When $\mathbb{K} = \mathbb{C}$, every similarity class contains exactly one matrix in Jordan
+When $\mathbb{K} = \C$, every similarity class contains exactly one matrix in Jordan
 normal form; matrices in Jordan normal form give a set of representatives for
 $\sim_{\GL_n\mathbb{K}}$.
 
@@ -5014,7 +5014,7 @@ However, there is a set bijection $H \times K \to G : (h, k) \mapsto hk$, and we
 $G \cong H \ltimes K$, the \hldef{semidirect product} of $H$ and $K$ (later, optional).
 
 For $p = 2$ and $q = 3$, it turns out the only groups of order $pq = 6$ are
-$\mathbb{Z}_2 \times \mathbb{Z}_3$, $\mathbb{Z}_6$, and $D_6 \cong S_3$.
+$\Z_2 \times \Z_3$, $\Z_6$, and $D_6 \cong S_3$.
 
 \pagebreak
 \subsection{What can we say?}
@@ -5066,7 +5066,7 @@ $G^{(m)}$ is the \hldef{$m$-torsion subgroup}.
     If $g \in G$, then $g^{mn} = e$, so $g^n \in G^{(m)}$ and $g^m \in G^{(n)}$.
     Hence $\phi$ is well-defined.
 
-    Now find $a, b \in \mathbb{Z}$ such that $an + bm = 1$.
+    Now find $a, b \in \Z$ such that $an + bm = 1$.
     If $\phi(g) = e$, then $g^n = g^m = e \implies g = g^{an + bm} = e$, so $\phi$ is injective.
 
     If $g \in G^{(m)}$ and $h \in G^{(n)}$, then $g = g^{an + bm} = g^{an}$ and similarly
@@ -5101,11 +5101,11 @@ $G^{(m)}$ is the \hldef{$m$-torsion subgroup}.
   Suppose $\gcd(m, n) = 1$ and let $G = \Zmod{mn}$.
 
   If $m[x] = 0$ for $0 \leq x < mn$, then $mn \mid mx \iff n \mid x$.
-  So $G^{(m)} = \{[x] \in G : m[x] = 0\} = n\mathbb{Z}/mn\mathbb{Z}$.
+  So $G^{(m)} = \{[x] \in G : m[x] = 0\} = n\Z/mn\Z$.
 
-  Since $\mathbb{Z} \to n\mathbb{Z} : x \mapsto nx$ is an isomorphism sending
-  $m\mathbb{Z} \mapsto mn\mathbb{Z}$, $n\mathbb{Z}/mn\mathbb{Z} \cong \Zmod{m}$.
-  Similarly, $G^{(n)} \cong m\mathbb{Z}/mn\mathbb{Z} \cong \Zmod{n}$.
+  Since $\Z \to n\Z : x \mapsto nx$ is an isomorphism sending
+  $m\Z \mapsto mn\Z$, $n\Z/mn\Z \cong \Zmod{m}$.
+  Similarly, $G^{(n)} \cong m\Z/mn\Z \cong \Zmod{n}$.
 
   The proposition gives $\Zmod{mn} \cong (\Zmod{m}) \times (\Zmod{n})$.
   (Chinese remainder theorem.)
@@ -5226,6 +5226,901 @@ Now, the main result.
     = \abs{\{ i : b_i = p^s \text{ for some } s \geq r \}}$.
 
   Exercise: recover $\ell$ and $b_1, \ldots, b_\ell$ from these numbers.
+\end{thmproof}
+
+\week{Rings}
+
+%%%%% Lec 15
+\section{Rings and fields}
+
+\subsection{Rings}
+
+Rings abstract sets with operations addition $+$ and multiplication $\cdot$.
+
+\begin{defn}{ring}{}
+  A \hldef{ring} is a tuple $(R, +, \cdot)$, where
+  \begin{enumerate}
+    \item $(R, +)$ is an abelian group, and
+    \item $\cdot$ is an associative binary operation on $R$ such that
+      $(a + b) \cdot c = a \cdot c + b \cdot c$ and $a \cdot (b + c) = a \cdot b + a \cdot c$ for
+      all $a, b, c \in R$ ((left/right) distributive property).
+  \end{enumerate}
+  The operation $+$ is called \hldef{addition}, and $\cdot$ is called \hldef{multiplication}.
+
+  A ring is \hldef{commutative} if $\cdot$ is commutative.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $\Z$, $\Q$, $\R$, $\C$ are all commutative rings.
+    \item $(\N, +, \cdot)$ is not a ring, since $(\N, +)$ is not a group.
+    \item $\Zmod{n}$ is a commutative ring.)
+    \item If $R$ is a ring and $X$ is a set, then $\Fun(X, R)$ is a ring with pointwise
+      multiplication and addition.
+    \item If $R$ is a (commutative) ring, then polynomials $R[x]$ with coefficients in $R$ is a
+      (commutative) ring (see later).
+    \item If $R$ is a ring and $n \geq 1$, the the set of $n \times n$ matrices $M_nR$ with
+      coefficients in $R$ is a ring under usual matrix operations.
+    \item If $\circ \colon M_n\C \times M_n\C \to M_n\C :
+      (A, B) \mapsto \frac{AB + BA}{2}$ then $(M_n\C, +, \circ)$ is not a ring since $\circ$
+      is not associative (homework \#1).
+  \end{itemize}
+\end{ex}
+
+Notation for rings:
+\begin{itemize}
+  \item As with groups, we may refer to the ring $(R, +, \cdot)$ by $R$ when the operations are
+    clear.
+  \item We always use additive notation for the group $(R, +)$, and almost always use $+$ as the
+    symbol.
+    (Sometimes $\oplus$ for $\Zmod{2}$, etc.)
+  \item In particular, denote identity of $(R, +)$ by 0 and inverse of $x \in R$ with respect to
+    $+$ by $-x$.
+  \item Some variation in notation permitted for multiplication ($\cdot$, $\times$, $\otimes$,
+    $\boxtimes$, etc.).
+  \item Usually just use $ab$ for multiplication of $a$ and $b$.
+\end{itemize}
+
+\pagebreak
+\subsection{Basic properties}
+
+\begin{prop}{}{}
+  If $R$ is ring, then:
+  \begin{enumerate}
+    \item $0 \cdot a = a \cdot 0 = 0$ for all $a \in R$.
+    \item $(-a) \cdot b = a \cdot (-b) = -(a \cdot b)$ for all $a, b \in R$.
+    \item $(-a) \cdot (-b) = a \cdot b$ for all $a, b \in R$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item $0 \cdot a = (0 + 0) \cdot a = 0 \cdot a + 0 \cdot a \implies 0 \cdot a = 0$.
+      Similarly, $a \cdot 0 = 0$.
+    \item $0 = 0 \cdot b = (a + (-a)) \cdot b = a \cdot b + (-a) \cdot b \implies (-a) \cdot b
+      = -(a \cdot b)$.
+      Similarly, $a \cdot (-b) = -(a \cdot b)$.
+    \item $(-a) \cdot (-b) = -(a \cdot (-b)) = -(-(a \cdot b)) = a \cdot b$.
+  \end{enumerate}
+\end{thmproof}
+
+\pagebreak
+\subsection{Multiplicative identities}
+
+\begin{defn}{ring with identity}{}
+  A \hldef{ring with identity} is a ring $(R, +, \cdot)$ where $\cdot$ has an identity.
+\end{defn}
+
+\textbf{In this course, ``ring'' means ``ring with identity'' unless otherwise noted.}
+
+This is a common assumption outside of the course.
+If a ring doesn't have an identity, we can call it a ``ring without an identity'' or
+``ring not necessarily having an identity'' (or a ``rng'', haha).
+(Will encounter these with subrings.)
+
+All rings mentioned so far are rings with identities.
+
+For $\Fun(X, R)$, $R[x]$, $M_nR$ to have identities, we need to assume that $R$ has an identity.
+
+Notation: use $1_R$ or 1 for identity of $R$.
+
+\begin{prop}{}{}
+  If $R$ is a ring (with identity), then $-a = (-1) \cdot a$ for all $a \in R$.
+\end{prop}
+
+\begin{thmproof}
+  $0 = 0 \cdot a = (1 + (-1)) \cdot a = 1 \cdot a + (-1) \cdot a = a + (-1) \cdot a$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Units}
+
+\begin{defn}{unit}{}
+  Let $R$ be a ring.
+  An element $x \in R$ is a \hldef{unit} if $x$ has an inverse with respect to multiplication
+  $\cdot$ (\emph{i.e.}, there is $y \in R$ where $xy = yx = 1$).
+
+  The set of units in $R$ is denoted by $R^\times$.
+\end{defn}
+
+If $x$ is a unit, then the inverse of $x$ is unique, and is denoted by $x^{-1}$.
+
+From homework, the set of units $R^\times$ forms a group under multiplication, and thus is called
+the \hldef{group of units} of $R$.
+
+\begin{ex}
+  \begin{itemize}
+    \item $\Z^\times = \{\pm 1\} \cong \Zmod{2}$.
+    \item $\Q^\times = \{x \in \Q : x \neq 0\}$.
+  \end{itemize}
+\end{ex}
+
+Rings with (without) identity are also called \hldef{unital (non-unital) rings}.
+
+\pagebreak
+\subsection{The trivial ring}
+
+The smallest possible ring is $R = \{0\}$, with multiplication $0 \cdot 0 = 0$.
+This is a ring with $1 = 0$.
+This ring is called the \hldef{trivial ring} or \hldef{zero ring}.
+
+Unlike the trivial group, which is crucial in group theory, the trivial ring is often an annoyance,
+since there's a special property which holds only for the trivial ring.
+
+\begin{lem}{}{}
+  Let $R$ be a ring.
+  Then $1 = 0$ if and only if $R$ is trivial.
+\end{lem}
+
+\begin{thmproof}
+  If $1 = 0$, then $x = 1 \cdot x = 0 \cdot x = 0$ for all $x \in R$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Fields and division rings}
+
+If $R$ is a ring with $1 \neq 0$, then $0 \cdot y = 0 \neq 1$ for all $y \in R$ and hence
+$0 \not\in R^\times$.
+
+\begin{defn}{division ring}{}
+  A \hldef{division ring} is a ring $R$ with $1 \neq 0$, such that $R^\times = R \setminus \{0\}$.
+
+  A \hldef{field} is a commutative division ring.
+\end{defn}
+
+\begin{ex}
+  $\Q$, $\R$, and $\C$ are all fields.
+\end{ex}
+
+Reminder: if $\alpha = a + bi \in \C$, then
+$\alpha\overline{\alpha} = \abs{\alpha}^2 = a^2 + b^2$, and $\abs{\alpha} = 0$ if and only if
+$\alpha = 0$, so if $\alpha \neq 0$, then $\alpha^{-1} = \overline{\alpha}/\abs{\alpha}^2$.
+
+\pagebreak
+\subsection[Example: Z/nZ]{Example: $\Zmod{n}$}
+
+We're used to working with $\Zmod{n}$ as a group under $+$.
+It also has multiplication $[x] \cdot [y] = [xy]$, making it a ring.
+
+\begin{lem}{}{}
+  $[x]$ is a unit in $\Zmod{n}$ if and only if $\gcd(x, n) = 1$.
+\end{lem}
+
+\begin{thmproof}
+  If $\gcd(x, n) = 1$, then $ax + bn = 1$ for some $a, b \in \Z$.
+  Since $n \mid ax - 1$, $[ax] = 1$ in $\Zmod{n}$.
+
+  Conversely, if $[ax] = 1$, then $ax - 1 = bn$ for some $b \in \Z$.
+  Hence $\gcd(x, n) = 1$.
+\end{thmproof}
+
+Corollary: $\Zmod{n}$ is a field if and only if $n$ is prime (every non-zero element coprime to
+$n$).
+
+In particular, there are fields $\mathbb{K}$ where $\mathbb{K}$ is finite.
+
+\pagebreak
+\subsection{Division rings}
+
+\begin{thm}{Wedderburn}{}
+  Any finite division ring is a field.
+\end{thm}
+
+\begin{defn}{ring of quaternions}{}
+  The \hldef{ring of quaternions} is the ring $Q = (\R^4, +, \cdot)$ where $+$ is vector
+  addition, and for $\cdot$ we denote the standard basis vectors by $1, i, j, k$, and set
+  $i^2 = j^2 = k^2 = -1$ and $ijk = -1$.
+\end{defn}
+
+In this ring, we have $ij = k$ and $jk = i$ so $ji = -k$, and hence $Q$ is non-commutative.
+$Q$ is an example of a non-commutative division ring.
+
+%%%%% Lec 16
+\section{Subrings and homomorphisms}
+
+\subsection{Subrings}
+
+\begin{defn}{subring}{}
+  Let $R$ be a ring.
+  A subset $S \subseteq R$ is a \hldef{subring} of $R$ if
+  \begin{enumerate}
+    \item $S$ is a subgroup of $(R, +)$,
+    \item $ab \in S$ for all $a, b \in S$, and
+    \item $1 \in S$.
+  \end{enumerate}
+\end{defn}
+
+\begin{lem}{}{}
+  If $S$ is a subring of $(R, +, \cdot)$, then $(S, +, \cdot)$ is a ring.
+\end{lem}
+
+\begin{ex}
+  Subrings:
+  \begin{itemize}
+    \item $\Z$ is a subring of $\Q$ is a subring of $\R$ is a subring of
+      $\C$ is a subring of the quaternions $Q$.
+    \item The ring $\R[x]$ of polynomial functions with coefficients over $\R$ is a
+      subring of $\Fun(\R, \R)$.
+    \item $M_n\Z$ is a subring of $M_n\R$.
+  \end{itemize}
+  Not subrings:
+  \begin{itemize}
+    \item $\Q^\times$ is not a subring of $\Q$ (not a subgroup).
+    \item $\Span\{1, x\}$ is not a subring of $\R[x]$ (not closed under multiplication).
+    \item $2\Z$ is not a subring of $\Z$ ($1 \not\in 2\Z$).
+    \item $\{0\}$ is not a subring of any non-trivial ring $R$ ($1_R \not\in \{0\}$)!
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Alternative approach: non-unital subrings}
+
+If we work with non-unital rings, then we might not care that subrings contain the identity.
+
+\begin{defn}{subring (non-unital approach)}{}
+  Let $R$ be a not-necessarily-unital ring.
+  A subset $S \subseteq R$ is a \hldef{subring} of $R$ if
+  \begin{enumerate}
+    \item $S$ is a subgroup of $(R, +, \cdot)$, and
+    \item $ab \in S$ for all $a, b \in S$.
+  \end{enumerate}
+  If, in addition, $R$ is a unital ring and
+  \begin{enumerate}[start=3]
+    \item $1 \in S$,
+  \end{enumerate}
+  then $S$ is a \hldef{unital subring}.
+\end{defn}
+
+In this course, ``ring'' = ``unital ring'' and ``subring'' = ``unital subring''.
+We'll call sets satisfying (1) and (2) ``non-unital subrings''.
+
+One reason for interest in non-unital subrings is that many unital rings have interesting
+non-unital subrings.
+
+\begin{ex}
+  Let $R = \R[x]$, so $R$ is unital.
+
+  Let $x\R[x] = \{f \in \R[x] : \text{constant term of } f \text{ is } 0\}$.
+  (Alternatively, $f \in x\R[x] \iff f(0) = 0$.)
+
+  If $f, g \in x\R[x]$, then $f - g \in x\R[x]$ so $x\R[x]$ is a subgroup
+  of $\R[x]$.
+  Also, $f \cdot g \in x\R[x]$ since $(fg)(0) = f(0)g(0) = 0$.
+  But $1 \not\in x\R[x]$, so $x\R[x]$ is a non-unital subring of $R$.
+
+  Exercise: show $(x\R[x], +, \cdot)$ is a non-unital ring.
+\end{ex}
+
+\begin{ex}
+  Let $R = \Fun(\R, \R)$.
+
+  A function $f \colon \R \to \R$ is \hldef{compactly supported} if there is some interval $[a, b]$
+  with $a < b \in \R$ such that $f(x) = 0$ for all $x \not\in [a, b]$.
+
+  Suppose $f, g \colon \R \to \R$ are compactly supported.
+  We can choose $a < b$ such that $f(x) = g(x) = 0$ for all $x \not\in [a, b]$.
+  Then $(f - g)(x) = (fg)(x) = 0$ for $x \not\in [a, b]$, so $f - g$ and $f \cdot g$ are compactly
+  supported.
+
+  The identity in $\Fun(\R, \R)$ is the constant-1 function, which is not compactly supported.
+
+  So compactly supported functions are a non-unital subring.
+
+  Claim: compactly supported functions are a non-unital ring.
+
+  Proof: Suppose $f$ is an identity element of the ring.
+  There is some interval $[a, b]$ such that $f(x) = 0$ for all $x \not\in [a, b]$.
+  There is a compactly supported function $g$ such that $g(x) \neq 0$ for some $x \not\in [a, b]$.
+  But then $fg(x) = f(x)g(x) = 0 \neq g(x)$ for this $x$, so $f$ is not an identity.
+\end{ex}
+
+\pagebreak
+\subsection{Characteristics and prime subrings}
+
+Suppose $x \in R$ where $R$ is a ring and $n \in \Z$.
+Since $(R, +)$ is an abelian group, $nx$ is well-defined.
+We can think of $n$ as the element $n1 \in R$, in the sense that if $x \in R$, we can talk about
+$n \cdot x$ or $x \cdot n$ or $x \pm n$.
+(For example, in $\Zmod{10}$, $10 \cdot 1 = 0$.)
+
+\begin{lem}{}{}
+  If $R$ is a ring, $x \in R$, and $n, m \in \Z$, then
+  \begin{itemize}
+    \item $n1 \cdot x = x \cdot n1 = nx$, and
+    \item $n(mx) = (nm)x$.
+  \end{itemize}
+\end{lem}
+
+\begin{thmproof}
+  Exercise.
+  Idea: if $n \geq 0$, then $n1 \cdot x = (1 + \cdots + 1) \cdot x = x + \cdots + x = nx$.
+\end{thmproof}
+
+\begin{lem}{}{}
+  Let $R$ be a ring.
+  The set $R_0 = \{n1 : n \in \Z\}$ is a subring of $R$ and is contained in every other subring.
+  Furthermore, as a group, $R_0 \cong \Zmod{k}$, where $k = \min\{m \in \N : m1 = 0\}$ (or $k = 0$
+  if this set is empty).
+\end{lem}
+
+\begin{defn}{prime subring, characteristic}{}
+  $R_0$ is called the \hldef{prime subring} of $R$, and $k$ is called the \hldef{characteristic} of
+  $R$, denoted $\charc(R)$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $\charc(\Zmod{n}) = n$.
+    \item $\charc(\Zmod{Z}) = 0$.
+    \item $\charc(R) = 1$ if and only if $R = \{0\}$.
+  \end{itemize}
+\end{ex}
+
+\begin{thmproof}[Proof of lemma.]
+  $R_0$ is the cyclic subgroup of $(R, +)$ generated by 1.
+  As a cyclic group, $R_0 \cong \Zmod{k}$ where $k = \min\{m \in \N : m1 = 0\}$ or $k = 0$.
+
+  If $n, m \in \Z$, then $n1 \cdot m1 = nm1 \in R_0$.
+
+  Also $1 \in R_0$, so $R_0$ is a unital subring.
+
+  If $S$ is a unital subring of $R$, then $1 \in S$, so $S$ contains $\ang{1} = R_0$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Centre of a ring}
+
+\begin{defn}{centre}{}
+  If $R$ is a ring, the \hldef{centre} of $R$ is the set
+  $Z(R) = \{x \in R : xy = yx \text{ for all } y \in R\}$.
+\end{defn}
+
+Note this is different from the group centre of $R$ (which is $R$ since $R$ is abelian).
+
+\begin{lem}{}{}
+  $Z(R)$ is a subring of $R$.
+\end{lem}
+
+\begin{thmproof}
+  Exercise.
+\end{thmproof}
+
+\begin{cor}{}{}
+  If $R$ is a non-zero ring, then $Z(R)$ is non-trivial.
+\end{cor}
+
+\begin{thmproof}
+  $Z(R)$ contains the prime subring $R_0$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Ring homomorphisms}
+
+\begin{defn}{homomorphism}{}
+  Let $R, S$ be rings.
+  A function $\phi \colon R \to S$ is a \hldef{(unital) homomorphism} if
+  \begin{enumerate}
+    \item $\phi \colon (R, +) \to (S, +)$ is a group homomorphism,
+    \item $\phi(ab) = \phi(a)\phi(b)$ for all $a, b \in R$, and
+    \item $\phi(1_R) = 1_S$.
+  \end{enumerate}
+  If (1) and (2) but not (3) are satisfied, then $\phi$ is a \hldef{non-unital homomorphism}.
+\end{defn}
+
+In this course, ``homomorphism'' = ``unital homomorphism''.
+
+\begin{ex}
+  \begin{itemize}
+    \item If $S$ is a subring of $R$, then $i \colon S \to R : x \mapsto x$ is a homomorphism.
+    \item The quotient maps $\Z \to \Zmod{n} : x \mapsto [x]$ and
+      $\Zmod{mn} \to (\Zmod{mn})/(m\Z/mn\Z) \cong \Zmod{m} : [x] \mapsto [x]$ are homomorphisms
+      since $[xy] = [x] \cdot [y]$.
+  \end{itemize}
+\end{ex}
+
+\begin{defn}{isomorphism}{}
+  A homomorphism $\phi \colon R \to S$ is an \hldef{isomorphism} if $\phi$ is bijective.
+\end{defn}
+
+\begin{prop}{}{}
+  Let $R_0 = \Z1_R$ be the prime subring of a ring $R$, and let $n = \charc(R)$.
+  Then $\phi \colon \Zmod{n} \to R_0 : [x] \mapsto x1$ is a ring isomorphism.
+\end{prop}
+
+\begin{thmproof}
+  We already showed $\phi$ is a well-defined group isomorphism, so $\phi$ is bijective.
+
+  If $[a], [b] \in \Zmod{n}$, then
+  \[
+    \phi([a] \cdot [b]) = \phi([ab]) = ab1 = a(b1) = (a1) \cdot (b1) = \phi([a])\phi([b]).
+  \]
+  Since $\phi([1]) = 1$, $\phi$ is a homomorphism.
+\end{thmproof}
+
+\pagebreak
+\subsection{Basic properties of ring homomorphisms}
+
+\begin{prop}{}{}
+  Let $\phi \colon R \to S$ be a homomorphism.
+  \begin{enumerate}
+    \item If $a \in R$ and $n \geq 0$, then $\phi(a^n) = \phi(a)^n$.
+    \item If $u \in R^\times$, then $\phi(u) \in S^\times$ and $\phi(u^n) = \phi(u)^n$ for all
+      $n \in \Z$.
+    \item If $\phi$ is an isomorphism, then $\phi^{-1}$ is a ring homomorphism.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item By induction.
+    \item $1 = \phi(1) = \phi(uu^{-1}) = \phi(u)\phi(u^{-1})$, so $\phi(u) \in S^\times$ and
+      $\phi(u^{-1}) = \phi(u)^{-1}$.
+      It follows from (1) that $\phi(u^n) = \phi(u)^n$ for all $n \in \Z$.
+    \item We already know $\phi^{-1}$ is a group homomorphism.
+
+    Note $\phi(1_R) = 1_S$, so $\phi^{-1}(1_S) = 1_R$.
+
+    If $a, b \in S$, then $a = \phi(\phi^{-1}(a))$ and $b = \phi(\phi^{-1}(b))$, so
+    $ab = \phi(\phi^{-1}(a))\phi(\phi^{-1}(b)) = \phi(\phi^{-1}(a)\phi^{-1}(b))$ and hence
+    $\phi^{-1}(ab) = \phi^{-1}(a)\phi^{-1}(b)$.
+  \end{enumerate}
+\end{thmproof}
+
+\begin{prop}{}{}
+  Let $\phi \colon R \to S$ be a homomorphism where $S$ is not zero.
+  \begin{enumerate}
+    \item $\Im\phi$ is a subring of $S$.
+    \item $\ker\phi$ is a non-unital subring of $R$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item We already $\Im\phi$ is a subgroup of $(S, +)$.
+
+    Since $\phi(1_R) = 1_S$, $1_S \in \Im\phi$.
+
+    Finally, if $a, b \in \Im\phi$, then $a = \phi(x)$ and $b = \phi(y)$ for some $x, y \in R$ and
+    $ab = \phi(x)\phi(y) = \phi(xy) \in \Im\phi$.
+
+    \item Revisit this when we study ideals.
+  \end{enumerate}
+\end{thmproof}
+
+Note about (2): if $1 \in \ker\phi$ and $\phi$ is unital, then $1_S = \phi(1_R) = 0_S$, so $S$ is
+the zero ring.
+
+%%%%% Lec 17
+\section{Polynomials and group rings}
+
+\subsection{Polynomials, formally}
+
+Let $R$ be a ring.
+
+The \hldef{ring of polynomials} in variable $x$ with coefficients in $R$ is the ring with elements
+$\sum_{i = 0}^n a_i x^i$ for $n \geq 0$ and $a_0, \ldots, a_n \in R$.
+
+Addition and multiplication are as usual:
+\[
+  \left(\sum_{i = 0}^n a_i x^i\right) \left(\sum_{j = 0}^m b_j x^j\right)
+    = \sum_{k = 0}^{n + m} \sum_{i = 0}^k a_i b_{k - i} x^k
+\]
+where $a_i = b_j = 0$ when $i > n$ and $j > m$.
+
+As usual, we can talk about degree, monomials, evaluation, etc., but how can we do it formally?
+
+\begin{defn}{}{}
+  Given a ring $R$, let $R[x]$ be the set
+  \[
+    \{ (a_i)_{i = 0}^\infty \subseteq R :
+      \exists N \geq 0 \text{ such that } a_i = 0 \forall i \geq N \}.
+  \]
+  We define binary operations $+$ and $\cdot$ on $R[x]$ by
+  \[ (a_i)_{i = 0}^\infty + (b_i)_{i = 0}^\infty = (a_i + b_i)_{i = 0}^\infty \]
+  and
+  \[
+    (a_i)_{i = 0}^\infty \cdot (b_i)_{i = 0}^\infty = (c_k)_{k = 0}^\infty
+      \text{ where } c_k = \sum_{i = 0}^k a_i b_{k - i}.
+  \]
+  The variable choice only matters in that we let $\sum_{i = 0}^n a_i x^i$ denote
+  $(a_0, \ldots, a_n, 0, 0, \ldots)$ (not unique representation).
+  Changing the variable changes the notation.
+\end{defn}
+
+\begin{lem}{}{}
+  $(R[x], +, \cdot)$ is a ring.
+\end{lem}
+
+\begin{thmproof}
+  Need to show $+$ and $\cdot$ are well-defined for some sequences $(a_i)_{i = 0}^\infty$ and
+  $(b_i)_{i = 0}^\infty$.
+
+  Let $N_1, N_2 \geq 0$ where $a_i = 0$ for all $i \geq N_1$ and $b_j = 0$ for all $b \geq N_2$.
+  Then $a_i + b_j = 0$ for $i \geq \max(N_1, N_2)$, so
+  $(a_i)_{i = 0}^\infty + (b_i)_{i = 0}^\infty \in R[x]$.
+
+  If $k \geq N_1 + N_2$ and $0 \leq i < N$, then $k - i > N_2$.
+  So $\sum_{i = 0}^k a_i b_{k - i} = 0$ if $k \geq N_1 + N_2$, so
+  $(a_i)_{i = 0}^\infty \cdot (b_i)_{i = 0}^\infty \in R[x]$.
+
+  Exercise: $(R[x], +)$ is an abelian group with $0 = (0, 0, \ldots)$.
+
+  Next, suppose $(a_i)_{i = 0}^\infty, (b_i)_{i = 0}^\infty, (c_i)_{i = 0}^\infty \in R[x]$.
+
+  (Lots of useless algebra\dots)
+
+  Exercise: $1 = (1, 0, 0, \ldots)$ is an identity for $\cdot$.
+
+  For distributivity, (more useless algebra\dots).
+
+  Conclusion: $R[x]$ is a ring.
+\end{thmproof}
+
+\pagebreak
+\subsection{Terminology/notation for polynomial rings}
+
+\begin{itemize}
+  \item $R[x]$ is called the \hldef{ring of polynomials in variable $x$ with coefficients in $R$}.
+  \item $x$ is the \hldef{variable} or \hldef{indeterminate}.
+    Any variable works.
+  \item We only use $(a_i)_{i = 0}^\infty$ for elements of $R[x]$ for formal definitions or proofs.
+  \item Use $\sum_{i = 0}^n a_i x^i$ when working with $R[x]$.
+    If coefficients not needed, denote elements by $p$ or $p(x)$.
+  \item Exercise: there is an isomorphism $R[x] \to R[y] : p(x) \mapsto p(y)$ for any variables
+    $x, y$.
+\end{itemize}
+
+\pagebreak
+\subsection{Degree and coefficients}
+
+\begin{defn}{degree}{}
+  The \hldef{degree} of $p(x) \in R[x]$ is the smallest integer $n$ such that
+  $p(x) = \sum_{i = 0}^n a_i x^i$ with $a_n \neq 0$, or $-\infty$ if no such $n$ exists.
+  Notation: $\deg(p)$.
+\end{defn}
+
+Examples: $\deg(1) = 0$, $\deg(1 + x - x^3) = 3$, $\deg(0) = -\infty$.
+
+\begin{defn}{coefficient, monomial, term}{}
+  The \hldef{coefficient} of $x^i$ in $(a_i)_{i = 0}^\infty \in R[x]$ is $a_i$.
+
+  A \hldef{monomial} is a polynomial of the form $x^i$ for some $i \geq 0$, and a polynomial of the
+  form $a_i x^i$ is called a \hldef{term}.
+
+  If $p(x) = \sum_{i = 0}^n a_i x^i$ is a polynomial of degree $n$, then the polynomials $a_i x^i$,
+  $i = 0, \ldots, n$, are the \hldef{terms} of $p(x)$.
+  $a_n x^n$ is the \hldef{leading term}, and $a_n$ is the \hldef{leading coefficient}.
+\end{defn}
+
+\pagebreak
+\subsection{Constant polynomials}
+
+Polynomials of degree $\leq 0$ are \hldef{constant polynomials}.
+
+There is a constant polynomial $ax^0 \in R[x]$ for every $a \in R$.
+Usually just denote this by $a$.
+
+\begin{lem}{}{}
+  Let $R$ be a ring.
+  The set of constant polynomials in $R[x]$ is a subring of $R[x]$, and is isomorphic to $R$.
+\end{lem}
+
+Because of this isomorphism, we think of $R$ as a subring of $R[x]$.
+
+\pagebreak
+\subsection{Commutativity}
+
+\begin{lem}{}{}
+  If $R$ is commutative, then $R[x]$ is commutative.
+\end{lem}
+
+\begin{thmproof}
+  \begin{align*}
+    \sum_{i = 0}^n a_i x^i \cdot \sum_{j = 0}^m b_j x^j
+    &= \sum_{i = 0}^n \sum_{j = 0}^m a_i b_j x^{i + j} \\
+    &= \sum_{j = 0}^n \sum_{i = 0}^n b_j a_i x^{j + i} \\
+    &= \sum_{j = 0}^m b_j x^j \cdot \sum_{i = 0}^n a_i x^i.
+  \end{align*}
+\end{thmproof}
+
+$R[x]$ makes sense even if $R$ is not commutative, but note that $x \in Z(R[x])$, so it's not very
+natural.
+
+\pagebreak
+\subsection{Evaluation}
+
+\begin{defn}{evaluation}{}
+  If $p(x) = \sum_{i = 0}^n a_i x^i \in R[x]$ and $c \in R$, then the \hldef{evaluation} of $p(x)$
+  at $c$ is $p(c) := \sum_{i = 0}^n a_i c^i$.
+\end{defn}
+
+\begin{prop}{}{}
+  If $R$ is commutative and $c \in R$, then $R[x] \to R : p(x) \mapsto p(c)$ is a homomorphism.
+\end{prop}
+
+This homomorphism is called \hldef{evaluation at $c$} or \hldef{substitution at $c$}.
+When necessary, refer to it by $\ev_c$.
+Note $\ev_c$ begin a homomorphism means that
+$(p + q)(c) = \ev_c(p + q) = \ev_c(p) + \ev_c(q) = p(c) + q(c)$, and similarly that
+$(p \cdot q)(c) = p(c)q(c)$ and $1(c) = 1$.
+
+\begin{thmproof}
+  If $p = \sum_i a_i x^i$ and $q = \sum_j b_j x^j$, then
+  \[
+    (p + q)(c) = \sum_i (a_i + b_i) c^i = \sum_i a_i c^i + \sum_i b_i c^i = p(c) + q(c).
+  \]
+  Also,
+  \begin{align*}
+    (p \cdot q)(c)
+    &= \sum_k \sum_{i = 0}^k a_i b_{k - i} c^k \\
+    &= \sum_i \sum_j (a_i c^i) (b_j c^j) \\
+    &= \left(\sum_i a_i c^i\right) \left(\sum_j b_j c^j\right) \\
+    &= p(c) q(c).
+  \end{align*}
+  Finally $1(c) = 1c^0 = 1$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Polynomials over fields}
+
+Most common type of polynomial rings are $\mathbb{K}[x]$ for $\mathbb{K}$ a field.
+
+\begin{prop}{}{}
+  Let $\mathbb{K}$ be a field.
+  Then
+  \begin{enumerate}
+    \item $\deg(fg) = \deg(f) + \deg(g)$ for all $f, g \in \mathbb{K}[x]$.
+    \item $\mathbb{K}[x]^\times = \mathbb{K}^\times$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+\begin{ex}
+  $\deg(0 \cdot f) = -\infty = -\infty + \deg(f) = \deg(0) + \deg(f)$, which explains why we
+  define $\deg(0) = -\infty$.
+\end{ex}
+
+\begin{ex}
+  Let $p(x) = 1 + 2x \in (\Zmod{4})[x]$.
+  Then $p(x)^2 = 1 + 4x + 4x^2 = 1$.
+  So $p(x)$ is a unit.
+\end{ex}
+
+\pagebreak
+\subsection{Multivariable polynomials}
+
+\begin{defn}{multivariable polynomial ring}
+  For any sequence of variables $x_1, \ldots, x_n$ and ring $R$, we define the
+  \hldef{multivariable polynomial ring} $R[x_1, \ldots, x_n]$ recursively by
+  $R[x_1, \ldots, x_n] := R[x_1, \ldots, x_{n - 1}][x_n]$.
+\end{defn}
+
+Elements of $R[x_1, \ldots, x_n]$ are technically of the form
+$\sum_i a_i(x_1, \ldots, x_{n - 1})x_n^i$ where $a_i \in R[x_1, \ldots, x_{n - 1}]$, but usually
+we write these elements as $\sum_{i = (i_1, \ldots, i_n) a_i x^i}$ where
+$x^i := x_1^{i_1} \cdots x_n^{i_n}$.
+
+\begin{ex}
+  Typical element of $R[x_1, x_2]$ is $x_1x_2^2 - 7x_1^2x_2^2 + 3x_1^5x_2 + 2$.
+\end{ex}
+
+What if we reorder $x_1, \ldots, x_n$?
+
+\begin{lem}{}{}
+  Let $R$ be a ring, $x_1, \ldots, x_n$ a sequence of variables, and $\sigma \in S_n$.
+  Then there is an isomorphism $R[x_{\sigma(1)}, \ldots, x_{\sigma(n)}] \to R[x_1, \ldots, x_n]$
+  given by
+  \[
+    \sum_{(i_1, \ldots, i_n)} a_i x_{\sigma(1)}^{i_1} \cdots x_{\sigma(n)}^{i_n} \mapsto
+      \sum_{(i_1, \ldots, i_n)} a_i x_1^{i_{\sigma^{-1}(1)}} \cdots x_n^{i_{\sigma^{-1}(n)}}.
+  \]
+\end{lem}
+
+\begin{ex}
+  Consider $3yx - 7y^2x^3 + 2y + 3x + 1 \in \Z[y, x]$.
+
+  The isomorphism above sends this to $3xy - 7x^3y^2 + 2y + 3x + 1 \in \Z[x, y]$.
+
+  The isomorphism in the lemma is not to be confused with the isomorphism (exercise)
+  $\Z[y, x] \to \Z[x, y] : p(y, x) \mapsto p(x, y)$, which would instead send the above to
+  $3xy - 7x^2y^3 + 2x + 3y + 1$.
+\end{ex}
+
+\pagebreak
+\subsection{Multivariate evaluation}
+
+\begin{defn}{}{}
+  If $p(x_1, \ldots, x_n) = \sum_i a_i x^i \in R[x_1, \ldots, x_n]$ and
+  $c = (c_1, \ldots, c_n) \in R^n$, then we define
+  $p(c) = p(c_1, \ldots, c_n) := \sum_i a_i c_1^{i_1} \cdots c_n^{i_n}$.
+\end{defn}
+
+\begin{lem}{}{}
+  Let $c = (c_1, \ldots, c_n) \in R^n$.
+  The function
+  \[ \ev_c \colon R[x_1, \ldots, x_n] \to R : p(x_1, \ldots, x_n) \mapsto p(c_1, \ldots, c_n) \]
+  is the composition
+  \[
+    \ev_{c_1} \circ \cdots \circ \ev_{c_n} \colon
+      R[x_1, \ldots, x_{n - 1}][x_n] \to R[x_1, \ldots, x_{n - 1}] \to \cdots \to R,
+  \]
+  and hence is a homomorphism if $R$ is commutative.
+\end{lem}
+
+\begin{thmproof}
+  Exercise.
+\end{thmproof}
+
+\pagebreak
+\subsection{Group rings}
+
+\begin{defn}{group ring}{}
+  Let $G$ be a group and $R$ be a ring.
+  The \hldef{group ring} $RG$ of $G$ with coefficients in $R$ is the set of formal sums
+  \[
+    \left\{ \sum_{g \in G} c_g \cdot g \right\}
+  \]
+  where $(c_g)_{g \in G} \subseteq R$ is such that there is a finite subset $X \subset G$ with
+  $c_g = 0$ for all $g \not\in X$, with operations
+  \[
+    \left(\sum_{g \in G} a_g g\right) + \left(\sum_{g \in G} b_g g\right)
+      = \sum_{g \in G} (a_g + b_g) g
+  \]
+  and
+  \[
+    \left(\sum_{g \in G} a_g g\right) \cdot \left(\sum_{g \in G} b_g g\right)
+      = \sum_{g, h \in G} a_g b_h gh = \sum_{k \in G} \left(\sum_{g \in G} a_g b_{g^{-1}k}\right) k.
+  \]
+\end{defn}
+
+A formal sum $\sum_{g \in G} a_g g$ with coefficients in $R$ is a fancy waya of writing a finitely
+support function $G \to R : g \mapsto a_g$.
+Recall a function is finitely support if it is 0 except at finitely many points of $G$.
+
+The group elements $g \in G$ are ``placeholders'' in this formal sum.
+
+\begin{ex}
+  Let $R = \Z$ and $G = D_6 = \{e, r, s, sr, s^2, s^2r\}$.
+  Some elements of $\Z D_6$ are:
+  \begin{itemize}
+    \item $1e + 7s - 2r + sr - s^2r$
+    \item $2e + 2s + 2s^2$
+    \item $r$
+    \item $e$
+  \end{itemize}
+  A general element of $RG$ is $a_e e + a_r r + a_s s + a_{sr} sr + a_{s^2} s^2 + a_{s^2r} s^2r$
+  where $a_x \in R$ for each $x \in G$.
+\end{ex}
+
+\pagebreak
+\subsection[G versus RG]{$G$ versus $RG$}
+
+Group elements $g \in G$ can be regarded as elements of $RG$.
+For example, $g = 1 \cdot g + \sum_{h \neq g} 0 \cdot h$.
+
+Technically speaking, though, $g \in G$ and $1 \cdot g \in RG$ are different.
+
+Sometimes, write $\underline{g}$ for $g$ considered as an element of $RG$.
+
+Can also write $\sum_{g \in G} a_g g$ as $\sum_{g \in G} a_g \underline{g}$ if it's helpful.
+
+\begin{ex}
+  Consider $G = \Z^+$ and $R = \Z$.
+  Elements of $RG = \Z\Z$ look like:
+  \begin{itemize}
+    \item $3 \cdot \underline{0} - 2 \cdot \underline{1} + 5 \cdot \underline{10}
+      - 6 \cdot \underline{-6}$
+    \item $\underline{1} + \underline{2} + \underline{3}$
+    \item $\underline{0}$ (in particular, not equal to
+      $0_{RG} = 0 \cdot \underline{0} + 0 \cdot \underline{1} + \cdots$)
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Ring operations of a group ring}
+
+Use component-wise addition:
+
+\begin{ex}
+  In $\Z D_6$, $(2 \cdot e - s + 3 \cdot s^2r) + (3 \cdot e + s + r)
+    = (5 \cdot e + r + 3 \cdot s^2r)$.
+\end{ex}
+
+For multiplication, use principle that $\underline{g} \cdot \underline{h} = \underline{gh}$.
+Extend to $RG$ so distributivity holds:
+
+\begin{ex}
+  In $\Z D_6$:
+  \begin{itemize}
+    \item $s \cdot (e + 2s + 3r + 4s^2r) = s + 2s^2 + 3sr + 4r$
+    \item $(e + 2s)(2e - 3r) = 2e + 4s - 3r - 6sr$
+    \item $(e - r)^2 = (e - r)(e - r) = e - r - r + r^2 = 2e - 2r = 2(e - r)$
+  \end{itemize}
+\end{ex}
+
+\begin{ex}
+  In $\Z\Z$,
+  $(\underline{0} + 2 \cdot \underline{-6})(3 \cdot \underline{1} - 4 \cdot \underline{2})
+    = 3 \cdot \underline{1} - 4 \cdot \underline{2} + 6 \cdot \underline{-5}
+    - 8 \cdot \underline{-4}$.
+\end{ex}
+
+\begin{prop}{}{}
+  Let $R$ be a ring and $G$ be a group.
+  Then $RG$ is a ring with identity $\underline{e}$.
+  If $G$ is commutative, then $RG$ is commutative.
+\end{prop}
+
+Group rings are very important examples of not-necessarily-commutative rings.
+
+However, we will focus on commutative rings in this course, so we won't prove this proposition.
+
+Let's check that $\underline{e}$ is an identity:
+\[
+  \underline{e} \cdot \left(\sum_{g \in G} a_g \underline{g}\right) =
+    \sum_{g \in G} a_g \underline{e \cdot g} = \sum_{g \in G} a_g \underline{g}
+\]
+and similarly for right identity.
+
+The remainder of the proof reduces to the fact that $\cdot$ is associative.
+
+\pagebreak
+\subsection{Group ring homomorphisms}
+
+\begin{prop}{}{}
+  Let $R$ be a ring and $\phi \colon G \to H$ be a group homomorphism.
+  Then $\psi \colon RG \to RH$ defined by
+  $\psi\left(\sum_{g \in G} a_g \underline{g}\right) = \sum_{g \in G} a_g \underline{\phi(g)}$ is a
+  ring homomorphism.
+\end{prop}
+
+\begin{thmproof}
+  Exercise: check well-definedness (two things: that $\sum_{g : \phi(g) = h} a_g$ is finite for
+  $h \in H$, and $\psi(x)$ is finitely supported for all $x \in RG$).
+
+  $\psi(\underline{e_G}) = \underline{\phi(e)} = \underline{e_H}$, so $\psi$ is unital.
+
+  Let $x = \sum_{g \in G} a_g \underline{g}$ and $y = \sum_{h \in G} b_h \underline{h}$.
+  Then
+  \begin{align*}
+    \psi(x + y)
+    &= \psi\left(\sum_{g \in G} (a_g + b_g) \underline{g}\right) \\
+    &= \sum_{g \in G} (a_g + b_g) \underline{\phi(g)} \\
+    &= \sum_{g \in G} a_g \underline{\phi(g)} + \sum_{g \in G} b_g \underline{\phi(g)} \\
+    &= \psi(x) + \psi(y).
+  \end{align*}
+  Also,
+  \begin{align*}
+    \psi(xy)
+    &= \psi\left(\sum_{g, h \in G} a_g b_h \underline{gh}\right) \\
+    &= \sum_{g, h \in G} a_g b_h \underline{\phi(gh)} \\
+    &= \sum_{g, h \in G} a_g b_h \underline{\phi(g)\phi(h)} \\
+    &= \left(\sum_{g \in G} a_g \underline{\phi(g)}\right)
+      \left(\sum_{h \in H} b_h \underline{\phi(h)}\right).
+  \end{align*}
 \end{thmproof}
 
 %---------------
