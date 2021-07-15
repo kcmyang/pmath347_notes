@@ -1143,7 +1143,7 @@ If $\pi$ is a permutation, then $\pi$ commutes with $\pi^i$ for all $i$, so $\pi
 commute.
 However, $\pi$ and $\pi^i$ don't have disjoint support sets.
 
-\week{Subgroups and homomorphisms}
+\week{Subgroups and Homomorphisms}
 
 %%%%% Lec 3
 \section{Subgroups}
@@ -6122,6 +6122,997 @@ The remainder of the proof reduces to the fact that $\cdot$ is associative.
       \left(\sum_{h \in H} b_h \underline{\phi(h)}\right).
   \end{align*}
 \end{thmproof}
+
+\week{Ideals and Quotient Rings}
+
+%%%%% Lec 18
+\section{Ideals}
+
+Recall:
+
+\begin{prop}{}{}
+  Let $\phi \colon R \to S$ be a homomorphism, where $S$ is not zero.
+  \begin{enumerate}
+    \item $\Im\phi$ is a subring of $S$.
+    \item $\ker\phi$ is an ideal of $R$.
+  \end{enumerate}
+\end{prop}
+
+What's an ideal?
+But first, what's special about kernels?
+
+\begin{lem}{}{}
+  If $\phi \colon R \to S$ is a homomorphism, and $m \in \ker\phi$, then $rm$ and $mr$ are in
+  $\ker\phi$ for all $r \in R$.
+\end{lem}
+
+\begin{thmproof}
+  $\phi(rm) = \phi(r)\phi(m) = \phi(r) \cdot 0_S = 0 = \cdots = \phi(mr)$.
+\end{thmproof}
+
+\begin{defn}{ideal}{}
+  An \hldef{ideal} of a ring $R$ is a subgroup $\ideal$ of $(R, +)$ such that if
+  $m \in \ideal$ and $r \in R$, then $rm, mr \in \ideal$.
+\end{defn}
+
+The lemma shows that the kernel of a homomorphism is an ideal (and so proves the proposition).
+
+Note if $R$ is commutative, we only need to check that $rm \in \ideal$ for all
+$m \in \ideal$ and $r \in R$.
+
+\pagebreak
+\subsection[Example: mZ]{Example: $m\Z$}
+
+\begin{lem}{}{}
+  $m\Z$ is an ideal of $\Z$ for every $m \in \Z$.
+\end{lem}
+
+\begin{thmproof}
+  We already know $m\Z \leq (\Z, +)$ (which is abelian).
+
+  If $r \in \Z$ and $km \in m\Z$, then $rkm \in m\Z$.
+
+  So $m\Z$ is an ideal.
+\end{thmproof}
+
+Intuition behind the ideal condition here: if $m \mid x$, then $m \mid rx$ for all $r \in \Z$.
+(Once we are inside the ideal, we can never move out of it.)
+
+Special case: when $m = 0$, then $m\Z = \{0\}$.
+
+Exercise: $\{0_R\}$ is an ideal of any ring $R$, called the \hldef{trivial ideal}, often denoted by
+$(0)$ (notation later).
+
+\pagebreak
+\subsection{Simplifying conditions}
+
+To show that $\ideal$ is a subgroup of $(R, +)$, we need to check that
+\begin{enumerate}
+  \item $0 \in \ideal$,
+  \item $\ideal$ is closed under addition, and
+  \item $\ideal$ is closed under negation (additive inverses).
+\end{enumerate}
+Of course, we could speed this up by checking that
+\begin{enumerate}[label={\arabic*$'$.}]
+  \item $\ideal$ is non-empty, and
+  \item $f, g \in \ideal \implies f - g \in \ideal$.
+\end{enumerate}
+
+We can speed this up in a different way with the ideal condition:
+
+\begin{lem}{}{}
+  Let $R$ be a ring and $\ideal \subseteq R$.
+  Then $\ideal$ is an ideal if and only if
+  \begin{enumerate}
+    \item $\ideal$ is non-empty, and
+    \item if $r \in R$ and $f, g \in \ideal$, then $rf + g, fr + g \in \ideal$.
+  \end{enumerate}
+\end{lem}
+
+\begin{thmproof}
+  If $f, g \in \ideal$, then $(-1) \cdot g + f = f - g \in \ideal$, so $(1')$ and $(2')$
+  are satisfied.
+  So $\ideal \leq (R, +)$.
+
+  Hence $0 \in \ideal$.
+  If $m \in \ideal$ and $r \in R$, then $rm = rm + 0 \in \ideal$.
+  So $\ideal$ is an ideal.
+\end{thmproof}
+
+\pagebreak
+\subsection{Example: evaluation}
+
+Let $R$ be a commutative ring and pick $c \in R$.
+
+The kernel of $\ev_c \colon R[x] \to R$ is $\ideal = \{f \in R[x] : f(c) = 0\}$.
+
+By the previous lemma, this is an ideal, but let's check:
+\begin{itemize}
+  \item $0 \in \ideal$, so $\ideal$ is non-empty.
+  \item If $f, g \in \ideal$ and $r \in R[x]$, then
+    $(rf + g)(c) = r(c)f(c) + g(c) = r(c) \cdot 0 + 0 = 0$ so $rf + g \in \ideal$.
+\end{itemize}
+
+Question: what do elements of this ideal look like?
+
+First, consider $c = 0$.
+
+Suppose $f(x) = \sum_{i = 0}^n a_i x^i$.
+Then $f(0) = \sum_i a_i 0^i = a_0$, so $f(0) = 0 \iff a_0 = 0$.
+(Note: in the context of polynomial evaluation, we use $0^0 := 1$.)
+
+So elements of $\ideal = \ker\ev_0$ look like $a_1 x + a_2 x^2 + \cdots$.
+Because we can factor this as $a_1 x + a_2 x^2 \cdots = x(a_1 + a_2 x + \cdots)$, we sometimes
+denote $\ideal$ by $xR[x]$, or by $(x)$.
+
+Intuition behind $xR[x]$ being an ideal: if $f(x)$ has no constant term, then multiplying $f(x)$ by
+another polynomial can't add in a constant term.
+
+Next, for general $c$.
+
+\begin{lem}{}{}
+  If $f(x) \in R[x]$ has degree $\leq n$ and $c \in R$, then there are $a_0, \ldots, a_n \in R$ such
+  that $f(x) = \sum_{i = 0}^n a_i (x - c)^i$, where $(x - c)^0 := 1$.
+\end{lem}
+
+\begin{thmproof}
+  Clearly true if $n = 0$.
+  Proof by induction on $n$.
+
+  General case: if coefficient of $x^n$ in $f(x)$ is $a_n$, then
+  $f(x) - a_n(x - c)^n = a_n x^n + \text{lower terms} - (a_n x^n) + \text{lower terms}$ is a
+  polynomial of degree at most $n - 1$.
+  By induction, $f(x) - a_n(x - c)^n = \sum_{i = 0}^{n - 1} a_i(x - c)^i$.
+  Rearrange for $f(x)$.
+\end{thmproof}
+
+Because evaluation is homomorphism,
+\[
+  \ev_c((x - c)^i) = \ev_c(x - c)^i = \begin{cases}
+    0 \quad & i > 0 \\
+    1 & i = 0
+  \end{cases}.
+\]
+So if $f(x) = \sum_{i = 0}^n a_i (x - c)^i$, then $f(c) = a_0$.
+Conclusion: $\ker\ev_c = (x - c)R[x] = (x - c)$.
+
+Caution: $2x = 2(x - 2) \in (\Zmod{4})[x]$, so $2x \in \ker\ev_2$.
+
+\pagebreak
+\subsection{Ideals containing 1}
+
+Note that $(x - c)R[x]$ doesn't contain 1 for any $c \in R$.
+That's because:
+
+\begin{lem}{}{}
+  If $\ideal$ is an ideal of a ring $R$, and $1 \in \ideal$, then $\ideal = R$.
+\end{lem}
+
+\begin{thmproof}
+  If $r \in R$ and $1 \in \ideal$, then $r = r \cdot 1 \in \ideal$.
+\end{thmproof}
+
+We typically consider \hldef{proper ideals}, that is, ideals $\ideal \subsetneq R$.
+
+\pagebreak
+\subsection{Ideals in fields}
+
+We can use the previous lemma to consider ideals in a field.
+
+\begin{cor}{}{}
+  The only ideals in a field $\mathbb{K}$ are $(0)$ and $\mathbb{K}$.
+\end{cor}
+
+\begin{thmproof}
+  Suppose $\ideal \subseteq \mathbb{K}$ is an ideal.
+  If $x \in \ideal$ and $x \neq 0$, then $x^{-1}x = 1 \in \ideal$.
+  So $\ideal = \mathbb{K}$.
+\end{thmproof}
+
+\begin{cor}{}{}
+  Let $\phi \colon \mathbb{K} \to R$ be a ring homomorphism, where $\mathbb{K}$ is a field and $R$
+  is non-zero.
+  Then $\phi$ is injective.
+\end{cor}
+
+\begin{thmproof}
+  $\ker\phi$ is an ideal of $\mathbb{K}$, so $\ker\phi$ is $(0)$ or $\mathbb{K}$.
+
+  If $\ker\phi = \mathbb{K}$, then $0 = \phi(1_\mathbb{K}) = 1_R$, so $R$ is zero.
+  Since we are assuming $R$ is non-zero, $\ker\phi = (0)$.
+  Then we know from group theroy that $\phi$ is injective.
+\end{thmproof}
+
+\begin{ex}
+  There are no homomorphisms from an infinite field to a finite field, since such a homomorphism
+  would have to have a kernel (that is, be injective).
+\end{ex}
+
+\begin{ex}
+  $\R$ is uncountable, while $\Q$ is countable.
+  So there is no injection $\R \to \Q$ as sets.
+  Therefore there is no homomorphism $\R \to \Q$.
+\end{ex}
+
+%%%%% Lec 19
+\section{Quotient rings}
+
+\subsection{Review on quotient groups}
+
+Recall in group theory:
+\begin{itemize}
+  \item Kernels of homomorphisms are normal subgroups.
+  \item Normal subgroups are kernels of homomorphisms, since if $N \trianglelefteq G$ then the
+    quotient map $G \to G/N$ has kernel $N$.
+\end{itemize}
+
+Suppose $G$ is an abelian group using additive notation.
+Then:
+\begin{itemize}
+  \item Elements of $G/N$ are equivalence classes $[x] = x + N$ for $x \in G$.
+  \item $[x] = [y]$ if and only if $x - y \in N$.
+  \item A group operation is $[x] + [y] = [x + y]$.
+  \item The quotient map $G \to G/N$ sends $x \in G$ to $[x]$.
+\end{itemize}
+
+\pagebreak
+\subsection{Are ideals always the kernel of some homomorphism?}
+
+In ring theory:
+\begin{itemize}
+  \item Kernels of homomorphism are ideals.
+  \item Is it true that ideals are kernels of homomorphisms?
+    If $\ideal$ is an ideal of $R$, is there a ``quotient ring'' $R/\ideal$?
+\end{itemize}
+
+Since $(R, +)$ is commutative, $\ideal \trianglelefteq R$, so the quotient group $R/\ideal$ exists.
+Can we put a ring structure on $R/\ideal$?
+
+We want multiplication $\cdot$ such that the quotient map $q \colon R \to R/\ideal$ is a ring
+homomorphism.
+This means we want $[x] = q(xy) = q(x)q(y) = [x] \cdot [y]$, so we know what the multiplication
+should be (assuming this idea works).
+
+\begin{thm}{}{}
+  Let $\ideal$ be an ideal of a ring $R$, and define operations $+$ and $\cdot$ on $R/\ideal$ by
+  $[x] + [y] = [x + y]$ and $[x] \cdot [y] = [xy]$ for $x, y \in R$.
+  Then $(R/\ideal, +, \cdot)$ is a ring.
+  Furthermore, the quotient map $q \colon R \to R/\ideal : x \mapsto [x]$ is a surjective ring
+  homomorphism with $\ker q = \ideal$.
+\end{thm}
+
+$R/\ideal$ is called the \hldef{quotient} of $R$ by the ideal $\ideal$, or just a
+\hldef{quotient ring}.
+
+\begin{cor}{}{}
+  Every ideal is the kernel of some homomorphism.
+\end{cor}
+
+\begin{ex}
+  $\Zmod{m}$ is a ring with operations $[x] + [y] = [x + y]$ and $[x] \cdot [y] = [xy]$.
+  We can use this as the definition of $\Zmod{m}$.
+\end{ex}
+
+\begin{thmproof}[Proof of theorem.]
+  We already know $(R/\ideal, +)$ is an abelian group.
+
+  First, we show $\cdot$ is \textbf{well-defined}.
+
+  Suppose $[x] = [x']$ and $[y] = [y']$ for $x, x', y, y' \in R$.
+  We want to show that $[xy] = [x'y']$, or equivalent $xy - x'y' \in \ideal$.
+  We see $xy - x'y' = xy - x'y + x'y - x'y' = (x - x')y + x'(y - y')$.
+  Since $[x] = [x']$ and $[y] = [y']$, we know $x - x', y - y' \in \ideal$.
+  By the ideal property, $(x - x')y, x'(y - y') \in \ideal$, so $xy - x'y' \in \ideal$.
+
+  Next, we show $\cdot$ is \textbf{associative}.
+
+  Suppose $x, y, z \in R$.
+  Then $[x] \cdot ([y] \cdot [z]) = [x] \cdot [yz] = [xyz] = ([x] \cdot [y]) \cdot [z]$.
+
+  Next, we show $\cdot$ has an \textbf{identity}.
+
+  Note $[1] \cdot [x] = [1 \cdot x] = [x] = [x] \cdot [1]$, so $[1]$ is an identity for $\cdot$.
+
+  Next, we show \textbf{distributivity}.
+
+  If $x, y, z \in R$.
+  Then
+  \[
+    [x] \cdot ([y] + [z]) = [x] \cdot [y + z] = [x \cdot (y + z)] = [xy + xz] = [xy] + [xz]
+      = [x] \cdot [y] + [x] \cdot [z],
+  \]
+  and similarly $([y] + [z]) \cdot [x] = [y] \cdot [x] + [z] \cdot [x]$.
+
+  Since $(R/\ideal, +)$ is an abelian group, $\cdot$ is associative with identity, and $+$ and
+  $\cdot$ satisfy distributivity, $R/\ideal$ is a ring.
+
+  Now, we show $q$ is a \textbf{homomorphism}.
+
+  We already know $q$ is a group homomorphism.
+  Also, $q(xy) = [xy] = [x] \cdot [y] = q(x)q(y)$ and $q(1) = [1]$ is the identity for $R/\ideal$.
+  So $q$ is a ring homomorphism.
+\end{thmproof}
+
+\pagebreak
+\subsection{Universal property of quotient groups, and quotient rings}
+
+\begin{thm}{Universal property of quotient groups}{}
+  Suppose $\phi \colon G \to K$ is a homomorphism and $N \trianglelefteq G$.
+  Let $q \colon G \to G/N$ be the quotient homomorphism.
+  Then there is a homomorphism $\psi \colon G/N \to K$ such that $\psi \circ q = \phi$ if and only
+  if $N \subseteq \ker\phi$.
+  Furthermore, if $\psi$ exists then it is unique.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (G) at (0, 1){$G$};
+    \node (K) at (4, 1){$K$};
+    \node (GN) at (2, 0){$G/N$};
+    \draw[->] (G)--(K) node[midway, above]{$\phi$};
+    \draw[->] (G)--(GN) node[midway, below left]{$q$};
+    \draw[->, dashed] (GN)--(K) node[midway, below right]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+Can we extend this to rings?
+
+Let $\phi \colon R \to S$ be a ring homomorphism and $\ideal$ an ideal of $R$.
+Suppose $\ideal \subseteq \ker\phi$.
+By the universal property of quotient groups, there is a unique group homomorphism
+$\psi \colon R/\ideal \to S$ such that $\phi = \psi \circ q$.
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (R) at (0, 1){$R$};
+    \node (S) at (4, 1){$S$};
+    \node (RI) at (2, 0){$R/\ideal$};
+    \draw[->] (R)--(S) node[midway, above]{$\phi$};
+    \draw[->] (R)--(RI) node[midway, below left]{$q$};
+    \draw[->, dashed] (RI)--(S) node[midway, below right]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+Is $\psi$ a ring homomorphism?
+
+\begin{lem}{}{}
+  Let $R, S, T$ be rings.
+  Suppose that $\psi_1 \colon R \to T$ is a ring homomorphism and $\psi_2 \colon T \to S$ is a
+  group homomorphism, such that $\psi_2 \circ \psi_1$ is a ring homomorphism.
+  If $\psi_1$ is surjective, then $\psi_2$ is a ring homomorphism.
+\end{lem}
+
+\begin{thmproof}
+  Let $\phi = \psi_2 \circ \psi_1$.
+
+  Suppose $x, y \in T$.
+  Let $a, b \in R$ such that $\psi_1(a) = x$ and $\psi_1(b) = y$.
+  Then $\psi_2(xy) = \psi_2(\psi_1(a)\psi_1(b)) = \psi_2(\psi_1(ab)) = \phi(ab) = \phi(a)\phi(b)
+    = \psi_2(\psi_1(a))\psi_2(\psi_1(b)) = \psi_2(x)\psi_2(y)$.
+
+  Also, $\psi_2(1_T) = \psi_2(\psi_1(1_R)) = \phi(1_R) = 1_S$.
+
+  So $\psi_2$ is a ring homomorphism.
+\end{thmproof}
+
+As a corollary of the lemma and the universal property of quotient groups:
+
+\begin{thm}{Universal property of quotient rings}{}
+  Suppose $\phi \colon R \to S$ is a ring homomorphism and $\ideal$ is an ideal of $R$.
+  Let $q \colon R \to R/\ideal$ be the quotient homomorphism.
+  Then there is a ring homomorphism $\psi \colon R/\ideal \to S$ such that $\psi \circ q = \phi$ if
+  and only if $\ideal \subseteq \ker\phi$.
+  Furthermore, if $\psi$ exists then it is unique.
+\end{thm}
+
+\begin{thmproof}
+  \textbf{Existence:}
+  If $\ideal \subseteq \ker\phi$, then $\psi$ exists as a group homomorphism.
+  Applying the lemma with $\psi_1 = q$, $\psi_2 = \psi$, and $T = R/\ideal$ shows $\psi$ is a ring
+  homomorphism.
+
+  \textbf{Uniqueness:}
+  Any ring homomorphism $\psi \colon R/\ideal \to S$ such that $\psi \circ q = \phi$ is equal to the
+  unique group homomorphism with this property.
+
+  \textbf{Necessity of $\ideal \in \ker\phi$:}
+  If $\psi$ exists, then it is a group homomorphism, so apply the universal property of quotient
+  groups.
+\end{thmproof}
+
+\pagebreak
+\subsection{First isomorphism theorem for rings}
+
+\begin{thm}{First isomorphism theorem for rings}{}
+  If $\phi \colon R \to S$ is a ring homomorphism, then there is a ring isomorphism
+  $\psi \colon R/\ker\phi \to \Im\phi$ such that $\phi = \psi \circ q$, where
+  $q \colon R \to R/\ker\phi$ is the quotient homomorphism.
+\end{thm}
+
+\begin{thmproof}
+  By the universal property, we have a ring homomorphism $\psi \colon R/\ker\phi \to \Im\phi$ such
+  that $\psi \circ q = \phi$.
+  From the first isomorphism theorem for groups, there is a group isomorphism
+  $\psi' \colon R/\ker\phi \to \Im\phi$ such that $\psi' \circ q = \phi$.
+  $\psi$ is also a group homomorphism.
+  By the universal property of quotient groups, $\psi = \psi'$, so $\psi$ is bijective.
+
+  (Or, apply the lemma to $\psi'$.)
+\end{thmproof}
+
+The first isomorphism theorem is very useful for finding quotient rings.
+
+\begin{prop}{}{}
+  Let $R$ be a commutative ring and let $c \in R$.
+  Then $R[x]/(x - c)R[x] \cong R$.
+\end{prop}
+
+\begin{thmproof}
+  $(x - c)R[x] = \ker\ev_c$, where $\ev_c \colon R[x] \to R$ is the evaluation map.
+  If $r \in R$, then $\ev_c(r) = r$, so $\Im\ev_c = R$.
+  By the first isomorphism theorem, $R[x]/(x - c)R[x] \cong R$.
+\end{thmproof}
+
+\begin{ex}
+  Let $\ideal = (y - x^2)\Z[x, y] = \{(y - x^2)p(x, y) : p(x, y) \in \Z[x, y]\}$.
+
+  To see that $\ideal$ is an ideal, note that $\ideal = \ker\ev_{x^2}$, where
+  $\ev_{x^2} \colon \Z[x, y] = \Z[x][y] \to \Z[x]$ is evaluation at $x^2$.
+  (From the recursive definition and our previous investigation.)
+
+  By the proposition, $\Z[x, y]/\ideal \cong \Z[x]$.
+\end{ex}
+
+%%%%% Lec 20
+\section{Ideals generated by a subset}
+
+\subsection{Ideal generated by a subset}
+
+\begin{prop}{}{}
+  Let $\mathcal{F}$ be a family of ideals in a ring $R$.
+  Then \[ \bigcap_{\ideal \in \mathcal{F}} \ideal \] is an ideal of $R$.
+\end{prop}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+\begin{defn}{ideal generated by a subset}{}
+  Let $X \subseteq R$.
+  The \hldef{ideal generated by $X$} is
+  \[ (X) := \bigcap_{\ideal \in \mathcal{F}} \ideal, \]
+  where $\mathcal{F}$ is the set of ideals of $R$ containing $X$.
+\end{defn}
+
+Key properties:
+\begin{itemize}
+  \item By proposition, $(X)$ is an ideal.
+  \item By definition, if $\ideal$ is an ideal containing $X$, then
+    $X \subseteq (X) \subseteq \ideal$.
+    Say that $(X)$ is the smallest ideal containing $X$.
+  \item Example: $(0) = (\varnothing) = \{0\}$.
+\end{itemize}
+
+Notation:
+\begin{itemize}
+  \item Sometimes use $\ang{X}$ instead of $(X)$.
+  \item If $X = \{f_1, f_2, \ldots\}$, can replace $(X) = (\{f_1, f_2, \ldots\})$ by
+    $(f_1, f_2, \ldots)$.
+    Example: $(0)$ instead of $(\{0\})$.
+\end{itemize}
+
+\begin{prop}{}{}
+  If $R$ is a ring and $X \subseteq R$, then
+  \[
+    (X) = \left\{ \sum_{i = 1}^k s_i x_i t_i : k \geq 0, \ s_i, t_i \in R, \ x_i \in X
+      \text{ for } 1 \leq i \leq k \right\}.
+  \]
+\end{prop}
+
+\begin{cor}{}{}
+  If $R$ is a commutative ring and $X \subseteq R$, then
+  \[
+    (X) = \left\{ \sum_{i = 1}^k r_i x_i : k \geq 0, \ r_i \in R, \ x_i \in X
+      \text{ for } 1 \leq i \leq k \right\}.
+  \]
+\end{cor}
+
+\begin{thmproof}
+  $s_i x_i t_i = (s_i t_i) x_i$, so set $r_i = s_i t_i$.
+\end{thmproof}
+
+\begin{thmproof}[Proof of proposition.]
+  Let $\ideal$ be the set in question.
+
+  First, show $\ideal$ is an ideal.
+  Taking $k = 0$, we get $0_R \in \ideal$.
+  Suppose $r \in R$ and $x, y \in \ideal$.
+  Let $x = \sum_{i = 1}^k s_i x_i t_i$ and $y = \sum_{i = 1}^\ell s_i' y_i t_i'$ for
+  $s_i, t_i, s_i', t_i' \in R$ and $x_i, y_i \in X$.
+  Then $rx + y = \sum_{i = 1}^k (rs_i) x_i t_i + \sum_{i = 1}^\ell s_i' y_i t_i' \in \ideal$ and
+  similarly $xr + y \in \ideal$, so $\ideal$ is an ideal.
+
+  Next, show $(X) \subseteq \ideal$.
+  Taking $k = 1$ and $s_1 = t_1 = 1$, we get $X \subseteq \ideal$ so $(X) \subseteq \ideal$.
+
+  Finally, show $\ideal \subseteq (X)$.
+  Suppose $k \geq 0$, $s_i, t_i \in R$, and $x_i \in X$ for $1 \leq i \leq k$.
+  Since $X \subseteq (X)$, $x_i \in (X)$ means $s_i x_i t_i \in (X)$ for all $1 \leq i \leq k$.
+  So $\sum_{i = 1}^k s_i x_i t_i \in (X)$.
+  Hence $\ideal \subseteq (X)$.
+\end{thmproof}
+
+\pagebreak
+\subsection{The sum of ideals}
+
+\begin{defn}{ideal sum}{}
+  If $\mathcal{I}, \mathcal{J} \subseteq R$ are ideals, then
+  $\mathcal{I} + \mathcal{J} := \{x + y : x \in \mathcal{I}, \ y \in \mathcal{J}\}$.
+\end{defn}
+
+\begin{cor}{}{}
+  $(\mathcal{I} \cup \mathcal{J}) = \mathcal{I} + \mathcal{J}$ is the smallest ideal containing
+  both $\mathcal{I}$ and $\mathcal{J}$.
+\end{cor}
+
+\begin{thmproof}
+  By proposition, clearly $\mathcal{I} + \mathcal{J} \subseteq (\mathcal{I} \cup \mathcal{J})$.
+
+  For the reverse inclusion, suppose $s_i, t_i \in R$ and $x_i \in \mathcal{I} \cup \mathcal{J}$
+  for $1 \leq i \leq k$.
+  Let $S = \{1 \leq i \leq k : x_i \in \mathcal{I}\}$, so if $i \in S$, then
+  $s_i x_i t_i \in \mathcal{I}$.
+  So $\sum_{i \in S} s_i x_i t_i \in \mathcal{I}$, and similarly
+  $\sum_{i \not\in S} s_i x_i t_i \in \mathcal{J}$.
+  We conclude that $\sum_{i = 1}^k s_i x_i t_i = \sum_{i \in S} s_i x_i t_i +
+    \sum_{i \not\in S} s_i x_i t_i \in \mathcal{I} + \mathcal{J}$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Lattice of ideals}
+
+Ideals of $R$ are ordered by set inclusion $\subseteq$.
+The set of ideals of $R$ with order $\subseteq$ is called the \hldef{lattice of ideals} of $R$.
+
+\begin{center}
+  \begin{forest}
+    [$R$, calign=child, calign child=2
+      [$\phantom{\cdots}$, name=2]
+      [$\cdots$
+        [$(0)$, name=0]
+      ]
+      [$\phantom{\cdots}$, name=3]
+    ]
+    \draw (2)--(0);
+    \draw (3)--(0);
+  \end{forest}
+\end{center}
+
+The subgroup below $\ideal_1$ and $\ideal_2$ in the lattice is $\ideal_1 \cap \ideal_2$
+(maximal subgroup contained in both).
+
+The subgroup above $\ideal_1$ and $\ideal_2$ is $\ideal_1 + \ideal_2$ (minimal subgroup containing
+both).
+
+\pagebreak
+\subsection{Quotients by a subset}
+
+We get a new way of constructing rings: take $R/(X)$ for any subset $X$.
+We know $R/(X)$ is a unital ring, but when is it non-zero?
+
+From group theory, we know that $R/\ideal$ is zero if and only if $\ideal = R$.
+We proved that $\ideal = R$ if and only if $1 \in \ideal$.
+
+\begin{cor}{}{}
+  Let $R$ be a ring and $X \subseteq R$.
+  Then $R/(X) = \{0\}$ if and only if there are $s_i, t_i \in R$ and $x_i \in X$ for
+  $1 \leq i \leq k$ such that
+  \[ \sum_{i = 1}^k s_i x_i t_i = 1. \]
+\end{cor}
+
+If $R$ is commutative, we can instead just show $\sum_{i = 1}^k r_i x_i = 1$ for $r_i \in R$ and
+$x_i \in X$.
+
+\pagebreak
+\subsection{Ideals generated by a finite subset}
+
+We often take ideals $(x_1, \ldots, x_n)$ generated by finite sets $\{x_1, \ldots, x_n\}$.
+
+\begin{cor}{}{}
+  If $R$ is a commutative ring and $X \subseteq R$, then
+  \[
+    (X) = \left\{
+      \sum_{i = 1}^k r_i x_i : k \geq 0, \ r_i \in R, \ x_i \in X \text{ for } 1 \leq i \leq k
+    \right\}.
+  \]
+\end{cor}
+
+\begin{cor}{}{}
+  If $R$ is a commutative ring and $X = \{x_1, \ldots, x_n\} \subseteq R$, then
+  \[ (X) = \left\{ \sum_{i = 1}^n r_i x_i : r_i \in R, \ 1 \leq i \leq n \right\}. \]
+\end{cor}
+
+\begin{thmproof}
+  $\text{RHS} \subseteq (X)$ is clear.
+  For the other inclusion, note that $rx_i + r'x_i = (r + r')x_i$, so we can collect like terms;
+  if $x_i$ is unneeded, then set $r_i = 0$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Principal ideals}
+
+\begin{defn}{principal ideal}{}
+  An ideal generated by a single element is called a \hldef{principal ideal}.
+\end{defn}
+
+If $R$ is a commutative ring, then $(x) = \{rx : r \in R\}$, so a principal ideal $(x)$ is often
+denoted by $xR$ or $Rx$.
+
+\begin{ex}
+  Let $R = \Z$ and $m \in \Z$.
+  Then $(m) = m\Z$ is a principal ideal.
+
+  All subgroups of $\Z$ are of the form $m\Z$ for some $m \in \Z$, so all subgroups of $\Z$ are
+  principal ideals.
+  In particular, all ideals of $\Z$ are principal ideals.
+\end{ex}
+
+\begin{ex}
+  If $R$ is commutative and $p(x) \in R[x]$, then $(p) = pR[x]$ is an ideal.
+\end{ex}
+
+\pagebreak
+\subsection{Principal ideals in non-commutative rings}
+
+If $R$ is non-commutative, then $(x)$ is not necessarily equal to $\{rx : r \in R\}$ since
+$xr \in (x)$ for $r \in R$.
+But is $(x) = \{sxr : s, r \in R\}$?
+In general, no.
+
+\begin{ex}
+  Let $E_{11} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \in M_2\R$.
+
+  We know $AE_{11}B$ has rank $\leq 1$ for every $A, B \in M_2\R$, hence
+  $\{AE_{11}B : A, B \in M_2\R\} \subsetneq M_2\R$.
+
+  Let $X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.
+  Then $XE_{11}X = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$.
+
+  So $E_{11} + XE_{11}X = I \in (E_{11})$, and we conclude that $(E_{11}) = M_2\R$.
+\end{ex}
+
+\pagebreak
+\subsection{More examples in polynomial rings}
+
+Principal ideals:
+\begin{itemize}
+  \item
+  We've already mentioned the principal ideals $(x - c)\Z[x]$ for $c \in \Z$.
+  For example, $x\Z[x]$ is the ideal of polynomials with no constant term.
+  \item
+  Another good example is $m\Z[x]$ for $m \in \Z$.
+  This is
+  $m\Z[x] = \{\sum_{i = 0}^n a_i x^i : n \geq 0, \ a_i \in m\Z \text{ for } 0 \leq i \leq n\}$.
+  \item
+  The previous example doesn't work in $\Q[x]$, though, since $2\Q[x] = \Q[x]$
+  ($2 \cdot \frac{1}{2} = 1$).
+  Also, $\Z[x]$ is not an ideal in $\Q[x]$ (in general, subrings are very different from ideals).
+\end{itemize}
+
+What about non-principal ideals?
+
+In $\Z[x, y]$, $(x, y) = \{p(x, y)x + q(x, y)y : p, q \in \Z[x, y]\}$.
+So $(x, y)$ contains $x, y, xy, x^2, y^2$, etc.
+Note $p, q$ aren't unique: $xy = 0 + x \cdot y = y \cdot x + 0$.
+To see that $(x, y)$ is a proper ideal of $\Z[x, y]$, observe that
+\[ (x, y) = \left\{
+  \sum_{i, j = 0}^n a_{ij} x^i y^j : n \geq 0, a_{ij} \in \Z \text{ for } 0 \leq i, j \leq n,
+    \ a_{00} = 0
+\right\}. \]
+
+\begin{exer}{}{}
+  Suppose there are polynomials $f, p, q \in \Z[x, y]$ such that $p \cdot f = x$ and
+  $q \cdot f = y$.
+  Show $f \in \{\pm 1\}$.
+\end{exer}
+
+Consequence: the only principal ideal containing $(x, y)$ is $\Z[x, y]$.
+In particular, $(x, y)$ is not principal.
+
+All ideals of $\Z$ are principal, whereas $\Z[x, y]$ has non-principal ideals.
+
+What about $\Z[x]$?
+Consider the ideal
+\begin{align*}
+  (2, x) &= \{2p(x) + xq(x) : p, q \in \Z[x]\} \\
+  &= \left\{ \sum_{i = 0}^n a_i x^i : n \geq 0, \ a_i \in \Z \text{ for } 0 \leq i \leq n,
+    \ a_0 \in 2\Z \right\}.
+\end{align*}
+Can this ideal be principal?
+
+\begin{exer}{}{}
+  Show that if $p, f \in \Z[x]$ such that $p(x)f(x) = 2$, then $f \in \{\pm 1, \pm 2\}$.
+
+  Show that $x \not\in \pm 2\Z[x]$.
+\end{exer}
+
+Conclusion: the only principal ideal containing $(2, x)$ is $\Z[x]$.
+
+%%%%% Lec 21
+\section{Correspondence, second and third isomorphism theorems}
+
+\subsection{Connecting ideals and homomorphisms (correspondence theorem)}
+
+\begin{prop}{}{}
+  Let $\phi \colon R \to S$ be a ring homomorphism.
+  \begin{enumerate}
+    \item If $\ideal$ is an ideal of $S$, then $\phi^{-1}(\ideal)$ is an ideal of $R$.
+    \item If $\ideal$ is an ideal of $R$ and $\phi$ is surjective, then $\phi(\ideal)$ is an ideal
+      of $S$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  Homework.
+  (Also provide counterexample for (2) when $\phi$ is not surjective.)
+\end{thmproof}
+
+Recall from group theory:
+
+\begin{thm}{Correspondence theorem for groups}{}
+  Let $\phi \colon G \to H$ be a surjective homomorphism.
+  Then there is a bijection
+  \begin{center}
+    \begin{tikzpicture}
+      \node[align=center, text width=2.5cm] at (0, 0){Subgroups $K$ of $G$ with $\ker\phi \leq K$};
+      \node[align=center, text width=2.5cm] at (8, 0){Subgroups $K'$ of $H$};
+      \draw[->] (1.5, 0.3)--(6.5, 0.3) node[midway, above]{$K \mapsto \phi(K)$};
+      \draw[->] (6.5, -0.3)--(1.5, -0.3) node[midway, below]{$\phi^{-1}(K') \mapsfrom K'$};
+    \end{tikzpicture}
+  \end{center}
+  Furthermore, if $\ker\phi \leq K, K_1, K_2 \leq G$ then
+  \begin{enumerate}
+    \item $K_1 \leq K_2 \iff \phi(K_1) \leq \phi(K_2)$,
+    \item $\phi(K_1 \cap K_2) = \phi(K_1) \cap \phi(K_2)$, and
+    \item $K$ is normal $\iff$ $\phi(K)$ is normal.
+  \end{enumerate}
+\end{thm}
+
+We can get a version for rings immediately.
+
+\begin{thm}{Correspondence theorem for rings}{}
+  Let $\phi \colon R \to S$ be a surjective ring homomorphism.
+  Then there is a bijection
+  \begin{center}
+    \begin{tikzpicture}
+      \node[align=center, text width=2.5cm]
+        at (0, 0){Subgroups $K$ of $R^+$ with $\ker\phi \leq K$};
+      \node[align=center, text width=2.5cm] at (8, 0){Subgroups $K'$ of $S^+$};
+      \draw[->] (1.5, 0.3)--(6.5, 0.3) node[midway, above]{$K \mapsto \phi(K)$};
+      \draw[->] (6.5, -0.3)--(1.5, -0.3) node[midway, below]{$\phi^{-1}(K') \mapsfrom K'$};
+    \end{tikzpicture}
+  \end{center}
+  Furthermore, if $\ker\phi \leq K, K_1, K_2 \leq R^+$, then $K$ is an ideal if and only if
+  $\phi(K)$ is an ideal.
+\end{thm}
+
+\begin{thmproof}
+  Apply proposition and use the fact that $K = \phi^{-1}(\phi(K))$.
+\end{thmproof}
+
+In the special case of $q \colon R \to R/\ideal$, if $\ideal \subseteq \mathcal{K} \leq R^+$, then
+$\mathcal{K}$ is an ideal of $R$ if and only if $\mathcal{K}/\ideal$ is an ideal of $R/\ideal$.
+
+\begin{ex}
+  Let $R$ be a commutative ring.
+  What are the ideals of $R[x]$ containing $(x)$?
+
+  $(x)$ is the kernel of the surjective homomorphism $\ev_{x = 0} \colon R[x] \to R$.
+  So ideals of $R[x]$ containing $(x)$ correspond to ideals $\ideal$ of $R$.
+
+  If $\ideal$ is an ideal of $R$, what is the corresponding ideal in $R[x]$?
+
+  Answer:
+  \begin{align*}
+    \ev_{x = 0}^{-1}(\ideal) &= \{f \in R[x] : f(0) \in \ideal\} \\
+    &= \left\{ \sum_{i = 0}^n a_i x^i : n \geq 0, \ a_i \in R \text{ for } 0 \leq i \leq n,
+      \ a_0 \in \ideal \right\}.
+  \end{align*}
+\end{ex}
+
+\pagebreak
+\subsection{Second isomorphism theorem}
+
+Recall from group theory:
+
+\begin{thm}{Second isomorphism theorem for groups}{}
+  Suppose $H \subseteq N_G(K)$.
+  Then $HK \leq G$, $K \trianglelefteq HK$, and $H \cap K \trianglelefteq H$.
+  Furthermore, if $i_H \colon H \to HK$ is the inclusion and $q_1 \colon H \to H/(H \cap K)$ and
+  $q_2 \colon HK \to HK/K$ are the quotient maps, then there is an isomorphism
+  $\psi \colon H/(H \cap K) \to HK/K$ such that $\psi \circ q_1 = q_2 \circ i_H$.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (H) at (0, 2){$H$};
+    \node (HK) at (4, 2){$HK$};
+    \node (HHK) at (0, 0){$H/H \cap K$};
+    \node (HKK) at (4, 0){$HK/K$};
+    \draw[->] (H)--(HHK) node[midway, left]{$q_1$};
+    \draw[->] (H)--(HK) node[midway, above]{$i_H$};
+    \draw[->] (HK)--(HKK) node[midway, right]{$q_2$};
+    \draw[->] (HHK)--(HKK) node[midway, below]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+Let's restate this for abelian groups with additive notation.
+
+\begin{thm}{Second isomorphism theorem for abelian groups}{}
+  Suppose $H, K \leq G$.
+  Then $H + K \leq G$, and furthermore, if $i_H \colon H \to H + K$ is the inclusion,
+  $q_1 \colon H \to H/H \cap K$ and $q_2 \colon H + K \to H + K/K$ are the quotient maps, then
+  there is an isomorphism $\psi \colon H/H \cap K \to H + K/K$ such that
+  $\psi \circ q_1 = q_2 \circ i_H$.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (H) at (0, 2){$H$};
+    \node (HK) at (4, 2){$H + K$};
+    \node (HHK) at (0, 0){$H/H \cap K$};
+    \node (HKK) at (4, 0){$H + K/K$};
+    \draw[->] (H)--(HHK) node[midway, left]{$q_1$};
+    \draw[->] (H)--(HK) node[midway, above]{$i_H$};
+    \draw[->] (HK)--(HKK) node[midway, right]{$q_2$};
+    \draw[->] (HHK)--(HKK) node[midway, below]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+Now we can extend this to rings.
+
+\begin{thm}{Second isomorphism theorem for rings}{}
+  Let $S$ be a subring of $R$ and let $\ideal$ be an ideal of $R$.
+  Then $S + \ideal$ is a subring of $R$ and $S \cap \ideal$ is an ideal of $S$.
+  Furthermore, if $i_S \colon S \to S + \ideal$ is the inclusion and
+  $q_1 \colon S \to S/S \cap \ideal$ and $q_2 \colon S + \ideal \to S + \ideal/\ideal$ are the
+  quotient maps, then there is a (ring) isomorphism
+  $\psi \colon S/S \cap \ideal \to S + \ideal/\ideal$ such that $\psi \circ q_1 = q_2 \circ i_S$.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (S) at (0, 2){$S$};
+    \node (SI) at (4, 2){$S + \ideal$};
+    \node (SSI) at (0, 0){$S/S \cap \ideal$};
+    \node (SII) at (4, 0){$S + \ideal/\ideal$};
+    \draw[->] (S)--(SSI) node[midway, left]{$q_1$};
+    \draw[->] (S)--(SI) node[midway, above]{$i_S$};
+    \draw[->] (SI)--(SII) node[midway, right]{$q_2$};
+    \draw[->] (SSI)--(SII) node[midway, below]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+Here $S + \ideal = \{s + x : s \in S, \ x \in \ideal\}$ (same definition as for ideals).
+
+\begin{thmproof}
+  $S, \ideal$ are subgroups of $R^+$ and $S + \ideal$ is a subgroup of $R^+$.
+
+  To show that $S + \ideal$, note that $1 \in S + \ideal$.
+  If $x, y \in S + \ideal$, then $x = s + a$ and $y = t + b$ for some $s, t \in S$ and
+  $a, b \in \ideal$.
+  So $xy = st + (st + at + ab) \in S + \ideal$ and hence $S + \ideal$ is a subring.
+
+  Exercise: show $S \cap \ideal$ is an ideal of $S$.
+
+  By second isomorphism theorem for groups, there is an isomorphism
+  $\psi \colon S/S \cap \ideal \to S + \ideal/\ideal$ such that $\psi \circ q_1 = q_2 \circ i_S$.
+
+  By applying the lemma below, we see $\psi$ is a ring isomorphism.
+\end{thmproof}
+
+\begin{lem}{From universal property of quotient rings}{}
+  Let $R, S, T$ be rings.
+  Suppose that $\psi_1 \colon R \to T$ is a ring homomorphism and $\psi_2 \colon T \to S$ is a
+  group homomorphism such that $\psi_2 \circ \psi_1$ is a ring homomorphism.
+  If $\psi_1$ is surjective, then $\psi_2$ is a ring homomorphism.
+\end{lem}
+
+\begin{ex}
+  Let $\mathcal{J}$ be an ideal of a commutative ring $R$.
+
+  Let $\ideal = \{f \in R[x] : f(0) \in \mathcal{J}\} = \ev_0^{-1}(\mathcal{J})$.
+
+  Then
+  \begin{itemize}
+    \item $R$ is a subring of $R[x]$,
+    \item $R + \ideal = R[x]$, and
+    \item $R \cap \ideal = \mathcal{J}$.
+  \end{itemize}
+  So $R/\mathcal{J} \cong R[x]/\ideal$ by the second isomorphism theorem.
+\end{ex}
+
+\pagebreak
+\subsection{Third isomorphism theorem}
+
+From group theory:
+
+\begin{thm}{Third isomorphism theorem for groups}{}
+  Let $N \trianglelefteq G$ and $N \leq K \trianglelefteq G$.
+  Let
+  \begin{itemize}
+    \item $q_1$ be the quotient map $G \to G/N$,
+    \item $q_2$ be the quotient map $G/N \to (G/N)/(K/N)$, and
+    \item $q_3$ be the quotient map $G \to G/K$.
+  \end{itemize}
+  Then there is an isomorphism $\psi \colon G/K \to (G/N)/(K/N)$ such that
+  $\psi \circ q_3 = q_2 \circ q_1$.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (G) at (0, 2){$G$};
+    \node (GN) at (4, 2){$G/N$};
+    \node (GK) at (0, 0){$G/K$};
+    \node (GNKN) at (4, 0){$(G/N)/(K/N)$};
+    \draw[->] (G)--(GK) node[midway, left]{$q_3$};
+    \draw[->] (G)--(GN) node[midway, above]{$q_1$};
+    \draw[->] (GN)--(GNKN) node[midway, right]{$q_2$};
+    \draw[->] (GK)--(GNKN) node[midway, below]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+Now for rings:
+
+
+\begin{thm}{Third isomorphism theorem for groups}{}
+  Suppose $\ideal \subseteq \mathcal{K}$ are ideals of a ring $R$, and let
+  \begin{itemize}
+    \item $q_1$ be the quotient map $R \to R/\ideal$,
+    \item $q_2$ be the quotient map $R/\ideal \to (R/\ideal)/(\mathcal{K}/\ideal)$, and
+    \item $q_3$ be the quotient map $R \to R/\mathcal{K}$.
+  \end{itemize}
+  Then there is a (ring) isomorphism $\psi \colon R/\mathcal{K} \to (R/\ideal)/(\mathcal{K}/\ideal)$
+  such that $\psi \circ q_3 = q_2 \circ q_1$.
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (R) at (0, 2){$R$};
+    \node (RI) at (4, 2){$R/\ideal$};
+    \node (RK) at (0, 0){$R/\mathcal{K}$};
+    \node (RIKI) at (4, 0){$(R/\ideal)/(\mathcal{K}/\ideal)$};
+    \draw[->] (R)--(RK) node[midway, left]{$q_3$};
+    \draw[->] (R)--(RI) node[midway, above]{$q_1$};
+    \draw[->] (RI)--(RIKI) node[midway, right]{$q_2$};
+    \draw[->] (RK)--(RIKI) node[midway, below]{$\psi$};
+  \end{tikzpicture}
+\end{center}
+
+\begin{thmproof}
+  Apply the lemma from the universal property of quotient rings again.
+\end{thmproof}
+
+\begin{ex}
+  $(\Z/mn\Z)/(m\Z/mn\Z) \cong \Zmod{m}$ as groups, and also as rings.
+\end{ex}
+
+\begin{ex}
+  As in the previous example, let $\mathcal{J}$ be an ideal of $R$ and
+  $\ideal = \ev_0^{-1}(\mathcal{J}) \subseteq R[x]$.
+
+  Now $\ideal$ contains $(x)$, so by the third isomorphism,
+  $R[x]/\ideal \cong (R[x]/(x))/(\ideal/(x))$.
+
+  By first isomorphism theorem, $R[x]/(x) \cong R$ since $(x) = \ker\ev_0$.
+  This isomorphism sends $f(x) + (x) \in R[x]/(x)$ to $\ev_0(f) = f(0)$, and hence identifies
+  $\ideal/(x)$ with $\mathcal{J}$.
+
+  Conclusion: $R[x]/\ideal \cong (R/(x))/(\ideal/(x)) \cong R/\mathcal{J}$.
+
+  Exercise: show that this isomorphism is the same as the isomorphism
+  $R/\mathcal{J} \cong R[x]/\ideal$ from the second isomorphism theorem.
+\end{ex}
 
 %---------------
 \end{document}
