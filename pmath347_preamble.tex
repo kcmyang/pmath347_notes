@@ -236,6 +236,26 @@
   {defn} % label prefix
 \crefname{defn}{Definition}{Definitions}
 
+\newtcbtheorem[no counter]
+  {axiom} % environment name
+  {Axiom} % display name
+  { % options
+    colback=blue!10,
+    colframe=blue!10,
+    colbacktitle=blue!10,
+    coltitle=blue!60!black,
+    fonttitle=\sffamily\bfseries,
+    sharp corners,
+    boxsep=1ex,
+    toptitle=1ex,
+    before skip=\baselineskip,
+    after skip=\baselineskip,
+    separator sign={~---},
+    label type={prop}
+  }
+  {axiom} % label prefix
+\crefname{axiom}{Axiom}{Axiom}
+
 \newtcolorbox{ex}[1][Example]{
   enhanced,
   parbox=false,

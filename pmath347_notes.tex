@@ -7114,6 +7114,733 @@ Now for rings:
   $R/\mathcal{J} \cong R[x]/\ideal$ from the second isomorphism theorem.
 \end{ex}
 
+\week{Maximal and Prime Ideals}
+
+%%%%% Lec 22
+\section{Maximal ideals and fields}
+
+\subsection{Constructing complex numbers from real numbers}
+
+From last week: we can construct new rings $R/(X)$ by taking $X \subseteq R$.
+What sets $X$ might we like to look at?
+
+Suppose we didn't know about $\C$, and we want a square root of $-1$.
+We want to take $\R$ and add an element $x$ such that $x^2 = -1$.
+
+So let's look at $\R[x]/(x^2 + 1)$ (note $x^2 + 1 = 0 \iff x^2 = -1$).
+If we look at $\overline{x} = [x]$ in $\R[x]/(x^2 + 1)$, then
+\[
+  \overline{x}^2 + 1 = [x]^2 + [1] = [x^2 + 1] = x^2 + 1 + (x^2 + 1) = (x^2 + 1) = 0.
+\]
+What ring is $\R[x]/(x^2 + 1)$?
+
+\begin{thm}{}{}
+  $\R[x]/(x^2 + 1) \cong \C$.
+\end{thm}
+
+If we didn't know about $\C$, we could use $\R[x]/(x^2 + 1)$ as the definition.
+
+\pagebreak
+\subsection{The complex numbers}
+
+Let's clarify what $\C$ is:
+\begin{itemize}
+  \item $\C = \{a + bi : a, b \in \R\}$
+  \item $(a + bi) + (c + di) = (a + c) + (b + d)i$
+  \item $(a + bi)(c + di) = (ac - bd) + (ad + bc)i$
+\end{itemize}
+
+How does $\R[x]/(x^2 + 1)$ correspond to $\C$?
+We know that $\overline{x}$ acts like $i$.
+
+\begin{lem}{}{}
+  Every element of $\R[x]/(x^2 + 1)$ can be written uniquely in the form $a + b\overline{x}$ for
+  some $a, b \in \R$.
+\end{lem}
+
+\begin{thmproof}
+  \textbf{Existence:}
+  Since the quotient map $\R[x] \to \R[x]/(x^2 + 1)$ is surjective, every element of
+  $\R[x]/(x^2 + 1)$ can be written as $\sum_{i = 0}^n a_i \overline{x}^i$.
+  (Note the bar on $a_i$ is dropped for brevity.)
+
+  If $n \geq 2$, then $a_n x^{n - 2}(x^2 + 1) \in (x^2 + 1)$, so
+  $a_n \overline{x}^n + a_n \overline{x}^{n - 2} = 0$.
+  Thus
+  \begin{align*}
+    \sum_{i = 0}^n a_i \overline{x}^i
+    &= \sum_{i = 0}^{n} a_i \overline{x}^i - (a_n \overline{x}^n + a_n \overline{x}^{n - 2}) \\
+    &= 0 \cdot \overline{x}^n + a_{n - 1} \overline{x}^{n - 1}
+      + (a_{n - 2} - a_n) \overline{x}^{n - 2} + \cdots.
+  \end{align*}
+  We can lower $n$ until we get $\sum_{i = 0}^n a_i \overline{x}^i = a + b\overline{x}$ for some
+  $a, b$.
+
+  \textbf{Uniqueness:}
+  Suppose $a + b\overline{x} = c + d\overline{x}$.
+  Then $(a - c) + (b - d)\overline{x} = 0$, so $(a - c) + (b - d)x \in (x^2 + 1)$.
+
+  If $f \in (x^2 + 1)$ and $f \neq 0$, then $f = g(x^2 + 1)$ for $g \in \R[x]$ with $g \neq 0$.
+  So $\deg(f) = \deg(g) + \deg(x^2 + 1) \geq 2$.
+
+  Hence every non-zero element of $(x^2 + 1)$ has degree $\geq 2$.
+  Then the only way $(a - c) + (b + d)x$ can be in $(x^2 + 1)$ is if it is zero, so
+  $a = c$ and $b = d$.
+\end{thmproof}
+
+Now for the theorem:
+
+\begin{thm}{}{}
+  $\R[x]/(x^2 + 1) \cong \C$.
+\end{thm}
+
+\begin{thmproof}
+  Since $\R$ is a subring of $\C$, we can consider $\R[x]$ as a subring of $\C[x]$.
+
+  Let $j \colon \R[x] \hookrightarrow \C[x]$ be the inclusion.
+  Let $\phi = \ev_{x = i} \circ j \colon \R[x] \to \C[x] \to \C$.
+  Then $\phi(x) = i$, so $\phi(x^2 + 1) = i^2 + 1 = 0$.
+  So $x^2 + 1 \in \ker\phi$, so $(x^2 + 1) \subseteq \ker\phi$.
+
+  By the universal property of quotient rings, there is a homomorphism
+  $\psi \colon \R[x]/(x^2 + 1) \to \C$ such that $\psi \circ q = \phi$.
+  So $\psi(a + b\overline{x}) = \phi(a + bx) = a + bi$.
+  By the lemma, $\psi$ is a bijection.
+\end{thmproof}
+
+This is a common line of proof (see Homework \#4 Q9).
+
+\pagebreak
+\subsection{Generalizations}
+
+We constructed $\C$ by asking for an element $x$ such that $x^2 + 1 = 0$.
+
+If we start from a field $\mathbb{K}$, can we ask for an element $x$ satisfying any polynomial
+equation(s), and then just cosntruct a ring containing $\mathbb{K}$ with such an element?
+
+Yes!
+But the ring might be zero if we ask for too much.
+
+\begin{ex}
+  \begin{itemize}
+    \item $1 \neq 0$ in $\mathbb{K}[x]/(x^2 + 1)$ as we've seen.
+    \item If $p$ is a polynomial of degree $n \geq 1$, then $\mathbb{K}[x]/(p)$ is a
+      $\mathbb{K}$-vector space of dimension $n$ (exercise similar to lemma).
+      So $1 \neq 0$ in $\mathbb{K}[x]/(p)$.
+    \item $1 = 0$ in $\mathbb{K}[x]/(x^2 + 1, x^3 + x + 1)$, since
+      $x^3 + x + 1 - x(x^2 + 1) = 1 \in (x^2 + 1, x^3 + x + 1)$.
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Maximal ideals}
+
+Let $\ideal$ be an ideal of a commutative ring $R$.
+When is $R/\ideal$ a field?
+
+We know that the only ideals in a field $\mathbb{K}$ are $(0)$ and $\mathbb{K}$.
+Suppose $\mathbb{K} = R/\ideal$ is a field, and $q \colon R \to \mathbb{K}$ is the quotient map.
+By the correspondence theorem, the only ideals of $R$ containing $\ideal$ are
+$q^{-1}((0)) = \ker q = \ideal$ and $q^{-1}(\mathbb{K}) = R$.
+
+\begin{defn}{maximal ideal}{}
+  An ideal $\ideal$ of a ring $R$ is \hldef{maximal} if the only ideals containing $\ideal$ are
+  $\ideal$ are $R$.
+\end{defn}
+
+Intuition: a maximal ideal is a maximal proper ideal under $\subseteq$.
+
+\begin{lem}{}{}
+  If $R/\ideal$ is a field, then $\ideal$ is maximal.
+\end{lem}
+
+\pagebreak
+\subsection{Ideals in fields}
+
+\begin{prop}{}{}
+  A commutative ring $R$ is a field if and only if $1 \neq 0$, and the only ideals in $R$ are $(0)$
+  and $R$.
+\end{prop}
+
+Requiring $1 \neq 0$ is the same as requiring $(0) \neq R$.
+
+\begin{thmproof}
+  We already saw the forward implication.
+
+  For the reverse, suppose $x \in R$ wher $x \neq 0$.
+  Then $(x) = R$.
+  Then $1 \in (x) = xR$, so there is $y \in R$ such that $xy = 1$.
+  So $x$ is a unit.
+  Since all non-zero elements of $R$ are units, $R$ is a field.
+\end{thmproof}
+
+\pagebreak
+\subsection{Maximal ideals and fields}
+
+\begin{thm}{}{}
+  Let $\ideal$ be an ideal in a commutative ring $R$.
+  Then $R/\ideal$ is a field if and only if $\ideal$ is maximal.
+\end{thm}
+
+\begin{thmproof}
+  By correspondence theorem, the only ideals of $R/\ideal$ are $(0)$ and $R/\ideal$ if and only if
+  the only ideals of $R$ containing $\ideal$ are $\ideal$ and $R$.
+  So by the proposition, $R/\ideal$ is a field if and only if $\ideal$ is maximal.
+\end{thmproof}
+
+\begin{ex}
+  \begin{itemize}
+    \item $\mathbb{K}[x]/(x - c) \cong \mathbb{K}$ for all $c \in \mathbb{K}$, so $(x - c)$ is a
+      maximal ideal of $\mathbb{K}[x]$ for any field $\mathbb{K}$.
+    \item $\mathbb{R}[x]/(x^2 + 1) \cong \C$, so $(x^2 + 1)$ is a maximal ideal of $\R[x]$.
+  \end{itemize}
+\end{ex}
+
+\begin{ex}
+  $\Z[x]/(x) \cong \Z$ is not a field, so $(x)$ is not a maximal ideal of $\Z[x]$.
+
+  Indeed, we know that $(x) \subsetneq (2, x) \subsetneq \Z[x]$.
+  We also know that $(2, x) = \{f \in \Z[x] : f(0) \in (2)\} = \ev_{x = 0}^{-1}((2))$ for ideal
+  $(2) \subseteq \Z$.
+  By the second isomorphism theorem, $\Z[x]/(2, x) \cong \Zmod{2}$, which is a field.
+
+  Exercise: $\Z[x]/(n, x) \cong \Zmod{n}$ and hence $(n, x)$ is maximal for $n \in \Z$ if and only
+  if $n$ is prime.
+\end{ex}
+
+\begin{ex}
+  If $R$ is commutative ring, we have
+  \[
+    \ev_{(a, b)} = \ev_{x = a} \circ \ev_{y = b} \colon R[x, y] = R[x][y] \to R[x] \to R.
+  \]
+  Then $\ker\ev_{(a, b)} = \ev_{(a, b)}^{-1}((0)) = \ev_{y = b}^{-1}((x - a))
+    = \{f \in R[x][y] : f(x, b) \in (x - a)R[x]\} = (x - a, y - b)$.
+  By the first isomorphism theorem, $R[x, y]/(x - a, y - b) \cong R$.
+  So $(x - a, y - b)$ is a maximal ideal of $R[x, y]$ if and only if $R$ is a field.
+
+  For $(y - x^2) \subseteq R[x, y]$, we know $R[x, y]/(y - x^2) \cong R[x]$.
+  $R[x]$ is not a field since $x$ is not a unit.
+  So $(y - x^2)$ is not maximal.
+  (Indeed, $(y - x^2) \subsetneq (x, y)$.)
+\end{ex}
+
+\begin{ex}
+  Let $c \in \R$.
+  In the homework, you'll show
+  \[
+    \R[x]/(x^2 - c) \cong \begin{cases}
+      \C & c < 0 \\
+      \R \times \R & c > 0 \\
+      \R[x]/(x^2) \quad & c = 0
+    \end{cases}.
+  \]
+  Exercise: $\R \times \R$ and $\R[x]/(x^2)$ are not fields.
+  Hence $\R[x]/(x^2 - c)$ is a field if and only if $c < 0$.
+  So $(x^2 - c)$ is maximal if and only if $c < 0$.
+
+  Exercise: find proper ideals properly containing $(x^2 - c)$ for $c \geq 0$.
+\end{ex}
+
+\pagebreak
+\subsection{Partially-ordered sets}
+
+\begin{defn}{partial order}{}
+  A \hldef{partial order} on a set $X$ is a relation $\leq$ on $X$ such that for all
+  $x, y, z \in X$:
+  \begin{enumerate}
+    \item $x \leq x$;
+    \item if $x \leq y$ and $y \leq x$, then $x = y$; and
+    \item if $x \leq y$ and $y \leq z$, then $x \leq z$.
+  \end{enumerate}
+  We say that $x < y$ if $x \leq y$ and $x \neq y$.
+
+  A \hldef{maximal element of a subset} $S \subseteq X$ is an element $x \in S$ such that if
+  $x \leq y$ for $y \in S$, then $x = y$.
+
+  An \hldef{upper bound of a subset} $S \subseteq X$ is an element $x \in X$ such that $y \leq x$
+  for all $y \in S$.
+
+  A \hldef{maximum element of a subset} $S \subseteq X$ is an element $x \in S$ which is an upper
+  bound for $S$ (unique if it exists).
+\end{defn}
+
+A maximum element (if it exists) of a subset $X$ is maximal.
+But a subset $S$ can have maximal elements without having a maximum element.
+
+\begin{ex}
+  Consider $2^{\{1, 2\}} = \{\varnothing, \{1\}, \{2\}, \{1, 2\}\}$ ordered by $\subseteq$.
+
+  Then $\{1, 2\}$ is a maximum element for $2^{\{1, 2\}}$, but the subset
+  $\{\varnothing, \{1\}, \{2\}\}$ has no maximum element.
+  Instead it has two maximal elements: $\{1\}$ and $\{2\}$.
+\end{ex}
+
+Ideals of a ring $R$ are ordered under $\subseteq$.
+$R$ is a maximum element for the whole set.
+We are more interested in the set of proper ideals ordered under $\subseteq$.
+
+\pagebreak
+\subsection{Proper ideals ordered under inclusion}
+
+Let $R$ be a non-zero ring, so the set of proper ideals is non-empty.
+Does the set of proper ideals of $R$ have a maximum element?
+Once a set has more than one maximal element, it can't have a maximum.
+
+\begin{ex}
+  $\Zmod{n}$ is a field if and only if $n$ is prime.
+  So $(n)$ is maximal if and only if $n$ is prime.
+  So $(2)$ and $(3)$ are both maximal.
+\end{ex}
+
+Does the set of proper ideals always have a maximal element?
+
+\pagebreak
+\subsection{Maximal elements for the set of proper ideals?}
+
+Does the set of proper ideals always have a maximal element?
+Maybe we can construct one:
+\begin{itemize}
+  \item Pick a proper ideal $\ideal_0$.
+  \item If $\ideal_0$ is not maximal, find a proper ideal $\ideal_1$ with
+    $\ideal_0 \subsetneq \ideal_1$.
+  \item Continue until we get to a maximal element.
+\end{itemize}
+
+Of course, this might not work.
+We might be in a poset (partially ordered set) like $(\N, \leq)$, where we have infinitely long
+increasing sequences like $1 < 2 < 3 < \cdots$.
+In that case, we're only guaranteed to get a sequence
+$\ideal_0 \subsetneq \ideal_1 \subsetneq \ideal_2 \subsetneq \cdots$ of proper ideals.
+
+\pagebreak
+\subsection{Chains of ideals}
+
+If $x_0 \leq x_1 \leq x_2 \leq \cdots$ in a partially ordered set $X$, then the subset
+$S = \{x_0, x_1, x_2, \ldots\}$ is a chain.
+
+\begin{defn}{chain}{}
+  If $(X, \leq)$ is a partially ordered set, we say that a subset $S \subseteq X$ is a \hldef{chain}
+  if for every $s, t \in S$, either $s \leq t$ or $t \leq s$ (or both).
+\end{defn}
+
+Is the set of proper ideals like $\N$, a chain with no upper bound?
+
+\begin{lem}{}{}
+  Let $R$ be a commutative ring, and let $\mathcal{F}$ be a chain of ideals.
+  Then
+  \[ \bigcup_{\ideal \in \mathcal{F}} \ideal \]
+  is an ideal of $R$.
+\end{lem}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+Note that this doesn't work if $\mathcal{F}$ is not a chain, since the union of ideals is typically
+not closed under addition.
+
+\begin{ex}
+  $(2) \cup (3) \subseteq \Z$ doesn't contain $5 = 2 + 3$.
+\end{ex}
+
+If $\mathcal{F}$ is a chain of proper ideals, then $1 \not\in \ideal$ for all
+$\ideal \in \mathcal{F}$.
+So $1 \not\in \bigcup_{\ideal \in \mathcal{F}} \ideal$.
+
+\begin{cor}{}{}
+  If $\mathcal{F}$ is a chain of proper ideals of $R$, then there is a proper ideal which is an
+  upper bound for $\mathcal{F}$.
+\end{cor}
+
+Suppose we try to construct a maximal ideal, and end up with a sequence
+$\ideal_0 \subsetneq \ideal_1 \subsetneq \ideal_2 \subsetneq \cdots$ of proper ideals.
+
+By the corollary, there is a proper ideal $\mathcal{J}_0$ which is an upper bound for
+$\{\ideal_0, \ideal_1, \ldots\}$, that is, $\ideal_k \subseteq \mathcal{J}_0$ for all $k$.
+
+If $\mathcal{J}_0$ is maximal, then we are done.
+If not, we can find a proper ideal $\mathcal{J}_1$ with $\mathcal{J}_0 \subsetneq \mathcal{J}_1$,
+and our search continues.
+
+Is this going to end?
+It looks like we face a never-ending (infinite) succession of choices.
+We need some help.
+
+\pagebreak
+\subsection{Zorn's lemma}
+
+\begin{axiom}{Axiom of choice}{}
+  Let $X \subseteq 2^Y$ for some $Y$, such that if $A \in X$, then $A \neq \varnothing$.
+  Then there is a function $f \colon X \to Y$ such that $f(A) \in A$ for all $A \in X$.
+\end{axiom}
+
+The function $f$ is called a \hldef{choice function} (it ``chooses'' an element from each set).
+We rarely use the axiom of choice in this form.
+However, it has a number of useful equivalent formulation:
+
+\begin{axiom}{Equivalent form of the axiom of choice \#1}{}
+  A function $f \colon X \to Y$ is surjective if and only if it has a right inverse.
+\end{axiom}
+
+(We called this a theorem earlier in the course because the axiom of choice is one of our standard
+axioms.)
+
+\begin{axiom}{Equivalent form of the axiom of choice \#2: Zorn's lemma}{}
+  Let $(X, \leq)$ be a partially ordered set, such that if $S$ is a chain in $X$, then there is an
+  element $x \in X$ which is an upper bound for $S$.
+  Then $X$ contains a maximal element.
+\end{axiom}
+
+\pagebreak
+\subsection{Maximal elements for the set of proper ideals, continued}
+
+\begin{prop}{}{}
+  Suppose that $\mathcal{J}$ is a proper ideal in a commutative ring $R$.
+  Then there is a maximal ideal $\mathcal{K}$ of $R$ containing $\mathcal{J}$.
+\end{prop}
+
+\begin{thmproof}
+  Let $\mathcal{P} = \{\ideal \subsetneq R : \ideal \text{ is an ideal and }
+    \mathcal{J} \subseteq \ideal\}$, ordered under $\subseteq$.
+  Let $\mathcal{F}$ be a chain in $\mathcal{P}$.
+
+  By the lemma, $\ideal' = \bigcup_{\ideal \in \mathcal{F}} \ideal$ is an ideal of $R$.
+  Clearly $\mathcal{J} \subseteq \ideal'$, and since $1 \not\in \ideal'$ we have that
+  $\ideal' \in \mathcal{P}$.
+  So $\ideal'$ is an upper bound for $\mathcal{F}$ in $\mathcal{P}$.)
+  By Zorn's lemma, $\mathcal{P}$ has a maximal element.
+\end{thmproof}
+
+\begin{ex}
+  Take $(0)$ in $\Z$.
+  Then $(0)$ is contained in $(p)$ for any prime $p$, all of which are maximal.
+  So the ideal $\mathcal{K}$ in the proposition isn't necessarily unique.
+\end{ex}
+
+In particular, every non-zero commutative ring has a maximal ideal.
+Or equivalently:
+
+\begin{cor}{}{}
+  For every non-zero commutative ring $R$, there is a field $\mathbb{K}$ such that there is a
+  homomomorphism $\phi \colon R \to \mathbb{K}$.
+\end{cor}
+
+\begin{thmproof}
+  Take $\ideal$ to be a maximal ideal of $R$, and let $\phi \colon R \to R/\ideal$ be the quotient
+  map.
+\end{thmproof}
+
+%%%%% Lec 23
+\section{Prime ideals and integral domains}
+
+\subsection{Zero divisors}
+
+If $\mathbb{K}$ is a field and $f, g \in \mathbb{K}[x]$, then $\deg(fg) = \deg(f) + \deg(g)$.
+
+In contrast, in an arbitrary ring like $R = \Zmod{6}$, we can have things like
+$(1 + 2x)(1 + 3x) = 1 + 5x + 6x^2 = 1 - x$.
+This happens when there are elements $x, y \in R \setminus \{0\}$ with $xy = 0$.
+
+\begin{defn}{zero divisor}{}
+  Let $R$ be a ring.
+  A non-zero element $x \in R$ is a \hldef{zero divisor} if there is a non-zero element $y \in R$
+  such that $xy = 0$ or $yx = 0$.
+\end{defn}
+
+That is, $x$ (and $y$) divide 0.
+
+\begin{ex}
+  If $n$ is not prime, then $n = ab$ for $2 \leq a, b < n$.
+  So $[a], [b] \neq 0$ in $\Zmod{n}$, but $[a] \cdot [b] = [ab] = 0$, so $[a], [b]$ are zero
+  divisors.
+\end{ex}
+
+\begin{ex}
+  If $R$ and $S$ are non-zero rings and $a \neq 0$ in $R$ and $b \neq 0$ in $S$, then
+  $(a, 0)$ and $(0, b)$ are non-zero in the product ring $R \times S$.
+
+  But $(a, 0) \cdot (0, b) = (0, 0) = 0$ in $R \times S$, so $(a, 0)$ and $(0, b)$ are zero
+  divisors.
+\end{ex}
+
+\begin{ex}
+  For any ring $R$, $\overline{x}$ is a zero divisor in $R[x]/(x^2)$ since $\overline{x}^2 = 0$.
+\end{ex}
+
+\begin{ex}
+  For any ring $R$, $\overline{x}$ and $\overline{y}$ are zero divisors in $R[x]/(xy)$.
+\end{ex}
+
+For these examples, we still need to show $\overline{x}$ or $\overline{y}$ are non-zero; there are
+techniques for this later and on the homework.
+
+\begin{ex}
+  Suppose $\mathbb{K}$ is a field.
+  Let $E_{ij} \in M_n\mathbb{K}$ be the matrix with a 1 in position $ij$ and 0's elsewhere.
+
+  Then $E_{ij}E_{k\ell} = \delta_{jk}E_{i\ell}$, so $E_{ij}$ is a zero divisor for all $i, j$
+  as long as $n \geq 2$.
+
+  Exercise: show that $A \in M_n\mathbb{K}$ is a zero divisor if and only if the rank of $A$ is
+  less than $n$ (i.e., $A$ is not invertible).
+\end{ex}
+
+\begin{ex}
+  Let $G$ be a group, and let $g \in G \setminus \{e\}$ with $\abs{g} = 2$.
+
+  Then $(e + g)(e - g) = e - g^2 = e - e = 0$ in $\Z G$.
+
+  \textbf{Kaplansky zero divisor conjecture}: if every element of $G \setminus \{e\}$ has infinite
+  order, and $\mathbb{K}$ is a field, then $\mathbb{K}G$ has no zero divisors.
+\end{ex}
+
+\pagebreak
+\subsection{Units and zero divisors}
+
+\begin{lem}{}{}
+  Let $u$ be a unit in a ring $R$.
+  Then $u$ is not a zero divisor.
+\end{lem}
+
+\begin{thmproof}
+  $uv = 0 \implies v = u^{-1}uv = 0$ and $vu = 0 \implies v = vuu^{-1} = 0$.
+\end{thmproof}
+
+Every non-zero element of a field is a unit, so fields have no zero divisors.
+
+In general, an element can be not a zero divisor but also not a unit:
+\begin{itemize}
+  \item $\Z$ has no zero divisors, but the only units are $\pm 1$.
+  \item If $f \in \mathbb{K}[x]$ with $f \neq 0$ and $\mathbb{K}$ a field, then by the degree
+    formula, $fg = 0$ if and only if $g = 0$.
+
+    So $\mathbb{K}[x]$ has no zero divisors, but $\mathbb{K}[x]^\times = \mathbb{K}^\times$.
+\end{itemize}
+
+\pagebreak
+\subsection{Cancellation laws}
+
+\begin{prop}{}{}
+  Suppose a non-zero element $x$ in a ring $R$ is not a zero divisor.
+  If $xa = xb$ or $ax = bx$ for some $a, b \in R$, then $a = b$.
+\end{prop}
+
+\begin{thmproof}
+  If $xa = xb$, then $x(a - b) = 0$.
+  Since $x \neq 0$ and $x$ is not a zero divisor, $a - b = 0 \implies a = b$.
+  Similar if $ax = bx$.
+\end{thmproof}
+
+\begin{cor}{}{}
+  Let $R$ be a finite ring.
+  If a non-zero element $x$ is not a zero divisor, then $x$ is a unit.
+\end{cor}
+
+\begin{thmproof}
+  Consider the function $\ell_x \colon R \to R : y \mapsto xy$.
+  If $\ell_x(a) = \ell_x(b)$, then $xa = xb$ and so $a = b$.
+  So $\ell_x$ is injective.
+
+  Since $R$ is finite, by the pigeonhole principle $\ell_x$ is also surjective.
+  Thus there is $y \in R$ such that $\ell_x(y) = xy = 1$, so $x$ has a right inverse.
+
+  A similar argument with $y \mapsto yx$ shows $x$ has a left inverse.
+  Hence $x$ is invertible.
+\end{thmproof}
+
+\pagebreak
+\subsection{Integral domains}
+
+\begin{defn}{integral domain}{}
+  An \hldef{integral domain} (or \hldef{domain}) is a commutative ring $R$ such that $1 \neq 0$
+  and $R$ has no zero divisors.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item Every field is an integral domain.
+    \item $\Z$ is an integral domain.
+    \item All the examples of rings we've looked at with zero divisors are not domains
+      ($\Zmod{n}$ for $n$ not prime, $\R \times \R$, $\R[x]/(x^2)$).
+    \item $\{0\}$ has no zero divisors, but is not a domain.
+  \end{itemize}
+\end{ex}
+
+Since all non-zero divisors in finite rings are units:
+
+\begin{cor}{}{}
+  All finite integral domains are fields.
+\end{cor}
+
+\begin{prop}{}{}
+  If $R$ is an integral domain, then:
+  \begin{enumerate}
+    \item If $f, g \in R[x]$, then $\deg(fg) = \deg(f) + \deg(g)$.
+    \item $R[x]$ is an integral domain.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item True if $f$ or $g$ is zero, so suppose $f, g \neq 0$.
+    Let $f = \sum_{i = 0}^n a_i x^i$ and $g = \sum_{i = 0}^m b_i x^i$ where $a_n, b_m \neq 0$.
+    Then $fg = a_n b_m x^{n + m} + \text{lower degree terms}$.
+    Since $R$ is a domain, $a_n b_m \neq 0$, so $\deg(fg) = n + m = \deg(f) + \deg(g)$.
+    \item Suppose $f, g \neq 0$ and $fg = 0$.
+    Then $\deg(fg) = -\infty$ so by part (a), we must have $\deg(f) = -\infty$ or
+    $\deg(g) = -\infty$.
+    So one of $f, g$ is zero, so neither $f$ nor $g$ can be a zero divisor.
+  \end{enumerate}
+\end{thmproof}
+
+\pagebreak
+\subsection{Interesting domains?}
+
+\begin{prop}{}{}
+  If $R$ is a subring of a field $\mathbb{K}$, then $R$ is a domain.
+\end{prop}
+
+\begin{thmproof}
+  $\mathbb{K}$ is commutative with $1_{\mathbb{K}} \neq 0_{\mathbb{K}}$.
+  So $R$ is commutative and $1_R \neq 0_R$.
+
+  If $x$ is a non-zero element of $R$ and $xy = 0$ for $y \in R$, then $y = x^{-1}xy = 0$ in
+  $\mathbb{K}$, so $y = 0$ in $R$.
+  So $R$ has no zero divisors.
+\end{thmproof}
+
+\begin{ex}
+  $\Z$ is a subring of $\Q$, and hence a domain.
+\end{ex}
+
+\begin{prop}{}{}
+  If $\alpha \in \C$ satisfies $\alpha^2 \in \Z$, then
+  \[ \Z[a] = \{a + b\alpha : a, b \in \Z\} \]
+  is a subring of $\C$.
+\end{prop}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+This leads to interesting domains like the Gaussian integers $\Z[i] = \{a + bi : a, b \in \Z\}$.
+
+\pagebreak
+\subsection{Prime ideals}
+
+Can we construct interesting domains of the form $R[x]/(p)$?
+
+First, we need to answer: if $\ideal$ is an ideal of a commutative ring $R$, when is $R/\ideal$ an
+integral domain?
+
+Suppose $R/\ideal$ is an integral domain.
+If $\overline{a} \cdot \overline{b} = 0$ in $R/\ideal$ for some $a, b \in R$, then one of
+$\overline{a}, \overline{b}$ is 0 in $R/\ideal$.
+
+Of course, $\overline{r} = 0$ in $R/\ideal$ if and only if $r \in \ideal$.
+So $\overline{a} \cdot \overline{b} = 0$ in $R/\ideal$ if and only if $ab \in \ideal$, and one of
+$\overline{a}, \overline{b}$ is zero in $R/\ideal$ if and only if one of $a, b$ is in $\ideal$.
+
+\begin{defn}{prime ideal}{}
+  Let $R$ be a commutative ring.
+  Then an ideal $\ideal$ is \hldef{prime} if $\ideal \subsetneq R$ and whenever $ab \in \ideal$ for
+  $a, b \in R$, at least one of $a, b$ is in $\ideal$.
+\end{defn}
+
+\begin{thm}{}{}
+  Let $\ideal$ be an ideal in a commutative ring $R$.
+  Then $R/\ideal$ is an integral domain if and only if $\ideal$ is a prime ideal.
+\end{thm}
+
+\begin{ex}
+  \begin{itemize}
+    \item If $\ideal$ is a maximal ideal of a commutative ring $R$, then $R/\ideal$ is a field and
+    hence a domain.
+    So maximal ideals are prime.
+    \item $\Zmod{n}$ is an integral domain if and only if $n$ is prime.
+    So $n\Z$ is a prime ideal if and only if $n$ is prime.
+    \item Previously we saw $\mathbb{K}[x, y]/(y - x^2) \cong \mathbb{K}[x]$, which is a domain but
+    not a field.
+    So $(y - x^2)$ is a prime ideal which is not maximal.
+  \end{itemize}
+\end{ex}
+
+\begin{thmproof}
+  Since $R$ is commutative and $R \to R/\ideal : r \mapsto \overline{r}$ is surjective, $R/\ideal$
+  is commutative for any ideal $\ideal$, and $R/\ideal$ is zero if and only if $\ideal = R$.
+
+  Using surjectivity of $R \to R/\ideal$ again, $R/\ideal$ has no zero divisors if and only if
+  for all $a, b \in R$, if $\overline{a} \cdot \overline{b} = 0$ in $R/\ideal$ then one of
+  $\overline{a}, \overline{b}$ is 0 in $R/\ideal$.
+
+  Since $\overline{r} = 0$ in $R/\ideal$ if and only if $r \in \ideal$, we have that $R/\ideal$ has
+  no zero divisors if and only if $ab \in \ideal$ means one of $a, b$ is in $\ideal$ for all
+  $a, b \in \ideal$.
+
+  So $R/\ideal$ is an integral domain if and only if $\ideal$ is prime.
+\end{thmproof}
+
+\pagebreak
+\subsection{Primality and factoring}
+
+We'll have more to say in a week about when an ideal is prime.
+For now, we consider one reason why an ideal might not be prime.
+
+\begin{lem}{}{}
+  If $R$ is an integral domain and $f, g \in R[x]$ have degree $\geq 1$, then $fgR[x]$ is not prime
+  (so $R/fgR[x]$ is not an integral domain).
+\end{lem}
+
+Intuition: if $h \in R[x]$ factors into a product of lower degree polynomials, then the principal
+ideal $hR[x]$ is not prime.
+
+\begin{thmproof}
+  We know $\deg(fgh) \geq \deg(fg) = \deg(f) + \deg(g) > \deg(f), \deg(g)$ for all non-zero
+  $h \in R[x]$.
+  So $fg \in fgR[x]$, but $f, g \not\in fgR[x]$.
+\end{thmproof}
+
+\begin{ex}
+  Since $(x^2 + 1)$ is maximal in $\R[x]$, we have $(x^2 + 1)$ is prime.
+
+  However, $(x^2 + 1)$ is not prime in $\C[x]$, since $x^2 + 1 = (x - i)(x + i)$ in $\C[x]$.
+\end{ex}
+
+As the previous example shows, whether or not a polynomial factors can be subtle, since it depends
+on the coefficient ring.
+
+\begin{ex}
+  $(x^2 + 1)$ is not prime in $\Z_2[x]$ as $(x + 1)^2 = x^2 + 2x + 1 = x^2 + 1$.
+
+  On the other hand, in $\Z_3[x]$, we can check that $(ax + b)(cx + d) \neq x^2 + 1$ for all
+  $a, b, c, d \in \Z_3$, so $x^2 + 1$ does not factor.
+  Later we will see $(x^2 + 1)$ is actually prime here.
+\end{ex}
+
+\pagebreak
+\subsection{A related idea}
+
+$\C[x]/(x^2 + 1)$ is a ring containing $\C$ and an additional element $x \not\in \C$ such that
+$x^2 = -1$.
+However, $\C[x]/(x^2 + 1)$ is not a domain.
+
+What if we wanted a domain containing $\C$ and an additional element $x \not\in \C$ such that
+$x^2 = -1$?
+
+\begin{prop}{}{}
+  Suppose $R$ is a subring of a domain $S$ and $x$ is an element of $S$ such that $x^2 = t^2$ for
+  some $t \in S$.
+  Then $x = t$ or $x = -t$.
+\end{prop}
+
+\begin{thmproof}
+  If $x^2 = t^2$, then $x^2 - t^2 = 0$, so $(x - t)(x + t) = 0$.
+  Since $S$ is a domain, one of $x - t$ or $x + t$ must be 0.
+\end{thmproof}
+
+Since $i^2 = -1$ in $\C$, there is no domain containing $\C$ and an additional element
+$x \not\in \C$ such that $x^2 = -1$.
+
 %---------------
 \end{document}
 %---------------
