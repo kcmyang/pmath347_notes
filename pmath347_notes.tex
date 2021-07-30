@@ -75,8 +75,8 @@ Notation:
     Subtraction is a binary operation on $\Z$, \emph{i.e.}, it defines a function
     $- \colon \Z \times \Z \to \Z$.
     \item
-    If $(V, +, \cdot)$ is a vector space over a field $\mathbb{K}$, then $+$ is a binary operation
-    on $V$, but $\cdot$ is not since $\cdot$ is a function $\mathbb{K} \times V \to V$.
+    If $(V, +, \cdot)$ is a vector space over a field $\K$, then $+$ is a binary operation
+    on $V$, but $\cdot$ is not since $\cdot$ is a function $\K \times V \to V$.
   \end{itemize}
 \end{ex}
 
@@ -479,19 +479,19 @@ Terminology:
 
 All the previous examples are abelian.
 
-Let $\GL_n(\mathbb{K})$ denote the invertible $n \times n$ matrices over a field $\mathbb{K}$.
+Let $\GL_n(\K)$ denote the invertible $n \times n$ matrices over a field $\K$.
 
 \begin{prop}{}{}
-  $\GL_n(\mathbb{K})$ is a group under matrix multiplication (called the
+  $\GL_n(\K)$ is a group under matrix multiplication (called the
   \hldef{general linear group}).
-  For $n \geq 2$, $\GL_n(\mathbb{K})$ is non-abelian.
+  For $n \geq 2$, $\GL_n(\K)$ is non-abelian.
 \end{prop}
 
 \begin{thmproof}
   If $A$ and $B$ are invertible matrices, then $AB$ is also invertible, so matrix multiplication is
-  an associative binary operation on $\GL_n(\mathbb{K})$.
+  an associative binary operation on $\GL_n(\K)$.
   The identity matrix is an identity and every element has an inverse by definition, so
-  $\GL_n(\mathbb{K})$ is a group.
+  $\GL_n(\K)$ is a group.
 
   Exercise: find matrices $A, B$ such that $AB \neq BA$.
 \end{thmproof}
@@ -1689,10 +1689,10 @@ A homomorphism preserves the group operation from $G$ to $H$.
 \begin{ex}
   \begin{itemize}
     \item
-    For $\mathbb{K}$ a field, $\mathbb{K}^\times = \{a \in \mathbb{K} : a \neq 0\}$ is a group with
+    For $\K$ a field, $\K^\times = \{a \in \K : a \neq 0\}$ is a group with
     operation $\cdot$.
 
-    Then $\GL_n \mathbb{K} \to \mathbb{K}^\times : A \mapsto \det(A)$ is a homomorphism because
+    Then $\GL_n \K \to \K^\times : A \mapsto \det(A)$ is a homomorphism because
     $\det(AB) = \det(A) \det(B)$ for all $A, B$.
     \item
     Let $\R_{> 0} = \{x \in \R : x > 0\} \leq \R^\times$.
@@ -1900,11 +1900,11 @@ Note: the forward and backward processes are not necessarily inverses, so we don
 \begin{ex}
   \begin{itemize}
     \item
-    For $\det \colon \GL_n(\mathbb{K}) \to \mathbb{K}^\times$, we have
-    $\ker \det = \{ A \in \GL_n(\mathbb{K}) : \det(A) = 1 \}$.
+    For $\det \colon \GL_n(\K) \to \K^\times$, we have
+    $\ker \det = \{ A \in \GL_n(\K) : \det(A) = 1 \}$.
 
-    This subgroup of $\GL_n(\mathbb{K})$ is called the \hldef{special linear group}, denoted by
-    $\SL_n(\mathbb{K})$.
+    This subgroup of $\GL_n(\K)$ is called the \hldef{special linear group}, denoted by
+    $\SL_n(\K)$.
     \item
     If $\phi \colon \Z \to \Z : k \mapsto mk$, then $\phi(k) = 0$ if and only if
     $mk = 0$, so
@@ -3369,21 +3369,21 @@ $\ker\phi \trianglelefteq G$.
   Homework.
 \end{ex}
 
-\begin{ex}[Example: $\GL_n(\mathbb{K})/Z(\GL_n(\mathbb{K}))$]
-  Recall $Z(\GL_n(\mathbb{K})) = \{\lambda 1 : \lambda \neq 0\}$.
+\begin{ex}[Example: $\GL_n(\K)/Z(\GL_n(\K))$]
+  Recall $Z(\GL_n(\K)) = \{\lambda 1 : \lambda \neq 0\}$.
 
   If $M$ is invertible, then $[M] = \{\lambda M : \lambda \neq 0\}$.
 
   $[M] \cdot [N] = \{\lambda_1 \lambda_2 MN : \lambda_1, \lambda_2 \neq 0\} = [MN]$.
 
-  We think of $\GL_n(\mathbb{K})$ as the group of invertible linear transformations on
-  $\mathbb{K}^n$ (acting on vectors).
+  We think of $\GL_n(\K)$ as the group of invertible linear transformations on
+  $\K^n$ (acting on vectors).
 
-  We can then think of $\GL_n(\mathbb{K})/Z(\GL_n(\mathbb{K}))$ as the invertible transformations of
-  lines through the origin in $\mathbb{K}^n$.
+  We can then think of $\GL_n(\K)/Z(\GL_n(\K))$ as the invertible transformations of
+  lines through the origin in $\K^n$.
 
-  $\GL_n(\mathbb{K})/Z(\GL_n(\mathbb{K}))$ is called the \hldef{projective general linear group},
-  and is denoted by $\PGL_n(\mathbb{K})$.
+  $\GL_n(\K)/Z(\GL_n(\K))$ is called the \hldef{projective general linear group},
+  and is denoted by $\PGL_n(\K)$.
 \end{ex}
 
 In general, we can look at:
@@ -3579,11 +3579,11 @@ Maybe this bijection is an isomorphism?
   The first isomorphism theorem is usually the best way to determine $G/N$:
   \begin{itemize}
     \item
-    Recall $\SL_n\mathbb{K} \trianglelefteq \GL_n\mathbb{K}$ is defined as the kernel of the
-    determinant homomorphism $\det \colon \GL_n\mathbb{K} \to \mathbb{K}^\times$.
-    The image is $\Im\det = \mathbb{K}^\times$.
+    Recall $\SL_n\K \trianglelefteq \GL_n\K$ is defined as the kernel of the
+    determinant homomorphism $\det \colon \GL_n\K \to \K^\times$.
+    The image is $\Im\det = \K^\times$.
 
-    By first isomorphism theorem, $\GL_n\mathbb{K} / \SL_n\mathbb{K} \cong \mathbb{K}^\times$.
+    By first isomorphism theorem, $\GL_n\K / \SL_n\K \cong \K^\times$.
     (Here, we only use the existence of $\psi$.)
     \item
     Consider $\Z \trianglelefteq \R^+$.
@@ -3872,8 +3872,8 @@ Because of this isomorphism, we use the following notation:
     $\Zmod{2}$ only has two subgroups, itself and $\{e\}$.
     So there are only two subgroups of $D_{2n}$ containing $N$.
     \item
-    $\GL_n\mathbb{K}/\SL_n\mathbb{K} \cong \mathbb{K}^\times$, so subgroups of $\GL_n\mathbb{K}$
-    containing $\SL_n\mathbb{K}$ correspond to subgroups of $\mathbb{K}^\times$ (of which there
+    $\GL_n\K/\SL_n\K \cong \K^\times$, so subgroups of $\GL_n\K$
+    containing $\SL_n\K$ correspond to subgroups of $\K^\times$ (of which there
     can be many).
   \end{itemize}
 \end{ex}
@@ -4190,7 +4190,7 @@ Group actions can reveal a lot about a group.
 \begin{ex}
   \begin{itemize}
     \item $S_n$ acts on $\{1, \ldots, n\}$ for $n \geq 1$ (proof: below).
-    \item $\GL_n\mathbb{K}$ acts on $\mathbb{K}^n$ (proof: exercise).
+    \item $\GL_n\K$ acts on $\K^n$ (proof: exercise).
     \item If $X$ is any set and $G$ is any group, we can define an action of $G$ on $x$ by
       $g \cdot x = x$ for all $g \in G$ and $x \in X$.
       This is the \hldef{trivial action} of $G$ on $X$.
@@ -4217,9 +4217,9 @@ Also, recall $S_n = S_{\{1, \ldots, n\}}$.
   $H \times X \to X : (h, x) \mapsto h \cdot x$.
 \end{lem}
 
-Hence an alternative way to show $\GL_n\mathbb{K}$ acts on $\mathbb{K}^n$ is to observe
-$\GL_n\mathbb{K} \leq S_{\mathbb{K}^n}$.
-(Invertible $n \times n$ matrices are invertible functions $\mathbb{K}^n \to \mathbb{K}^n$.)
+Hence an alternative way to show $\GL_n\K$ acts on $\K^n$ is to observe
+$\GL_n\K \leq S_{\K^n}$.
+(Invertible $n \times n$ matrices are invertible functions $\K^n \to \K^n$.)
 
 \pagebreak
 \subsection{Invariant subsets}
@@ -4251,8 +4251,8 @@ This dihedral group action on the vertices of the $n$-gon is a special case of a
 \end{lem}
 
 \begin{ex}
-  $\{0\}$ is an invariant subset of $\mathbb{K}^n$ under the action of $\GL_n\mathbb{K}$.
-  In this case, the action of $\GL_n\mathbb{K}$ on $\{0\}$ is the trivial action.
+  $\{0\}$ is an invariant subset of $\K^n$ under the action of $\GL_n\K$.
+  In this case, the action of $\GL_n\K$ on $\{0\}$ is the trivial action.
 \end{ex}
 
 \pagebreak
@@ -4499,7 +4499,7 @@ That is, an action is faithful if the corresponding permutation representation i
   \begin{itemize}
     \item $S_X$ acts faithfully on $X$.
     \item If $A \cdot e_i = e_i$ for all $i = 1, \ldots, n$, then $A = 1$, so the action of
-      $\GL_n\mathbb{K}$ on $\mathbb{K}^n$ is faithful.
+      $\GL_n\K$ on $\K^n$ is faithful.
     \item $D_{2n}$ acts faithfully on vertices on the $n$-gon (exercise).
     \item The trivial action is not faithful.
   \end{itemize}
@@ -4568,12 +4568,12 @@ Note the left regular representation may not be the most efficient permutation r
 
     Since $Hg$ is a proper subset of $G$ if $H < G$, we see the action is not transitive unless
     $H = G$.
-    \item Consider the action of $\GL_n\mathbb{K}$ on $\mathbb{K}^n$.
+    \item Consider the action of $\GL_n\K$ on $\K^n$.
     Then
     \[
       \orbit_v = \begin{cases}
         \{0\} & v = 0 \\
-        \mathbb{K}^n \setminus \{0\} \qquad & v \neq 0
+        \K^n \setminus \{0\} \qquad & v \neq 0
       \end{cases}.
     \]
     So this action is not transitive, and there are two orbits.
@@ -4816,28 +4816,28 @@ normalizer of $S$ in $G$).
 \pagebreak
 \subsection{Example: matrices}
 
-One important instance of the conjugation action is with $\GL_n\mathbb{K}$.
+One important instance of the conjugation action is with $\GL_n\K$.
 
 Actually, if $A, B$ are $n \times n$ matrices and $A$ is invertbile, then $ABA^{-1}$ makes sense
 even if $B$ is not invertible.
 
 \begin{exer}{}{}
-  Show $\GL_n\mathbb{K}$ acts on $M_n\mathbb{K}$ by conjugation, where $M_n\mathbb{K}$ is the set
-  of $n \times n$ matrices over $\mathbb{K}$.
+  Show $\GL_n\K$ acts on $M_n\K$ by conjugation, where $M_n\K$ is the set
+  of $n \times n$ matrices over $\K$.
 \end{exer}
 
-Recall matrices $A$ and $B$ are \hldef{similar} if there is $C \in \GL_n\mathbb{K}$ such that
+Recall matrices $A$ and $B$ are \hldef{similar} if there is $C \in \GL_n\K$ such that
 $CAC^{-1} = B$.
-This is the equivalence relation $\sim_{\GL_n\mathbb{K}}$.
+This is the equivalence relation $\sim_{\GL_n\K}$.
 
-The orbits of the conjugation action of $\GL_n\mathbb{K}$ on $M_n\mathbb{K}$ are called
+The orbits of the conjugation action of $\GL_n\K$ on $M_n\K$ are called
 \hldef{similarity classes}.
 
 A matrix $A$ is \hldef{diagonalizable} if it is similar to a diagonal matrix.
 
-When $\mathbb{K} = \C$, every similarity class contains exactly one matrix in Jordan
+When $\K = \C$, every similarity class contains exactly one matrix in Jordan
 normal form; matrices in Jordan normal form give a set of representatives for
-$\sim_{\GL_n\mathbb{K}}$.
+$\sim_{\GL_n\K}$.
 
 \pagebreak
 \subsection{Class equation and Cauchy's theorem}
@@ -5417,7 +5417,7 @@ It also has multiplication $[x] \cdot [y] = [xy]$, making it a ring.
 Corollary: $\Zmod{n}$ is a field if and only if $n$ is prime (every non-zero element coprime to
 $n$).
 
-In particular, there are fields $\mathbb{K}$ where $\mathbb{K}$ is finite.
+In particular, there are fields $\K$ where $\K$ is finite.
 
 \pagebreak
 \subsection{Division rings}
@@ -5883,14 +5883,14 @@ $(p \cdot q)(c) = p(c)q(c)$ and $1(c) = 1$.
 \pagebreak
 \subsection{Polynomials over fields}
 
-Most common type of polynomial rings are $\mathbb{K}[x]$ for $\mathbb{K}$ a field.
+Most common type of polynomial rings are $\K[x]$ for $\K$ a field.
 
 \begin{prop}{}{}
-  Let $\mathbb{K}$ be a field.
+  Let $\K$ be a field.
   Then
   \begin{enumerate}
-    \item $\deg(fg) = \deg(f) + \deg(g)$ for all $f, g \in \mathbb{K}[x]$.
-    \item $\mathbb{K}[x]^\times = \mathbb{K}^\times$.
+    \item $\deg(fg) = \deg(f) + \deg(g)$ for all $f, g \in \K[x]$.
+    \item $\K[x]^\times = \K^\times$.
   \end{enumerate}
 \end{prop}
 
@@ -6300,25 +6300,25 @@ We typically consider \hldef{proper ideals}, that is, ideals $\ideal \subsetneq 
 We can use the previous lemma to consider ideals in a field.
 
 \begin{cor}{}{}
-  The only ideals in a field $\mathbb{K}$ are $(0)$ and $\mathbb{K}$.
+  The only ideals in a field $\K$ are $(0)$ and $\K$.
 \end{cor}
 
 \begin{thmproof}
-  Suppose $\ideal \subseteq \mathbb{K}$ is an ideal.
+  Suppose $\ideal \subseteq \K$ is an ideal.
   If $x \in \ideal$ and $x \neq 0$, then $x^{-1}x = 1 \in \ideal$.
-  So $\ideal = \mathbb{K}$.
+  So $\ideal = \K$.
 \end{thmproof}
 
 \begin{cor}{}{}
-  Let $\phi \colon \mathbb{K} \to R$ be a ring homomorphism, where $\mathbb{K}$ is a field and $R$
+  Let $\phi \colon \K \to R$ be a ring homomorphism, where $\K$ is a field and $R$
   is non-zero.
   Then $\phi$ is injective.
 \end{cor}
 
 \begin{thmproof}
-  $\ker\phi$ is an ideal of $\mathbb{K}$, so $\ker\phi$ is $(0)$ or $\mathbb{K}$.
+  $\ker\phi$ is an ideal of $\K$, so $\ker\phi$ is $(0)$ or $\K$.
 
-  If $\ker\phi = \mathbb{K}$, then $0 = \phi(1_\mathbb{K}) = 1_R$, so $R$ is zero.
+  If $\ker\phi = \K$, then $0 = \phi(1_\K) = 1_R$, so $R$ is zero.
   Since we are assuming $R$ is non-zero, $\ker\phi = (0)$.
   Then we know from group theroy that $\phi$ is injective.
 \end{thmproof}
@@ -7215,19 +7215,19 @@ This is a common line of proof (see Homework \#4 Q9).
 
 We constructed $\C$ by asking for an element $x$ such that $x^2 + 1 = 0$.
 
-If we start from a field $\mathbb{K}$, can we ask for an element $x$ satisfying any polynomial
-equation(s), and then just cosntruct a ring containing $\mathbb{K}$ with such an element?
+If we start from a field $\K$, can we ask for an element $x$ satisfying any polynomial
+equation(s), and then just cosntruct a ring containing $\K$ with such an element?
 
 Yes!
 But the ring might be zero if we ask for too much.
 
 \begin{ex}
   \begin{itemize}
-    \item $1 \neq 0$ in $\mathbb{K}[x]/(x^2 + 1)$ as we've seen.
-    \item If $p$ is a polynomial of degree $n \geq 1$, then $\mathbb{K}[x]/(p)$ is a
-      $\mathbb{K}$-vector space of dimension $n$ (exercise similar to lemma).
-      So $1 \neq 0$ in $\mathbb{K}[x]/(p)$.
-    \item $1 = 0$ in $\mathbb{K}[x]/(x^2 + 1, x^3 + x + 1)$, since
+    \item $1 \neq 0$ in $\K[x]/(x^2 + 1)$ as we've seen.
+    \item If $p$ is a polynomial of degree $n \geq 1$, then $\K[x]/(p)$ is a
+      $\K$-vector space of dimension $n$ (exercise similar to lemma).
+      So $1 \neq 0$ in $\K[x]/(p)$.
+    \item $1 = 0$ in $\K[x]/(x^2 + 1, x^3 + x + 1)$, since
       $x^3 + x + 1 - x(x^2 + 1) = 1 \in (x^2 + 1, x^3 + x + 1)$.
   \end{itemize}
 \end{ex}
@@ -7238,10 +7238,10 @@ But the ring might be zero if we ask for too much.
 Let $\ideal$ be an ideal of a commutative ring $R$.
 When is $R/\ideal$ a field?
 
-We know that the only ideals in a field $\mathbb{K}$ are $(0)$ and $\mathbb{K}$.
-Suppose $\mathbb{K} = R/\ideal$ is a field, and $q \colon R \to \mathbb{K}$ is the quotient map.
+We know that the only ideals in a field $\K$ are $(0)$ and $\K$.
+Suppose $\K = R/\ideal$ is a field, and $q \colon R \to \K$ is the quotient map.
 By the correspondence theorem, the only ideals of $R$ containing $\ideal$ are
-$q^{-1}((0)) = \ker q = \ideal$ and $q^{-1}(\mathbb{K}) = R$.
+$q^{-1}((0)) = \ker q = \ideal$ and $q^{-1}(\K) = R$.
 
 \begin{defn}{maximal ideal}{}
   An ideal $\ideal$ of a ring $R$ is \hldef{maximal} if the only ideals containing $\ideal$ are
@@ -7290,8 +7290,8 @@ Requiring $1 \neq 0$ is the same as requiring $(0) \neq R$.
 
 \begin{ex}
   \begin{itemize}
-    \item $\mathbb{K}[x]/(x - c) \cong \mathbb{K}$ for all $c \in \mathbb{K}$, so $(x - c)$ is a
-      maximal ideal of $\mathbb{K}[x]$ for any field $\mathbb{K}$.
+    \item $\K[x]/(x - c) \cong \K$ for all $c \in \K$, so $(x - c)$ is a
+      maximal ideal of $\K[x]$ for any field $\K$.
     \item $\mathbb{R}[x]/(x^2 + 1) \cong \C$, so $(x^2 + 1)$ is a maximal ideal of $\R[x]$.
   \end{itemize}
 \end{ex}
@@ -7521,8 +7521,8 @@ In particular, every non-zero commutative ring has a maximal ideal.
 Or equivalently:
 
 \begin{cor}{}{}
-  For every non-zero commutative ring $R$, there is a field $\mathbb{K}$ such that there is a
-  homomomorphism $\phi \colon R \to \mathbb{K}$.
+  For every non-zero commutative ring $R$, there is a field $\K$ such that there is a
+  homomomorphism $\phi \colon R \to \K$.
 \end{cor}
 
 \begin{thmproof}
@@ -7535,7 +7535,7 @@ Or equivalently:
 
 \subsection{Zero divisors}
 
-If $\mathbb{K}$ is a field and $f, g \in \mathbb{K}[x]$, then $\deg(fg) = \deg(f) + \deg(g)$.
+If $\K$ is a field and $f, g \in \K[x]$, then $\deg(fg) = \deg(f) + \deg(g)$.
 
 In contrast, in an arbitrary ring like $R = \Zmod{6}$, we can have things like
 $(1 + 2x)(1 + 3x) = 1 + 5x + 6x^2 = 1 - x$.
@@ -7575,13 +7575,13 @@ For these examples, we still need to show $\overline{x}$ or $\overline{y}$ are n
 techniques for this later and on the homework.
 
 \begin{ex}
-  Suppose $\mathbb{K}$ is a field.
-  Let $E_{ij} \in M_n\mathbb{K}$ be the matrix with a 1 in position $ij$ and 0's elsewhere.
+  Suppose $\K$ is a field.
+  Let $E_{ij} \in M_n\K$ be the matrix with a 1 in position $ij$ and 0's elsewhere.
 
   Then $E_{ij}E_{k\ell} = \delta_{jk}E_{i\ell}$, so $E_{ij}$ is a zero divisor for all $i, j$
   as long as $n \geq 2$.
 
-  Exercise: show that $A \in M_n\mathbb{K}$ is a zero divisor if and only if the rank of $A$ is
+  Exercise: show that $A \in M_n\K$ is a zero divisor if and only if the rank of $A$ is
   less than $n$ (i.e., $A$ is not invertible).
 \end{ex}
 
@@ -7591,7 +7591,7 @@ techniques for this later and on the homework.
   Then $(e + g)(e - g) = e - g^2 = e - e = 0$ in $\Z G$.
 
   \textbf{Kaplansky zero divisor conjecture}: if every element of $G \setminus \{e\}$ has infinite
-  order, and $\mathbb{K}$ is a field, then $\mathbb{K}G$ has no zero divisors.
+  order, and $\K$ is a field, then $\K G$ has no zero divisors.
 \end{ex}
 
 \pagebreak
@@ -7611,10 +7611,10 @@ Every non-zero element of a field is a unit, so fields have no zero divisors.
 In general, an element can be not a zero divisor but also not a unit:
 \begin{itemize}
   \item $\Z$ has no zero divisors, but the only units are $\pm 1$.
-  \item If $f \in \mathbb{K}[x]$ with $f \neq 0$ and $\mathbb{K}$ a field, then by the degree
+  \item If $f \in \K[x]$ with $f \neq 0$ and $\K$ a field, then by the degree
     formula, $fg = 0$ if and only if $g = 0$.
 
-    So $\mathbb{K}[x]$ has no zero divisors, but $\mathbb{K}[x]^\times = \mathbb{K}^\times$.
+    So $\K[x]$ has no zero divisors, but $\K[x]^\times = \K^\times$.
 \end{itemize}
 
 \pagebreak
@@ -7697,15 +7697,15 @@ Since all non-zero divisors in finite rings are units:
 \subsection{Interesting domains?}
 
 \begin{prop}{}{}
-  If $R$ is a subring of a field $\mathbb{K}$, then $R$ is a domain.
+  If $R$ is a subring of a field $\K$, then $R$ is a domain.
 \end{prop}
 
 \begin{thmproof}
-  $\mathbb{K}$ is commutative with $1_{\mathbb{K}} \neq 0_{\mathbb{K}}$.
+  $\K$ is commutative with $1_{\K} \neq 0_{\K}$.
   So $R$ is commutative and $1_R \neq 0_R$.
 
   If $x$ is a non-zero element of $R$ and $xy = 0$ for $y \in R$, then $y = x^{-1}xy = 0$ in
-  $\mathbb{K}$, so $y = 0$ in $R$.
+  $\K$, so $y = 0$ in $R$.
   So $R$ has no zero divisors.
 \end{thmproof}
 
@@ -7759,7 +7759,7 @@ $\overline{a}, \overline{b}$ is zero in $R/\ideal$ if and only if one of $a, b$ 
     So maximal ideals are prime.
     \item $\Zmod{n}$ is an integral domain if and only if $n$ is prime.
     So $n\Z$ is a prime ideal if and only if $n$ is prime.
-    \item Previously we saw $\mathbb{K}[x, y]/(y - x^2) \cong \mathbb{K}[x]$, which is a domain but
+    \item Previously we saw $\K[x, y]/(y - x^2) \cong \K[x]$, which is a domain but
     not a field.
     So $(y - x^2)$ is a prime ideal which is not maximal.
   \end{itemize}
@@ -7840,6 +7840,1344 @@ $x^2 = -1$?
 
 Since $i^2 = -1$ in $\C$, there is no domain containing $\C$ and an additional element
 $x \not\in \C$ such that $x^2 = -1$.
+
+\week{Fields of Fractions and the Chinese Remainder Theorem}
+
+%%%%% Lec 24
+\section{Fields of fractions}
+
+\subsection{Domains and subrings of fields}
+From last week, we had:
+
+\begin{prop}{}{}
+  If $R$ is a subring of a field $\K$, then $R$ is a domain.
+\end{prop}
+
+This week, we'll show:
+
+\begin{thm}{}{}
+  A ring $R$ is an integral domain if and only if it is (isomorphic to) a subring of a field.
+\end{thm}
+
+\begin{ex}
+  \begin{itemize}
+    \item $\Z$ is a subring of $\Q$ (also of $\R$ and $\C$).
+    \item $\Q[x]$ is a subring of $\Q(x)$, the ring of \hldef{rational functions}
+      \[ \Q(x) = \left\{ \frac{f(x)}{g(x)} : f, g \in \Q[x], \ g \neq 0 \right\}. \]
+  \end{itemize}
+\end{ex}
+
+Strategy for proving the theorem: we've already done the reverse direction; for the forward
+direction, given $R$ we need to construct a field $\K$ containing $R$.
+
+For $\Z$ we could pick $\Q$, $\R$, $\C$, or $\Q(x)$.
+Which field should we pick?
+
+\begin{lem}{}{}
+  Let $\K$ be a field containing $\Z$ as a subring.
+  Then $\K$ contains $\Q$ as a subfield.
+\end{lem}
+
+Notes:
+\begin{itemize}
+  \item Here, ``$\K$ containing $\Z$ as a subring'' means there is an isomorphism
+    $\phi \colon \Z \to R$ where $R$ is a subring of $\K$.
+  \item By the first isomorphism theorem, this is equivalent to saying there is an injective
+    homomorphism $\phi \colon \Z \to \K$.
+  \item $\phi \colon \Z \to \K$ is called the \hldef{subgroup inclusion map}, since it's
+    like the inclusion map $R \hookrightarrow \K : x \mapsto x$ for the actual subring.
+\end{itemize}
+
+\begin{thmproof}
+  Let $\phi \colon \Z \to \K$ be the subgroup inclusion map.
+  Define $\psi \colon \Q \to \K$ by $\frac{a}{b} \mapsto \phi(a)\phi(b)^{-1}$.
+
+  Is this well-defined?
+  Suppose $\frac{a}{b} = \frac{c}{d}$, so $ad = bc$.
+  Then $\phi(a)\phi(d) = \phi(ad) = \phi(bc) = \phi(b)\phi(c)$, so
+  $\phi(a)\phi(b)^{-1} = \phi(c)\phi(d)^{-1}$ and hence $\psi$ is well-defined.
+
+  Exercise: show $\psi$ is a ring homomorphism.
+
+  Any map from a field is injective, so $\psi$ is an injective homomorphism.
+\end{thmproof}
+
+\pagebreak
+\subsection{Constructing fractions}
+
+How do we get $\Q$ from $\Z$?
+\begin{itemize}
+  \item Elements are $\frac{a}{b}$ where $a, b \in \Z$ and $b \neq 0$.
+  \item $\frac{a}{c} = \frac{b}{d}$ if and only if $ad = bc$.
+  \item Operations:
+  \[ \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}
+    \text{ and } \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}. \]
+  \item Zero element is $\frac{0}{1}$, identity is $\frac{1}{1}$, and
+    $\left(\frac{a}{b}\right)^{-1} = \frac{b}{a}$ if $a \neq 0$.
+  \item Why can't we take $\frac{a}{0}$?
+    Including $\frac{a}{0}$ for any $a$ means we have to include
+    $\frac{0}{1} \cdot \frac{a}{0} = \frac{0}{0}$.
+    Since $0 \cdot a = 0 \cdot b$ for all $b$, we have $\frac{a}{b} = \frac{0}{0}$ for all
+    $a, b \in \Z$.
+    But then $\frac{a}{b} = \frac{a'}{b'}$ for all $a, b, a', b' \in \Z$.
+\end{itemize}
+
+We can do this for an arbitrary integral domain as well.
+The \hldef{field of fractions} $Q$ of an integral domain $R$ is defined as follows:
+\begin{itemize}
+  \item Elements are $\frac{a}{b}$ where $a, b \in R$ and $b \neq 0$.
+  \item $\frac{a}{c} = \frac{b}{d}$ if and only if $ad = bc$.
+  \item Operations:
+  \[ \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}
+    \text{ and } \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}. \]
+  \item Zero element is $\frac{0}{1}$, identity is $\frac{1}{1}$, and
+    $\left(\frac{a}{b}\right)^{-1} = \frac{b}{a}$ if $a \neq 0$.
+  \item Why can't we include zero divisors (i.e., why do we need an integral domain)?
+    If $yz = 0$ and $y, z \neq 0$, then $\frac{0}{y} \cdot \frac{0}{z} = \frac{0}{0}$.
+    Once again we get $\frac{a}{b} = \frac{0}{0} = \frac{a'}{b'}$ for all $a, b, a', b' \in \Z$.
+\end{itemize}
+Later, we'll see that we can take fractions over rings with zero divisors, we just can't put zero
+divisors in the denominator.
+
+\pagebreak
+\subsection{Constructing fractions of an arbitrary ring}
+
+Suppose we have a commutative ring $R$ and we want to make a ring of fractions $\frac{a}{b}$ with
+$a, b \in R$.
+
+The operations should be $\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$ and
+$\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}$, with zero being $\frac{0}{1}$ and the identity
+being $\frac{1}{1}$.
+
+Let $S$ be the set of elements that can go in the denominator.
+We've already seen that $S$ shouldn't contain 0 or any zero divisors.
+To have an inverse, and for operations to be well-defined, we want $S$ to be multiplicatively
+closed.
+
+\begin{defn}{multiplicatively closed}{}
+  A subset $S$ of a ring $R$ is \hldef{multiplicatively closed} if and only if $1 \in S$ and
+  if $b, d \in S$ then $bd \in S$.
+\end{defn}
+
+\begin{thm}{(Informal version)}{}
+  Let $R$ be a commutative ring and let $S$ be a multiplicatively closed subset of $R$ which does
+  not contain 0 or any zero divisors.
+
+  Then there is a commutative ring $Q$ containing $R$ as a subring such that
+  \begin{enumerate}
+    \item every element of $S$ is a unit in $Q$, and
+    \item if $T$ is a ring containing $R$ as a subring such that every element of $S$ is a unit in
+      $T$, then $T$ contains $Q$ as a subring.
+  \end{enumerate}
+\end{thm}
+
+That is, $Q$ is the smallest commutative ring satisfying (1).
+
+\begin{thm}{(Stronger, formal version)}{}
+  Let $R$ be a commutative ring and let $S$ be a multiplicatively closed subset of $R$ which does
+  not contain 0 or any zero divisors.
+
+  Then there is a commutative ring $Q$ and an injective homomorphism $\phi \colon R \to Q$ such that
+  \begin{enumerate}
+    \item $\phi(a) \in Q^\times$ for all $a \in S$, and every element of $Q$ is of the form
+      $\phi(a)\phi(b)^{-1}$ for $a \in R$ and $b \in S$, and
+    \item if $\psi \colon R \to T$ is a homomorphism such that $\psi(x) \in T^\times$ for all
+      $x \in S$, then there is a homomorphism $\tilde{\psi} \colon Q \to T$ such that
+      $\tilde{\psi} \circ \phi = \psi$.
+  \end{enumerate}
+\end{thm}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (R) at (0, 1){$R$};
+    \node (T) at (4, 1){$T$};
+    \node (Q) at (2, 0){$Q$};
+    \draw[->] (R)--(T) node[midway, above]{$\psi$};
+    \draw[->] (R)--(Q) node[midway, below left]{$\phi$};
+    \draw[->, dashed] (Q)--(T) node[midway, below right]{$\tilde{\psi}$};
+  \end{tikzpicture}
+\end{center}
+
+Note: since $\tilde{\psi} \circ \phi = \psi$, if $a \in S$ then
+$\tilde{\psi} \circ \phi(a) = \psi(a)$ and
+$\tilde{\psi}(\phi(a)^{-1}) = \tilde{\psi}(a)^{-1} = \psi(a)^{-1}$.
+
+\begin{defn}{localization}{}
+  The ring $Q$ from the theorem is called the \hldef{localization} of $R$ at $S$ (or with respect to
+  $S$), denoted by $S^{-1}R$.
+\end{defn}
+
+\begin{thmproof}
+  Let $Q_0 := \{(a, b) : a \in R, \ b \in S\}$ and define an equivalence relation $\sim$ on $Q_0$ by
+  $(a, b) \sim (c, d)$ if $ad = bc$.
+
+  First we show $\sim$ is an equivalence relation:
+  \begin{itemize}
+    \item $(a, b) \sim (a, b)$ since $ab = ba$ by commutativity.
+    \item If $(a, b) \sim (c, d)$ then commutativity again gives $cb = da$, so $(c, d) \sim (a, b)$.
+    \item If $(a, b) \sim (c, d) \sim (e, f)$, then $ad = bc$ and $cf = de$ so $afd = bcf = bed$.
+    Since $d \in S$, we know $d$ is neither zero nor a zero divisor, so $af = be$ by cancellation.
+    So $(a, b) \sim (e, f)$.
+  \end{itemize}
+
+  Let $Q = Q_0/\sim$ be the set of equivalence classes of $\sim$.
+
+  \begin{tcolorbox}
+    \textbf{Notation:} If $a \in R$ and $b \in S$, let $\frac{a}{b} := [(a, b)] \in Q$.
+  \end{tcolorbox}
+
+  Define operations $\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$ and
+  $\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}$.
+
+  We show these are well-defined.
+
+  Because $S$ is multiplicatively closed, if $a, c \in R$ and $b, d \in S$ then $[(ad + bc, bd)]$
+  and $[(ac, bd)]$ are well-defined elements of $Q$.
+  So $([(a, b)], [(c, d)]) \sim_+ [(ad + bc, bd)]$ is a well-defined relation between $Q \times Q$
+  and $Q$; similar for $\cdot$.
+
+  Suppose $[(a, b)] = [(a', b')]$ and $[(c, d)] = [(c', d')]$, so $ab' = ba'$ and $cd' = dc'$.
+  Then $(ad + bc)(b'd') = ba'dd' + bb'dc' = (a'd' + b'c')(bd)$ and
+  $(ac)(b'd') = ba'dc' = (bd)(a'c')$, so $\frac{ad + bc}{bd} = \frac{a'd' + b'c'}{b'd'}$ and
+  $\frac{ac}{bd} = \frac{a'c'}{b'd'}$ as desired.
+
+  Now we show $(Q, +)$ is an abelian group.
+
+  \begin{tcolorbox}
+    $\frac{a}{b} = \frac{0}{1}$ if and only if $a = 1 \cdot a = b \cdot 0 = 0$.
+  \end{tcolorbox}
+
+  For all $a, c, e \in R$ and $b, d, f \in S$, we have associativity:
+  \[
+    \left(\frac{a}{b} + \frac{c}{d}\right) + \frac{e}{f}
+      = \frac{ad + bc}{bd} + \frac{e}{f}
+      = \frac{adf + bcf + ebd}{bdf}
+      = \frac{a}{b} + \left(\frac{c}{d} + \frac{e}{f}\right);
+  \]
+  commutativity:
+  \[
+    \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} = \frac{c}{d} + \frac{a}{b};
+  \]
+  zero ($\frac{0}{1}$);
+  \[
+    \frac{a}{b} + \frac{0}{1} = \frac{a \cdot 1 + b \cdot 0}{b \cdot 1} = \frac{a}{b};
+  \]
+  and additive inverse:
+  \[
+    \frac{a}{b} + \frac{-a}{b} = \frac{ab - ba}{b^2} = \frac{0}{b^2} = \frac{0}{1}.
+  \]
+
+  \begin{tcolorbox}
+    $(Q, +)$ is an abelian group with zero $\frac{0}{1}$ and $-\frac{a}{b} = \frac{-a}{b}$.
+  \end{tcolorbox}
+
+  Now we show $(Q, +, \cdot)$ is a commutative ring.
+
+  For all $a, c, e \in R$ and $b, d, f \in S$, we have
+  \[
+    \frac{a}{b} \cdot \frac{c}{d} = \frac{ab}{cd} = \frac{ba}{dc} = \frac{c}{d} \cdot \frac{a}{b}
+  \]
+  and
+  \[
+    \left(\frac{a}{b} \cdot \frac{c}{d}\right) \cdot \frac{e}{f}
+      = \frac{ace}{bdf} = \frac{a}{b} \cdot \left(\frac{c}{d} \cdot \frac{e}{f}\right)
+  \]
+  so $\cdot$ is associative and commutative.
+
+  \begin{tcolorbox}
+    Since $\frac{a}{b} \cdot \frac{1}{1} = \frac{a \cdot 1}{b \cdot 1} = \frac{a}{b}$, we have that
+    $\frac{1}{1}$ is an identity.
+
+    Also, if $a \in R$ and $b, c \in S$, then $\frac{ac}{bc} = \frac{a}{b}$ since $acb = bca$.
+  \end{tcolorbox}
+
+  Finally for distributivity,
+  \[
+    \frac{a}{b} \cdot \left(\frac{c}{d} + \frac{e}{f}\right)
+      = \frac{a}{b} \cdot \frac{cf + de}{df}
+      = \frac{acf + ade}{bdf}
+      = \frac{acfb + adeb}{b^2df}
+      = \frac{ac}{bd} + \frac{ae}{bf}
+      = \frac{a}{b} \cdot \frac{c}{d} + \frac{a}{b} \cdot \frac{e}{f}.
+  \]
+  So $(Q, +, \cdot)$ is a commutative ring.
+
+  Now we can define $\phi \colon R \to Q : a \mapsto \frac{a}{1}$.
+  To check this is a ring homomorphism, we have
+  \begin{align*}
+    \phi(1) &= \frac{1}{1} \\
+    \phi(a + b) &= \frac{a + b}{1} = \frac{a}{1} + \frac{b}{1} = \phi(a) + \phi(b) \\
+    \phi(ab) &= \frac{ab}{1} = \frac{a}{1} \cdot \frac{b}{1} = \phi(a)\phi(b)
+  \end{align*}
+  for all $a, b \in R$.
+
+  If $\phi(a) = \phi(b)$, then $\frac{a}{1} = \frac{b}{1} \implies a = a \cdot 1 = b \cdot 1 = b$,
+  so $\phi$ is injective.
+
+  Also, if $a \in S$, then $\frac{a}{1} \cdot \frac{1}{a} = \frac{a}{a} = \frac{1}{1}$ so
+  $\phi(a) \in Q^\times$ for all $a \in S$.
+
+  Lastly, since every element of $Q$ has form $\frac{a}{b}$ for some $a \in R$ and $b \in S$, we
+  see this is also $\phi(a)\phi(b)^{-1}$.
+
+  This proves part (1) of the theorem.
+
+  Suppose $\psi \colon R \to T$ is a homomorphism such that $\psi(a) \in T^\times$ for all
+  $a \in S$.
+  $\Im\psi \cong R/\ker\phi$ is commutative, so we can assume $T$ is commutative.
+  (Exercise: if $ab = ba$ for $a \in T^\times$ and $b \in T$, then $a^{-1}b = ba^{-1}$.)
+
+  \begin{tcolorbox}
+    Define $\tilde{\psi} \colon Q \to T : \frac{a}{b} \mapsto \psi(a)\psi(b)^{-1}$.
+  \end{tcolorbox}
+
+  Since $\psi(b) \in T^\times$ if $b \in S$, we see $\psi(a)\psi(b)^{-1}$ is well-defined in $T$.
+
+  To see that $\tilde{\psi}$ is well-defined, suppose that $\frac{a}{b} = \frac{c}{d}$.
+  Then $ad = bc$, so $\psi(a)\psi(d) = \psi(b)\psi(c) \implies
+    \psi(a)\psi(b)^{-1} = \psi(c)\psi(d)^{-1}$.
+  So $\tilde{\psi}$ is well-defined.
+
+  Also, $\tilde{\psi} \circ \phi(a) = \tilde{\psi}\left(\frac{a}{1}\right) = \psi(a)\psi(1)^{-1}
+    = \psi(a)$ for all $a \in R$, so $\tilde{\psi} \circ \phi = \psi$.
+
+  Finally, we just need to show that $\tilde{\psi}$ is a ring homomorphism.
+  We have that
+  \[
+    \tilde{\psi}\left(\frac{1}{1}\right) = \psi(1)\psi(1)^{-1} = 1,
+  \]
+  \begin{align*}
+    \tilde{\psi}\left(\frac{a}{b} + \frac{c}{d}\right)
+    &= \tilde{\psi}\left(\frac{ad + bc}{bd}\right) \\
+    &= \psi(ad + bc)\psi(bd)^{-1} \\
+    &= \psi(a)\psi(b)^{-1} + \psi(c)\psi(d)^{-1} \\
+    &= \tilde{\psi}\left(\frac{a}{b}\right) + \tilde{\psi}\left(\frac{c}{d}\right),
+  \end{align*}
+  and
+  \begin{align*}
+    \tilde{\psi}\left(\frac{a}{b} \cdot \frac{c}{d}\right)
+    &= \tilde{\psi}\left(\frac{ac}{bd}\right) \\
+    &= \psi(ac)\psi(bd)^{-1} \\
+    &= \psi(a)\psi(b)^{-1}\psi(c)\psi(d)^{-1} \\
+    &= \tilde{\psi}\left(\frac{a}{b}\right) \cdot \tilde{\psi}\left(\frac{c}{d}\right)
+  \end{align*}
+  for all $a, c \in R$ and $b, d \in S$.
+
+  This proves part (2) of the theorem.
+\end{thmproof}
+
+\pagebreak
+\subsection{Uniqueness of localization}
+
+\begin{cor}{}{}
+  Let $S$ be a multiplicatively closed subset of a ring $R$, where $S$ does not contain 0 or any
+  zero divisors.
+  If $Q_i$ and $\phi_i$ are a commutative ring and an injective homomorphism satisfying conditions
+  (1) and (2) of the theorem for $i = 1, 2$, then there is an isomorphism
+  $\alpha \colon Q_1 \to Q_2$ such that $\alpha \circ \phi_1 = \phi_2$.
+\end{cor}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (R) at (2, 2){$R$};
+    \node (Q1) at (0, 0){$Q_1$};
+    \node (Q2) at (4, 0){$Q_2$};
+    \draw[->] (R)--(Q1) node[midway, above left]{$\phi_1$};
+    \draw[->] (R)--(Q2) node[midway, above right]{$\phi_2$};
+    \draw[->, dashed] (Q1)--(Q2) node[midway, below]{$\alpha$};
+  \end{tikzpicture}
+\end{center}
+
+Intuitively, $\alpha$ preserves the subring structure of $R$ between $Q_1$ and $Q_2$.
+
+\begin{thmproof}
+  \begin{multicols}{2}
+    Since $\phi_i(a) \in Q_i^\times$ for all $a \in S$ and $i = 1, 2$, we can apply part (2) of the
+    theorem to get homomorphisms $\alpha \colon Q_1 \to Q_2$ and $\beta \colon Q_2 \to Q_1$
+    with $\alpha \circ \phi_1 = \phi_2$ and $\beta \circ \phi_2 = \phi_1$.
+
+    \begin{center}
+      \begin{tikzpicture}
+        \node (R) at (2, 2){$R$};
+        \node (Q1) at (0, 0){$Q_1$};
+        \node (Q2) at (4, 0){$Q_2$};
+        \draw[->] (R)--(Q1) node[midway, above left]{$\phi_1$};
+        \draw[->] (R)--(Q2) node[midway, above right]{$\phi_2$};
+        \draw[->, dashed] (Q1) to[out=10, in=170] node[midway, above]{$\alpha$} (Q2);
+        \draw[->, dashed] (Q2) to[out=-170, in=-10] node[midway, below]{$\beta$} (Q1);
+      \end{tikzpicture}
+    \end{center}
+  \end{multicols}
+
+  Suppose $x \in Q_1$.
+  By part (1) of the theorem, $x = \phi_1(a)\phi_1(b)^{-1}$ for some $a \in R$ and $b \in S$.
+  Since $\alpha(\phi_1(b)) = \phi_2(b)$, we get $\alpha(x) = \phi_2(a)\phi_2(b)^{-1}$.
+  So $\beta(\alpha(x)) = \phi_1(a)\phi_1(b)^{-1} = x$.
+  So $\beta$ is a left inverse to $\alpha$.
+
+  Symmetrically, $\alpha$ is a left inverse to $\beta$, so $\alpha$ and $\beta$ are inverses.
+  So $\alpha$ is an isomorphism.
+\end{thmproof}
+
+Hence the localization $S^{-1}R$ is unique up to isomorphism.
+Usually, we just take $S^{-1}R$ to be the ring from the proof of the theorem.
+
+\begin{exer}{}{}
+  Show that if we leave out the requirement from that every element of $Q$ is of the form
+  $\phi(a)\phi(b)^{-1}$ for some $a \in R$ and $b \in S$, then there can be non-isomorphic rings
+  satisfying conditions (1) and (2).
+
+  (Hint: show that you can replace $Q$ with $Q[x]$ and still satisfy parts (1) and (2).)
+\end{exer}
+
+\pagebreak
+\subsection{Fields of fractions}
+
+\begin{lem}{}{}
+  Let $R$ be an integral domain.
+  Then $S = R \setminus \{0\}$ is multiplicatively closed and does not contain 0 or any zero
+  divisors.
+  Furthermore, $S^{-1}R$ is a field.
+\end{lem}
+
+\begin{thmproof}
+  Because $R$ is a subring of $S^-{1}R$ (in the homomorphic sense), $S^{-1}R$ is non-zero.
+  Suppose $\frac{a}{b} \in S^{-1}R$.
+  Then $\frac{a}{b} = \frac{0}{1}$ if and only if $a = 0$.
+  So if $\frac{a}{b} \neq 0$, then $\frac{a}{b}$ has an inverse, namely $\frac{b}{a}$.
+  (Thus $S^{-1}R$ is a non-zero commutative ring where every non-zero element is a unit.)
+\end{thmproof}
+
+\begin{defn}{field of fractions}{}
+  If $R$ is an integral domain and $S = R \setminus \{0\}$, then $S^{-1}R$ is called the
+  \hldef{field of fractions} of $R$.
+\end{defn}
+
+Now we can prove the main theorem from this week:
+
+\begin{thm}{}{}
+  A ring $R$ is an integral domain if and only if it is (isomorphic to) a subring of a field.
+\end{thm}
+
+\begin{thmproof}
+  We've already seen that every subring of a field is an integral domain.
+
+  Conversely, every domain is a subring of its field of fractions.
+\end{thmproof}
+
+\pagebreak
+\subsection{Examples of fields of fractions}
+
+\begin{lem}{}{}
+  The field of fractions of $\Z$ is $\Q$.
+\end{lem}
+
+\begin{thmproof}
+  It is clear from the construction of $S^{-1}R$ here that we get $\Q$.
+
+  Alternatively, we can show $\Q$ satisfies conditions (1) and (2) of the localization theorem.
+\end{thmproof}
+
+\begin{defn}{rational functions}{}
+  Let $R$ be a domain.
+  The field of fractions of $R[x]$ is denoted by $R(x)$ and is called the field of
+  \hldef{rational functions} over $R$.
+\end{defn}
+
+By construction, $R(x)$ consists of fractions $\frac{f(x)}{g(x)}$ with $f, g \in R[x]$ and
+$g \neq 0$.
+
+\begin{lem}{}{}
+  Let $Q$ be the field of fractions of a domain $R$.
+  Then $Q(x) = R(x)$.
+\end{lem}
+
+\begin{thmproof}
+  Since $R[x]$ is a subring of $Q[x]$, there is an injective homomorphism
+  $\phi \colon R[x] \to Q(x)$.
+
+  By part (2) of the localization theorem, there is an inclusion homomorphism $R(x) \to Q(x)$.
+  Since $R(x)$ is a field, this homomorphism is injective.
+
+  But $R(x)$ contains $\frac{a}{b}$ for any $a, b \in R$ with $b \neq 0$, this homomorphism
+  $R(x) \to Q(x)$ is surjective.
+\end{thmproof}
+
+So for rational functions, we can assume the coefficients form a field.
+
+\pagebreak
+\subsection{Rational functions}
+
+Suppose $\K$ is a field.
+Why do we call fractions $\frac{f(x)}{g(x)} \in \K(x)$ rational \emph{functions}?
+
+Suppose we have $c \in \K$.
+If $g(c) \neq 0$, then $\frac{f(c)}{g(c)} \in \K$.
+
+\begin{defn}{domain}{}
+  The \hldef{domain} $D(F)$ of $F \in \K(x)$ is the set of points $c \in \K$ such that
+  $F = \frac{f(x)}{g(x)}$ for some $f, g \in \K[x]$ with $g(c) \neq 0$.
+\end{defn}
+
+Homework: give an example of $f, g \in \K[x]$ such that $g(c) = 0$ but $c \in D(f/g)$.
+
+\begin{lem}{}{}
+  $F \in \K(x)$ defines a function $D(F) \to \K : c \mapsto \frac{f(c)}{g(c)}$, where
+  $f, g \in \K[x]$ are chosen such that $F = f/g$ and $g(c) \neq 0$.
+\end{lem}
+
+\begin{thmproof}[Proof (exercise).]
+  Suppose $F = f/g = f'/g'$ for some $f, g, f', g' \in \K[x]$ with $g(c), g'(c) \neq 0$.
+  Then $fg' = f'g$, so $f(c)g'(c) = f'(c)g(c)$.
+  Since $g(c), g'(c) \neq 0$, we get $f(c)g(c)^{-1} = f'(c)g'(c)^{-1}$ or equivalently
+  $\frac{f(c)}{g(c)} = \frac{f'(c)}{g'(c)}$.
+\end{thmproof}
+
+\begin{ex}
+  Let $F = \frac{1}{x(x - 1)(x + 1)} \in \C(x)$.
+  If $F = f/g$, then $g(x) = x(x - 1)(x + 1)f(x)$, so $g(c) = 0$ for $c \in \{0, 1, -1\}$.
+  We conclude $D(F) = \C \setminus \{0, 1, -1\}$.
+  So $F$ defines a function
+  $\C \setminus \{0, 1, -1\} \to \C : c \mapsto \frac{1}{c(c - 1)(c + 1)}$.
+
+  Exercise: $D(F) = \C \iff F \in \C[x]$ (more later this week).
+
+  Intuition: functions defined on all $\C$ are polynomials.
+
+  The \hldef{localization} of $\C[x]$ at $c \in \C$ is the set of rational functions $F \in \C(x)$
+  with $c \in D(F)$.
+  (Intuition: focus in on $c$, expand $\C[x]$.)
+\end{ex}
+
+\begin{lem}{}{}
+  Let $\K$ be a field and $c \in \K$.
+  Then $R(c) = \{F \in \K(x) : c \in D(F)\}$ is a subring of $\K(x)$.
+\end{lem}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+\pagebreak
+\subsection{Localization at a prime ideal}
+
+If $R$ is a domain, then $R \setminus \{0\}$ is multiplicatively closed.
+
+\begin{lem}{}{}
+  Let $\mathcal{P}$ be an ideal of a commutative ring $R$.
+  Then $R \setminus \mathcal{P}$ is multiplicatively closed if and only if $\mathcal{P}$ is prime.
+\end{lem}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+Note: if $\mathcal{P}$ is a prime ideal of a domain $R$, then $S = R \setminus \mathcal{P}$ doesn't
+contain 0 or any zero divisors.
+
+\begin{defn}{localization (at a prime ideal)}{}
+  Let $\mathcal{P}$ be a prime ideal of a domain $R$.
+  The \hldef{localization} of $R$ at $\mathcal{P}$ is the ring $R_\mathcal{P} := S^{-1}R$, where
+  $S = R \setminus \mathcal{P}$.
+\end{defn}
+
+Further reading: there's a more general version of localization where $S$ can contain zero divisors,
+and this can be used to define $R_\mathcal{P}$ when $R$ is not a domain.
+
+\pagebreak
+\subsection{Localization and local rings}
+
+\begin{lem}{}{}
+  Let $\K$ be a field and $c \in \K$ so that $(x - c)$ is a maximal ideal in $\K[x]$.
+  Then the localization $\K[x]_{(x - c)}$ is isomorphic to the subring $R(x) \subseteq \K(x)$ of
+  rational functions with $c$ in the domain.
+\end{lem}
+
+\begin{thmproof}
+  Homework.
+\end{thmproof}
+
+This chain of examples is why $S^{-1}R$ is called a ``localization''.
+
+\begin{prop}{}{}
+  Let $\mathcal{P}$ be a prime ideal in a domain $R$.
+  Then $R_\mathcal{P}$ has a unique maximal ideal.
+\end{prop}
+
+Recall a commutative ring $R$ is \hldef{local} if it has a unique maximal ideal, so equivalently
+$R_\mathcal{P}$ is local.
+
+\pagebreak
+\subsection{Localization at a prime ideal, continued}
+
+\begin{ex}
+  Let $p$ be a prime in $\Z$, so that $(p)$ is prime.
+
+  $S = \Z \setminus (p)$ is the set of numbers in $\Z$ which are not divisible by $p$.
+
+  Then $\Z_{(p)} = \{\frac{a}{b} : a, b \in \Z, \ b \not\in (p)\} \subseteq \Q$.
+  In particular, this set has a unique maximal ideal.
+\end{ex}
+
+\section{The Chinese remainder theorem}
+
+\subsection{Products of ideals}
+
+\begin{defn}{product ideal}{}
+  Let $\mathcal{I}$ and $\mathcal{J}$ be ideals in a ring $R$.
+  The \hldef{product ideal} $\mathcal{IJ}$ is the ideal
+  \[ (\{ ab : a \in \mathcal{I}, \ b \in \mathcal{J} \}), \]
+  that is, the ideal generated by products of elements from $\mathcal{I}$ and $\mathcal{J}$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item If $R$ is commutative, then $Rf \cdot Rg = Rfg$.
+    For instance, in $\Z[x]$, $(x)^2 = (x^2)$.
+    \item In $\Z[x, y]$, $(x, y)^2$ contains $x^2$, $y^2$, and $xy$, but neither $x$ nor $y$.
+    Note that $x^2 + y^2$ is in $(x, y)^2$, but since it doesn't factor, it's not true that every
+    element of $\mathcal{IJ}$ is a product of elements of $\mathcal{I}$ and $\mathcal{J}$.
+  \end{itemize}
+\end{ex}
+
+\pagebreak
+\subsection{Basic properties of product ideals}
+
+\begin{lem}{}{}
+  Let $\mathcal{I}$ and $\mathcal{J}$ be ideals in a ring $R$.
+  Then:
+  \begin{enumerate}
+    \item $\mathcal{IJ} =
+      \{ \sum_{i = 1}^k a_i b_i : k \geq 0, \ a_i \in \mathcal{I}, \ b_i \in \mathcal{J} \}$.
+    \item If $R$ is commutative, $\mathcal{I} = (S)$, and $\mathcal{J} = (T)$, then
+      $\mathcal{IJ} = (\{ ab : a \in S, \ b \in T \})$.
+  \end{enumerate}
+\end{lem}
+
+Notes:
+\begin{itemize}
+  \item Another way to say (1) is that $\mathcal{IJ}$ is the subgroup of $R^+$ generated by
+    products of elements of $\mathcal{I}$ and $\mathcal{J}$.
+  \item The reason we need $R$ to be commutative in (2) is so that we don't need to include
+    elements of the form $arb$ for $a \in S$, $b \in T$, and $r \in R$.
+\end{itemize}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item
+    Let $K$ be the RHS.
+    If $x \in K$, then $-x \in K$, and $K$ is closed under addition, so $K$ is a subgroup.
+
+    If $r, s \in R$ and $x = \sum_{i = 1}^k a_i b_i \in K$ for $a_i \in \mathcal{I}$,
+    $b_i \in \mathcal{J}$, then $rxs = \sum_{i = 1}^k (ra_i)(b_is) \in K$ since
+    $ra_i \in \mathcal{I}$ and $b_is \in \mathcal{J}$.
+
+    So $K$ is an ideal.
+    Since $K$ contains the generating set for $\mathcal{IJ}$ (take $k = 1$) and is contained in
+    $\mathcal{IJ}$, we must have $\mathcal{IJ} = K$.
+
+    \item
+    Clearly $\text{RHS} \subseteq \mathcal{J}$, so we need to show the other inclusion.
+
+    Suppose $x \in \mathcal{I}$ and $y \in \mathcal{J}$.
+    Then $x = \sum a_i s_i$ for $a_i \in R$ and $s_i \in S$, and $y = \sum b_i t_i$ for $b_i \in R$
+    and $t_i \in T$.
+    So $xy = \sum_{i, j} a_i b_j s_i t_j \in \text{RHS}$.
+    Since RHS contains generators for $\mathcal{IJ}$, it contains $\mathcal{IJ}$.
+  \end{enumerate}
+\end{thmproof}
+
+\pagebreak
+\subsection{Products and intersections}
+
+\begin{lem}{}{}
+  Let $\mathcal{I}$ and $\mathcal{J}$ be ideals in a ring $R$.
+  Then $\mathcal{IJ} \subseteq \mathcal{I} \cap \mathcal{J}$.
+\end{lem}
+
+\begin{thmproof}
+  If $a \in \mathcal{I}$ and $b \in \mathcal{J}$, then $ab \in \mathcal{I} \cap \mathcal{J}$,
+  so $\mathcal{I} \cap \mathcal{J}$ contains a generating set for $\mathcal{IJ}$.
+  Since $\mathcal{I} \cap \mathcal{J}$ is an ideal,
+  $\mathcal{IJ} \subseteq \mathcal{I} \cap \mathcal{J}$.
+\end{thmproof}
+
+\begin{ex}
+  Consider $\mathcal{I} = (xy)$ and $\mathcal{J} = (yz)$ in $R[x, y, z]$ where $R$ is commutative.
+  Then $\mathcal{IJ} = (xy^2z)$, but $xyz \in \mathcal{I} \cap \mathcal{J}$.
+  So here, $\mathcal{IJ} \neq \mathcal{I} \cap \mathcal{J}$.
+\end{ex}
+
+\begin{ex}
+  Suppose $\mathcal{I} = (x)$ and $\mathcal{J} = (y)$ in $\Z[x, y]$.
+
+  $f \in \mathcal{I}$ (respectively $\mathcal{J}$) if and only if every monomial of $f$ contains a
+  positive power of $x$ (respectively $y$).
+  So $f \in \mathcal{I} \cap \mathcal{J}$ if and only if every monomial of $f$ contains a positive
+  power of both $x$ and $y$.
+
+  So $\mathcal{I} \cap \mathcal{J} = (xy) = \mathcal{IJ}$.
+\end{ex}
+
+Soon, we'll see a sufficient condition for $\mathcal{IJ} = \mathcal{I} \cap \mathcal{J}$.
+
+\pagebreak
+\subsection{From group theory: Chinese remainder theorem}
+
+If $m, n \geq 0$ and $\gcd(m, n) = 1$, then $\Zmod{mn} \cong \Zmod{m} \times \Zmod{n}$.
+
+How did this group isomorphism work?
+\[
+  \begin{array}{ccccc}
+    \Zmod{mn} & \to & n\Z/mn\Z \times m\Z/mn\Z & \to & \Zmod{m} \times \Zmod{n} \\
+    x & \mapsto & (nx, mx) & \mapsto & (x, x)
+  \end{array}
+\]
+
+\begin{tcolorbox}
+  The fact that $\Zmod{mn} \to \Zmod{m} \times \Zmod{n}$ is an isomorphism is called the
+  \textbf{Chinese remainder theorem}.
+  It implies that for any $0 \leq a < m$ and $0 \leq b < n$, there is a unique $0 \leq x < mn$ such
+  that $x$ is the solution to
+  \begin{align*}
+    x &\equiv a \pmod{m} \\
+    x &\equiv b \pmod{n}.
+  \end{align*}
+\end{tcolorbox}
+
+Is there a connection to ring theory?
+
+\pagebreak
+\subsection{Connections with rings?}
+
+Group theory: if $\gcd(m, n) = 1$, then $\Zmod{mn} \cong \Zmod{m} \times \Zmod{n}$.
+
+What about ring theory?
+
+Well, $\gcd(m, n) = 1$ if and only if $\lcm(m, n) = mn$, where $\lcm(m, n)$ is the \hldef{least
+common multiple} of $m$ and $n$: the smallest integer $k \geq 0$ where $k = xm = yn$ for some
+$x, y \in \Z$.
+
+\begin{lem}{}{}
+  $\lcm(m, n) = k$, where $k \geq 0$ and $(m) \cap (n) = (k)$.
+\end{lem}
+
+\begin{thmproof}
+  $k = xm = yn$ for some $x, y \in \Z$ if and only if $k \in (m) \cap (n)$.
+  Since $\ideal = (m) \cap (n)$ is an ideal, $\ideal = (k)$ where $k$ is the smallest non-negative
+  integer in $\ideal$.
+\end{thmproof}
+
+We can restate the CRT: if $(m)(n) = (m) \cap (n)$, then $\Zmod{mn} \cong \Zmod{m} \times \Zmod{n}$.
+
+\pagebreak
+\subsection{Generalizing the Chinese remainder theorem}
+
+\begin{lem}{}{}
+  If $R, S, T$ are rings and $\phi \colon R \to S$ and $\psi \colon R \to T$ are homomorphisms, then
+  \[ \phi \times \psi \colon R \to S \times T : r \mapsto (\phi(r), \psi(r)) \]
+  is a homomorphism.
+\end{lem}
+
+\begin{thmproof}
+  Exercise.
+\end{thmproof}
+
+Notice $\Zmod{mn} \to \Zmod{m} \times \Zmod{n} : x \mapsto(x, x)$ is the product $q_1 \times q_2$,
+where $q_1 \colon \Zmod{mn} \to \Zmod{m}$ and $q_2 \colon \Zmod{mn} \to \Zmod{n}$ are the quotient
+maps.
+So this is a ring isomorphism as well.
+
+Now let $\mathcal{I}, \mathcal{J}$ be ideals in some ring $R$.
+Do we get a map $R/\mathcal{IJ} \to R/\mathcal{I} \times R/\mathcal{J} :
+  \overline{r} \mapsto (\overline{r}, \overline{r})$?
+
+\begin{lem}{}{}
+  If $\mathcal{I}, \mathcal{J}$ are ideals in a ring $R$, and
+  $\phi = q_1 \times q_2 \colon R \to R/\mathcal{I} \times R/\mathcal{J}$ where
+  $q_1 \colon R \to R/\mathcal{I}$ and $q_2 \colon R \to R/\mathcal{J}$ are the quotient maps, then
+  $\ker\phi = \mathcal{I} \cap \mathcal{J}$.
+
+  As a result, there is a homomorphism
+  $\psi \colon R/\mathcal{IJ} \to R/\mathcal{I} \times R/\mathcal{J}$ such that
+  $\psi(\overline{x}) = (q_1(x), q_2(x))$ and
+  $\ker\psi = \mathcal{I} \cap \mathcal{J}/\mathcal{IJ}$.
+\end{lem}
+
+\begin{thmproof}
+  First, $x \in \ker\phi \iff (q_1(x), q_2(x)) = (0, 0) \iff x \in \ker q_1 \cap \ker q_2 =
+    \mathcal{I} \cap \mathcal{J}$.
+
+  Next, note $\mathcal{IJ} \subseteq \mathcal{I} \cap \mathcal{J} = \ker\phi$.
+  By the universal property of quotient rings, there is a homomorphism
+  $\psi \colon R/\mathcal{IJ} \to R/\mathcal{I} \times R/\mathcal{J}$ such that
+  $\psi(\overline{x}) = \phi(x)$ for all $x \in R$, and
+  $\ker\psi = \mathcal{I} \cap \mathcal{J}/\mathcal{IJ}$ by the correspondence theorem, since
+  $\psi(\overline{x}) = 0 \iff \phi(x) = 0$.
+\end{thmproof}
+
+\begin{tcolorbox}
+  Let $\mathcal{I}, \mathcal{J}$ be ideals in $R$.
+  Is $\phi \colon R/\mathcal{IJ} \to R/\mathcal{I} \times R/\mathcal{J} :
+    \overline{r} \mapsto (\overline{r}, \overline{r})$ a ring isomorphism?
+\end{tcolorbox}
+
+By the lemma, $\phi$ is injective if and only if $\mathcal{I} \cap \mathcal{J} = \mathcal{IJ}$.
+Is injectivity sufficient to prove surjectivity?
+
+\begin{ex}
+  Let $R = \Z$, $\mathcal{I} = (m)$, and $\mathcal{J} = (n)$.
+
+  Then $\abs{\Zmod{mn}} = mn = \abs{\Zmod{m} \times \Zmod{n}}$.
+
+  By the pigeonhole principle, $\phi$ is surjective if and only if $\phi$ is injective.
+  We can conclude the following are equivalent:
+  \begin{enumerate}
+    \item $\phi$ is a group isomorphism.
+    \item $\phi$ is a ring isomorphism.
+    \item $(m) \cap (n) = (mn)$, i.e., $\lcm(m, n) = mn$, i.e., $\gcd(m, n) = 1$.
+  \end{enumerate}
+  Note this is actually slightly stronger than the stated CRT.
+\end{ex}
+
+\begin{ex}
+  Consider $(2), (x)$ in $\Z[x]$.
+  Exercise: $(2) \cap (x) = (2x)$.
+
+  Is $\phi \colon \Z[x]/(2x) \to \Z[x]/(2) \times \Z[x]/(x) :
+    \overline{p} \mapsto (\overline{p}, \overline{p})$ surjective?
+
+  Suppose $p \in \Z[x]$ such that $p(x) = 0$ in $\Z[x]/(2)$, so all coefficients of $p$ are even.
+  But then $p(x) - 1$ must have a constant term, so $p(x) - 1 \not\in (x)$.
+  Conclusion: $(0, 1) \not\in \Im\phi$.
+
+  So $\phi$ is injective but not surjective.
+\end{ex}
+
+We need some more work to fully generalize CRT.
+
+\pagebreak
+\subsection{Comaximal ideals}
+
+Recall $\gcd(m, n) = 1 \iff xm + yn = 1$ for some $x, y \in \Z$.
+
+(We used this fact to prove the group theory version of the CRT.)
+
+Can we build off of this idea, rather than the connection with $\lcm$?
+
+Note $a = xm$ for $x \in \Z$ if and only if $a \in (m)$, and similarly $b = yn$ for $y \in \Z$ if
+and only if $b \in (n)$.
+
+\begin{lem}{}{}
+  $\gcd(m, n) = 1$ if and only if $(m) + (n) = \Z$.
+\end{lem}
+
+\begin{thmproof}
+  We know $(m) + (n)$ is an ideal, so $(m) + (n) = \Z$ if and only if $1 \in (m) + (n)$, which
+  happens if and only if $1 = xm + yn$ for some $x, y \in \Z$.
+\end{thmproof}
+
+\begin{defn}{comaximal ideals}{}
+  Two ideals $\mathcal{I}$ and $\mathcal{J}$ in a ring $R$ are \hldef{comaximal}
+  (or \hldef{coprime}) if $\mathcal{I} + \mathcal{J} = R$, or equivalently if
+  $1 \in \mathcal{I} + \mathcal{J}$.
+\end{defn}
+
+This is actually enough to generalize the CRT.
+
+\begin{thm}{Generalized Chinese remainder theorem}{}
+  If $\mathcal{I}, \mathcal{J}$ are comaximal in a commutative ring $R$, then
+  $\phi \colon R/\mathcal{IJ} \to R/\mathcal{I} \times R/\mathcal{J}$ is an isomorphism.
+\end{thm}
+
+\begin{thmproof}
+  Suppose $a \in \mathcal{I}$ and $b \in \mathcal{J}$ such that $a + b = 1$.
+
+  \textbf{$\phi$ is surjective:}
+  If $r \in R$, then $ra + rb = r$, so $r - rb = ra \in \mathcal{I}$ and
+  $r - ra = rb \in \mathcal{J}$.
+  So $\overline{r} = \overline{rb}$ in $R/\mathcal{I}$ and $\overline{r} = \overline{ra}$ in
+  $R/\mathcal{J}$.
+  But $\overline{rb} = 0$ in $R/\mathcal{J}$ and $\overline{ra} = 0$ in $R/\mathcal{I}$.
+  So for all $r_1, r_2 \in R$, we see
+  $\phi(\overline{r_1b + r_2a}) = (\overline{r_1}, \overline{r_2})$ in
+  $R/\mathcal{I} \times R/\mathcal{J}$.
+
+  \textbf{$\phi$ is injective:}
+  Need to show $\mathcal{I} \cap \mathcal{J} = \mathcal{IJ}$.
+  Suppose $x \in \mathcal{I} \cap \mathcal{J}$.
+  Then $x = xa + xb \in \mathcal{IJ}$.
+  So $\mathcal{I} \cap \mathcal{J} \subseteq \mathcal{IJ}$.
+  We already know $\mathcal{IJ} \subseteq \mathcal{I} \cap \mathcal{J}$, so
+  $\mathcal{I} \cap \mathcal{J} = \mathcal{IJ}$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Continuing the decomposition}
+
+If $n = p_1^{a_1} \cdots p_k^{a_k}$ where $p_1, \ldots, p_k$ are distinct primes, then
+$\Zmod{n} \cong \Zmod{p_1^{a_1}} \times \Zmod{p_2^{a_2} \cdots p_k^{a_k}} \cong
+  \Zmod{p_1^{a_1}} \times \cdots \times \Zmod{p_k^{a_k}}$.
+
+Why?
+Because $p_1^{a_1}$ is coprime to $p_2^{a_2} \cdots p_k^{a_k}$.
+
+In $\Z$, if $a$ is coprime to $b$ and coprime to $c$, then $a$ is coprime to $bc$.
+
+\begin{lem}{}{}
+  If $\mathcal{I}$, $\mathcal{J}$, and $\mathcal{K}$ are ideals of $R$ such that
+  $\mathcal{I}, \mathcal{J}$ and $\mathcal{I}, \mathcal{K}$ are comaximal, then $\mathcal{I}$ and
+  $\mathcal{JK}$ are comaximal.
+\end{lem}
+
+\begin{thmproof}
+  Suppose $a + b = 1 = a' + c$ where $a, a' \in \mathcal{I}$, $b \in \mathcal{J}$, and
+  $c \in \mathcal{K}$.
+  Then $b = ba' + bc$, so $1 = a + b = (a + ba') + bc \in \mathcal{I} + \mathcal{JK}$.
+\end{thmproof}
+
+We can generalize the CRT even further.
+
+\begin{thm}{Generalized CRT, extended version}{}
+  Suppose $\ideal_1, \ldots, \ideal_k$ are pairwise comaximal ideals of a commutative ring $R$ for
+  $k \geq 2$.
+  Then there is an isomorphism
+  $\phi \colon R/\ideal_1 \cdots \ideal_k \to R/\ideal_1 \times \cdots \times R/\ideal_k$ defined by
+  $\phi(\overline{r}) = (\overline{r}, \ldots, \overline{r})$.
+\end{thm}
+
+\begin{thmproof}
+  By induction on $k$.
+  We've already done the base case $k = 2$.
+
+  If $k > 2$, by induction be get an isomorphism
+  $R/\ideal_2 \cdots \ideal_k \to R/\ideal_2 \times \cdots \times R/\ideal_k :
+    \overline{r} \mapsto (\overline{r}, \ldots, \overline{r})$.
+  By lemma, $\ideal_1$ and $\ideal_2 \cdots \ideal_k$ are comaximal.
+  So $R/\ideal_1 \cdots \ideal_k \to R/\ideal_1 \times R/\ideal_2 \cdots R/\ideal_k :
+    \overline{r} \mapsto (\overline{r}, \overline{r})$ is an isomorphism.
+
+  Exercise: compose these steps to get the desired isomorphism.
+\end{thmproof}
+
+\pagebreak
+\subsection{End notes}
+
+Question: Why not go straight from CRT to generalized CRT?
+(That is, why did we bother looking at the other ring-theoretic approaches that didn't work?)
+
+Answer: There are some applications of generalized CRT (especially to polynomials), but the
+generalized CRT doesn't come up as much as we might expect in ring theory.
+
+The important takeaway from this section is that it's interesting to look for ``decompositions'' of
+a ring $R$.
+
+\week{PIDs and UFDs}
+
+\section{Principal ideal domains (PIDs)}
+
+\subsection{Division in a ring}
+
+\begin{defn}{division}{}
+  Let $x$ and $y$ be elements of a commutative ring $R$.
+  We say that $x$ \hldef{divides} $y$ if $y = xr$ for some $r \in R$, or equivalent if $y \in Rx$.
+  Notation: $x \mid y$.
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item In $\Z$, $12 = 3 \cdot 4$, so $3 \mid 12$; meanwhile $5 \nmid 12$.
+    \item $12 = (-3) \cdot (-4)$, so also $-3 \mid 12$.
+    \item $x - 1$ divides $x^2 - 1$ in $\Z[x]$, since $x^2 - 1 = (x - 1)(x + 1)$.
+  \end{itemize}
+\end{ex}
+
+Basic properties:
+\begin{itemize}
+  \item If $x \mid y$, then $x \mid yz$ for all $z \in R$.
+  \item Every $x \in R$ divides 0, since $x \cdot 0 = 0$.
+    Caution: ``divides 0'' is not the same as ``zero divisor''.
+  \item $u \mid 1$ if and only if $u \in R^\times$.
+    More generally, if $u \in R^\times$, then $x = u(u^{-1}x)$, so $u \mid x$ for all $x \in R$.
+  \item $x = x \cdot 1$, so $x \mid x$ for all $x \in R$.
+  \item Suppose $x, y \in R$ and $u \in R^\times$.
+    If $x \mid y$, then $y = rx = ru^{-1}(ux)$, so $ux \mid y$.
+    In particular, $ux \mid x$ and $x = u^{-1}(ux) \mid ux$ for all units $u \in R^\times$.
+\end{itemize}
+
+\begin{defn}{associates}{}
+  Two elements $x$ and $y$ of a commutative ring $R$ are \hldef{associates} if $y = ux$ for some
+  $u \in R^\times$.
+  We write $x \sim y$.
+\end{defn}
+
+\begin{lem}{}{}
+  Suppose $R$ is a commutative ring.
+  Then:
+  \begin{enumerate}
+    \item $\sim$ is an equivalence relation.
+    \item If $x_1 \sim x_2$ and $y_1 \sim y_2$, then $x_1 \mid y_1 \iff x_2 \mid y_2$.
+    \item If $x \sim y$, then $x \mid y$ and $y \mid x$.
+  \end{enumerate}
+\end{lem}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item (Exercise) Key idea: if $y = ux$, then $x = u^{-1}y$.
+    \item (Exercise) Key idea: $x_1 \mid y_1 \implies x_2 \mid y_2$ from earlier observations.
+    \item (Exercise) From previous observations.
+  \end{enumerate}
+\end{thmproof}
+
+When do $x$ and $y$ mutual divide?
+
+\begin{lem}{}{}
+  If $R$ is a commutative ring, then $x \mid y$ and $y \mid x$ if and only if $(x) = (y)$.
+\end{lem}
+
+\begin{thmproof}
+  Follows from the fact that $x \mid y \iff y \in (x) \iff (y) \subseteq (x)$.
+\end{thmproof}
+
+\begin{lem}{}{}
+  If $R$ is a domain, then for all $x, y \in R$, $x \sim y$ if and only if $x \mid y$ and
+  $y \mid x$.
+\end{lem}
+
+\begin{thmproof}
+  We already know that if $x \sim y$, then $x \mid y$ and $y \mid x$.
+
+  Suppose $y = xr$ and $x = yt$ for $r, t \in R$.
+  If $y = 0$, then $x = 0$, so $x \sim y$.
+  Then suppose $y \neq 0$.
+  We have $y = xr = yrt$ so $(1 - rt)y = 0$, but $y \neq 0$ and $R$ is a domain, so $1 - rt = 0$
+  and hence $r, t \in R^\times$.
+\end{thmproof}
+
+\pagebreak
+\subsection{Common divisors}
+
+\begin{defn}{common divisor, greatest common divisor}{}
+  Let $R$ be a commutative ring and $a, b \in R$.
+  An element $d \in R$ is a \hldef{common divisor} of $a$ and $b$ if $d \mid a$ and $d \mid b$.
+
+  A common divisor $d$ is a \hldef{greatest common divisor} if for all common divisors $d' \in R$
+  of $a$ and $b$, we have $d' \mid d$.
+
+  We write $d = \gcd(x, y)$ to say $d$ is a greatest common divisor of $x$ and $y$.
+  (Caution: this definition does not say $\gcd(x, y)$ exists, is computable, or even unique.)
+\end{defn}
+
+\begin{lem}{}{}
+  Let $d, a, b \in R$ where $R$ is a commutative ring.
+  Then the following are equivalent:
+  \begin{enumerate}
+    \item $d \mid a$ and $d \mid b$.
+    \item $d \mid xa + yb$ for all $x, y \in R$.
+    \item $(a, b) \subseteq (d)$.
+  \end{enumerate}
+\end{lem}
+
+\begin{thmproof}
+  $(1) \implies (2)$: if $a = dr$ and $b = dt$, then $xa + yb = (xr + yt)d$.
+
+  $(2) \implies (1)$: set $x = 1$ and $y = 0$, and vice versa.
+
+  $(3) \iff (2)$: every element of $(a, b)$ is of the form $xa + yb$, and
+  $d \mid xa + yb$ if and only if $xa + yb \in (d)$.
+\end{thmproof}
+
+Basic properties of greatest common divisors:
+\begin{itemize}
+  \item If $a$ and $b$ have 0 as a common divisor, then $a = b = 0$, so $0 = \gcd(a, b)$ if and
+    only if $a = b = 0$.
+  \item Every common divisor of $x \in R$ and $u \in R^\times$ is a unit.
+    Since units divide every element, $v = \gcd(x, u)$ for all $v \in R^\times$.
+  \item If $d, d'$ are both greatest common divisors of $x, y \in R$, then $d \mid d'$ and
+    $d' \mid d$.
+    Hence if $R$ is a domain, $d \sim d'$.
+
+    Meanwhile, in any ring $R$: if $d = \gcd(x, y)$ and $d \sim d'$, then $d' = \gcd(x, y)$.
+
+    We say that greatest common divisors in integral domains are \textbf{unique up to units}.
+    For example: $3 = \gcd(12, 9)$ and $-3 = \gcd(12, 9)$.
+\end{itemize}
+
+\pagebreak
+\subsection{Existence of greatest common divisors}
+
+\begin{prop}{}{}
+  Let $a, b \in R$ where $R$ is a commutative ring.
+  Then $a$ and $b$ have a greatest common divisor if and only if there is a principal ideal $\ideal$
+  such that
+  \begin{enumerate}
+    \item $(a, b) \subseteq \ideal$, and
+    \item if $\mathcal{J} \subseteq R$ is a principal ideal containing $(a, b)$, then
+      $\ideal \subseteq \mathcal{J}$.
+  \end{enumerate}
+  If $\ideal$ exists then it is unique, and $\ideal = (d) \iff d = \gcd(a, b)$.
+\end{prop}
+
+\begin{thmproof}
+  Since $d'$ is a common divisor of $a$ and $b$ if and only if $(a, b) \subseteq (d')$, and
+  $d = \gcd(a, b)$ if and only if $\ideal := (d)$ satisfies (1) and (2).
+
+  If $\ideal$ and $\ideal'$ are principal ideals satisfying (1) and (2), then
+  $\ideal \subseteq \ideal'$ and $\ideal' \subseteq \ideal$, so $\ideal = \ideal'$.
+  Combining uniqueness with the first observation, we see $\ideal = (d) \iff d = \gcd(a, b)$.
+\end{thmproof}
+
+\begin{cor}{}{}
+  Let $a, b \in R$ where $R$ is a commutative ring.
+  If $(a, b)$ is a principal ideal, then a greatest common divisor of $a$ and $b$ exists.
+  As a result, if $d$ is a common divisor of $a$ and $b$ such that $d = xa + yb$ for some
+  $x, y \in R$, then $d = \gcd(a, b)$.
+\end{cor}
+
+\begin{thmproof}
+  If $(a, b) = (d)$, then $\ideal = (d)$ satisfies (1) and (2) of the proposition.
+  If $d$ is a common divisor of $a$ and $b$, then $(a, b) \subseteq (d)$, and if $d = xa + yb$, then
+  $d \in (a, b)$, so $(d) = (a, b)$.
+\end{thmproof}
+
+In $\Z$, every ideal is principal, so greatest common divisors always exist.
+
+\begin{cor}{}{}
+  Let $a, b \in R$ where $R$ is a commutative ring, and suppose $(a)$ and $(b)$ are comaximal.
+  Then $1 = \gcd(a, b)$.
+\end{cor}
+
+\begin{thmproof}
+  $(a) + (b) = (1)$.
+\end{thmproof}
+
+\begin{ex}
+  In $\Z$, $d = \gcd(a, b) \iff (d) = (a, b)$.
+
+  For instance, $(9, 12) = (3)$.
+\end{ex}
+
+\begin{ex}
+  In $\Z[x]$, $(x^2 + 1)$ and $(x^2)$ are comaximal, so $1 = \gcd(x^2, x^2 + 1)$.
+
+  On the other hand, $(2, x)$ is not principal in $\Z[x]$, so we can't use this method to find
+  $\gcd(2, x)$.
+  Does $\gcd(2, x)$ exist?
+
+  We showed that the only principal ideal containing $(2, x)$ is $(1)$, so $1 = \gcd(2, x)$,
+  even though $(2)$ and $(x)$ are not comaximal.
+
+  Different argument: $2$ and $x$ don't factor, so we should treat the like distinct primes.
+  That is, they should be ``coprime''.
+
+  We'll explore this argument in this week and the next.
+\end{ex}
+
+\pagebreak
+\subsection{Principal ideal domains}
+
+Recall: since all ideals of $\Z$ are principal, there is a greatest common divisor of every
+$a, b \in \Z$.
+
+\begin{defn}{principal ideal domain (PID)}{}
+  A ring $R$ is a \hldef{principal ideal domain (PID)} if
+  \begin{itemize}
+    \item $R$ is an integral domain, and
+    \item every ideal of $R$ is principal.
+  \end{itemize}
+\end{defn}
+
+\begin{ex}
+  \begin{itemize}
+    \item $\Z$ is a principal ideal domain.
+    \item Later: if $\K$ is a field, then $\K[x]$ is a principal ideal domain.
+    \item $\Z[x]$ is not a PID, since $(2, x)$ is not principal.
+    \item $\K[x, y]$ is not a principal ideal domain even if $\K$ is a field, since $(x, y)$ is not
+      principal.
+  \end{itemize}
+\end{ex}
+
+\begin{prop}{}{}
+  If $R$ is a PID, then every pair of elements $a, b \in R$ has a greatest common divisor.
+  Also, $d = \gcd(a, b)$ if and only if $d$ is a common divisor of $a$ and $b$ and $d = xa + yb$
+  for some $x, y \in R$.
+\end{prop}
+
+\begin{thmproof}
+  Easy application of last corollary.
+\end{thmproof}
+
+Recall that maximal ideals are prime.
+In $\Z$, an ideal $n\Z$ is maximal if and only if $n$ is prime.
+\sout{Since $\Zmod{n}$ is an integral domain if and only if $n$ is prime, $n\Z$ is prime if and only
+if $n$ is prime.}
+
+\begin{tcolorbox}
+  Correction!
+
+  $\Zmod{n}$ is also an integral domain if $n = 0$.
+  So $n\Z$ is prime if and only if $n$ is prime or zero.
+\end{tcolorbox}
+
+\begin{prop}{}{}
+  If $R$ is a PID, then every non-zero prime ideal of $R$ is maximal.
+\end{prop}
+
+\begin{thmproof}
+  Suppose $\ideal$ is a non-zero prime ideal in $R$.
+  Let $\mathcal{J}$ be a proper ideal of $R$ containing $\ideal$.
+
+  Because $R$ is a PID, $\ideal = (a)$ and $\mathcal{J} = (b)$ for some $a, b \in R$.
+  Since $\ideal \subseteq \mathcal{J}$, $a = br$ for some $r \in R$.
+
+  Since $\ideal$ is prime and $br \in \ideal$, one of $b$ or $r$ is in $\ideal$.
+  Suppose for contradiction $b \not\in \ideal$, so $r \in \ideal$.
+
+  Then $(r) \subseteq (a)$, and since $a = br \in (r)$, we have $(a) = (r)$.
+  Since $R$ is a domain, $a$ and $r$ are associates.
+  This means $a = ur$ for some $u \in R^\times$.
+  So $br = a = ur \implies (b - u)r = 0$.
+  Since $\ideal = (r)$ is non-zero, $r \neq 0$, so $b = u$.
+  But then $1 \in \mathcal{J}$, a contradiction.
+
+  So $b \in \ideal$ and hence $\mathcal{J} \subseteq \ideal$.
+  So $\ideal$ is maximal.
+\end{thmproof}
+
+Later, we'll see that if $\K$ is a field then $\K[x]$ is a PID.
+The converse is also true:
+
+\begin{cor}{}{}
+  Suppose $R$ is a commutative ring such that $R[x]$ is a PID.
+  Then $R$ is a field.
+\end{cor}
+
+\begin{thmproof}
+  If $R[x]$ is a PID, then it is a domain.
+  As a subring of $R[x]$, $R$ must also be a domain.
+  Since $R \cong R[x]/(x)$, $(x)$ is prime.
+  But then $(x)$ is maximal, so $R$ is a field.
+\end{thmproof}
+
+\pagebreak
+\subsection{Euclidean domains}
+
+Why is every ideal of $\Z$ principal?
+
+Streamlined (ring theory) answer:
+\begin{itemize}
+  \item Suppose $\ideal$ is a non-zero ideal of $\Z$.
+  \item Let $n$ be the smallest positive integer of $\ideal$ (so $n\Z \subseteq \ideal$).
+  \item If $x \in \ideal$, then $x = qn + r$ where $0 \leq r < n$.
+  \item $r = x - qn \in \ideal$, so $r = 0$ by assumption on $n$.
+  \item Therefore $x \in n\Z$ for all $x \in \ideal$, so $\ideal \subseteq n\Z$.
+\end{itemize}
+This argument relies on being able to divide in $\Z$ (writing $x = qn + r$).
+
+What would it mean to do division in an arbitrary ring?
+Given $n, x \in R$, maybe we can find $q, r \in R$ such that $x = qn + r$, but then taking $q = 0$
+and $r = x$ gives a trivial result.
+
+We want to somehow have $\abs{r} < \abs{n}$, but we don't necessarily have an order on $R$.
+
+\begin{defn}{Euclidean domain}{}
+  A domain $R$ is a \hldef{Euclidean domain} if there is a function $N \colon R \to \N \cup \{0\}$
+  such that
+  \begin{itemize}
+    \item $N(0) = 0$, and
+    \item for all $x, y \in R$ with $x \neq 0$, there are $q, r \in R$ where $y = qx + r$ with
+      $r = 0$ or $N(r) < N(x)$.
+  \end{itemize}
+  $N$ is called a \hldef{norm}.
+\end{defn}
+
+Sometimes a Euclidean domain is called a \hldef{domain with a division algorithm} (cf. Euclidean
+algorithm).
+
+\begin{ex}
+  $\Z$ is a Euclidean domain with norm $N(x) = \abs{x}$.
+  (If $x < 0$, then $y = q\abs{x} + r = (-q)x + r$ where $0 \leq r < \abs{x}$.)
+\end{ex}
+
+We'll see it's possible to have norms with $N(x) = 0$, but $x \neq 0$.
+However, if $N(x) = 0$, then $1 = qx + r$ with $r = 0$ \sout{or $N(r) < N(x)$}.
+So $x \mid 1$ and hence $x$ is a unit.
+
+\begin{prop}{}{}
+  Any Euclidean domain $R$ is a PID.
+\end{prop}
+
+\begin{thmproof}
+  Suppose $\ideal$ is an ideal in $R$.
+
+  If $\ideal$ is zero, then it is principal, so suppose $\ideal \neq (0)$.
+
+  Let $k = \min\{N(x) : x \in \ideal, \ x \neq 0\}$.
+  Let $x \in \ideal$ such that $N(x) = k$.
+  Suppose $y \in \ideal$.
+  Then $y = qx + r$ for $q, r \in R$ with $r = 0$ or $N(r) < N(x)$.
+
+  Since $r = y - qx \in \ideal$, we can't have $N(r) < N(x)$, so $r = 0$.
+  Thus $y \in (x)$, so $\ideal \subseteq (x)$.
+  We see readily $(x) \subseteq \ideal$ as well.
+\end{thmproof}
+
+Now for polynomial rings.
+
+\begin{prop}{}{}
+  If $\K$ is a field, then $\K[x]$ is a Euclidean domain.
+\end{prop}
+
+\begin{thmproof}
+  Define $N \colon \K[x] \to \N \cup \{0\}$ by $N(p) = \deg(p)$ if $p \neq 0$, and $N(0) = 0$.
+  Suppose $y, p \in \K[x]$ with $p \neq 0$.
+  If $\deg(p) = 0$, then $p$ is a unit, so $y = qp + 0$ for some $q \in \K[x]$.
+  If $\deg(p) > 0$, then we can divide $y$ by $p$ to get $y = qp + r$ for $q, r \in \K[x]$ with
+  $\deg(r) < \deg(p)$.
+  In both cases, we can get $y = qp + r$ with $q, r \in \K[x]$ such that $r = 0$ or $N(r) < N(p)$.
+\end{thmproof}
+
+\begin{cor}{}{}
+  If $\K$ is a field, then $\K[x]$ is a PID.
+\end{cor}
+
+\pagebreak
+\subsection{Polynomial division over a field}
+
+Suppose $y, p \in \K[x]$ with $\deg(p) \geq 1$.
+
+Let $p = \sum_{i = 0}^n a_i x^i$ with $a_n \neq 0$ and let $y = \sum_{j = 0}^m b_j x^j$.
+We can divide $y$ by $p$ with the following procedure:
+\begin{itemize}
+  \item Keep track of $q$, starting with $q = 0$.
+  \item If $m < n$, return $q$ and $r = y$.
+  \item If $m \geq n$, then
+  \[
+    y - \frac{b_m}{a_n} x^{m - n} p
+      = 0x^m + \frac{a_n b_{m - 1} - b_m a_{n - 1}}{a_n} x^{m - 1} + \cdots.
+  \]
+  So replace $q$ by $q + \frac{b_m}{a_n} x^{m - n}$ and $y$ by $y - \frac{b_m}{a_n} x^{m - n} p$,
+  and repeat.
+\end{itemize}
+Eventually we'll finish with $q$ and $r$ such that $y - qp = r$ and $\deg(r) < \deg(p)$.
+
+\pagebreak
+\subsection{Euclidean domains vs. PIDs}
+
+Every Euclidean domain is a PID.
+
+Are there PIDs which are not Euclidean?
+\begin{itemize}
+  \item Yes: famously $\Z[(1 + \sqrt{-19})/2]$ (we won't prove this).
+\end{itemize}
+
+How do Euclidean domains functionally differ from PIDs?
+\begin{itemize}
+  \item In PIDs, greatest common divisors always exist (but may not be easy to find).
+  \item In Euclidean domains, we have an algorithm (the Euclidean algorithm) for computing
+    greatest common divisors.
+    This algorithm is nice because it is fast as long as division is fast.
+\end{itemize}
 
 %---------------
 \end{document}
