@@ -9179,6 +9179,681 @@ How do Euclidean domains functionally differ from PIDs?
     This algorithm is nice because it is fast as long as division is fast.
 \end{itemize}
 
+\section{Unique factorization domains (UFDs)}
+
+\subsection{Primes and irreducibles}
+
+Prime numbers in $\Z$ have two equivalent definitions:
+\begin{enumerate}
+  \item $p$ is prime if $p \neq \pm 1, 0$ and whenever $p \mid ab$, one of $p \mid a$ or $p \mid b$
+    holds.
+  \item $p$ is prime if $p \neq \pm 1$ and whenever $p = ab$, one of $a$ or $b$ is a unit.
+\end{enumerate}
+
+In an arbitrary ring, prime ideals generalize definition (1).
+
+But what if we want prime elements, rather than prime ideals?
+What about definition (2)?
+
+\begin{defn}{prime, irreducible, reducible}{}
+  Let $R$ be a domain and let $p \in R$ with $p \neq 0$ and $p \not\in R^\times$.
+  \begin{itemize}
+    \item $p$ is \hldef{prime} if for all $a, b \in R$, if $p \mid ab$, then $p \mid a$ or
+      $p \mid b$.
+    \item $p$ is \hldef{irreducible} if for all $a, b \in R$, if $p = ab$ then one of $a$ or $b$
+      is a unit.
+    \item $p$ is \hldef{reducible} if it is not irreducible.
+  \end{itemize}
+\end{defn}
+
+Some basic properties:
+
+\begin{prop}{}{}
+  Let $R$ be a domain.
+  \begin{enumerate}
+    \item $p \in R$ is prime if and only if $p \neq 0$ and $(p)$ is a prime ideal.
+    \item If $p_1$ and $p_2$ are associates, then $p_1$ is prime (resp. irreducible) if and only if
+      $p_2$ is prime (resp. irreducible).
+    \item If $p$ is prime, then $p$ is irreducible.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item Use fact that $p \mid m \iff m \in (p)$.
+    \item Exercise.
+    \item Suppose $p$ is prime and let $p = ab$.
+      Then $p \mid ab$ so $p \mid a$ or $p \mid b$.
+      Suppose $p \mid a$.
+      Then $a = up$, and $0 = p - ab = p(1 - ub)$.
+      Since $R$ is a domain and $p \neq 0$, then $ub = 1$ so $b \in R^\times$.
+  \end{enumerate}
+\end{thmproof}
+
+Primes are irreducibles, but is the converse true?
+Yes, in PIDs.
+
+\begin{prop}{}{}
+  Let $p$ be an irreducible in a PID $R$.
+  Then $p$ is prime.
+\end{prop}
+
+\begin{thmproof}
+  Suppose $\ideal$ is an ideal of $R$ containing $(p)$.
+  Since $R$ is a PID, $\ideal = (q)$ for some $q \in R$.
+  Since $p \in \ideal$, $p = kq$ for some $k \in R$.
+  Since $p$ is irreducible, either $k$ or $q$ is a unit.
+  If $q$ is a unit, then $\ideal = R$.
+  If $k$ is a unit, then $p$ and $q$ are associates, so $(p) = (q)$.
+  Thus $(p)$ is maximal and hence prime.
+  Since $p \neq 0$ by definition, $p$ is prime.
+\end{thmproof}
+
+What about general domains?
+We'll get there later.
+
+\pagebreak
+\subsection{Complete factorizations}
+
+Let's consider another question first.
+In $\Z$, every number is a product of primes.
+
+\begin{tcolorbox}
+  Is every element of a domain $R$ a product of irreducibles?
+\end{tcolorbox}
+
+\begin{defn}{complete factorization}{}
+  Let $R$ be a domain.
+  Say that $r \in R$ has a \hldef{complete factorization into irreducibles} if and only if
+  $r = r_1 \cdots r_k$ where $k \geq 1$ and $r_1, \ldots, r_k$ are irreducible.
+
+  Say that $R$ has \hldef{complete factorizations (into irreducibles)} if every
+  $r \in R \setminus (R^\times \cup \{0\})$ has a complete factorization into irreducibles.
+\end{defn}
+
+Side question: should we use irreducibles or primes in this definition?
+We define \hldef{complete factorizations into primes} similarly.
+
+If $R$ has complete factorizations into primes, then $R$ has complete factorizations into
+irreducibles (since primes are irreducible).
+
+So having complete factorizations into primes is (potentially) stronger than having complete
+factorizations into irreducibles.
+Could these be equivalent?
+
+\begin{lem}{}{}
+  If $r \in R$ is irreducible and a product of primes, then $r$ is prime.
+\end{lem}
+
+\begin{thmproof}
+  Suppose $r = p_1 \cdots p_k$ is irreducible and $p_1, \ldots, p_k$ are prime.
+  If $r$ is irreducible and $k \geq 2$, then either $p_1 \cdots p_{k - 1}$ or $p_k$ is a unit.
+  If $p_1 \cdots p_{k - 1}$ is a unit, then $p_i$ divides 1 for all $i$, so $p_i$ is a unit.
+  Since primes can't be units, this is a contradiction.
+  So $k = 1$ and hence $r$ is prime.
+\end{thmproof}
+
+\begin{cor}{}{}
+  If $R$ has complete factorizations into irreducibles, then $R$ has complete factorizations into
+  primes if and only if every irreducible in $R$ is prime.
+\end{cor}
+
+Since we don't know whether irreducibles are always prime yet, we'll use the weaker condition
+(into irreducibles).
+
+\pagebreak
+\subsection{A procedure for factoring}
+
+Let $r \in R$ where $R$ is a domain, $r \neq 0$, and $r \not\in R^\times$.
+Let's try to show that $r$ factors into a product of irreducibles.
+\begin{enumerate}
+  \item If $r$ is irreducible, we're done.
+  \item Otherwise $r = r_1r_2$ where $r_1, r_2$ are not units.
+  \item Start over at step 1 and try to write $r_1$ and $r_2$ as products of irreducibles.
+  \item If this is possible, we can write $r$ as a product of irreducibles.
+\end{enumerate}
+
+In this example, $r = r_3r_5r_6r_2$.
+\begin{center}
+  \begin{forest}
+    for tree={s sep=1.5cm}
+    [$r$
+      [$r_1$
+        [$r_3$]
+        [$r_4$
+          [$r_5$]
+          [$r_6$]
+        ]
+      ]
+      [$r_2$]
+    ]
+  \end{forest}
+\end{center}
+
+Does this always terminate?
+If even one branch keeps growing, the process won't terminate.
+
+\begin{lem}{}{}
+  Let $r = r_1r_2 \in R$ where $R$ is a domain, so $(r) \subseteq (r_2)$.
+  If $r \neq 0$, then $(r) = (r_2)$ if and only if $r_1$ is a unit.
+\end{lem}
+
+\begin{thmproof}
+  $(r) = (r_2)$ if and only if $r$ and $r_2$ are associates.
+  So if $r_1$ is a unit then $(r) = (r_2)$.
+
+  Conversely, if $(r) = (r_2)$, then $r = ur_2$ for $u$ a unit, so $(r_1 - u)r_2 = 0$.
+  Since $r \neq 0$, we have $r_2 \neq 0$, hence $r_1 = u$ is a unit.
+\end{thmproof}
+
+So if $r$ is reducible, then $r = r_1r_2$ where $(r) \subsetneq (r_1)$ and $(r) \subsetneq (r_2)$.
+If the procedure continues infinitely, we get an infinite strictly increasing sequence of principal
+ideals $\ideal_1 = (r_1) \subsetneq \ideal_2 = (r_2) \subsetneq \ideal_3 \subsetneq \cdots$ in $R$.
+
+\begin{defn}{acending chain condition for principal ideals}{}
+  A ring $R$ satisfies the \hldef{ascending chain condition for principal ideals} if there is no
+  infinite strictly increasing sequence $\ideal_1 \subsetneq \ideal_2 \subsetneq \cdots$ of
+  principal ideals in $R$.
+\end{defn}
+
+Equivalently, if $\ideal_1 \subseteq \ideal_2 \subseteq \cdots$ is an infinite chain of principal
+ideals, eventually there is $k$ such that $\ideal_n = \ideal_k$ for all $n \geq k$.
+
+$R$ satisfies the ascending chain condition for principal ideals if and only if the procedure
+always terminates.
+This proves:
+
+\begin{prop}{}{}
+  If $R$ satisfies the ascending chain condition for principal ideals, then $R$ has complete
+  factorizations into irreducibles.
+\end{prop}
+
+Note: there is an ``ascending chain condition for ideals'' that is also very important in
+commutative ring theory.
+
+\begin{prop}{}{}
+  If $R$ is a PID, then $R$ satisfies the ascending chain condition for principal ideals.
+\end{prop}
+
+\begin{thmproof}
+  Suppose $\ideal_1 \subseteq \ideal_2 \subseteq \cdots$ is an increasing sequence of ideals.
+  Then $\ideal := \bigcup \ideal_i$ is an ideal.
+  Since $R$ is a PID, $\ideal = (x)$ for some $x \in R$.
+  Since $x \in \ideal$, $x \in \ideal_k$ for some $k$.
+  But then $\ideal_k \subseteq \ideal_n \subseteq \ideal = (x) \subseteq \ideal_k$ for all
+  $n \geq k$, so $\ideal_n = \ideal_k$ for all $n \geq k$.
+\end{thmproof}
+
+What about rings which do not satisfy the ascending chain condition for principal ideals?
+
+\begin{ex}
+  Let $\K$ be a field, and let $R = \K[x_1, x_2, \ldots]$ denote the infinite polynomial ring in
+  variables $x_1, x_2, \ldots$.
+
+  Elements of this ring belong to $R_n := \K[x_1, \ldots, x_n]$ for some $n$, so we can think of
+  $R$ as $\bigcup_{n \geq 1} R_n$.
+  (Technically, we say $R$ is the direct limit of rings $R_n$.)
+
+  Let $\ideal = (x_1 - x_2^2, x_2 - x_3^2, x_3 - x_4^2, \ldots)$.
+  Then in $R/\ideal$, we have $x_1 = x_2^2$, $x_2 = x_3^2$, and so on, so
+  $(x_1) \subsetneq (x_2) \subsetneq (x_3) \subsetneq \cdots$ (details omitted).
+
+  Thus $R/\ideal$ does not satisfy the ascending chain condition.
+\end{ex}
+
+In the homework, you'll do a more elementary example.
+
+\pagebreak
+\subsection{Unique factorizations}
+
+In $\Z$, not only can we write every element as a product of irreducibles, but factorizations are
+unique.
+
+We'll explore the question of uniqueness before considering complete factorizations.
+
+\begin{defn}{uniqueness of complete factorizations}{}
+  Let $R$ be a domain.
+  We say \hldef{complete factorizations are unique when they exist} if for every pair of sequences
+  of irreducibles $f_1, \ldots, f_n$ and $g_1, \ldots, g_m$ in $R$ where
+  $n, m \geq 1$ and $f_1 \cdots f_n = g_1 \cdots g_m$, we have that
+  \begin{enumerate}
+    \item $n = m$, and
+    \item there is $\sigma \in S_n$ such that $f_i \sim g_{\sigma(i)}$ for all $1 \leq i \leq n$.
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  Complete factorizations in $\Z$ are unique when they exist.
+  For example, $12 = 2 \cdot 3 \cdot 2 = (-2) \cdot 2 \cdot (-3)$.
+\end{ex}
+
+Note: we don't say anything about when $n = 0$ or $m = 0$, because:
+
+\begin{lem}{}{}
+  If $f_1, \ldots, f_n$ are irreducibles in a domain $R$ with $n \geq 1$, then
+  $f_1 \cdots f_n \not\in R^\times$.
+\end{lem}
+
+\begin{thmproof}
+  If $f_1 \cdots f_n = u \in R^\times$, then $u^{-1}f_1 \cdots f_n = 1$ so $f_i \mid 1$ so
+  $f_i \in R^\times$, a contradiction.
+\end{thmproof}
+
+What domains satisfy this condition?
+
+\begin{prop}{}{}
+  Let $R$ be a domain such that every irreducible in $R$ is prime.
+  Then complete factorizations are unique when they exist.
+\end{prop}
+
+In particular, PIDs have unique factorizations.
+
+\begin{thmproof}
+  Similar to uniqueness of prime factorizations in $\Z$.
+
+  Exercise: if $p$ is prime and $p \mid a_1 \cdots a_n$, then $p \mid a_i$ for some
+  $1 \leq i \leq n$ (use induction).
+
+  Proposition follows from this claim: if $1 \leq n \leq m$ and
+  $f_1, \ldots, f_n, g_1, \ldots, g_m \in R$ are irreducibles such that
+  $f_1 \cdots f_n = g_1 \cdots g_m$, then
+  \begin{itemize}
+    \item $n = m$, and
+    \item there is $\sigma \in S_n$ such that $f_i \sim g_{\sigma(i)}$ for all $1 \leq i \leq n$.
+  \end{itemize}
+
+  Proof of claim is by induction on $n$.
+
+  \textbf{Base case ($n = 1$):} since $f_1 = g_1 \cdots g_m$, we know $f_1 \mid g_i$ for some
+  $1 \leq i \leq m$.
+  So $g_i = uf_1$.
+  Since $f_1$ is not a unit and $g_i$ is irreducible, $u$ is a unit.
+
+  Now let $r = g_1 \cdots g_{i - 1} g_{i + 1} \cdots g_m$, so $f_1 = f_1ur$.
+  Then $f_1(1 - ur) = 0$, so $r \in R^\times$.
+  Hence $m = 1 = n$ by the lemma, so $r = u = 1$ and $f_1 = g_1$.
+
+  \textbf{Inductive case:} suppose we have $f_1, \ldots, f_n, g_1, \ldots, g_m$ as in the claim,
+  where $n \geq 2$ and the claim holds for smaller $n$.
+
+  Since $f_1 \cdots f_n = g_1 \cdots g_m$, we have $f_1 \mid g_1 \cdots g_m$ and hence
+  $f_1 \mid g_i$ for some $1 \leq i \leq m$.
+  Then $g_i = uf_1$ where $u$ is a unit.
+
+  Since $m \geq n \geq 2$, pick $1 \leq j \leq m$ such that $j \neq i$.
+  Define $\tilde{g}_j := ug_j$ and $\tilde{g}_k := g_k$ for $k \neq j$, so that
+  $f_1 \cdots f_n = f_1 \tilde{g}_1 \cdots \tilde{g}_{i - 1} \tilde{g}_{i + 1} \cdots \tilde{g}_m$.
+
+  Since $R$ is a domain,
+  $f_2 \cdots f_n = \tilde{g}_1 \cdots \tilde{g}_{i - 1} \tilde{g}_{i + 1} \cdots \tilde{g}_m$ by
+  cancellation.
+  Since the $f_k, \tilde{g}_\ell$ are irreducibles, by induction we get $n - 1 = m = 1$ and a
+  bijection $\tilde{\sigma} \colon \{2, \ldots, n\} \to \{1, \ldots, n\} \setminus \{i\}$ such that
+  $f_k \sim \tilde{g}_{\tilde{\sigma}(k)}$ for $2 \leq k \leq n$.
+
+  Finally define $\sigma \in S_n$ by $\sigma(1) = i$ and $\sigma(k) = \tilde{\sigma}(k)$ for
+  $2 \leq k \leq n$.
+  Then $n = m$ and $f_k \sim g_{\sigma(k)}$ for all $1 \leq k \leq n$.
+\end{thmproof}
+
+Can we find domains which don't have unique factorizations?
+
+\begin{ex}
+  $R = \Z[x, y, z, w]/(xy - zw)$ is a domain (see why later).
+
+  Exercise (not easy): $x, y, z, w$ are non-associated irreducibles in $R$.
+
+  But $xy = zw$ in $R$, so $R$ does not have unique factorizations.
+  Since factorizations in $R$ are not unique when they exist, there are irreducibles in $R$ which
+  are not prime.
+
+  Indeed, we can show that $x, y, z, w$ are not prime, since
+  $R/(x) \cong \Z[x, y, z, w]/(xy - zw, x) \cong \Z[x, y, z, w]/(zw, x) \cong \Z[y, z, w]/(zw)$
+  which is not a domain.
+\end{ex}
+
+\begin{ex}
+  In $\Z[i\sqrt{5}] = \{a + bi\sqrt{5} : a, b \in \Z\}$, we have
+  $6 = 2 \cdot 3 = (1 - i\sqrt{5})(1 + i\sqrt{5})$.
+  In the homework, you'll show $2, 3, (1 - i\sqrt{5}), (1 + i\sqrt{5})$ are irreducibles.
+\end{ex}
+
+\pagebreak
+\subsection{Unique factorization domains}
+
+\begin{defn}{unique factorization domain (UFD)}
+  A domain $R$ is a \hldef{unique factorization domain (UFD)} if $R$ has complete factorizations
+  into irreducibles, and complete factorizations are unique when they exist.
+
+  In other words, $R$ is a UFD if
+  \begin{itemize}
+    \item every $r \in R \setminus (R^\times \cup \{0\})$ is a product of irreducibles in $R$, and
+    \item if $f_1, \ldots, f_n, g_1, \ldots, g_m$ for $n, m \geq 1$ are irreducibles in $R$ such
+      that $f_1 \cdots f_n = g_1 \cdots g_m$, then
+      \begin{enumerate}
+        \item $n = m$, and
+        \item there is $\sigma \in S_n$ such that $f_i \sim g_{\sigma(i)}$.
+      \end{enumerate}
+  \end{itemize}
+\end{defn}
+
+Idea: every non-zero non-unit element in $R$ has a unique factorization into irreducibles (where
+unique is qualified as above).
+
+Example: $\Z$ is a UFD (no surprise).
+
+\pagebreak
+\subsection{Examples of UFDs}
+
+We've shown:
+\begin{itemize}
+  \item A domain with the ascending chain condition for principal ideals has complete
+    factorizations.
+  \item A domain where all irreducibles are prime has unique complete factorizations when they
+    exist.
+  \item Irreducibles in PIDs are prime, and all PIDs satisfy the ascending chain condition for
+    principal ideals.
+\end{itemize}
+
+\begin{cor}{}{}
+  PIDs are UFDs.
+  In particular, Euclidean domains are UFDs.
+\end{cor}
+
+\begin{ex}
+  If $\K$ is a field, then $\K[x]$ is a UFD.
+
+  For instance, $\Q(y)[x]$.
+\end{ex}
+
+\pagebreak
+\subsection{Domains which aren't UFDs}
+
+\begin{itemize}
+  \item We sketched out a proof that $R = \Z[x, y, z, w]/(xy - zw)$ does not have unique
+    factorizations.
+    So $R$ is not a UFD.
+  \item In the homework, you'll show $\Z[i\sqrt{5}]$ is not a UFD.
+  \item The question of whether $\Z[i\sqrt{n}]$ is a UFD is interesting.
+
+    For example, in the textbook it is shown that $\Z[i]$ is a Euclidean domain and hence a UFD.
+    Homework: modify this proof to show that $\Z[i\sqrt{2}]$ is also a Euclidean domain.
+  \item We also sketched a proof that $R = \K[x_1, x_2, \ldots]/(x_1 - x_2^2, x_2 - x_3^2, \ldots)$
+    does not satisfy the ascending chain condition for principal ideals.
+
+    Is $R$ a UFD?
+    We need to clarify the relationship between UFDs, the ascending chain condition, and the
+    condition that primes be irreducibles.
+\end{itemize}
+
+\pagebreak
+\subsection{UFDs and the other conditions}
+
+\begin{thm}{}{}
+  A domain $R$ is a UFD if and only if $R$ satisfies the ascending chain condition for principal
+  ideals and every irreducible in $R$ is prime.
+\end{thm}
+
+So irreducibles in a UFD are prime.
+
+Hence if $R$ is a UFD and $x \not\in R^\times \cup \{0\}$, we refer to the factorization of $x$
+into irreducibles as the \hldef{prime factorization} of $x$.
+
+\begin{ex}
+  $R = \K[x_1, x_2, \ldots]/(x_1 - x_2^2, x_2 - x_3^2, \ldots)$ does not satisfy the ascending
+  chain condition for principal ideals.
+
+  Hence $R$ is not a UFD.
+\end{ex}
+
+Proof later.
+
+What about multivariate polynomial rings like $\Q[x, y]$?
+Are these UFDs?
+In week 12, we'll see:
+
+\begin{thm}{}{}
+  If $R$ is a UFD, then $R[x]$ is a UFD.
+\end{thm}
+
+Note this property is shared by domains, but not PIDs: $\Q[x]$ is a PID (since $\Q$ is a field),
+but $\Q[x, y] = \Q[x][y]$ is not a PID ($(x, y)$ is not principal).
+
+The theorem implies that rings like $\Q[x, y]$ and $\Z[x, y, z, w]$ are UFDs.
+
+\begin{ex}
+  Let $p = xy - zw \in \Z[x, y, z, w]$.
+  Exercise: show $p$ is irreducible (show highest $x$ (or $y$ or $z$ or $w$) degree in any factor
+  is 1, then use brute force).
+
+  Since $\Z[x, y, z, w]$ is a UFD, $p$ is prime.
+  So $\Z[x, y, z, w]/(p)$ is a domain.
+\end{ex}
+
+\pagebreak
+\subsection{Proving the main UFD theorem}
+
+Recall:
+
+\begin{thm}{}{}
+  A domain $R$ is a UFD if and only if $R$ satisfies the ascending chain condition for principal
+  ideals and every irreducible in $R$ is prime.
+\end{thm}
+
+Recall that if $R$ is a UFD and $x \in R^\times \cup \{0\}$, we refer to the factorization of $x$
+into irreducibles as the \hldef{prime factorization} of $x$.
+
+We'll need this lemma to prove the theorem:
+
+\begin{lem}{}{}
+  Suppose $R$ is a UFD and $a, b \in R$ are non-zero non-units.
+  If $a \mid b$, then the number of factors in the prime factorization of $a$ is at most the
+  number of factors in the prime factorization of $b$, and equality holds if and only if
+  $(a) = (b)$.
+\end{lem}
+
+\begin{thmproof}
+  If $ca = b$, we can write $a = p_1 \cdots p_m$, $b = q_1 \cdots q_n$, and $c = ug_1 \cdots g_\ell$
+  where $p_i, q_j, g_k$ are irreducibles, $u \in R^\times$, and $m, n \geq 1$ and $\ell \geq 0$.
+  (Letting $\ell \geq 0$ allows $c$ to be a unit.)
+
+  Then $g_1 \cdots g_\ell (up_1) \cdots p_m = q_1 \cdots q_n$, so $m \leq m + \ell = n$ (since the
+  factorization is unique).
+  We previously showed that $(a) = (b)$ if and only if $c$ is a unit.
+  But $c$ is a unit if and only if $\ell = 0$, which happens if and only if $m = n$.
+\end{thmproof}
+
+\begin{thmproof}[Proof of theorem.]
+  We've already shown the reverse direction (satisfying the ascending chain condition for principal
+  ideals implies complete factorizations into irreducibles, and if every irreducible is prime then
+  factorizations are unique when they exist).
+
+  So assume $R$ is a UFD.
+
+  \textbf{Irreducibles in $R$ are prime:}
+  Let $r \in R$ be irreducible and suppose $r \mid ab$, so $kr = ab$ for some $k, a, b \in R$.
+  We want to show $r \mid a$ or $r \mid b$.
+
+  If $a = 0$, then $r \mid a$, so we can assume $a, b \neq 0$.
+
+  If $a \in R^\times$, then $a^{-1}kr = b$ so $r \mid b$; similar for if $b \in R^\times$.
+  So we can assume $a, b \not\in R^\times$.
+
+  Then $a = p_1 \cdots p_m$ and $b = q_1 \cdots q_n$ where $p_1, \ldots, p_m, q_1, \ldots, q_n$
+  are irreducibles.
+  Let $k = ug_1 \cdots g_\ell$ where $\ell \geq 0$ and $g_1, \ldots, g_\ell$ are irreducibles, and
+  $u \in R^\times$ (to include the case when $k \in R^\times$).
+  Then $ug_1 \cdots g_\ell r = p_1 \cdots p_m q_1 \cdots q_n$.
+  By uniqueness of factorizations, $ur$ (and hence $r$) is associated with some $p_i$ or $q_j$.
+
+  So $r$ divides some $p_i$ or $q_j$, hence $r$ divides $a$ or $b$.
+
+  \textbf{$R$ satisfies the ascending chain condition for principal ideals:}
+  Suppose $(x_1) \subseteq (x_2) \subseteq \cdots \subseteq (x_i) \subseteq \cdots$ is an
+  increasing chain of principal ideals.
+  We want to show there is $n$ such that $(x_k) = (x_n)$ for all $k \geq n$.
+
+  If $x_i = 0$ for all $i$, then we are done.
+  If $x_n \neq 0$, then $x_k \neq 0$ for all $k \geq n$, so assume WLOG that $x_i \neq 0$ for all
+  $i \geq 1$.
+
+  If $x_n \in R^\times$ for some $n$, then $R = (x_n)$ and hence $(x_k) = R = (x_n)$ for all
+  $k \geq n$.
+  So assume that $x_i \not\in R^\times$ for all $i \geq 1$.
+
+  Let $f_i$ be the number of factors in the prime factorization of $x_i$.
+  Since $x_{i + 1} \mid x_i$, the lemma implies that $f_i \geq f_{i + 1}$.
+  Since the sequence of integers $f_1, f_2, \ldots$ is bounded below by 1, there must be some
+  $n$ such that $f_k = f_n$ for all $k \geq n$.
+  Again by the lemma, we get $(x_k) = (x_n)$ for all $k \geq n$.
+\end{thmproof}
+
+\pagebreak
+\subsection{GCDs in UFDs}
+
+Suppose $p_1, \ldots, p_n$ are distinct primes in $\Z$, and $x = p_1^{a_1} \cdots p_n^{a_n}$ and
+$y = p_1^{b_1} \cdots p_n^{b_n}$ for some $a_1, \ldots, a_n, b_1, \ldots, b_n \geq 0$.
+Then we know that $\gcd(x, y) = p_1^{c_1} \cdots p_n^{c_n}$ where $c_i = \min(a_i, b_i)$.
+
+This works in a general UFD.
+To show this, we need to consider ``formatting'' prime factorizations.
+
+So far, if $R$ is a UFD and $x \in R \setminus \{0\}$, then we've written $x = ug_1 \cdots g_n$
+where $u \in R^\times$, $n \geq 0$, and $g_1, \ldots, g_n \in R$ are irreducibles.
+
+What if $g_n \sim g_i$?
+Then $g_n = u'g_i$ for some $u' \in R^\times$, so we can instead write
+$x = (uu')g_1 \cdots g_{i - 1} g_i^2 g_{i + 1} \cdots g_{n - 1}$.
+Repeating this, we can eventually write
+\[ x = ug_1^{a_1} \cdots g_n^{a_n} \]
+where $u \in R^\times$, $a_1, \ldots, a_n$ are positive integers, and (*) $g_1, \ldots, g_n$ are
+irreducibles, $n \geq 0$, where $g_i \not\sim g_j$ for all $1 \leq i \neq j \leq n$.
+
+\begin{prop}{}{}
+  Let $R$ be a UFD.
+  \begin{enumerate}
+    \item (Compact representation)
+      If $0 \neq x \in R$, there are $u \in R^\times$, $g_1, \ldots, g_n$ as in (*), and
+      positive integers $a_1, \ldots, a_n$ where $x = ug_1^{a_1} \cdots g_n^{a_n}$.
+    \item (Unique compact representation)
+      If $u, v \in R^\times$, $a_1, \ldots, a_n, b_1, \ldots, b_n \geq 0$, and $g_1, \ldots, g_n$
+      are as in (*) such that $ug_1^{a_1} \cdots g_n^{a_n} = vg_1^{b_1} \cdots g_n^{b_n}$, then
+      $u = v$ and $a_i = b_i$.
+    \item (Division)
+      If $x = ug_1^{a_1} \cdots g_n^{a_n}$ where $u \in R^\times$, $g_1, \ldots, g_n$ are as in
+      (*), and $a_1, \ldots, a_n \geq 0$, then $y \mid x$ if and only if
+      $y = vg_1^{b_1} \cdots g_n^{b_n}$ for $v \in R^\times$ and $0 \leq b_i \leq a_i$.
+    \item (Common primes)
+      If $x, y \in R$ are non-zero, then there are $u, v \in R^\times$, $g_1, \ldots, g_n$ as in
+      (*), and $a_1, \ldots, a_n, b_1, \ldots, b_n \geq 0$ such that
+      $x = ug_1^{a_1} \cdots g_n^{a_n}$ and $y = vg_1^{b_1} \cdots g_n^{b_n}$.
+  \end{enumerate}
+\end{prop}
+
+\begin{thmproof}
+  \begin{enumerate}
+    \item Already done.
+    \item If $a_i > 0$, then $g_i$ divides the RHS, so $b_i > 0$.
+      Divide out $g_i$ on both sides and repeat until $a_i \leq b_i$.
+      By symmetry, $b_i \leq a_i$ so $a_i = b_i$.
+      Hence $u = v$.
+
+      \begin{tcolorbox}
+        \textbf{Division in a domain:} If $R$ is a domain, and $a = kb = k'b$ for $b \neq 0$, then
+        $(k - k')b = 0$ so $k = k'$.
+        So if $b \mid a$ and $b \neq 0$, let $\frac{b}{a}$ denote the unique element $k \in R$
+        such that $a = kb$.
+      \end{tcolorbox}
+    \item The reverse direction is clear, so suppose $y \mid x$.
+      Write $y = vf_1 \cdots f_k$ where $v \in R^\times$, $k \geq 0$, and $f_1, \ldots, f_k$ are
+      irreducibles.
+      Since $f_k \mid x$, we see $f_k \sim g_i$ for some $i$ with $a_i > 0$.
+      Let $f_k = v'g_i$ for some $v' \in R^\times$.
+      Now $(vv')y/g_i \mid x/g_i$.
+      Repeating this gives $y$ as desired.
+    \item Exercise.
+  \end{enumerate}
+\end{thmproof}
+
+Now for the generalized formula for GCDs in a UFD.
+
+\begin{prop}{}{}
+  Suppose $R$ is a UFD, $u, v \in R^\times$, $g_1, \ldots, g_n$ are primes in $R$ such that
+  $g_i \not\sim g_j$ for all $1 \leq i \neq j \leq n$, and $a_1, \ldots, a_n, b_1, \ldots, b_n$ are
+  non-negative integers.
+  Let $c_i = \min(a_i, b_i)$ for each $i$.
+  Then
+  \[ g_1^{c_1} \cdots g_n^{c_n} = \gcd(ug_1^{a_1} \cdots g_n^{a_n}, vg_1^{b_1} \ldots g_n^{b_n}). \]
+\end{prop}
+
+\begin{thmproof}
+  Let $d = g_1^{c_1} \cdots g_n^{c_n}$, $x = ug_1^{a_1} \cdots g_n^{a_n}$, and
+  $y = vg_1^{b_1} \cdots g_n^{b_n}$.
+  Clearly $d \mid x$ and $d \mid y$.
+  Suppose $d' \mid x$ and $d' \mid y$ as well.
+
+  By part (3) of the proposition, $d' = wg_1^{d_1} \cdots g_n^{d_n}$ with $w \in R^\times$ and
+  $d_i \leq a_i$ and $d' = w'g_1^{d_1'} \cdots g_n^{d_n'}$ with $w' \in R^\times$ and
+  $d_i' \leq b_i$.
+
+  By part (2) of the proposition, $w = w'$ and $d_i = d_i'$ for all $i$, so $d_i \leq c_i$.
+  Hence $d' \mid d$.
+  So $d$ is a greatest common divisor.
+\end{thmproof}
+
+In a UFD, greatest common divisors always exist.
+
+\pagebreak
+\subsection{Summary of greatest common divisors}
+
+\begin{itemize}
+  \item Euclidean domain:
+  \begin{itemize}
+    \item $\gcd(a, b)$ always exists.
+    \item Can calculate $\gcd(a, b)$ from prime factorization.
+    \item There are $x, y \in R$ such that $\gcd(a, b) = xa + yb$.
+    \item Can calculate $\gcd(a, b)$ by Euclidean algorithm.
+  \end{itemize}
+  Examples: $\Z$, $\K[x]$ for $\K$ a field.
+  \item Principal ideal domain (PID):
+  \begin{itemize}
+    \item $\gcd(a, b)$ always exists.
+    \item Can calculate $\gcd(a, b)$ from prime factorization.
+    \item There are $x, y \in R$ such that $\gcd(a, b) = xa + yb$.
+  \end{itemize}
+  \item Unique factorization domain (UFD):
+  \begin{itemize}
+    \item $\gcd(a, b)$ always exists.
+    \item Can calculate $\gcd(a, b)$ from prime factorization.
+  \end{itemize}
+  Example: $\gcd(2, x) = 1$, but $1 \not\in (2, x) \subseteq \Z[x]$.
+\end{itemize}
+
+What about domains where $\gcd(a, b)$ doesn't exist?
+
+\pagebreak
+\subsection{Domains where GCDs don't exist}
+
+In the homework, you'll show:
+\begin{itemize}
+  \item If $R$ is a domain with complete factorizations, then $R$ is a UFD if and only if every
+    pair of elements has a greatest common divisor.
+  \item $\Z[i\sqrt{5}]$ is a domain with complete factorizations, but is not a UFD.
+\end{itemize}
+
+So $\gcd(a, b)$ does not always exist for $a, b \in \Z[i\sqrt{5}]$.
+
+For a specific counterexample, take $6 = 2 \cdot 3 = (1 + i\sqrt{5})(1 - i\sqrt{5})$.
+We can show $2$, $3$, $(1 + i\sqrt{5})$, $(1 - i\sqrt{5})$ are irreducibles (homework).
+
+Suppose $d = \gcd(6, 2(1 + i\sqrt{5}))$.
+Then $2 \mid d$, so $d = 2d'$, and $2 \cdot 3 = kd = 2kd'$.
+So $3 = kd'$.
+Since $3$ is irreducible, $k$ or $d'$ is a unit.
+If $k$ is a unit, then $d' \sim 3$, but $d \sim 6 \nmid 2(1 + i\sqrt{5})$.
+If $d'$ is a unit, then $d \sim 2$, but $(1 + i\sqrt{5}) \nmid d$.
+Contradiction in both cases.
+
 %---------------
 \end{document}
 %---------------
